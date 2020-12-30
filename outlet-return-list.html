@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>Nellai Krishna Foods PVT. LTD</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <!-- Plugins css -->
+    <link href="assets/libs/dropzone/min/dropzone.min.css" rel="stylesheet" type="text/css" />
+    <!-- Select 2-->
+    <link href="assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap Css -->
+    <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body data-sidebar="dark" data-sidebar="dark" data-keep-enlarged="true" class="vertical-collpsed">
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <div class="d-flex">
+                    <!-- LOGO -->
+                    <div class="navbar-brand-box">
+                        <a href="index.html" class="logo logo-dark">
+                            <span class="logo-sm">
+                                <img src="assets/images/logo.png" alt="" class="rounded-circle" height="50">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="assets/images/logo.png" alt="" class="rounded-circle" height="50">
+                                </span>
+                        </a>
+
+                        <a href="index.html" class="logo logo-light">
+                            <span class="logo-sm">
+                                <img src="assets/images/logo.png" alt="" class="rounded-circle" height="50">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="assets/images/logo.png" alt="" class="rounded-circle" height="50">
+                                </span>
+                        </a>
+                    </div>
+
+                    <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect" id="vertical-menu-btn">
+                            <i class="fa fa-fw fa-bars"></i>
+                        </button>
+                </div>
+
+                <div class="d-flex">
+                    <div class="dropdown d-none d-lg-inline-block ml-1">
+                        <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
+                                <i class="bx bx-fullscreen"></i>
+                            </button>
+                    </div>
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg"
+                                    alt="Header Avatar">
+                                <span class="d-none d-xl-inline-block ml-1">Nellai</span>
+                                <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                            </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <!-- item-->
+                            <a class="dropdown-item" href="#"><i class="bx bx-user font-size-16 align-middle mr-1"></i> Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="#"><i class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Logout</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="vertical-menu">
+
+            <div data-simplebar class="h-100">
+
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu list-unstyled outlet" id="side-menu">
+
+
+                    </ul>
+                </div>
+                <!-- Sidebar -->
+            </div>
+        </div>
+        <!-- Left Sidebar End -->
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="mb-0 font-size-18">Outlet Return</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Outlet</a></li>
+                                        <li class="breadcrumb-item active">Outlet Return</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                        <thead>
+                                            <tr>
+                                                <th>NKT Bill No</th>
+                                                <th>Date/Time</th>
+                                                <th>Quantity</th>
+                                                <th>Cost</th>
+                                                <th>Checked By</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1001</td>
+                                                <td>10/10/2020 10:50</td>
+                                                <td>5</td>
+                                                <td>1500</td>
+                                                <td>Ram</td>
+                                                <td>
+                                                    <a class="mr-3 text-info" title="View" data-toggle="modal" data-target=".view"><i class="mdi mdi-eye font-size-18"></i></a>
+                                                    <a class="mr-3 text-info" title="Edit" data-toggle="modal" data-target=".edit"><i class="mdi mdi-pencil font-size-18"></i></a>
+                                                    <a class="mr-3 text-success" title="Check Approve"><i class="mdi mdi-check-decagram font-size-18"></i></a>
+                                                    <a class="text-danger" title="Delete" data-toggle="modal" data-target=".delete"><i class="mdi mdi-close font-size-18"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>1002</td>
+                                                <td>10/11/2020 10:50</td>
+                                                <td>8</td>
+                                                <td>5100</td>
+                                                <td>Ram</td>
+                                                <td>
+                                                    <a class="mr-3 text-info" title="View" data-toggle="modal" data-target=".view"><i class="mdi mdi-eye font-size-18"></i></a>
+                                                    <a class="mr-3 text-info" title="Edit" data-toggle="modal" data-target=".edit"><i class="mdi mdi-pencil font-size-18"></i></a>
+
+                                                    <a class="text-danger" title="Delete" data-toggle="modal" data-target=".delete"><i class="mdi mdi-close font-size-18"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>1003</td>
+                                                <td>10/10/2020 10:50</td>
+                                                <td>6</td>
+                                                <td>1050</td>
+                                                <td>Ram</td>
+                                                <td>
+                                                    <a class="mr-3 text-info" title="View" data-toggle="modal" data-target=".view"><i class="mdi mdi-eye font-size-18"></i></a>
+                                                    <a class="mr-3 text-info" title="Edit" data-toggle="modal" data-target=".edit"><i class="mdi mdi-pencil font-size-18"></i></a>
+
+                                                    <a class="text-danger" title="Delete" data-toggle="modal" data-target=".delete"><i class="mdi mdi-close font-size-18"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>1004</td>
+                                                <td>10/10/2020 10:50</td>
+                                                <td>3</td>
+                                                <td>500</td>
+                                                <td>Ram</td>
+                                                <td>
+                                                    <a class="mr-3 text-info" title="View" data-toggle="modal" data-target=".view"><i class="mdi mdi-eye font-size-18"></i></a>
+                                                    <a class="mr-3 text-info" title="Edit" data-toggle="modal" data-target=".edit"><i class="mdi mdi-pencil font-size-18"></i></a>
+                                                    <a class="mr-3 text-success" title="Check Approve"><i class="mdi mdi-check-decagram font-size-18"></i></a>
+                                                    <a class="text-danger" title="Delete" data-toggle="modal" data-target=".delete"><i class="mdi mdi-close font-size-18"></i></a>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+                </div>
+                <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+
+            <!-- Modal -->
+
+            <div class="modal fade add" tabindex="-1" role="dialog" aria-labelledby="addOutletOutLabel" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addOutletOutLabel">View Outlet Return Details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <p class="mb-2 col-md-3"> NKT Bill No: <span class="text-primary ml-2">10001</span></p>
+                                <p class="mb-2 col-md-3">Date/Time:<span class="text-primary ml-2">10/11/2020 12:52</span></p>
+                                <p class="mb-2 col-md-3">Checked By:<span class="text-primary ml-2">Sathish</span></p>
+                                <p class="mb-2 col-md-3">Type<select class="form-control select2">
+                                    <option>Select</option>
+                                    <option value="ITE0001">BreakFast</option>
+                                    <option value="ITE0002">Lunch</option>
+                                    <option value="ITE0002">Dinner</option>
+                                    <option value="ITE0002">Snakes</option>
+                                </select></p>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-centered table-nowrap table-bordered table-striped">
+                                    <thead class="bg-gray">
+                                        <tr>
+                                            <th>Item</th>
+
+                                            <th>Quantity (KGS)</th>
+                                            <th>Cost per kg</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td scope="row">ITE0001 - Rice</td>
+
+                                            <td> 10</td>
+                                            <td> 50 </td>
+                                            <td> 500</td>
+                                        </tr>
+                                        <tr>
+                                            <td scope="row">ITE0002 - Idly</td>
+
+                                            <td> 5</td>
+                                            <td> 110 </td>
+                                            <td> 550</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">
+                                                <h6 class="m-0 text-right">Total:</h6>
+                                            </td>
+                                            <th>
+                                                Rs.1550
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Check Approve</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade view" tabindex="-1" role="dialog" aria-labelledby="addOutletOutLabel" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addOutletOutLabel">View Outlet Return Details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <p class="mb-2 col-md-3"> NKT Bill No: <span class="text-primary ml-2">10001</span></p>
+                                <p class="mb-2 col-md-3">Date/Time:<span class="text-primary ml-2">10/11/2020 12:52</span></p>
+                                <p class="mb-2 col-md-3">Checked By:<span class="text-primary ml-2">Sathish</span></p>
+                                <p class="mb-2 col-md-3">Type: <span class="text-primary ml-2"></span>Lunch</span>
+                                </p>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-centered table-nowrap table-bordered table-striped">
+                                    <thead class="bg-gray">
+                                        <tr>
+                                            <th>Item</th>
+
+                                            <th>Quantity (KGS)</th>
+                                            <th>Cost per kg</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td scope="row">ITE0001 - Rice</td>
+
+                                            <td> 10</td>
+                                            <td> 50 </td>
+                                            <td> 500</td>
+                                        </tr>
+                                        <tr>
+                                            <td scope="row">ITE0002 - Idly</td>
+
+                                            <td> 5</td>
+                                            <td> 110 </td>
+                                            <td> 550</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">
+                                                <h6 class="m-0 text-right">Total:</h6>
+                                            </td>
+                                            <th>
+                                                Rs.1550
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Check Approve</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade edit" tabindex="-1" role="dialog" aria-labelledby="addOutletOutLabel" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addOutletOutLabel">View Outlet Return Details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <p class="mb-2 col-md-3"> NKT Bill No: <span class="text-primary ml-2">10001</span></p>
+                                <p class="mb-2 col-md-3">Date/Time:<span class="text-primary ml-2">10/11/2020 12:52</span></p>
+                                <p class="mb-2 col-md-3">Checked By:<span class="text-primary ml-2">Sathish</span></p>
+                                <p class="mb-2 col-md-3">Type<select class="form-control select2">
+                                    <option>Select</option>
+                                    <option value="ITE0001">BreakFast</option>
+                                    <option value="ITE0002">Lunch</option>
+                                    <option value="ITE0002">Dinner</option>
+                                    <option value="ITE0002">Snakes</option>
+                                </select></p>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-centered table-nowrap table-bordered table-striped">
+                                    <thead class="bg-gray">
+                                        <tr>
+                                            <th>Item</th>
+                                            <th>Quantity (KGS)</th>
+                                            <th>Cost per kg</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td scope="row">ITE0001 - Rice</td>
+                                            <td> 10</td>
+                                            <td> 50 </td>
+                                            <td> 500</td>
+                                        </tr>
+                                        <tr>
+                                            <td scope="row">ITE0002 - Idly</td>
+                                            <td> 5</td>
+                                            <td> 110 </td>
+                                            <td> 550</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">
+                                                <h6 class="m-0 text-right">Total:</h6>
+                                            </td>
+                                            <th>
+                                                Rs.1550
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Check Approve</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="modal fade delete" tabindex="-1" role="dialog" aria-labelledby="editOutletOutLabel" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editOutletOutLabel">Delete Outlet In Details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <p class="mb-2 col-md-12">Are you sure want to Delete?</p>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+
+
+
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
+
+    <!-- JAVASCRIPT -->
+    <script src="assets/libs/jquery/jquery.min.js"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="assets/libs/node-waves/waves.min.js"></script>
+
+    <!-- Required datatable js -->
+    <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <!-- Buttons examples -->
+    <script src="assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="assets/libs/jszip/jszip.min.js"></script>
+    <script src="assets/libs/pdfmake/build/pdfmake.min.js"></script>
+    <script src="assets/libs/pdfmake/build/vfs_fonts.js"></script>
+    <script src="assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+
+    <!-- Responsive examples -->
+    <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
+    <!-- Select 2 -->
+    <script src="assets/libs/select2/js/select2.min.js"></script>
+
+    <!-- Plugins js -->
+    <script src="assets/libs/dropzone/min/dropzone.min.js"></script>
+
+    <!-- Page js -->
+    <script src="assets/js/pages/outlet-return-damage.js"></script>
+
+    <script src="assets/js/app.js"></script>
+
+</body>
+
+</html>
