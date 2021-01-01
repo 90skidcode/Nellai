@@ -1,15 +1,15 @@
 $(document).ready(function() {
-    displayLeaveListInit();
+    displayQualificationListInit();
 });
 
 var button = `<div class="text-sm-right">
-<button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Leave </button>
+<button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Qualification </button>
 </div>`;
 
-function displayLeaveListInit() {
+function displayQualificationListInit() {
     let data = {
         "query": "fetch",
-        "databasename": "leave_master",
+        "databasename": "employee_qualification",
         "column": {
             "*": "*"
         },
@@ -18,16 +18,14 @@ function displayLeaveListInit() {
         },
         "like": ""
     }
-    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "displayLeaveList", "param1": "table-leave-list" }, { "functionName": "displayLeaveList", "param1": "table-leave-list" });
+    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "displayQualificationList", "param1": "table-qualification-list" }, { "functionName": "displayQualificationList", "param1": "table-qualification-list" });
 }
 
-function displayLeaveList(response, dataTableId) {
+function displayQualificationList(response, dataTableId) {
     var tableHeader = [{
-        "data": "leave_master_id"
+        "data": "employee_qualification_id"
     }, {
-        "data": "leave_name"
-    }, {
-        "data": "leave_shortname"
+        "data": "employee_qualification"
     }, {
         "data": "status",
         mRender: function(data, type, row) {
@@ -40,8 +38,8 @@ function displayLeaveList(response, dataTableId) {
         "data": "created_at",
         mRender: function(data, type, row) {
             return `<td class="text-right">
-                     <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-id="${row.leave_master_id}" data-target=".add"><i class="mdi mdi-pencil font-size-14"></i></a>
-                    <a class="text-danger delete-row" title="Delete" data-toggle="modal" data-id="${row.leave_master_id}" data-target=".delete"><i class="mdi mdi-close font-size-14"></i></a>
+                     <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-id="${row.employee_qualification_id}" data-target=".add"><i class="mdi mdi-pencil font-size-14"></i></a>
+                    <a class="text-danger delete-row" title="Delete" data-toggle="modal" data-id="${row.employee_qualification_id}" data-target=".delete"><i class="mdi mdi-close font-size-14"></i></a>
                 </td>`;
         }
     }];
@@ -49,29 +47,29 @@ function displayLeaveList(response, dataTableId) {
 }
 
 /**
- * To Add Leave
+ * To Add Qualification
  */
 
 $(document).on('click', '[data-target=".add"]', function() {
-    $(".leave-add").removeAttr('data-id');
-    $("#leave-add")[0].reset();
+    $(".qualification-add").removeAttr('data-id');
+    $("#qualification-add")[0].reset();
 });
 
 /**
- * To Edit Leave
+ * To Edit Qualification
  */
 
 $(document).on('click', ".edit-row", function() {
-    $(".leave-add").attr('data-id', $(this).attr('data-id'));
-    $("#leave-add")[0].reset();
+    $(".qualification-add").attr('data-id', $(this).attr('data-id'));
+    $("#qualification-add")[0].reset();
     let data = {
         "query": "fetch",
-        "databasename": "leave_master",
+        "databasename": "employee_qualification",
         "column": {
             "*": "*"
         },
         'condition': {
-            'leave_master_id': $(this).attr('data-id')
+            'employee_qualification_id': $(this).attr('data-id')
         },
         "like": ""
     }
@@ -89,9 +87,9 @@ $(document).on('click', ".delete-row", function() {
 $(document).on('click', ".btn-delete", function() {
     var data = {
         'query': 'update',
-        'databasename': 'leave_master',
+        'databasename': 'employee_qualification',
         'condition': {
-            'leave_master_id': $(".btn-delete").attr('data-detete')
+            'employee_qualification_id': $(".btn-delete").attr('data-detete')
         },
         'values': {
             'status': '0'
@@ -106,29 +104,29 @@ $(document).on('click', ".btn-delete", function() {
  * Add Leave Master
  */
 
-$('.leave-add').click(function() {
-    if (checkRequired('#leave-add')) {
+$('.qualification-add').click(function() {
+    if (checkRequired('#qualification-add')) {
         var id = $(this).attr('data-id');
         if (isEmptyValue(id)) {
             // Add New
             var data = {
                 "query": 'add',
-                "databasename": 'leave_master',
-                "values": $("#leave-add").serializeObject()
+                "databasename": 'employee_qualification',
+                "values": $("#qualification-add").serializeObject()
             }
-            commonAjax('database.php', 'POST', data, '.add', 'Leave added successfully', '', { "functionName": "locationReload" })
-            $("#table-leave-list").dataTable().fnDraw();
+            commonAjax('database.php', 'POST', data, '.add', 'Qualification added successfully', '', { "functionName": "locationReload" })
+            $("#table-qualification-list").dataTable().fnDraw();
         } else {
             // Edit
             var data = {
                 "query": 'update',
-                "databasename": 'leave_master',
-                "values": $("#leave-add").serializeObject(),
+                "databasename": 'employee_qualification',
+                "values": $("#qualification-add").serializeObject(),
                 "condition": {
-                    "leave_master_id": id
+                    "employee_qualification_id": id
                 }
             }
-            commonAjax('database.php', 'POST', data, '.add', 'Leave updated successfully', '', { "functionName": "locationReload" })
+            commonAjax('database.php', 'POST', data, '.add', 'Qualification updated successfully', '', { "functionName": "locationReload" })
         }
     }
 });

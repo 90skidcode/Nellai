@@ -132,7 +132,8 @@ $("#side-menu.employee").html(
             <li><a href="employee-dashboard.html">Employee List</a></li>
             <li><a href="allowence-list.html">Allowence List</a></li>  
             <li><a href="grade-list.html">Grade List</a></li> 
-            <li><a href="designation-list.html">Designation List</a></li>            
+            <li><a href="designation-list.html">Designation List</a></li> 
+            <li><a href="qualification-list.html">Qulification List</a></li>           
         </ul>
     </li>  
 
@@ -149,7 +150,7 @@ $("#side-menu.employee").html(
 
     <li>
         <a href="product.html" class="has-arrow waves-effect">
-            <i class='bx bx-fingerprint'></i>
+        <i class='bx bx-slider-alt'></i>
             <span>Setting</span>
         </a>
         <ul class="sub-menu mm-collapse" aria-expanded="false">

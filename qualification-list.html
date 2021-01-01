@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <title>Nellai Krishna Foods PVT. LTD</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Leave List Template" name="description" />
+    <meta content="Premium Multipurpose Admin & Qualification List Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
@@ -112,11 +112,11 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0 font-size-18">Leave Type List</h4>
+                                <h4 class="mb-0 font-size-18">Qualification List</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Leave Type Lists</a></li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Qualification Lists</a></li>
                                     </ol>
                                 </div>
 
@@ -131,12 +131,11 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <table id="table-leave-list" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <table id="table-qualification-list" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                         <thead>
                                             <tr>
-                                                <th>Leave ID</th>
-                                                <th>Leave Name</th>
-                                                <th>Leave Short Name</th>
+                                                <th>Qualification ID</th>
+                                                <th>Qualification Name</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -152,55 +151,48 @@
                     <!-- end row -->
 
 
-                    <div class="modal fade add" tabindex="-1" role="dialog" aria-labelledby="addLeaveLabel" style="display: none;" aria-hidden="true">
+                    <div class="modal fade add" tabindex="-1" role="dialog" aria-labelledby="addQualificationLabel" style="display: none;" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-xs" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="addLeaveLabel">Add Leave List</h5>
+                                    <h5 class="modal-title" id="addQualificationLabel">Add Qualification List</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="checkout-tabs">
-                                        <form id="leave-add">
+                                        <form id="qualification-add">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="formrow-email-input">Leave ID</label>
-                                                        <input type="text" name="leave_master_id" class="form-control" readonly>
+                                                        <label for="formrow-email-input">Qualification ID</label>
+                                                        <input type="text" name="employee_qualification_id" class="form-control" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="formrow-email-input">Leave Short Name</label>
-                                                        <input type="text" name="leave_shortname" class="form-control" required>
+                                                        <label for="formrow-email-input">Qualification Name</label>
+                                                        <input type="text" name="employee_qualification" class="form-control" required>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="formrow-email-input">Leave Name</label>
-                                                        <input type="text" name="leave_name" class="form-control" required>
-                                                    </div>
-                                                </div>
-
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary leave-add">Save</button>
+                                    <button type="button" class="btn btn-primary qualification-add">Save</button>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="modal fade delete" tabindex="-1" role="dialog" aria-labelledby="deleteLeaveLabel" style="display: none;" aria-hidden="true">
+                    <div class="modal fade delete" tabindex="-1" role="dialog" aria-labelledby="deleteQualificationLabel" style="display: none;" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="deleteLeaveLabel">Delete Leave</h5>
+                                    <h5 class="modal-title" id="deleteQualificationLabel">Delete Qualification</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
@@ -265,7 +257,7 @@
 
     <script src="assets/js/app.js"></script>
     <!-- Page js -->
-    <script src="assets/js/pages/leave-type-list.js"></script>
+    <script src="assets/js/pages/qualification-list.js"></script>
 
 
 
