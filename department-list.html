@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <title>Nellai Krishna Foods PVT. LTD</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Allowence List Template" name="description" />
+    <meta content="Premium Multipurpose Admin & Department List Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
@@ -112,11 +112,11 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0 font-size-18">Allowence List</h4>
+                                <h4 class="mb-0 font-size-18">Department List</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Allowence Lists</a></li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Department Lists</a></li>
                                     </ol>
                                 </div>
 
@@ -131,11 +131,12 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <table id="table-allowence-list" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <table id="table-department-list" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                         <thead>
                                             <tr>
-                                                <th>Allowence ID</th>
-                                                <th>Allowence Name</th>
+                                                <th>Department ID</th>
+                                                <th>Department Name</th>
+                                                <th>Department Short Name</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -151,48 +152,55 @@
                     <!-- end row -->
 
 
-                    <div class="modal fade add" tabindex="-1" role="dialog" aria-labelledby="addAllowenceLabel" style="display: none;" aria-hidden="true">
+                    <div class="modal fade add" tabindex="-1" role="dialog" aria-labelledby="addDepartmentLabel" style="display: none;" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-xs" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="addAllowenceLabel">Add Allowence List</h5>
+                                    <h5 class="modal-title" id="addDepartmentLabel">Add Department List</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="checkout-tabs">
-                                        <form id="allowence-add">
+                                        <form id="department-add">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="formrow-email-input">Allowence ID</label>
-                                                        <input type="text" name="allowence_master_id" class="form-control" readonly>
+                                                        <label for="formrow-email-input">Department ID</label>
+                                                        <input type="text" name="department_master_id" class="form-control" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="formrow-email-input">Allowence Name</label>
-                                                        <input type="text" name="allowence_name" class="form-control" required>
+                                                        <label for="formrow-email-input">Department Short Name</label>
+                                                        <input type="text" name="department_shortname" class="form-control" required>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="formrow-email-input">Department Name</label>
+                                                        <input type="text" name="department_name" class="form-control" required>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary allowence-add">Save</button>
+                                    <button type="button" class="btn btn-primary department-add">Save</button>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="modal fade delete" tabindex="-1" role="dialog" aria-labelledby="deleteAllowenceLabel" style="display: none;" aria-hidden="true">
+                    <div class="modal fade delete" tabindex="-1" role="dialog" aria-labelledby="deleteDepartmentLabel" style="display: none;" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="deleteAllowenceLabel">Delete Allowence</h5>
+                                    <h5 class="modal-title" id="deleteDepartmentLabel">Delete Department</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
@@ -257,7 +265,7 @@
 
     <script src="assets/js/app.js"></script>
     <!-- Page js -->
-    <script src="assets/js/pages/allowence-list.js"></script>
+    <script src="assets/js/pages/department-list.js"></script>
 
 
 

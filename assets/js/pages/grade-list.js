@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     displayGradeListInit();
 });
 
@@ -19,7 +18,7 @@ function displayGradeListInit() {
         },
         "like": ""
     }
-    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "displayGradeList", "param1": "table-grade-list" });
+    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "displayGradeList", "param1": "table-grade-list" }, { "functionName": "displayGradeList", "param1": "table-grade-list" });
 }
 
 function displayGradeList(response, dataTableId) {

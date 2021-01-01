@@ -131,7 +131,8 @@ $("#side-menu.employee").html(
         <ul class="sub-menu mm-collapse" aria-expanded="false">
             <li><a href="employee-dashboard.html">Employee List</a></li>
             <li><a href="allowence-list.html">Allowence List</a></li>  
-            <li><a href="grade-list.html">Grade List</a></li>          
+            <li><a href="grade-list.html">Grade List</a></li> 
+            <li><a href="designation-list.html">Designation List</a></li>            
         </ul>
     </li>  
 
@@ -143,6 +144,17 @@ $("#side-menu.employee").html(
         <ul class="sub-menu mm-collapse" aria-expanded="false">
             <li><a href="leave-type-list.html">Leave Type List</a></li>
             <li><a href="leave-list.html">Leave List</a></li>              
+        </ul>
+    </li>
+
+    <li>
+        <a href="product.html" class="has-arrow waves-effect">
+            <i class='bx bx-fingerprint'></i>
+            <span>Setting</span>
+        </a>
+        <ul class="sub-menu mm-collapse" aria-expanded="false">
+            <li><a href="department-list.html">Department List</a></li>
+            <li><a href="branch-list.html">Branch List</a></li>              
         </ul>
     </li>
      `

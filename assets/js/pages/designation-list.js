@@ -1,15 +1,15 @@
 $(document).ready(function() {
-    displayAllowenceListInit();
+    displayDesignationListInit();
 });
 
 var button = `<div class="text-sm-right">
-<button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Allowence </button>
+<button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Designation </button>
 </div>`;
 
-function displayAllowenceListInit() {
+function displayDesignationListInit() {
     let data = {
         "query": "fetch",
-        "databasename": "allowence_master",
+        "databasename": "employee_designation",
         "column": {
             "*": "*"
         },
@@ -18,14 +18,14 @@ function displayAllowenceListInit() {
         },
         "like": ""
     }
-    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "displayAllowenceList", "param1": "table-allowence-list" }, { "functionName": "displayAllowenceList", "param1": "table-allowence-list" });
+    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "displayDesignationList", "param1": "table-designation-list" }, { "functionName": "displayDesignationList", "param1": "table-designation-list" });
 }
 
-function displayAllowenceList(response, dataTableId) {
+function displayDesignationList(response, dataTableId) {
     var tableHeader = [{
-        "data": "allowence_master_id"
+        "data": "employee_designation_id"
     }, {
-        "data": "allowence_name"
+        "data": "employee_designation"
     }, {
         "data": "status",
         mRender: function(data, type, row) {
@@ -38,8 +38,8 @@ function displayAllowenceList(response, dataTableId) {
         "data": "created_at",
         mRender: function(data, type, row) {
             return `<td class="text-right">
-                     <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-id="${row.allowence_master_id}" data-target=".add"><i class="mdi mdi-pencil font-size-14"></i></a>
-                    <a class="text-danger delete-row" title="Delete" data-toggle="modal" data-id="${row.allowence_master_id}" data-target=".delete"><i class="mdi mdi-close font-size-14"></i></a>
+                     <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-id="${row.employee_designation_id}" data-target=".add"><i class="mdi mdi-pencil font-size-14"></i></a>
+                    <a class="text-danger delete-row" title="Delete" data-toggle="modal" data-id="${row.employee_designation_id}" data-target=".delete"><i class="mdi mdi-close font-size-14"></i></a>
                 </td>`;
         }
     }];
@@ -47,29 +47,29 @@ function displayAllowenceList(response, dataTableId) {
 }
 
 /**
- * To Add Allowence
+ * To Add Designation
  */
 
 $(document).on('click', '[data-target=".add"]', function() {
-    $(".allowence-add").removeAttr('data-id');
-    $("#allowence-add")[0].reset();
+    $(".designation-add").removeAttr('data-id');
+    $("#designation-add")[0].reset();
 });
 
 /**
- * To Edit Allowence
+ * To Edit Designation
  */
 
 $(document).on('click', ".edit-row", function() {
-    $(".allowence-add").attr('data-id', $(this).attr('data-id'));
-    $("#allowence-add")[0].reset();
+    $(".designation-add").attr('data-id', $(this).attr('data-id'));
+    $("#designation-add")[0].reset();
     let data = {
         "query": "fetch",
-        "databasename": "allowence_master",
+        "databasename": "employee_designation",
         "column": {
             "*": "*"
         },
         'condition': {
-            'allowence_master_id': $(this).attr('data-id')
+            'employee_designation_id': $(this).attr('data-id')
         },
         "like": ""
     }
@@ -87,9 +87,9 @@ $(document).on('click', ".delete-row", function() {
 $(document).on('click', ".btn-delete", function() {
     var data = {
         'query': 'update',
-        'databasename': 'allowence_master',
+        'databasename': 'employee_designation',
         'condition': {
-            'allowence_master_id': $(".btn-delete").attr('data-detete')
+            'employee_designation_id': $(".btn-delete").attr('data-detete')
         },
         'values': {
             'status': '0'
@@ -104,29 +104,29 @@ $(document).on('click', ".btn-delete", function() {
  * Add Leave Master
  */
 
-$('.allowence-add').click(function() {
-    if (checkRequired('#allowence-add')) {
+$('.designation-add').click(function() {
+    if (checkRequired('#designation-add')) {
         var id = $(this).attr('data-id');
         if (isEmptyValue(id)) {
             // Add New
             var data = {
                 "query": 'add',
-                "databasename": 'allowence_master',
-                "values": $("#allowence-add").serializeObject()
+                "databasename": 'employee_designation',
+                "values": $("#designation-add").serializeObject()
             }
-            commonAjax('database.php', 'POST', data, '.add', 'Allowence added successfully', '', { "functionName": "locationReload" })
-            $("#table-allowence-list").dataTable().fnDraw();
+            commonAjax('database.php', 'POST', data, '.add', 'Designation added successfully', '', { "functionName": "locationReload" })
+            $("#table-designation-list").dataTable().fnDraw();
         } else {
             // Edit
             var data = {
                 "query": 'update',
-                "databasename": 'allowence_master',
-                "values": $("#allowence-add").serializeObject(),
+                "databasename": 'employee_designation',
+                "values": $("#designation-add").serializeObject(),
                 "condition": {
-                    "allowence_master_id": id
+                    "employee_designation_id": id
                 }
             }
-            commonAjax('database.php', 'POST', data, '.add', 'Allowence updated successfully', '', { "functionName": "locationReload" })
+            commonAjax('database.php', 'POST', data, '.add', 'Designation updated successfully', '', { "functionName": "locationReload" })
         }
     }
 });
