@@ -59,12 +59,15 @@ $('.employee-add').click(function() {
     if (checkRequired('#employee-add')) {
         var url = new URL(window.location.href);
         var id = url.searchParams.get("id");
+        var data = $("#employee-add").serializeObject();
+        data['employee_experience'] = tableRowTOArrayOfObjects('#employee-table tbody tr:not(#addItem)');
+        console.log();
         if (isEmptyValue(id)) {
             // Add New
             var data = {
                 "query": 'add',
                 "databasename": 'employee_master',
-                "values": $("#employee-add").serializeObject()
+                "values": data
             }
             commonAjax('', 'POST', data, '#employee-add', 'Employee added successfully');
         } else {
@@ -72,7 +75,7 @@ $('.employee-add').click(function() {
             var data = {
                 "query": 'update',
                 "databasename": 'employee_master',
-                "values": $("#employee-add").serializeObject(),
+                "values": data,
                 "condition": {
                     "employee_id": id
                 }

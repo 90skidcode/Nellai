@@ -504,13 +504,15 @@ $.fn.serializeObject = function() {
 /**
  * Table
  */
-function dataTableDisplay(data, column, filter, dataTableId) {
+function dataTableDisplay(data, column, filter, dataTableId, button) {
     $('#' + dataTableId).DataTable({
         lengthChange: !1,
         buttons: ["excel", "pdf"],
         'columns': column,
         'data': data,
         initComplete: function() {
+
+
             if (filter) {
                 var i = 0;
                 this.api().columns().every(function() {
@@ -535,7 +537,7 @@ function dataTableDisplay(data, column, filter, dataTableId) {
                     }
                 });
             }
-
+            $(".dataTables_filter").parent().append(button);
             $(".dataTables_filter").addClass('search-box pull-left');
             $(".dataTables_filter label").addClass('position-relative').append(`<i class="bx bx-search-alt search-icon"></i>`);
             $(".dataTables_filter label input").attr('placeholder', 'Search...').removeClass('form-control-sm');
@@ -545,7 +547,7 @@ function dataTableDisplay(data, column, filter, dataTableId) {
         "drawCallback": function() {
             $(".paging_simple_numbers > .pagination").addClass('pagination-rounded justify-content-end mb-2"');
         }
-    }).buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)")
+    }).buttons().container().appendTo("#" + dataTableId + "_wrapper .col-md-6:eq(0)")
 }
 
 /**
@@ -573,6 +575,24 @@ $.fn.serializeObject = function() {
     return o;
 };
 
+
+/**
+ * Table Row to Array of Objects
+ * @param {string} selector  Eg: '#employee-table tbody tr:not(#addItem)'
+ */
+
+function tableRowTOArrayOfObjects(selector) {
+    var TableData = new Array();
+    $(selector).each(function() {
+        let inputData = $(this).find('.form-control');
+        var item = {};
+        inputData.each(function() {
+            item[$(this).attr('name')] = $(this).val();
+        })
+        TableData.push(item);
+    });
+    return TableData;
+}
 /**
  *  To Get Parameter
  *  @parameterName 
@@ -639,7 +659,7 @@ $(document).on('click', '.btn-delete-table', function() {
  */
 
 function showToast(msg, type) {
-    toastr.success(msg, type);
+    (type == 'success') ? toastr.success(msg, type.toLocaleUpperCase()): toastr.error(msg, type.toLocaleUpperCase());
 }
 
 toastr.options = {
@@ -781,7 +801,7 @@ function commonAjax(url, type, data, modalSelector, sMessage, eMessage, sCallBac
 function isEmptyValue(value) {
     return (
         // null or undefined
-        (value == null) ||
+        (value == null) || (typeof(value) == 'undefined') ||
 
         // has length and it's zero
         (value.hasOwnProperty('length') && value.length === 0) ||
@@ -818,7 +838,7 @@ function listSelect2(data, selector, jsonLabel, jsonValue) {
  * Add Status & creted by for all form
  */
 
-$('form').append(`<input type="hidden" class="form-control" name="created_by" value="1000488">`);
+$('form').append(`<input type="hidden" class="form-control" name="created_by" value="1000488"><input type="hidden" class="form-control" name="status" value="1">`);
 
 
 /**
