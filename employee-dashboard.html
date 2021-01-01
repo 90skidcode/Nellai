@@ -16,6 +16,8 @@
     <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- Toaster Css-->
+    <link href="assets/libs/toastr/build/toastr.min.css" rel="stylesheet" type="text/css">
     <!-- App Css-->
     <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
     <!-- Select 2 -->
@@ -236,198 +238,215 @@
                                             <div class="col-lg-10">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <div class="tab-content" id="v-pills-tabContent">
-                                                            <div class="tab-pane fade show active" id="v-pills-gen-ques" role="tabpanel" aria-labelledby="v-pills-gen-ques-tab">
-                                                                <div class="row">
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="formrow-email-input">Employee ID</label>
-                                                                            <input type="text" name="employee_id" class="form-control" readonly>
+                                                        <form id="employee-add">
+                                                            <div class="tab-content" id="v-pills-tabContent">
+                                                                <div class="tab-pane fade show active" id="v-pills-gen-ques" role="tabpanel" aria-labelledby="v-pills-gen-ques-tab">
+                                                                    <div class="row">
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="formrow-email-input">Employee ID</label>
+                                                                                <input type="text" name="employee_id" class="form-control" readonly>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="formrow-password-input">Name</label>
-                                                                            <input type="text" name="employee_name" class="form-control">
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="formrow-password-input">Name</label>
+                                                                                <input type="text" name="employee_name" class="form-control" required>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="formrow-password-input">DOB</label>
-                                                                            <input type="date" name="employee_dob" class="form-control">
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="formrow-password-input">DOB</label>
+                                                                                <input type="date" name="employee_dob" class="form-control" required>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="formrow-password-input">Mobile</label>
-                                                                            <input type="number" name="employee_mobile" class="form-control">
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="formrow-password-input">Mobile</label>
+                                                                                <input type="number" name="employee_mobile" class="form-control" required>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="formrow-password-input">Email</label>
-                                                                            <input type="email" name="employee_email" class="form-control">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="formrow-password-input">Country</label>
-                                                                            <select name="country" id="country" class="form-control select2"></select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="formrow-password-input">State</label>
-                                                                            <select name="state" id="state" class="form-control select2"></select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="formrow-password-input">City</label>
-                                                                            <select name="city" id="city" class="form-control select2"></select>
-                                                                        </div>
-                                                                    </div>
 
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="formrow-password-input">Country</label>
+                                                                                <select name="country" id="country" class="form-control select2" required></select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="formrow-password-input">State</label>
+                                                                                <select name="state" id="state" class="form-control select2" required></select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="formrow-password-input">City</label>
+                                                                                <select name="city" id="city" class="form-control select2" required></select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="formrow-password-input">Pincode</label>
+                                                                                <input type="number" name="pincode" class="form-control" required>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="formrow-password-input">Email</label>
+                                                                                <input type="email" name="employee_email" class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="employee_gender">Gender</label>
+                                                                                <select class="select2" name="employee_gender" required>
+                                                                                <option value="Male">Male</option>
+                                                                                <option value="Female">Female</option>
+                                                                                <option value="Transgender">Transgender</option>                                               
+                                                                            </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="formrow-password-input">Blood Group</label>
+                                                                                <input type="text" name="blood_group" class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="place_of_birth">Place of Birth</label>
+                                                                                <input type="text" name="place_of_birth" class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="marital_status">Marital Status</label>
+                                                                                <select class="form-control select2" name="marital_status" required>
+                                                                                <option value="Married">Married</option>
+                                                                                <option value="Widowed">Widowed</option>
+                                                                                <option value="Separated">Separated</option>  
+                                                                                <option value="Divorced">Divorced</option>  
+                                                                                <option value="Single">Single</option>                                               
+                                                                            </select>
+                                                                            </div>
+                                                                        </div>
 
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="formrow-password-input">Pincode</label>
-                                                                            <input type="number" name="pincode" class="form-control">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="formrow-password-input">Aadhar Card</label>
-                                                                            <input type="text" name="aadhar_card" class="form-control">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="formrow-password-input">Pancard</label>
-                                                                            <input type="text" name="pancard" class="form-control">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="formrow-password-input">Blood Group</label>
-                                                                            <input type="text" name="blood_group" class="form-control">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="place_of_birth">Place of Birth</label>
-                                                                            <input type="text" name="place_of_birth" class="form-control">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="marital_status">Marital Status</label>
-                                                                            <input type="text" name="marital_status" class="form-control">
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="col-md-12">
-                                                                        <div class="form-group">
-                                                                            <label for="formrow-password-input">Address</label>
-                                                                            <textarea class="form-control" name="employee_address"></textarea>
+                                                                        <div class="col-md-12">
+                                                                            <div class="form-group">
+                                                                                <label for="formrow-password-input">Address</label>
+                                                                                <textarea class="form-control" name="employee_address" required></textarea>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="tab-pane fade" id="v-pills-privacy" role="tabpanel" aria-labelledby="v-pills-privacy-tab">
-                                                                <div class="row">
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="formrow-password-input">Qualification</label>
-                                                                            <input type="text" name="employee_qualification" class="form-control">
+                                                                <div class="tab-pane fade" id="v-pills-privacy" role="tabpanel" aria-labelledby="v-pills-privacy-tab">
+                                                                    <div class="row">
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="formrow-password-input">Qualification</label>
+                                                                                <input type="text" name="employee_qualification" class="form-control">
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="formrow-password-input">Designation</label>
-                                                                            <input type="text" name="employee_designation" class="form-control">
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="formrow-password-input">Designation</label>
+                                                                                <input type="text" name="employee_designation" class="form-control">
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="formrow-password-input">Grade</label>
-                                                                            <input type="text" name="employee_grade" class="form-control">
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="formrow-password-input">Grade</label>
+                                                                                <input type="text" name="employee_grade" class="form-control">
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="formrow-password-input">Joining_date</label>
-                                                                            <input type="date" name="employee_joining_date" class="form-control">
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="formrow-password-input">Joining_date</label>
+                                                                                <input type="date" name="employee_joining_date" class="form-control">
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="employee_reporting_to">Reporting To</label>
-                                                                            <input type="text" name="employee_reporting_to" class="form-control">
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="employee_reporting_to">Reporting To</label>
+                                                                                <input type="text" name="employee_reporting_to" class="form-control">
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="col-md-3">
-                                                                        <div class="form-group">
-                                                                            <label for="department">Department</label>
-                                                                            <input type="date" name="department" class="form-control">
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="department">Department</label>
+                                                                                <input type="date" name="department" class="form-control">
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="form-group col-md-12">
-                                                                        <label class="pointer btn btn-primary" for="upload">Upload Customer Files</label>
-                                                                        <input type="file" id="upload" accept="image/*">
-                                                                        <input type="hidden" name="employee_documents">
-                                                                    </div>
-                                                                    <div class="row image-prev-area d-none">
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="formrow-password-input">Aadhar Card</label>
+                                                                                <input type="text" name="aadhar_card" class="form-control" required>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
+                                                                                <label for="formrow-password-input">Pancard</label>
+                                                                                <input type="text" name="pancard" class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group col-md-12">
+                                                                            <label class="pointer btn btn-primary" for="upload">Upload Customer Files</label>
+                                                                            <input type="file" id="upload" accept="image/*">
+                                                                            <input type="hidden" name="employee_documents">
+                                                                        </div>
+                                                                        <div class="row image-prev-area d-none">
 
-                                                                    </div>
+                                                                        </div>
 
-                                                                    <div class="table-responsive">
-                                                                        <table class="table table-centered table-nowrap table-bordered table-striped">
-                                                                            <thead class="bg-gray">
-                                                                                <tr>
-                                                                                    <th> </th>
-                                                                                    <th>Company Name</th>
-                                                                                    <th>Joined Date</th>
-                                                                                    <th>Relieved Date</th>
-                                                                                    <th>Designation</th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td class="text-center">
-                                                                                        <button type="button" title="Reject" class="btn btn-icon btn-outline-danger btn-lg">
+                                                                        <div class="table-responsive">
+                                                                            <table class="table table-centered table-nowrap table-bordered table-striped">
+                                                                                <thead class="bg-gray">
+                                                                                    <tr>
+                                                                                        <th> </th>
+                                                                                        <th>Company Name</th>
+                                                                                        <th>Joined Date</th>
+                                                                                        <th>Relieved Date</th>
+                                                                                        <th>Designation</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td class="text-center">
+                                                                                            <button type="button" title="Reject" class="btn btn-icon btn-outline-danger btn-lg">
                                                                                             <i class="fa fa-trash"></i>
                                                                                         </button>
-                                                                                    </td>
-                                                                                    <td scope="row">
-                                                                                        <input type="text" name="company_name" class="form-control">
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <input type="date" name="joined_date" class="form-control">
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <input type="date" name="relieved_date" class="form-control">
-                                                                                    </td>
-                                                                                    <td scope="row">
-                                                                                        <input type="text" name="company_designation" class="form-control">
-                                                                                    </td>
-                                                                                </tr>
+                                                                                        </td>
+                                                                                        <td scope="row">
+                                                                                            <input type="text" name="company_name" class="form-control">
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <input type="date" name="joined_date" class="form-control">
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <input type="date" name="relieved_date" class="form-control">
+                                                                                        </td>
+                                                                                        <td scope="row">
+                                                                                            <input type="text" name="company_designation" class="form-control">
+                                                                                        </td>
+                                                                                    </tr>
 
-                                                                                <tr id="addItem">
-                                                                                    <td class="text-center border-right-0">
-                                                                                        <button type="button" id="button-add-item" count="1" data-toggle="tooltip" title="Add" data-original-title="Add" class="btn btn-icon btn-outline-success btn-lg">
+                                                                                    <tr id="addItem">
+                                                                                        <td class="text-center border-right-0">
+                                                                                            <button type="button" id="button-add-item" count="1" data-toggle="tooltip" title="Add" data-original-title="Add" class="btn btn-icon btn-outline-success btn-lg">
                                                                                     <i class="fa fa-plus"></i>
                                                                                 </button>
-                                                                                    </td>
-                                                                                    <td colspan="5" class="text-right"></td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
+                                                                                        </td>
+                                                                                        <td colspan="5" class="text-right"></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
 
-                                                        </div>
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
@@ -435,7 +454,7 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+                                    <button type="button" class="btn btn-primary employee-add">Save</button>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
@@ -620,6 +639,9 @@
     <script src="assets/json/countries.js"></script>
     <script src="assets/json/cities.js"></script>
     <script src="assets/json/states.js"></script>
+    <!-- toastr plugin -->
+    <script src="assets/libs/toastr/build/toastr.min.js"></script>
+
     <script src="assets/js/app.js"></script>
     <!-- Page js -->
     <script src="assets/js/pages/employee-list.js"></script>

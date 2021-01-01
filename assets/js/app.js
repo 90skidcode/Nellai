@@ -121,6 +121,32 @@ $("#side-menu.outlet").html(
      `
 );
 
+$("#side-menu.employee").html(
+    ` 
+    <li>
+        <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="bx bx bxs-user"></i>
+            <span>Employee</span>
+        </a>
+        <ul class="sub-menu mm-collapse" aria-expanded="false">
+            <li><a href="employee-dashboard.html">Employee List</a></li>
+            <li><a href="allowence-list.html">Allowence List</a></li>  
+            <li><a href="grade-list.html">Grade List</a></li>          
+        </ul>
+    </li>  
+
+    <li>
+        <a href="product.html" class="has-arrow waves-effect">
+            <i class='bx bx-calendar-plus'></i>
+            <span>Leave</span>
+        </a>
+        <ul class="sub-menu mm-collapse" aria-expanded="false">
+            <li><a href="leave-type-list.html">Leave Type List</a></li>
+            <li><a href="leave-list.html">Leave List</a></li>              
+        </ul>
+    </li>
+     `
+);
 
 
 
@@ -480,12 +506,8 @@ $.fn.serializeObject = function() {
  */
 function dataTableDisplay(data, column, filter, dataTableId) {
     $('#' + dataTableId).DataTable({
-        dom: 'Bfrtlip',
-        "pagingType": "full_numbers",
-        colReorder: true,
-        fixedHeader: true,
-        paging: true,
-        keys: true,
+        lengthChange: !1,
+        buttons: ["excel", "pdf"],
         'columns': column,
         'data': data,
         initComplete: function() {
@@ -513,8 +535,17 @@ function dataTableDisplay(data, column, filter, dataTableId) {
                     }
                 });
             }
+
+            $(".dataTables_filter").addClass('search-box pull-left');
+            $(".dataTables_filter label").addClass('position-relative').append(`<i class="bx bx-search-alt search-icon"></i>`);
+            $(".dataTables_filter label input").attr('placeholder', 'Search...').removeClass('form-control-sm');
+            $(".paging_simple_numbers > .pagination").addClass('pagination-rounded justify-content-end mb-2"');
+            $(".dataTables_info").addClass('text-dark');
+        },
+        "drawCallback": function() {
+            $(".paging_simple_numbers > .pagination").addClass('pagination-rounded justify-content-end mb-2"');
         }
-    });
+    }).buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)")
 }
 
 /**
@@ -608,28 +639,25 @@ $(document).on('click', '.btn-delete-table', function() {
  */
 
 function showToast(msg, type) {
-    let background = "";
-    let icon = '';
-    (type == 'error') ? background = 'badge-danger': background = 'badge-success';
-    (type == 'success') ? icon = 'anticon-check-circle': icon = 'anticon-info-circle'
-    var toastHTML = `<div class="toast fade hide" data-delay="5000">
-        <div class="toast-header ${background}">
-            <i class="anticon ${icon} m-r-5 text-white"></i>
-            <strong class="mr-auto">${type.toUpperCase()}</strong>
-            <button type="button" class="ml-2 close text-white" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="toast-body">
-            ${msg}
-        </div>
-    </div>`
+    toastr.success(msg, type);
+}
 
-    $('#notification-toast').append(toastHTML)
-    $('#notification-toast .toast').toast('show');
-    setTimeout(function() {
-        $('#notification-toast .toast:first-child').remove();
-    }, 5000);
+toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": 3000,
+    "hideDuration": 1000,
+    "timeOut": 5000,
+    "extendedTimeOut": 1000,
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
 }
 
 
@@ -657,7 +685,12 @@ function loader(type) {
 
 $(document).on('keyup blur', '[required]', function() {
     ($(this).val()) ? $(this).removeClass('is-invalid'): $(this).addClass('is-invalid');
-})
+});
+
+/** Adding Star to Required field */
+$('[required]').each(function() {
+    $(this).closest('div').find('label').append('<span class="text-danger">*</span>');
+});
 
 
 /**
@@ -682,16 +715,16 @@ function checkRequired(selector) {
  * @param {string} url 
  * @param {string} type 
  * @param {JSON} data 
- * @param {string} resetFormSelector  ID/Class for the Form to reset after success
+ * @param {string} modalSelector  ID/Class for the Form to reset after success
  * @param {string} sMessage 
  * @param {string} eMessage 
  * @param {JSON} sCallBack  *function* for function name, *param* for call back paramater
  * @param {JSON} eCallBack  *function* for function name, *param* for call back paramater
  */
 
-function commonAjax(url, type, data, resetFormSelector, sMessage, eMessage, sCallBack, eCallBack) {
+function commonAjax(url, type, data, modalSelector, sMessage, eMessage, sCallBack, eCallBack) {
     loader(true);
-    let serverUrl = 'http://glowmedia.in/frontoffice/admin/api/';
+    let serverUrl = 'http://glowmedia.in/nellai/api/';
     $.ajax({
         url: (isEmptyValue(url)) ? serverUrl + 'services.php' : serverUrl + url,
         type: type,
@@ -702,9 +735,9 @@ function commonAjax(url, type, data, resetFormSelector, sMessage, eMessage, sCal
                 var response = JSON.parse(response);
                 if (data.query == 'fetch') {
                     if (!isEmptyValue(response)) {
-                        if (!isEmptyValue(resetFormSelector)) {
+                        if (!isEmptyValue(modalSelector)) {
                             $(".select2[multiple]").val(null).trigger("change");
-                            $(resetFormSelector)[0].reset();
+                            $(modalSelector).modal('hide');
                         }
                         if (!isEmptyValue(sMessage))
                             showToast(sMessage, 'success')
@@ -718,9 +751,9 @@ function commonAjax(url, type, data, resetFormSelector, sMessage, eMessage, sCal
                     }
                 } else {
                     if (response.status_code == '200') {
-                        if (!isEmptyValue(resetFormSelector)) {
+                        if (!isEmptyValue(modalSelector)) {
                             $(".select2[multiple]").val(null).trigger("change");
-                            $(resetFormSelector)[0].reset();
+                            $(modalSelector).modal('hide');
                         }
                         if (!isEmptyValue(sMessage))
                             showToast(sMessage, 'success')
@@ -785,8 +818,7 @@ function listSelect2(data, selector, jsonLabel, jsonValue) {
  * Add Status & creted by for all form
  */
 
-$('form').append(`<input type="hidden" class="form-control" name="status" value="1">
- <input type="hidden" class="form-control" name="created_by" value="1000488">`);
+$('form').append(`<input type="hidden" class="form-control" name="created_by" value="1000488">`);
 
 
 /**

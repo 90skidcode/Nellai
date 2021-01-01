@@ -51,6 +51,37 @@ $(document).on('click', '#button-add-item', function() {
 </tr>`);
 });
 
+/**
+ * Add Employee
+ */
+
+$('.employee-add').click(function() {
+    if (checkRequired('#employee-add')) {
+        var url = new URL(window.location.href);
+        var id = url.searchParams.get("id");
+        if (isEmptyValue(id)) {
+            // Add New
+            var data = {
+                "query": 'add',
+                "databasename": 'employee_master',
+                "values": $("#employee-add").serializeObject()
+            }
+            commonAjax('', 'POST', data, '#employee-add', 'Employee added successfully');
+        } else {
+            // Edit
+            var data = {
+                "query": 'update',
+                "databasename": 'employee_master',
+                "values": $("#employee-add").serializeObject(),
+                "condition": {
+                    "employee_id": id
+                }
+            }
+            commonAjax('database.php', 'POST', data, '', 'Employee updated successfully');
+        }
+    }
+});
+
 
 /**
  * To delete a row
