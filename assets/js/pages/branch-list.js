@@ -48,6 +48,12 @@ function displayBranchList(response, dataTableId) {
     }, {
         "data": "branch_name"
     }, {
+        "data": "department_name"
+    }, {
+        "data": "branch_phone"
+    }, {
+        "data": "branch_address"
+    }, {
         "data": "status",
         mRender: function(data, type, row) {
             if (row.status == '1')

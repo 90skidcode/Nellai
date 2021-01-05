@@ -1,6 +1,5 @@
 $(document).ready(function() {
     $(".select2").select2();
-
     listCountry();
     listState($('#country').val());
     $('#country').select2().on('change', function() {
@@ -10,29 +9,163 @@ $(document).ready(function() {
         listCity($(this).val());
     });
 
-    $("#datatable-buttons").DataTable({
-        lengthChange: !1,
-        buttons: ["excel", "pdf"],
-        "initComplete": function(settings, json) {
-            $(".dataTables_filter").parent().append(`<div class="text-sm-right">
-                <button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Employee </button>
-            </div>`);
-            $(".dataTables_filter").addClass('search-box pull-left');
-            $(".dataTables_filter label").addClass('position-relative').append(`<i class="bx bx-search-alt search-icon"></i>`);
-            $(".dataTables_filter label input").attr('placeholder', 'Search...').removeClass('form-control-sm');
-            $(".paging_simple_numbers > .pagination").addClass('pagination-rounded justify-content-end mb-2"');
-            $(".dataTables_info").addClass('text-dark');
-        },
-        "drawCallback": function(settings) {
-            $(".paging_simple_numbers > .pagination").addClass('pagination-rounded justify-content-end mb-2"');
-        }
-    }).buttons().container().appendTo("#datatable-buttons_wrapper .col-md-6:eq(0)");
+    displayEmployeeListInit();
+    listQualification();
+    listDesignation();
+    listGrade();
+    listDepartment();
+    listEmployee();
 });
+
+
+/**
+ * List Qualification in select 2
+ */
+
+function listQualification() {
+    let data = {
+        "query": 'fetch',
+        "databasename": 'employee_qualification',
+        "column": {
+            "employee_qualification_id": "employee_qualification_id",
+            "employee_qualification": "employee_qualification"
+        },
+        "condition": {
+            "status": '1'
+        },
+        "like": ""
+    }
+    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='employee_qualification_id']", "param2": "employee_qualification", "param3": "employee_qualification_id" })
+}
+
+/**
+ * List Designation in select 2
+ */
+
+function listDesignation() {
+    let data = {
+        "query": 'fetch',
+        "databasename": 'employee_designation',
+        "column": {
+            "employee_designation_id": "employee_designation_id",
+            "employee_designation": "employee_designation"
+        },
+        "condition": {
+            "status": '1'
+        },
+        "like": ""
+    }
+    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='employee_designation_id']", "param2": "employee_designation", "param3": "employee_designation_id" })
+}
+
+/**
+ * List Grade in select 2
+ */
+
+function listGrade() {
+    let data = {
+        "query": 'fetch',
+        "databasename": 'employee_grade',
+        "column": {
+            "employee_grade_id": "employee_grade_id",
+            "employee_grade": "employee_grade"
+        },
+        "condition": {
+            "status": '1'
+        },
+        "like": ""
+    }
+    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='employee_grade_id']", "param2": "employee_grade", "param3": "employee_grade_id" })
+}
+
+/**
+ * List Department in select 2
+ */
+
+function listDepartment() {
+    let data = {
+        "query": 'fetch',
+        "databasename": 'department_master',
+        "column": {
+            "department_master_id": "department_master_id",
+            "department_name": "department_name"
+        },
+        "condition": {
+            "status": '1'
+        },
+        "like": ""
+    }
+    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='department_id']", "param2": "department_name", "param3": "department_master_id" })
+}
+
+
+/**
+ * List Employee in select 2
+ */
+
+function listEmployee() {
+    let data = {
+        "query": 'fetch',
+        "databasename": 'employee_master',
+        "column": {
+            "employee_master_id": "employee_master_id",
+            "employee_name": "employee_name"
+        },
+        "condition": {
+            "status": '1'
+        },
+        "like": ""
+    }
+    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='employee_reporting_to']", "param2": "employee_name", "param3": "employee_master_id" })
+}
+
+
+
+var button = `<div class="text-sm-right">
+                    <button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Employee </button>
+                </div>`;
+
+
+function displayEmployeeListInit() {
+    let data = { "list_key": "getEmployee", "condition": { "employee_master.status": "1" } }
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "displayEmployeeList", "param1": "table-employee-list" }, { "functionName": "displayEmployeeList", "param1": "table-employee-list" });
+}
+
+function displayEmployeeList(response, dataTableId) {
+    var tableHeader = [{
+        "data": "employee_id"
+    }, {
+        "data": "employee_name"
+    }, {
+        "data": "department_name"
+    }, {
+        "data": "employee_mobile"
+    }, {
+        "data": "employee_grade"
+    }, {
+        "data": "status",
+        mRender: function(data, type, row) {
+            if (row.status == '1')
+                return `<span class="badge badge-pill badge-success font-size-12">Active</span>`;
+            else
+                return `<span class="badge badge-pill badge-danger font-size-12">In Active</span>`;
+        }
+    }, /* EDIT */ /* DELETE */ {
+        "data": "created_at",
+        mRender: function(data, type, row) {
+            return `<td class="text-right">
+                     <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-id="${row.employee_master_id}" data-target=".add"><i class="mdi mdi-pencil font-size-14"></i></a>
+                    <a class="text-danger delete-row" title="Delete" data-toggle="modal" data-id="${row.employee_master_id}" data-target=".delete"><i class="mdi mdi-close font-size-14"></i></a>
+                </td>`;
+        }
+    }];
+    dataTableDisplay(response.result, tableHeader, false, dataTableId, button);
+}
 
 $(document).on('click', '#button-add-item', function() {
     let c = $(this).attr('count');
     $(this).attr('count', parseInt($(this).attr('count')) + 1);
-    $(this).closest('table').find('#addItem').before(` <tr>
+    $(this).closest('table').find('#addItem').before(`<tr>
     <td class="text-center"><button type="button" title="Reject" class="btn btn-icon btn-outline-danger btn-lg">
         <i class="fa fa-trash"></i>
     </button></td>
@@ -51,36 +184,117 @@ $(document).on('click', '#button-add-item', function() {
 </tr>`);
 });
 
+
+/**
+ * To Add Allowence
+ */
+
+$(document).on('click', '[data-target=".add"]', function() {
+    $(".employee-add").removeAttr('data-id');
+    $("#employee-add")[0].reset();
+});
+
+/**
+ * To Edit Allowence
+ */
+
+$(document).on('click', ".edit-row", function() {
+    $(".employee-add").attr('data-id', $(this).attr('data-id'));
+    $("#employee-add")[0].reset();
+    let data = {
+        "query": "fetch",
+        "databasename": "employee_master",
+        "column": {
+            "*": "*"
+        },
+        'condition': {
+            'employee_master_id': $(this).attr('data-id')
+        },
+        "like": ""
+    }
+    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "employeeSetValue" });
+});
+
+/***
+ * Employee Set Value
+ */
+
+function employeeSetValue(response) {
+    multipleSetValue(response);
+    if (response[0].employee_experience) {
+        let employeeExperience = JSON.parse(response[0].employee_experience);
+        $.each(employeeExperience, function(index, value) {
+            if (index)
+                $('#button-add-item').trigger('click');
+            $.each(value, function(i, v) {
+                $('tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v);
+            })
+        })
+    }
+    if (response[0].employee_documents)
+        docShow('employee_documents');
+}
+
+
+/**
+ * To detele row
+ */
+
+$(document).on('click', ".delete-row", function() {
+    $(".delete .btn-delete").attr('data-detete', $(this).attr('data-id'));
+});
+
+$(document).on('click', ".btn-delete", function() {
+    var data = {
+        'query': 'update',
+        'databasename': 'employee_master',
+        'condition': {
+            'employee_master_id': $(".btn-delete").attr('data-detete')
+        },
+        'values': {
+            'status': '0'
+        }
+    }
+    $("#delete").modal('hide');
+    commonAjax('database.php', 'POST', data, '', 'Record Deleted Sucessfully', '', { "functionName": "locationReload" })
+});
+
+
+
 /**
  * Add Employee
  */
 
 $('.employee-add').click(function() {
     if (checkRequired('#employee-add')) {
-        var url = new URL(window.location.href);
-        var id = url.searchParams.get("id");
-        var data = $("#employee-add").serializeObject();
-        data['employee_experience'] = tableRowTOArrayOfObjects('#employee-table tbody tr:not(#addItem)');
-        console.log();
+        var id = $(this).attr('data-id');
+        var values = $("#employee-add").serializeObject();
+        values['employee_experience'] = tableRowTOArrayOfObjects('#employee-table tbody tr:not(#addItem)');
+        delete values['company_name'];
+        delete values['joined_date'];
+        delete values['relieved_date'];
+        delete values['company_designation'];
         if (isEmptyValue(id)) {
             // Add New
             var data = {
                 "query": 'add',
                 "databasename": 'employee_master',
-                "values": data
+                "values": values
             }
-            commonAjax('', 'POST', data, '#employee-add', 'Employee added successfully');
+            console.log(data);
+            commonAjax('', 'POST', data, '#employee-add', 'Employee added successfully', '', { "functionName": "locationReload" });
         } else {
             // Edit
             var data = {
                 "query": 'update',
                 "databasename": 'employee_master',
-                "values": data,
+                "values": values,
                 "condition": {
-                    "employee_id": id
+                    "employee_master_id": id
                 }
             }
-            commonAjax('database.php', 'POST', data, '', 'Employee updated successfully');
+            console.log(data);
+            commonAjax('database.php', 'POST', data, '', 'Employee updated successfully', '', { "functionName": "locationReload" });
         }
     }
 });
@@ -140,7 +354,7 @@ $(document).ready(function() {
                 }, false);
                 return xhr;
             },
-            url: 'http://glowmedia.in/frontoffice/admin/api/upload.php',
+            url: 'http://glowmedia.in/nellai/api/upload.php',
             type: 'POST',
             data: formData,
             success: function(data) {

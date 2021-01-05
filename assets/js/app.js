@@ -130,7 +130,8 @@ $("#side-menu.employee").html(
         </a>
         <ul class="sub-menu mm-collapse" aria-expanded="false">
             <li><a href="employee-dashboard.html">Employee List</a></li>
-            <li><a href="allowence-list.html">Allowence List</a></li>  
+            <li><a href="allowence-list.html">Allowence List</a></li> 
+            <li><a href="deductions-list.html">Deductions List</a></li>  
             <li><a href="grade-list.html">Grade List</a></li> 
             <li><a href="designation-list.html">Designation List</a></li> 
             <li><a href="qualification-list.html">Qulification List</a></li>           
@@ -142,9 +143,9 @@ $("#side-menu.employee").html(
             <i class='bx bx-calendar-plus'></i>
             <span>Leave</span>
         </a>
-        <ul class="sub-menu mm-collapse" aria-expanded="false">
-            <li><a href="leave-type-list.html">Leave Type List</a></li>
-            <li><a href="leave-list.html">Leave List</a></li>              
+        <ul class="sub-menu mm-collapse" aria-expanded="false">           
+            <li><a href="leave-list.html">Leave List</a></li> 
+            <li><a href="leave-type-list.html">Leave Type List</a></li>             
         </ul>
     </li>
 
@@ -160,8 +161,6 @@ $("#side-menu.employee").html(
     </li>
      `
 );
-
-
 
 
 
@@ -604,7 +603,7 @@ function tableRowTOArrayOfObjects(selector) {
         })
         TableData.push(item);
     });
-    return TableData;
+    return JSON.stringify(TableData);
 }
 /**
  *  To Get Parameter
@@ -716,8 +715,9 @@ function loader(type) {
 
 /* For Validate Required field */
 
-$(document).on('keyup blur', '[required]', function() {
+$(document).on('keyup blur change', '[required],.form-group.isinvalid .select2-container--default .select2-selection--single', function() {
     ($(this).val()) ? $(this).removeClass('is-invalid'): $(this).addClass('is-invalid');
+    ($(this).val()) ? $(this).closest('.form-group').removeClass('isinvalid'): $(this).closest('.form-group').addClass('isinvalid');
 });
 
 /** Adding Star to Required field */
@@ -736,9 +736,12 @@ function checkRequired(selector) {
     $(selector + " [required]").each(function(index) {
         if (!$(this).val()) {
             $(this).addClass('is-invalid');
+            $(this).closest('.form-group').addClass('isinvalid');
             flag = false;
-        } else
+        } else {
             $(this).removeClass('is-invalid');
+            $(this).closest('.form-group').removeClass('isinvalid');
+        }
     });
     return flag;
 }
@@ -872,8 +875,9 @@ function locationReload() {
 
 function setValue(name, value) {
     $('[name="' + name + '"]').val(value);
-    if ($('[name="' + name + '"]').hasClass('select2'))
+    if ($('[name="' + name + '"]').hasClass('select2')) {
         $('[name="' + name + '"]').trigger('change');
+    }
 }
 
 /**
@@ -918,25 +922,24 @@ function listCity(stateId) {
 
 /**
  * To set current date time
- * @param {string} ele Class name
+ * @param {string} element Selector
  */
 
 function setCurrentDate(ele) {
     var now = new Date();
     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-    $("." + ele).val(now.toISOString().slice(0, 16));
+    $(ele).val(now.toISOString().slice(0, 10));
 }
 
 /**
  * To add days
  * @param {date} theDate from Date
  * @param {number} days  No of days to increment
- * @param {string} ele Class name
+ * @param {string}  element Selector
  */
 function addDays(theDate, days, ele) {
-    var now = new Date(theDate.getTime() + days * 24 * 60 * 60 * 1000);
-    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-    $("." + ele).val(now.toISOString().slice(0, 16));
+    var now = new Date(new Date(theDate).getTime() + (days * 24 * 60 * 60 * 1000));
+    $(ele).val(now.toISOString().slice(0, 10));
 }
 
 
@@ -1028,21 +1031,27 @@ function checkAddOrEdit(databasename, conditionkey, imageFlag) {
  */
 
 function multipleSetValue(responce, imageFlag) {
+    let data = [];
     if (!isEmptyValue(responce)) {
         $.each(responce[0], function(i, v) {
-            setValue(i, v)
+            (i != 'state' && i != 'country' && i != 'city') ? setValue(i, v): data[i] = v;
         })
+        if (data.toString() != '[]') {
+            setValue('country', data['country']);
+            setValue('state', data['state']);
+            setValue('city', data['city']);
+        }
     }
-    docShow(imageFlag)
+    docShow(imageFlag);
 }
 
 /**
- * Based on the flag
- * @param {Booleen} imageFlag 
+ * Based on the flag * 
+ * @param {string} element to which need to select 
  */
-function docShow(imageFlag) {
-    if (imageFlag) {
-        var uploadData = $('[name=customer_doc]').val().split(",");
+function docShow(element) {
+    if (element) {
+        var uploadData = $('[name=' + element + ']').val().split(",");
         /**
          * To preload Image in edit  
          */
@@ -1053,10 +1062,10 @@ function docShow(imageFlag) {
                 html += ` <div class="col-md-3 ${randomClass}" data-val="${v}">
                             <span class="badge-danger float-right border-radius-round position-absolute pointer remove-img" title="remove">
                                 <span class="icon-holder">
-                                    <i class="anticon anticon-close"></i>
+                                    <i class="bx bx-x"></i>
                                 </span>
                             </span>
-                            <img class="w-100" src="http://glowmedia.in/frontoffice/admin/api/uploads/${v}" alt="">                        
+                            <img class="w-100" src="http://glowmedia.in/nellai/api/uploads/${v}" alt="">                        
                         </div>`;
             })
             $(".image-prev-area").append(html);
