@@ -317,8 +317,14 @@
                                                                         </div>
                                                                         <div class="col-md-3">
                                                                             <div class="form-group">
+                                                                                <label for="department">Branch</label>
+                                                                                <select class="form-control select2" name="branch_id" required></select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <div class="form-group">
                                                                                 <label for="department">Reporting To</label>
-                                                                                <select class="form-control select2" name="employee_reporting_to" required></select>
+                                                                                <select class="form-control select2" name="employee_reporting_to"></select>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-3">
@@ -341,9 +347,9 @@
                                                                         <div class="row image-prev-area d-none">
 
                                                                         </div>
-
+                                                                        <p class="font-weight-bold col-md-12">Employee Work Expreiance</p>
                                                                         <div class="table-responsive" id="employee-table">
-                                                                            <table class="table table-centered table-nowrap table-bordered table-striped">
+                                                                            <table class="table table-centered table-nowrap table-bordered table-striped table-employee">
                                                                                 <thead class="bg-gray">
                                                                                     <tr>
                                                                                         <th> </th>
@@ -354,31 +360,11 @@
                                                                                     </tr>
                                                                                 </thead>
                                                                                 <tbody>
-                                                                                    <tr>
-                                                                                        <td class="text-center">
-                                                                                            <button type="button" title="Reject" class="btn btn-icon btn-outline-danger btn-lg">
-                                                                                            <i class="fa fa-trash"></i>
-                                                                                        </button>
-                                                                                        </td>
-                                                                                        <td scope="row">
-                                                                                            <input type="text" name="company_name" class="form-control">
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            <input type="date" name="joined_date" class="form-control">
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            <input type="date" name="relieved_date" class="form-control">
-                                                                                        </td>
-                                                                                        <td scope="row">
-                                                                                            <input type="text" name="company_designation" class="form-control">
-                                                                                        </td>
-                                                                                    </tr>
-
                                                                                     <tr id="addItem">
                                                                                         <td class="text-center border-right-0">
                                                                                             <button type="button" id="button-add-item" count="1" data-toggle="tooltip" title="Add" data-original-title="Add" class="btn btn-icon btn-outline-success btn-lg">
-                                                                                    <i class="fa fa-plus"></i>
-                                                                                </button>
+                                                                                                <i class="fa fa-plus"></i>
+                                                                                            </button>
                                                                                         </td>
                                                                                         <td colspan="5" class="text-right"></td>
                                                                                     </tr>
@@ -387,7 +373,6 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
                                                             </div>
                                                         </form>
                                                     </div>
@@ -403,53 +388,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="modal fade view" tabindex="-1" role="dialog" aria-labelledby="addKitchenOutLabel" style="display: none;" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="addKitchenOutLabel">View Kitchen InDetails</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                            </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <p class="mb-2 col-md-4"> Bill No: <span class="text-primary ml-2">10001</span></p>
-                                        <p class="mb-2 col-md-4">Date/Time:<span class="text-primary ml-2">10/11/2020 12:52</span></p>
-                                        <p class="mb-2 col-md-4">Raised By:<span class="text-primary ml-2">Sathish</span></p>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table class="table table-centered table-nowrap table-bordered table-striped">
-                                            <thead class="bg-gray">
-                                                <tr>
-                                                    <th>Item</th>
-                                                    <th>Quantity (KGS)</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td scope="row">ITE0001 - Rice</td>
-                                                    <td> 10</td>
-                                                </tr>
-                                                <tr>
-                                                    <td scope="row">ITE0002 - Sunflower Oil</td>
-                                                    <td> 5</td>
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Check Approve</button>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
 
                     <div class="modal fade delete" tabindex="-1" role="dialog" aria-labelledby="editKitchenOutLabel" style="display: none;" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
@@ -474,6 +412,89 @@
                         </div>
                     </div>
 
+
+
+                    <div class="modal fade salary" tabindex="-1" role="dialog" aria-labelledby="addKitchenOutLabel" style="display: none;" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="addKitchenOutLabel">Update CTC List</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <div class="checkout-tabs">
+                                        <form id="ctc-add">
+                                            <div class="row">
+                                                <p class="font-weight-bold">Earning</p>
+                                                <div class="table-responsive" id="allowance-table">
+                                                    <table class="table table-centered table-nowrap table-bordered table-striped">
+                                                        <thead class="bg-gray">
+                                                            <tr>
+                                                                <th> </th>
+                                                                <th>Allowance Type</th>
+                                                                <th>Amount</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr id="addAllowance">
+                                                                <td class="text-center border-right-0">
+                                                                    <button type="button" id="button-add-allowance" count="1" data-toggle="tooltip" title="Add" data-original-title="Add" class="btn btn-icon btn-outline-success btn-lg">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </button>
+                                                                </td>
+                                                                <td colspan="2" class="text-right"></td>
+                                                            </tr>
+                                                            <tr id="addAllowance">
+                                                                <td colspan="2" class="text-right">Total Allowance</td>
+                                                                <td class="text-right allowance-total"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <p class="font-weight-bold">Deductions</p>
+                                                <div class="table-responsive" id="deductions-table">
+                                                    <table class="table table-centered table-nowrap table-bordered table-striped">
+                                                        <thead class="bg-gray">
+                                                            <tr>
+                                                                <th> </th>
+                                                                <th>Deductions Type</th>
+                                                                <th>Amount</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr id="addDeductions">
+                                                                <td class="text-center border-right-0">
+                                                                    <button type="button" id="button-add-deductions" count="1" data-toggle="tooltip" title="Add" data-original-title="Add" class="btn btn-icon btn-outline-success btn-lg">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </button>
+                                                                </td>
+                                                                <td colspan="2" class="text-right"></td>
+                                                            </tr>
+                                                            <tr id="addDeductions">
+                                                                <td colspan="2" class="text-right">Total Deductions</td>
+                                                                <td colspan="2" class="text-right deductions-total"></td>
+                                                            </tr>
+                                                            <tr id="addDeductions">
+                                                                <td colspan="2" class="text-right">Total CTC</td>
+                                                                <td colspan="2" class="text-right ctc-total"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary ctc-add">Save</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
                 <!-- container-fluid -->

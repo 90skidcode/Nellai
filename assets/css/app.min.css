@@ -1501,7 +1501,7 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #fff;
+    background-color: #ffffff14;
     z-index: 9999
 }
 
@@ -2029,6 +2029,12 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
     }
     .card {
         border: 0
+    }
+    .no-print {
+        display: none;
+    }
+    .print {
+        display: block;
     }
 }
 
@@ -4549,6 +4555,10 @@ input[switch=dark]:checked+label {
 
 .float-none {
     float: none !important
+}
+
+.display-none {
+    display: none;
 }
 
 @media (min-width: 576px) {

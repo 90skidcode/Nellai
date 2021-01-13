@@ -1,10 +1,69 @@
 $(document).ready(function() {
     displayGradeListInit();
+    listAllowence();
+    listDeductions();
 });
 
 var button = `<div class="text-sm-right">
 <button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Grade </button>
 </div>`;
+
+
+/**
+ * List Allowence in select 2
+ */
+
+function listAllowence() {
+    let data = {
+        "query": 'fetch',
+        "databasename": 'allowence_master',
+        "column": {
+            "allowence_master_id": "allowence_master_id",
+            "allowence_name": "allowence_name"
+        },
+        "condition": {
+            "status": '1'
+        },
+        "like": ""
+    }
+    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "dataAllowence" })
+}
+
+var allowenceDataList = '';
+
+function dataAllowence(responce) {
+    $.each(responce, function(i, v) {
+        allowenceDataList += `<option value='${v.allowence_master_id}'>${v.allowence_name}</option>`
+    });
+}
+
+/**
+ * List Deductions in select 2
+ */
+
+function listDeductions() {
+    let data = {
+        "query": 'fetch',
+        "databasename": 'deductions_master',
+        "column": {
+            "deductions_master_id": "deductions_master_id",
+            "deductions_name": "deductions_name"
+        },
+        "condition": {
+            "status": '1'
+        },
+        "like": ""
+    }
+    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "dataDeductions" })
+}
+
+var deductionsDataList = '';
+
+function dataDeductions(responce) {
+    $.each(responce, function(i, v) {
+        deductionsDataList += `<option value='${v.deductions_master_id}'>${v.deductions_name}</option>`
+    });
+}
 
 function displayGradeListInit() {
     let data = {
@@ -52,7 +111,7 @@ function displayGradeList(response, dataTableId) {
 
 $(document).on('click', '[data-target=".add"]', function() {
     $(".grade-add").removeAttr('data-id');
-    $("#grade-add")[0].reset();
+    formReset();
 });
 
 /**
@@ -61,7 +120,7 @@ $(document).on('click', '[data-target=".add"]', function() {
 
 $(document).on('click', ".edit-row", function() {
     $(".grade-add").attr('data-id', $(this).attr('data-id'));
-    $("#grade-add")[0].reset();
+    formReset();
     let data = {
         "query": "fetch",
         "databasename": "employee_grade",
@@ -73,8 +132,37 @@ $(document).on('click', ".edit-row", function() {
         },
         "like": ""
     }
-    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "multipleSetValue" });
+    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "gradeSetValue" });
 });
+
+/***
+ * Grade Set Value
+ */
+
+function gradeSetValue(response) {
+    multipleSetValue(response);
+    if (response[0].allowance) {
+        let gradeAllowance = JSON.parse(response[0].allowance);
+        $.each(gradeAllowance, function(index, value) {
+            if (index)
+                $('#button-add-allowance').trigger('click');
+            $.each(value, function(i, v) {
+                $('tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v);
+            })
+        })
+    }
+    if (response[0].deductions) {
+        let gradeDeductions = JSON.parse(response[0].deductions);
+        $.each(gradeDeductions, function(index, value) {
+            if (index)
+                $('#button-add-deductions').trigger('click');
+            $.each(value, function(i, v) {
+                $('tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v);
+            })
+        })
+    }
+    totalCalculation();
+}
 
 /**
  * To detele row
@@ -101,34 +189,80 @@ $(document).on('click', ".btn-delete", function() {
 
 
 /**
- * Add Leave Master
+ * Add Grade Master
  */
 
 $('.grade-add').click(function() {
     if (checkRequired('#grade-add')) {
         var id = $(this).attr('data-id');
-        if (isEmptyValue(id)) {
-            // Add New
-            var data = {
-                "query": 'add',
-                "databasename": 'employee_grade',
-                "values": $("#grade-add").serializeObject()
-            }
-            commonAjax('database.php', 'POST', data, '.add', 'Grade added successfully', '', { "functionName": "locationReload" })
-            $("#table-grade-list").dataTable().fnDraw();
-        } else {
-            // Edit
-            var data = {
-                "query": 'update',
-                "databasename": 'employee_grade',
-                "values": $("#grade-add").serializeObject(),
-                "condition": {
-                    "employee_grade_id": id
+        var values = $("#grade-add").serializeObject();
+        values['allowance'] = tableRowTOArrayOfObjects('#allowance-table tbody tr:not(#addAllowance)');
+        values['deductions'] = tableRowTOArrayOfObjects('#deductions-table tbody tr:not(#addDeductions)');
+        if (!hasDuplicates(values['allowance_type']) && !hasDuplicates(values['deductions_type'])) {
+            delete values['allowance_type'];
+            delete values['allowance_amount'];
+            delete values['deductions_type'];
+            delete values['deductions_amount'];
+            if (isEmptyValue(id)) {
+                // Add New
+                var data = {
+                    "query": 'add',
+                    "databasename": 'employee_grade',
+                    "values": values
                 }
+                commonAjax('database.php', 'POST', data, '.add', 'Grade added successfully', '', { "functionName": "locationReload" })
+                $("#table-grade-list").dataTable().fnDraw();
+            } else {
+                // Edit
+                var data = {
+                    "query": 'update',
+                    "databasename": 'employee_grade',
+                    "values": values,
+                    "condition": {
+                        "employee_grade_id": id
+                    }
+                }
+                commonAjax('database.php', 'POST', data, '.add', 'Grade updated successfully', '', { "functionName": "locationReload" })
             }
-            commonAjax('database.php', 'POST', data, '.add', 'Grade updated successfully', '', { "functionName": "locationReload" })
-        }
+        } else
+            showToast("Check Duplicate Allowance and Deductions", 'error');
     }
+});
+
+$(document).on('click', '#button-add-allowance', function() {
+    let c = $(this).attr('count');
+    $(this).attr('count', parseInt($(this).attr('count')) + 1);
+    $(this).closest('table').find('#addAllowance').before(`  <tr>
+    <td class="text-center">
+        <button type="button" title="Reject" class="btn btn-icon btn-outline-danger btn-lg">
+        <i class="fa fa-trash"></i>
+    </button>
+    </td>
+    <td scope="row">
+        <select name="allowance_type" class="form-control">${allowenceDataList}</select>
+    </td>
+    <td>
+        <input type="number" name="allowance_amount" class="form-control text-right" required>
+    </td>
+</tr>`);
+});
+
+$(document).on('click', '#button-add-deductions', function() {
+    let c = $(this).attr('count');
+    $(this).attr('count', parseInt($(this).attr('count')) + 1);
+    $(this).closest('table').find('#addDeductions').before(`<tr>
+    <td class="text-center">
+        <button type="button" title="Reject" class="btn btn-icon btn-outline-danger btn-lg">
+        <i class="fa fa-trash"></i>
+    </button>
+    </td>
+    <td scope="row">
+        <select name="deductions_type" class="form-control">${deductionsDataList}</select>
+    </td>
+    <td>
+        <input type="number" name="deductions_amount" class="form-control text-right" required>
+    </td>
+</tr>`);
 });
 
 
@@ -136,9 +270,56 @@ $('.grade-add').click(function() {
  * To delete a row
  */
 
-$(document).on('click', '.btn-outline-danger', function() {
-    if ($(this).closest('table').find("#button-add-item").attr('count') != '1') {
+$(document).on('click', '#allowance-table .btn-outline-danger', function() {
+    if ($('#allowance-table .btn-outline-danger').closest('table').find("tbody tr:not('#addAllowance')").length != '1') {
         $(this).closest('tr').remove();
-        $(this).closest('table').find("#button-add-item").attr('count', parseInt($(this).closest('table').find("#button-add-item").attr('count')) - 1);
     }
 });
+
+/**
+ * To delete a row
+ */
+
+$(document).on('click', '#deductions-table .btn-outline-danger', function() {
+    if ($('#deductions-table .btn-outline-danger').closest('table').find("tbody tr:not('#addDeductions')").length != '1') {
+        $(this).closest('tr').remove();
+    }
+});
+
+/**
+ * For Total Calculation
+ */
+
+$(document).on('click keyup blur', '#deductions-table .btn-outline-danger, #allowance-table .btn-outline-danger, [name="allowance_amount"], [name="deductions_amount"]', function() {
+    totalCalculation();
+});
+
+function totalCalculation() {
+    var allowanceTotal = 0;
+    $('[name="allowance_amount"]').each(function() {
+        allowanceTotal += Number($(this).val());
+    })
+    $('.allowance-total').html('<b>Rs.' + allowanceTotal + '</b>');
+    var deductionsTotal = 0;
+    $('[name="deductions_amount"]').each(function() {
+        deductionsTotal += Number($(this).val());
+    })
+    $('.deductions-total').html('<b> Rs.' + deductionsTotal + '</b>');
+    var ctcTotal = allowanceTotal - deductionsTotal;
+    $('.ctc-total').html('<b class="font-size-18">Rs.' + ctcTotal + '</b>');
+}
+
+/**
+ * To reset form while clicking the Add or Edit
+ */
+
+function formReset() {
+    $("#grade-add")[0].reset();
+    $('#allowance-table .btn-outline-danger').closest('table').find("tbody tr:not('#addAllowance')").remove();
+    $('#deductions-table .btn-outline-danger').closest('table').find("tbody tr:not('#addDeductions')").remove();
+    $('#button-add-allowance').trigger('click');
+    $('#button-add-deductions').trigger('click');
+    $('.allowance-total').html('');
+    $('.deductions-total').html('');
+    $('.ctc-total').html('');
+}

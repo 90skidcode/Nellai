@@ -1,5 +1,9 @@
 var state = {
     "states": [{
+            "id": "35",
+            "text": "Tamil Nadu",
+            "country_id": "101"
+        }, {
             "id": "1",
             "text": "Andaman and Nicobar Islands",
             "country_id": "101"
@@ -147,11 +151,6 @@ var state = {
         {
             "id": "34",
             "text": "Sikkim",
-            "country_id": "101"
-        },
-        {
-            "id": "35",
-            "text": "Tamil Nadu",
             "country_id": "101"
         },
         {

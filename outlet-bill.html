@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8" />
     <title>Nellai Krishna Foods PVT. LTD</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +9,6 @@
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
-    <!-- Select 2-->
-    <link href="assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
     <!-- Bootstrap Css -->
     <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
@@ -20,11 +17,9 @@
     <link href="assets/libs/toastr/build/toastr.min.css" rel="stylesheet" type="text/css">
     <!-- App Css-->
     <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-
 </head>
 
 <body data-sidebar="dark" data-sidebar="dark" data-keep-enlarged="true" class="vertical-collpsed">
-
     <!-- Begin page -->
     <div id="layout-wrapper">
         <header id="page-topbar">
@@ -141,8 +136,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label for="formrow-email-input">Order By</label>
-                                                            <select class="form-control select2">
-                                                                <option>Select</option>
+                                                            <select class="form-control ">                                  
                                                                 <option value="Shop">Shop</option>
                                                                 <option value="Online">Online</option>
                                                                 <option value="Direct">Direct</option>
@@ -159,8 +153,7 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label for="formrow-password-input">Payment Type</label>
-                                                            <select class="form-control select2">
-                                                                <option>Select</option>
+                                                            <select class="form-control">
                                                                 <option value="Shop">Online</option>
                                                                 <option value="Online">Cash</option>
                                                                 <option value="Direct">Card</option>
@@ -172,11 +165,11 @@
                                                     <table class="table table-centered table-nowrap table-bordered table-striped">
                                                         <thead class="bg-gray">
                                                             <tr>
-                                                                <th> </th>
-                                                                <th>Item Description</th>
-                                                                <th>Quantity </th>
-                                                                <th>Cost per Unit</th>
-                                                                <th>Cost</th>
+                                                                <th width="2%"> </th>
+                                                                <th width="40%">Item Description</th>
+                                                                <th width="10%">Quantity </th>
+                                                                <th width="10%">Cost per Unit</th>
+                                                                <th width="10%">Cost</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -185,7 +178,7 @@
                                                                 <i class="fa fa-trash"></i>
                                                             </button></td>
                                                                 <td scope="row">
-                                                                    <select class="form-control select2">
+                                                                    <select class="form-control ">
                                                                     <option>Select</option>
                                                                     <option value="ITE0001">ITE0001 - Veg Rice</option>
                                                                     <option value="ITE0002">ITE0002 - Non Veg Rice</option>
@@ -263,63 +256,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                            <thead>
-                                <tr>
-                                    <th>Bill No</th>
-                                    <th>Order By</th>
-                                    <th>Payment Type</th>
-                                    <th>Total</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
 
-                            <tbody>
-                                <tr>
-                                    <td>1001</td>
-                                    <td>Direct</td>
-                                    <td>Cash</td>
-                                    <td>500</td>
-
-                                    <td>
-
-                                        <a href="javascript:void(0);" class="mr-3 text-info" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                        <a href="javascript:void(0);" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Reject"><i class="mdi mdi-close font-size-18"></i></a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>1002</td>
-                                    <td>Online</td>
-                                    <td>Card</td>
-                                    <td>815</td>
-
-                                    <td>
-
-                                        <a href="javascript:void(0);" class="mr-3 text-info" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                        <a href="javascript:void(0);" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Reject"><i class="mdi mdi-close font-size-18"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1003</td>
-                                    <td>Direct</td>
-                                    <td>Cash</td>
-                                    <td>652</td>
-
-                                    <td>
-
-                                        <a href="javascript:void(0);" class="mr-3 text-info" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                        <a href="javascript:void(0);" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Reject"><i class="mdi mdi-close font-size-18"></i></a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
         </div>
         <!-- end row -->
     </div>
@@ -327,170 +264,11 @@
     </div>
     <!-- End Page-content -->
 
-    <!-- Modal -->
-
-    <div class="modal fade add" tabindex="-1" role="dialog" aria-labelledby="addStoreOutLabel" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addStoreOutLabel">Add Store Out Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                            </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="formrow-firstname-input">Item Code</label>
-                                    <input type="text" readonly class="form-control" id="formrow-firstname-input" value="10005">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="formrow-email-input">Item Name</label>
-                                    <input type="text" class="form-control" id="formrow-email-input">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="formrow-password-input">Quantity Low Limit</label>
-                                    <input type="number" class="form-control" id="formrow-password-input">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="formrow-password-input">Description</label>
-                                    <textarea class="form-control" id="formrow-password-input"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="table-responsive">
-                                <table class="table table-centered table-nowrap table-bordered table-striped">
-                                    <thead class="bg-gray">
-                                        <tr>
-                                            <th> </th>
-                                            <th>Item</th>
-                                            <th>Quantity (KGS)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-center"><button type="button" title="Reject" class="btn btn-icon btn-outline-danger btn-lg">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button></td>
-                                            <td scope="row">
-                                                <select class="form-control select2">
-                                                            <option>Select</option>
-                                                            <option value="ITE0001">ITE0001 - Rice</option>
-                                                            <option value="ITE0002">ITE0002 - Sunflower Oil</option>
-                                                        </select>
-                                            </td>
-                                            <td> <input type="number" name="" id="" class="form-control"> </td>
-                                        </tr>
-
-                                        <tr id="addItem">
-                                            <td class="text-center border-right-0">
-                                                <button type="button" id="button-add-item" count="1" data-toggle="tooltip" title="Add" data-original-title="Add" class="btn btn-icon btn-outline-success btn-lg">
-                                                            <i class="fa fa-plus"></i>
-                                                        </button>
-                                            </td>
-                                            <td colspan="5" class="text-right"></td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-
-
-                    </form>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="modal fade addstore" tabindex="-1" role="dialog" aria-labelledby="addStoreOutLabel" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addStoreOutLabel">Add Store Out Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                            </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="row">
-                            <p class="mb-2 col-md-4"> Bill No: <span class="text-primary ml-2">10001</span></p>
-                            <p class="mb-2 col-md-4">Date/Time:<span class="text-primary ml-2">10/11/2020 12:52</span></p>
-                            <p class="mb-2 col-md-4">Add By:<span class="text-primary ml-2">Sathish</span></p>
-
-                            <div class="table-responsive">
-                                <table class="table table-centered table-nowrap table-bordered table-striped">
-                                    <thead class="bg-gray">
-                                        <tr>
-                                            <th> </th>
-                                            <th>Item</th>
-                                            <th>Quantity (KGS)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-center"><button type="button" title="Reject" class="btn btn-icon btn-outline-danger btn-lg">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button></td>
-                                            <td scope="row">
-                                                <select class="form-control select2">
-                                                            <option>Select</option>
-                                                            <option value="ITE0001">ITE0001 - Turmeric Powder</option>
-                                                            <option value="ITE0002">ITE0002 - Rice Powder</option>
-                                                            <option value="ITE0002">ITE0003 - Cocunut Oil</option>
-                                                        </select>
-                                            </td>
-                                            <td> <input type="number" name="" id="" class="form-control"> </td>
-                                        </tr>
-
-                                        <tr id="addItem">
-                                            <td class="text-center border-right-0">
-                                                <button type="button" id="button-add-item" count="1" data-toggle="tooltip" title="Add" data-original-title="Add" class="btn btn-icon btn-outline-success btn-lg">
-                                                            <i class="fa fa-plus"></i>
-                                                        </button>
-                                            </td>
-                                            <td colspan="5" class="text-right"></td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
     </div>
     <!-- end main content-->
 
     </div>
     <!-- END layout-wrapper -->
-
-
 
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
@@ -502,9 +280,6 @@
     <script src="assets/libs/simplebar/simplebar.min.js"></script>
     <script src="assets/libs/node-waves/waves.min.js"></script>
 
-
-    <!-- Select 2 -->
-    <script src="assets/libs/select2/js/select2.min.js"></script>
     <!-- Page js -->
     <script src="assets/js/pages/outlet-bill.js"></script>
 

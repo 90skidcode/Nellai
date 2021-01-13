@@ -197,8 +197,6 @@ $("#side-menu.employee").html(
         t('[data-toggle="popover"]').popover()
     }), window.sessionStorage && ((n = sessionStorage.getItem("is_visited")) ? (t(".right-bar input:checkbox").prop("checked", !1), t("#" + n).prop("checked", !0), s(n)) : sessionStorage.setItem("is_visited", "light-mode-switch")), t("#light-mode-switch, #dark-mode-switch, #rtl-mode-switch").on("change", function(e) {
         s(e.target.id)
-    }), t(window).on("load", function() {
-        t("#status").fadeOut(), t("#preloader").delay(350).fadeOut("slow")
     }), Waves.init()
 }(jQuery);
 
@@ -428,12 +426,8 @@ else {
     $(".side-nav-menu").html(menuHtml);
 }
 
-/* Add Loader to body */
-$('body').prepend(`<div class="loader-area">
-    <div class="loader-overlay">
-        <div class="loader"></div>
-    </div>
-</div>`);
+
+
 
 /* Set Menu Active */
 
@@ -603,7 +597,7 @@ function tableRowTOArrayOfObjects(selector) {
         })
         TableData.push(item);
     });
-    return JSON.stringify(TableData);
+    return TableData;
 }
 /**
  *  To Get Parameter
@@ -680,16 +674,8 @@ toastr.options = {
     "newestOnTop": false,
     "progressBar": true,
     "positionClass": "toast-top-right",
-    "preventDuplicates": false,
+    "preventDuplicates": true,
     "onclick": null,
-    "showDuration": 3000,
-    "hideDuration": 1000,
-    "timeOut": 5000,
-    "extendedTimeOut": 1000,
-    "showEasing": "swing",
-    "hideEasing": "linear",
-    "showMethod": "fadeIn",
-    "hideMethod": "fadeOut"
 }
 
 
@@ -703,6 +689,23 @@ $("input[type=number]").each(function(index) {
 });
 
 
+
+
+/* Add Loader to body */
+$('body').prepend(`
+    <div id="preloader" class="display-none">
+        <div id="status">
+            <div class="spinner-chase">
+                <div class="chase-dot"></div>
+                <div class="chase-dot"></div>
+                <div class="chase-dot"></div>
+                <div class="chase-dot"></div>
+                <div class="chase-dot"></div>
+                <div class="chase-dot"></div>
+            </div>
+        </div>
+    </div>`);
+
 /**
  * Loader 
  * @param {boolean} type 
@@ -710,15 +713,16 @@ $("input[type=number]").each(function(index) {
  */
 
 function loader(type) {
-    (type) ? $(".loader-area").addClass('display-block'): $(".loader-area").removeClass('display-block');
+    (type) ? $("#preloader").removeClass('display-none'): $("#preloader").addClass('display-none');
 }
 
-/* For Validate Required field */
+/* For Validate Required field 
 
-$(document).on('keyup blur change', '[required],.form-group.isinvalid .select2-container--default .select2-selection--single', function() {
+$(document).on('blur change', '[required],.form-group.isinvalid .select2-container--default .select2-selection--single', function() {
     ($(this).val()) ? $(this).removeClass('is-invalid'): $(this).addClass('is-invalid');
     ($(this).val()) ? $(this).closest('.form-group').removeClass('isinvalid'): $(this).closest('.form-group').addClass('isinvalid');
 });
+*/
 
 /** Adding Star to Required field */
 $('[required]').each(function() {
@@ -760,7 +764,7 @@ function checkRequired(selector) {
 
 function commonAjax(url, type, data, modalSelector, sMessage, eMessage, sCallBack, eCallBack) {
     loader(true);
-    let serverUrl = 'http://glowmedia.in/nellai/api/';
+    let serverUrl = 'https://glowmedia.in/nellai/api/';
     $.ajax({
         url: (isEmptyValue(url)) ? serverUrl + 'services.php' : serverUrl + url,
         type: type,
@@ -804,7 +808,6 @@ function commonAjax(url, type, data, modalSelector, sMessage, eMessage, sCallBac
             } catch (err) {
                 console.log(err)
             }
-
         }
     });
 }
@@ -838,16 +841,22 @@ function isEmptyValue(value) {
 function listSelect2(data, selector, jsonLabel, jsonValue) {
     let select2Data = [];
     let i = 1;
-    data.forEach(element => {
-        if (jsonValue)
-            i = eval('element.' + jsonValue);
-        select2Data.push({ 'id': i, 'text': eval('element.' + jsonLabel) })
-        if (!jsonValue || typeof(jsonjsonValueKey) == 'undefined')
-            i++;
-    });
-    $(selector).select2({
-        data: select2Data
-    })
+    if (JSON.stringify(data) != '{}') {
+        data.forEach(element => {
+            if (jsonValue)
+                i = eval('element.' + jsonValue);
+            select2Data.push({ 'id': i, 'text': eval('element.' + jsonLabel) })
+            if (!jsonValue || typeof(jsonjsonValueKey) == 'undefined')
+                i++;
+        });
+        $(selector).html('');
+        $(selector).select2({
+            data: select2Data
+        })
+    } else {
+        $(selector).html('');
+    }
+
 }
 
 /**
@@ -862,9 +871,10 @@ $('form').append(`<input type="hidden" class="form-control" name="created_by" va
  */
 
 function locationReload() {
+    loader(true);
     setTimeout(function() {
         location.reload();
-    }, 1100)
+    }, 3000)
 }
 
 /**
@@ -1034,12 +1044,21 @@ function multipleSetValue(responce, imageFlag) {
     let data = [];
     if (!isEmptyValue(responce)) {
         $.each(responce[0], function(i, v) {
-            (i != 'state' && i != 'country' && i != 'city') ? setValue(i, v): data[i] = v;
+            (i != 'state' && i != 'country' && i != 'city' && i != 'department_id' && i != 'branch_id' && i != 'employee_reporting_to') ? setValue(i, v): data[i] = v;
         })
         if (data.toString() != '[]') {
             setValue('country', data['country']);
             setValue('state', data['state']);
             setValue('city', data['city']);
+            setTimeout(function() {
+                setValue('department_id', data['department_id']);
+            }, 300);
+            setTimeout(function() {
+                setValue('branch_id', data['branch_id']);
+            }, 1500);
+            setTimeout(function() {
+                setValue('employee_reporting_to', data['employee_reporting_to']);
+            }, 3000);
         }
     }
     docShow(imageFlag);
@@ -1065,7 +1084,7 @@ function docShow(element) {
                                     <i class="bx bx-x"></i>
                                 </span>
                             </span>
-                            <img class="w-100" src="http://glowmedia.in/nellai/api/uploads/${v}" alt="">                        
+                            <img class="w-100" src="https://glowmedia.in/nellai/api/uploads/${v}" alt="">                        
                         </div>`;
             })
             $(".image-prev-area").append(html);
@@ -1140,3 +1159,20 @@ $('input').on("wheel mousewheel ", function(e) {
 /**
  * Stop Injecting Script
  */
+
+/**
+ * Find is any duplicate is there
+ * @param {Array} array ['1','1','2']
+ */
+
+function hasDuplicates(array) {
+    var counts = [];
+    for (var i = 0; i <= array.length; i++) {
+        if (counts[array[i]] === undefined) {
+            counts[array[i]] = 1;
+        } else {
+            return true;
+        }
+    }
+    return false;
+}

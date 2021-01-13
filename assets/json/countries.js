@@ -1,5 +1,10 @@
 var country = {
     "countries": [{
+            "id": 101,
+            "sortname": "IN",
+            "text": "India",
+            "phoneCode": 91
+        }, {
             "id": 1,
             "sortname": "AF",
             "text": "Afghanistan",
@@ -598,12 +603,6 @@ var country = {
             "sortname": "IS",
             "text": "Iceland",
             "phoneCode": 354
-        },
-        {
-            "id": 101,
-            "sortname": "IN",
-            "text": "India",
-            "phoneCode": 91
         },
         {
             "id": 102,
