@@ -15,6 +15,8 @@
     <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <!-- Toaster Css-->
     <link href="assets/libs/toastr/build/toastr.min.css" rel="stylesheet" type="text/css">
+    <!-- Auto Complete -->
+    <link href="assets/libs/horsey/horsey.css" rel="stylesheet" type="text/css">
     <!-- App Css-->
     <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
 </head>
@@ -78,15 +80,11 @@
 
         <!-- ========== Left Sidebar Start ========== -->
         <div class="vertical-menu">
-
             <div data-simplebar class="h-100">
-
                 <!--- Sidemenu -->
                 <div id="sidebar-menu">
                     <!-- Left Menu Start -->
                     <ul class="metismenu list-unstyled outlet" id="side-menu">
-
-
                     </ul>
                 </div>
                 <!-- Sidebar -->
@@ -98,167 +96,140 @@
         <!-- Start right Content here -->
         <!-- ============================================================== -->
         <div class="main-content">
-
             <div class="page-content">
                 <div class="container-fluid">
-
-                    <!-- start page title -->
                     <div class="row">
-                        <div class="col-12">
-                            <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0 font-size-18">Bill</h4>
-                                <div class="page-title-right">
-                                    <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Bill</a></li>
-                                        <li class="breadcrumb-item active">Recipt</li>
-                                    </ol>
+                        <div class="col-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="table-responsive">
+                                            <table class="table table-centered table-nowrap table-bordered table-striped">
+                                                <thead class="bg-gray">
+                                                    <tr>
+                                                        <th width="2%"> </th>
+                                                        <th width="40%">Item Description</th>
+                                                        <th width="10%">Quantity </th>
+                                                        <th width="10%">Cost per Unit</th>
+                                                        <th width="10%">Cost</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="add-row">
+                                                        <td class="text-center">
+                                                            <button type="button" title="Reject" class="btn btn-icon btn-outline-danger btn-lg">
+                                                                <i class="fa fa-trash"></i>
+                                                            </button>
+                                                        </td>
+                                                        <td scope="row">
+                                                            <input type="text" type="text" class="form-control autoComplete" name="">
+                                                        </td>
+                                                        <td><input type="number" name="" id="" class="form-control quantity"> </td>
+                                                        <td> <input type="number" name="" id="" class="form-control costperunit" readonly tabindex='-1'> </td>
+                                                        <td> <input type="number" name="" id="" class="form-control row-cost" readonly tabindex='-1'> </td>
+                                                    </tr>
+
+                                                    <tr id="addItem">
+                                                        <td class="text-center border-right-0">
+                                                            <button type="button" id="button-add-item" count="1" data-toggle="tooltip" title="Add" data-original-title="Add" class="btn btn-icon btn-outline-success btn-lg">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </button>
+                                                        </td>
+                                                        <td colspan="5" class="text-right"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- end page title -->
-
-                    <div class="row">
-                        <div class="col-12">
+                        <div class="col-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="formrow-firstname-input">Item No</label>
-                                                            <input type="text" readonly class="form-control" id="formrow-firstname-input" value="10005">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="formrow-email-input">Order By</label>
-                                                            <select class="form-control ">                                  
-                                                                <option value="Shop">Shop</option>
-                                                                <option value="Online">Online</option>
-                                                                <option value="Direct">Direct</option>
-                                                                <option value="Agent">Agent</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="formrow-password-input">GST No</label>
-                                                            <input type="number" class="form-control" id="formrow-password-input">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="form-group">
-                                                            <label for="formrow-password-input">Payment Type</label>
-                                                            <select class="form-control">
-                                                                <option value="Shop">Online</option>
-                                                                <option value="Online">Cash</option>
-                                                                <option value="Direct">Card</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="table-responsive">
-                                                    <table class="table table-centered table-nowrap table-bordered table-striped">
-                                                        <thead class="bg-gray">
-                                                            <tr>
-                                                                <th width="2%"> </th>
-                                                                <th width="40%">Item Description</th>
-                                                                <th width="10%">Quantity </th>
-                                                                <th width="10%">Cost per Unit</th>
-                                                                <th width="10%">Cost</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td class="text-center"><button type="button" title="Reject" class="btn btn-icon btn-outline-danger btn-lg">
-                                                                <i class="fa fa-trash"></i>
-                                                            </button></td>
-                                                                <td scope="row">
-                                                                    <select class="form-control ">
-                                                                    <option>Select</option>
-                                                                    <option value="ITE0001">ITE0001 - Veg Rice</option>
-                                                                    <option value="ITE0002">ITE0002 - Non Veg Rice</option>
-                                                                </select>
-                                                                </td>
-                                                                <td> <input type="number" name="" id="" class="form-control">
-                                                                    <p class="text-success text-right col-12 p-0 m-0">Avaliable quantity - 10</p>
-                                                                </td>
-                                                                <td> <input type="number" name="" id="" class="form-control"> </td>
-                                                                <td> <input type="number" name="" id="" class="form-control" readonly> </td>
-                                                            </tr>
-
-                                                            <tr id="addItem">
-                                                                <td class="text-center border-right-0">
-                                                                    <button type="button" id="button-add-item" count="1" data-toggle="tooltip" title="Add" data-original-title="Add" class="btn btn-icon btn-outline-success btn-lg">
-                                                                    <i class="fa fa-plus"></i>
-                                                                </button>
-                                                                </td>
-                                                                <td colspan="5" class="text-right"></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="table-responsive">
-                                                    <table class="table table-centered table-nowrap table-bordered table-striped">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td colspan="3" class="text-right font-weight-bolder">
-                                                                    CGST
-                                                                </td>
-                                                                <td class="text-right font-weight-bolder"><input type="text" name="" id="" value="2.5" class="form-control text-right"></td>
-                                                                <td class="text-right font-weight-bolder">25</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="3" class="text-right font-weight-bolder">
-                                                                    SGST
-                                                                </td>
-                                                                <td class="text-right font-weight-bolder"><input type="text" name="" id="" value="2.5" class="form-control text-right"></td>
-                                                                <td class="text-right font-weight-bolder">25</td>
-                                                            </tr>
-
-                                                            <tr>
-                                                                <td colspan="4" class="text-right font-weight-bolder">
-                                                                    Customer Given
-                                                                </td>
-                                                                <td class="text-right font-weight-bolder"><input type="number" name="" id="" value="1500" class="form-control text-right"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="4" class="text-right font-weight-bolder">
-                                                                    Need to return
-                                                                </td>
-                                                                <td class="text-right font-weight-bolder">300</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="4" class="text-right font-weight-bolder font-size-24">
-                                                                    Total
-                                                                </td>
-                                                                <td class="text-right font-weight-bolder font-size-24">1200</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formrow-firstname-input">Bill No</label>
+                                                <input type="text" readonly tabindex='-1' class="form-control" id="formrow-firstname-input" value="10005">
                                             </div>
                                         </div>
-                                    </form>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formrow-email-input">Order By <span class=" text-success">(F2)</span></label>
+                                                <select class="form-control order-by">        
+                                                    <option value="Direct">Direct</option>                          
+                                                    <option value="Shop">Shop</option>
+                                                    <option value="Online">Online</option>                                                            
+                                                    <option value="Agent">Agent</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formrow-password-input">GST No <span class=" text-success">(F3)</span></label>
+                                                <input type="text" class="form-control gst-no">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formrow-password-input">Payment Type <span class="text-success">(F4)</span></label>
+                                                <select class="form-control payment-type">
+                                                    <option value="Online">Cash</option>
+                                                    <option value="Shop">Online</option>                                                            
+                                                    <option value="Direct">Card</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formrow-password-input">CGST</label>
+                                                <input type="text" class="form-control cgst" readonly value="2.5" tabindex='-1'>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formrow-password-input">SGST</label>
+                                                <input type="text" class="form-control sgst" readonly value="2.5" tabindex='-1'>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="formrow-password-input">Total</label>
+                                                <input type="text" class="form-control total font-weight-bold font-size-22 text-success text-right" value="1000" readonly tabindex='-1'>
+                                            </div>
+                                        </div>
+                                        <div class="p-1 border-bottom col-md-12"></div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formrow-password-input">Customer Given <span class="text-success">(F6)</span></label>
+                                                <input type="text" class="form-control customer-given">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="formrow-password-input">Need to return</label>
+                                                <input type="text" class="form-control" readonly tabindex='-1'>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <div class="text-right col-12 p-2">
-                                    <button type="button" class="btn btn-success">Print</button>
-                                    <button type="button" class="btn btn-secondary">Close</button>
+                                    <button type="button" class="btn btn-success btn-save">Print (F8)</button>
+                                    <button type="button" class="btn btn-secondary">Close (F5)</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-        <!-- end row -->
+    </div>
+
+    </div>
+    <!-- end row -->
     </div>
     <!-- container-fluid -->
     </div>
@@ -279,10 +250,12 @@
     <script src="assets/libs/metismenu/metisMenu.min.js"></script>
     <script src="assets/libs/simplebar/simplebar.min.js"></script>
     <script src="assets/libs/node-waves/waves.min.js"></script>
-
+    <!-- Auto Conplete -->
+    <script src="assets/libs/horsey/horsey.js"></script>
+    <!-- Scanner Detection -->
+    <script src="assets/libs/onscan/onscan.js"></script>
     <!-- Page js -->
     <script src="assets/js/pages/outlet-bill.js"></script>
-
     <!-- toastr plugin -->
     <script src="assets/libs/toastr/build/toastr.min.js"></script>
 

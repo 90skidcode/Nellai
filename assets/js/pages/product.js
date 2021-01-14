@@ -47,17 +47,36 @@ function displayProductList(response, dataTableId) {
  */
 
 $(document).on('click', '[data-target=".add"]', function() {
-    JsBarcode("#barcode", $(this).attr('data-id'));
     formReset();
+});
+
+/**
+ * To Barcode Preview
+ */
+
+$(document).on('click', '[data-target=".barcode-print"]', function() {
+    JsBarcode("#barcode", $(this).attr('data-id'));
+    $('#barcode').attr('data-id', $(this).attr('data-id'));
+    $("#no_of_labels").val('');
 });
 
 /**
  * To print Barcode
  */
 
-$(document).on('click', '[data-target=".barcode-print"]', function() {
-    JsBarcode("#barcode", $(this).attr('data-id'));
-    $("#no_of_labels").val('');
+$(document).on('click', '.print-barcode', function() {
+    var mywindow = window.open('', 'my div', 'height=400,width=600');
+    mywindow.document.write('<html><head><title>my div</title>');
+    mywindow.document.write('<script src="assets/libs/jquery/jquery.min.js"></script><script src="assets/libs/JsBarcode/JsBarcode.all.min.js"></script>');
+    mywindow.document.write('</head><body >');
+    for (let i = 0; i < $("#no_of_labels").val(); i++) {
+        mywindow.document.write('<svg class="barcode"></svg>');
+    }
+    mywindow.document.write("</body><script>JsBarcode('.barcode', '1004');window.print();</script></html>");
+    mywindow.print();
+    // mywindow.close();
+
+    return true;
 });
 
 /**

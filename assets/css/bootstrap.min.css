@@ -2390,7 +2390,7 @@ pre code {
 .form-control:focus {
     color: #495057;
     background-color: #fff;
-    border-color: #b1bbc4;
+    border-color: #0287ff;
     outline: 0;
     -webkit-box-shadow: none;
     box-shadow: none
@@ -4340,7 +4340,7 @@ input[type=submit].btn-block {
 }
 
 .custom-control-input:focus:not(:checked)~.custom-control-label::before {
-    border-color: #b1bbc4
+    border-color: #0287ff
 }
 
 .custom-control-input:not(:disabled):active~.custom-control-label::before {
@@ -4486,7 +4486,7 @@ input[type=submit].btn-block {
 }
 
 .custom-select:focus {
-    border-color: #b1bbc4;
+    border-color: #0287ff;
     outline: 0;
     -webkit-box-shadow: 0 0 0 .15rem rgba(85, 110, 230, .25);
     box-shadow: 0 0 0 .15rem rgba(85, 110, 230, .25)
@@ -4552,7 +4552,7 @@ input[type=submit].btn-block {
 }
 
 .custom-file-input:focus~.custom-file-label {
-    border-color: #b1bbc4;
+    border-color: #0287ff;
     -webkit-box-shadow: none;
     box-shadow: none
 }
