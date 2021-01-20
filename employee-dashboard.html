@@ -496,6 +496,48 @@
                         </div>
                     </div>
 
+                    <div class="modal fade login" tabindex="-1" role="dialog" aria-labelledby="editKitchenOutLabel" style="display: none;" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editKitchenOutLabel">Add/Update Login</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="login-add">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="formrow-email-input">Employee ID</label>
+                                                    <input type="text" name="login_username" class="form-control" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="formrow-email-input">Employee Password</label>
+                                                    <input type="text" name="login_password" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="formrow-email-input">Employee Login Status</label><br>
+                                                    <input type="checkbox" name="login_status">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger save-login">Save</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
                 <!-- container-fluid -->
             </div>
@@ -547,10 +589,6 @@
     <script src="assets/js/app.js"></script>
     <!-- Page js -->
     <script src="assets/js/pages/employee-list.js"></script>
-
-
-
-
 </body>
 
 </html>

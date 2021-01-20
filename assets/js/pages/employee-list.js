@@ -194,6 +194,7 @@ function displayEmployeeList(response, dataTableId) {
             return `<td class="text-right">
                      <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-id="${row.employee_master_id}" data-target=".add"><i class="mdi mdi-pencil font-size-14"></i></a>
                      <a class="mr-3 text-info salary-row" title="CTC" data-toggle="modal" data-id="${row.employee_id}" data-target=".salary"><i class="fa fa-dollar-sign font-size-14"></i></a>
+                     <a class="mr-3 text-info login-row" title="Add Login" data-toggle="modal" data-id="${row.employee_id}" data-target=".login"><i class="fa fa-key font-size-14"></i></a>
                      <a class="text-danger delete-row" title="Delete" data-toggle="modal" data-id="${row.employee_master_id}" data-target=".delete"><i class="mdi mdi-close font-size-14"></i></a>
                 </td>`;
         }
@@ -456,6 +457,74 @@ $(document).on('click', '.salary-row', function() {
     commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "ctcSetValue" });
 });
 
+
+
+/*********************************************************************************
+ * *******************************************************************************
+ * Login Details
+ * *******************************************************************************
+ */
+
+$(document).on('click', '.login-row', function() {
+    formReset();
+    $("[name='login_username']").val($(this).attr('data-id'));
+    $('.save-login').attr('data-id', $(this).attr('data-id'))
+    let data = {
+        "query": "fetch",
+        "databasename": "login_master",
+        "column": {
+            "*": "*"
+        },
+        'condition': {
+            'login_username': $(this).attr('data-id')
+        },
+        "like": ""
+    };
+    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "loginSetValue" }, { "functionName": "removeSaveLogin" });
+});
+
+$(document).on('click', "[name='login_status']", function() {
+    ($(this).prop("checked")) ? $(this).val(1): $(this).val(2);
+});
+
+function loginSetValue(responce) {
+    if (JSON.stringify(responce) != '{}') {
+        $("[name='login_username']").val(responce[0].login_username);
+        $("[name='login_password']").val(responce[0].login_password);
+        (responce[0].login_status == '1') ? $("[name='login_status']").prop('checked', true).val(1): $("[name='login_status']").prop('checked', false).val(0);
+    }
+}
+
+function removeSaveLogin() {
+    $('.save-login').attr('data-id', '');
+}
+
+$(document).on('click', '.save-login', function() {
+    if (checkRequired('#login-add')) {
+        var id = $(this).attr('data-id');
+        var values = $("#login-add").serializeObject();
+        if (isEmptyValue(id)) {
+            var data = {
+                "query": 'add',
+                "databasename": 'login_master',
+                "values": values
+            }
+            commonAjax('database.php', 'POST', data, '#login-add', 'Login added successfully', '', { "functionName": "locationReload" });
+        } else {
+            var data = {
+                "query": 'update',
+                "databasename": 'login_master',
+                "values": values,
+                "condition": {
+                    "login_username": id
+                }
+            }
+            commonAjax('database.php', 'POST', data, '', 'Login updated successfully', '', { "functionName": "locationReload" });
+        }
+    } else
+        showToast("Please fill the fields", 'error');
+});
+
 /**
  * List Allowence in select 2
  */
@@ -512,7 +581,6 @@ function dataDeductions(responce) {
     });
 }
 
-
 /***
  * CTC Set Value
  */
@@ -541,8 +609,6 @@ function ctcSetValue(response) {
     }
     totalCalculation();
 }
-
-
 
 $(document).on('click', '#button-add-allowance', function() {
     let c = $(this).attr('count');
@@ -630,6 +696,7 @@ function totalCalculation() {
 
 function formReset() {
     $("#ctc-add")[0].reset();
+    $("#login-add")[0].reset();
     $('#allowance-table .btn-outline-danger').closest('table').find("tbody tr:not('#addAllowance')").remove();
     $('#deductions-table .btn-outline-danger').closest('table').find("tbody tr:not('#addDeductions')").remove();
     $('#button-add-allowance').trigger('click');

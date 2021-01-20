@@ -159,35 +159,57 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form>
+                            <form id="product-add">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="formrow-firstname-input">Item Code</label>
-                                            <input type="text" readonly class="form-control" id="formrow-firstname-input" value="10005">
+                                            <label for="product_code">Item Code</label>
+                                            <input type="text" readonly name="product_code" class="form-control" value="">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label for="formrow-email-input">Item Name</label>
-                                            <input type="text" class="form-control" id="formrow-email-input">
+                                            <input type="text" class="form-control" name="product_name" required>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label for="formrow-password-input">Quantity Low Limit</label>
-                                            <input type="number" class="form-control" id="formrow-password-input">
+                                            <label for="quantity_limit">Quantity Low Limit</label>
+                                            <input type="number" class="form-control" name="quantity_limit" required>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="formrow-password-input">Description</label>
-                                            <textarea class="form-control" id="formrow-password-input"></textarea>
+                                            <label for="product_desc">Description</label>
+                                            <textarea class="form-control" name="product_desc"></textarea>
                                         </div>
+                                    </div>
+                                    <p class="font-weight-bold">Deductions</p>
+                                    <div class="table-responsive" id="deductions-table">
+                                        <table class="table table-centered table-nowrap table-bordered table-striped">
+                                            <thead class="bg-gray">
+                                                <tr>
+                                                    <th> </th>
+                                                    <th>Deductions Type</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr id="addIngredients">
+                                                    <td class="text-center border-right-0">
+                                                        <button type="button" id="button-add-ingredients" count="1" data-toggle="tooltip" title="Add" data-original-title="Add" class="btn btn-icon btn-outline-success btn-lg">
+                                                            <i class="fa fa-plus"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td colspan="2" class="text-right"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                                 <div>
-                                    <button type="button" class="btn btn-primary w-md float-right">Save</button>
+                                    <button type="button" class="btn btn-primary w-md float-right product-add">Save</button>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 </div>
                             </form>

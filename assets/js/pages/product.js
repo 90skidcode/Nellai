@@ -6,8 +6,6 @@ var button = `<div class="text-sm-right">
 <button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Product </button>
 </div>`;
 
-
-
 function displayProductListInit() {
     let data = {
         "query": "fetch",
@@ -48,7 +46,27 @@ function displayProductList(response, dataTableId) {
 
 $(document).on('click', '[data-target=".add"]', function() {
     formReset();
+    var id = $(this).attr('data-id');
+    if (!isEmptyValue(id)) {
+        let data = { "list_key": "getProducts", "condition": { "product_master.product_code": id } };
+        commonAjax('', 'POST', data, '', '', '', { "functionName": "productSetValue" });
+    }
 });
+
+function productSetValue(response) {
+    multipleSetValue(response.result);
+    if (response[0].allowance) {
+        let gradeAllowance = JSON.parse(response[0].allowance);
+        $.each(gradeAllowance, function(index, value) {
+            if (index)
+                $('#button-add-allowance').trigger('click');
+            $.each(value, function(i, v) {
+                $('tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v);
+            })
+        })
+    }
+}
+
 
 /**
  * To Barcode Preview
@@ -72,7 +90,7 @@ $(document).on('click', '.print-barcode', function() {
     for (let i = 0; i < $("#no_of_labels").val(); i++) {
         mywindow.document.write('<svg class="barcode"></svg>');
     }
-    mywindow.document.write("</body><script>JsBarcode('.barcode', '1004');window.print();</script></html>");
+    mywindow.document.write("</body><script>JsBarcode('.barcode', '1005');window.print();</script></html>");
     mywindow.print();
     // mywindow.close();
 
@@ -80,54 +98,36 @@ $(document).on('click', '.print-barcode', function() {
 });
 
 /**
- * To Edit Product
+ * Add Product
  */
 
-$(document).on('click', ".edit-row", function() {
-    $(".product-add").attr('data-id', $(this).attr('data-id'));
-    formReset();
-    let data = {
-        "query": "fetch",
-        "databasename": "employee_product",
-        "column": {
-            "*": "*"
-        },
-        'condition': {
-            'employee_product_id': $(this).attr('data-id')
-        },
-        "like": ""
+$('.product-add').click(function() {
+    if (checkRequired('#product-add')) {
+        var id = $(this).attr('data-id');
+        if (isEmptyValue(id)) {
+            // Add New
+            var data = {
+                "query": 'add',
+                "databasename": 'product_master',
+                "values": $("#product-add").serializeObject()
+            }
+            commonAjax('', 'POST', data, '.add', 'Allowence added successfully', '', { "functionName": "locationReload" })
+            $("#table-product-list").dataTable().fnDraw();
+        } else {
+            // Edit
+            var data = {
+                "query": 'update',
+                "databasename": 'product_master',
+                "values": $("#product-add").serializeObject(),
+                "condition": {
+                    "product_code": id
+                }
+            }
+            commonAjax('database.php', 'POST', data, '.add', 'Allowence updated successfully', '', { "functionName": "locationReload" })
+        }
     }
-    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "productSetValue" });
 });
 
-/***
- * Product Set Value
- */
-
-function productSetValue(response) {
-    multipleSetValue(response);
-    if (response[0].allowance) {
-        let productAllowance = JSON.parse(response[0].allowance);
-        $.each(productAllowance, function(index, value) {
-            if (index)
-                $('#button-add-allowance').trigger('click');
-            $.each(value, function(i, v) {
-                $('tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v);
-            })
-        })
-    }
-    if (response[0].deductions) {
-        let productDeductions = JSON.parse(response[0].deductions);
-        $.each(productDeductions, function(index, value) {
-            if (index)
-                $('#button-add-deductions').trigger('click');
-            $.each(value, function(i, v) {
-                $('tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v);
-            })
-        })
-    }
-    totalCalculation();
-}
 
 /**
  * To detele row
@@ -153,48 +153,7 @@ $(document).on('click', ".btn-delete", function() {
 });
 
 
-/**
- * Add Leave Master
- */
-
-$('.product-add').click(function() {
-    if (checkRequired('#product-add')) {
-        var id = $(this).attr('data-id');
-        var values = $("#product-add").serializeObject();
-        values['allowance'] = tableRowTOArrayOfObjects('#allowance-table tbody tr:not(#addAllowance)');
-        values['deductions'] = tableRowTOArrayOfObjects('#deductions-table tbody tr:not(#addDeductions)');
-        if (!hasDuplicates(values['allowance_type']) && !hasDuplicates(values['deductions_type'])) {
-            delete values['allowance_type'];
-            delete values['allowance_amount'];
-            delete values['deductions_type'];
-            delete values['deductions_amount'];
-            if (isEmptyValue(id)) {
-                // Add New
-                var data = {
-                    "query": 'add',
-                    "databasename": 'employee_product',
-                    "values": values
-                }
-                commonAjax('database.php', 'POST', data, '.add', 'Product added successfully', '', { "functionName": "locationReload" })
-                $("#table-product-list").dataTable().fnDraw();
-            } else {
-                // Edit
-                var data = {
-                    "query": 'update',
-                    "databasename": 'employee_product',
-                    "values": values,
-                    "condition": {
-                        "employee_product_id": id
-                    }
-                }
-                commonAjax('database.php', 'POST', data, '.add', 'Product updated successfully', '', { "functionName": "locationReload" })
-            }
-        } else
-            showToast("Check Duplicate Allowance and Deductions", 'error');
-    }
-});
-
-$(document).on('click', '#button-add-allowance', function() {
+$(document).on('click', '#button-add-ingredients', function() {
     let c = $(this).attr('count');
     $(this).attr('count', parseInt($(this).attr('count')) + 1);
     $(this).closest('table').find('#addAllowance').before(`  <tr>
@@ -212,23 +171,6 @@ $(document).on('click', '#button-add-allowance', function() {
 </tr>`);
 });
 
-$(document).on('click', '#button-add-deductions', function() {
-    let c = $(this).attr('count');
-    $(this).attr('count', parseInt($(this).attr('count')) + 1);
-    $(this).closest('table').find('#addDeductions').before(`<tr>
-    <td class="text-center">
-        <button type="button" title="Reject" class="btn btn-icon btn-outline-danger btn-lg">
-        <i class="fa fa-trash"></i>
-    </button>
-    </td>
-    <td scope="row">
-        <select name="deductions_type" class="form-control">${deductionsDataList}</select>
-    </td>
-    <td>
-        <input type="number" name="deductions_amount" class="form-control text-right" required>
-    </td>
-</tr>`);
-});
 
 
 /**
@@ -280,11 +222,4 @@ function totalCalculation() {
 
 function formReset() {
     $("#product-add")[0].reset();
-    $('#allowance-table .btn-outline-danger').closest('table').find("tbody tr:not('#addAllowance')").remove();
-    $('#deductions-table .btn-outline-danger').closest('table').find("tbody tr:not('#addDeductions')").remove();
-    $('#button-add-allowance').trigger('click');
-    $('#button-add-deductions').trigger('click');
-    $('.allowance-total').html('');
-    $('.deductions-total').html('');
-    $('.ctc-total').html('');
 }

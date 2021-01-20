@@ -98,7 +98,7 @@ h6 {
 
 p {
     margin-top: 0;
-    margin-bottom: 1rem
+    margin-bottom: .25rem
 }
 
 abbr[data-original-title],
@@ -1994,7 +1994,7 @@ pre code {
 
 .table td,
 .table th {
-    padding: .75rem;
+    padding: .25rem;
     vertical-align: top;
     border-top: 1px solid #eff2f7
 }
@@ -2354,8 +2354,8 @@ pre code {
 .form-control {
     display: block;
     width: 100%;
-    height: calc(1.5em + .94rem + 2px);
-    padding: .47rem .75rem;
+    height: 30px;
+    padding: .25rem;
     font-size: .8125rem;
     font-weight: 400;
     line-height: 1.5;
@@ -3714,7 +3714,7 @@ fieldset:disabled a.btn {
 
 .btn-group-lg>.btn,
 .btn-lg {
-    padding: .5rem 1rem;
+    padding: .25rem .5rem;
     font-size: 1.01563rem;
     line-height: 1.5;
     border-radius: .4rem

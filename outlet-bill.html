@@ -16,7 +16,7 @@
     <!-- Toaster Css-->
     <link href="assets/libs/toastr/build/toastr.min.css" rel="stylesheet" type="text/css">
     <!-- Auto Complete -->
-    <link href="assets/libs/horsey/horsey.css" rel="stylesheet" type="text/css">
+    <link href="assets/libs/selectize/selectize.css" rel="stylesheet" type="text/css">
     <!-- App Css-->
     <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
 </head>
@@ -122,9 +122,10 @@
                                                             </button>
                                                         </td>
                                                         <td scope="row">
-                                                            <input type="text" type="text" class="form-control autoComplete" name="">
+                                                            <select name="" id="" class="form-control autoComplte"></select>
+                                                            <input type="text" type="text" class="autoComplete autoComplete-1" data-id="" name="">
                                                         </td>
-                                                        <td><input type="number" name="" id="" class="form-control quantity"> </td>
+                                                        <td><input type="number" name="" id="" class="form-control quantity" onkeyup="billCalculation()"> </td>
                                                         <td> <input type="number" name="" id="" class="form-control costperunit" readonly tabindex='-1'> </td>
                                                         <td> <input type="number" name="" id="" class="form-control row-cost" readonly tabindex='-1'> </td>
                                                     </tr>
@@ -197,20 +198,20 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="formrow-password-input">Total</label>
-                                                <input type="text" class="form-control total font-weight-bold font-size-22 text-success text-right" value="1000" readonly tabindex='-1'>
+                                                <input type="text" class="form-control total font-weight-bold font-size-22 text-success text-right" value="0" readonly tabindex='-1'>
                                             </div>
                                         </div>
                                         <div class="p-1 border-bottom col-md-12"></div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="formrow-password-input">Customer Given <span class="text-success">(F6)</span></label>
-                                                <input type="text" class="form-control customer-given">
+                                                <input type="text" class="form-control customer-given" onkeyup="billCalculation()">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="formrow-password-input">Need to return</label>
-                                                <input type="text" class="form-control" readonly tabindex='-1'>
+                                                <input type="text" class="form-control need-to-return" readonly tabindex='-1'>
                                             </div>
                                         </div>
                                     </div>
@@ -250,8 +251,12 @@
     <script src="assets/libs/metismenu/metisMenu.min.js"></script>
     <script src="assets/libs/simplebar/simplebar.min.js"></script>
     <script src="assets/libs/node-waves/waves.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.7.0/slimselect.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.7.0/slimselect.min.css" rel="stylesheet"></link>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.6.1/slimselect.min.css'>
+    <link rel="stylesheet" href="./style.css">
     <!-- Auto Conplete -->
-    <script src="assets/libs/horsey/horsey.js"></script>
+    <script src="assets/libs/selectize/selectize.js"></script>
     <!-- Scanner Detection -->
     <script src="assets/libs/onscan/onscan.js"></script>
     <!-- Page js -->
