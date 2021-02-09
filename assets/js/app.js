@@ -159,6 +159,12 @@ $("#side-menu.employee").html(
             <li><a href="branch-list.html">Branch List</a></li>              
         </ul>
     </li>
+    <li>
+        <a href="attendance-list.html" class="has-arrow waves-effect">
+        <i class='bx bx-fingerprint'></i>
+            <span>Attendance</span>
+        </a>
+    </li>
      `
 );
 
@@ -427,8 +433,6 @@ else {
 }
 
 
-
-
 /* Set Menu Active */
 
 var path = window.location.pathname;
@@ -497,8 +501,6 @@ $.fn.serializeObject = function() {
 };
 
 
-
-
 /**
  * 
  * @param {JSON} data  Full data for Table list
@@ -517,8 +519,6 @@ function dataTableDisplay(data, column, filter, dataTableId, button) {
         'columns': column,
         'data': data,
         initComplete: function() {
-
-
             if (filter) {
                 var i = 0;
                 this.api().columns().every(function() {
@@ -599,6 +599,7 @@ function tableRowTOArrayOfObjects(selector) {
     });
     return TableData;
 }
+
 /**
  *  To Get Parameter
  *  @parameterName 
@@ -642,9 +643,7 @@ $("body").append(`
     
 </div>
 </div>
-`)
-
-
+`);
 
 /**
  * Set vale to delete modal
@@ -655,8 +654,7 @@ $(document).on('click', '.btn-delete-table', function() {
 
     if (typeof($(this).attr('data-type')) != 'undefined')
         $(".btn-delete").attr('data-type', $(this).attr('data-type'))
-})
-
+});
 
 /**
  * ShoW Toast
@@ -687,8 +685,6 @@ $("input[type=number]").each(function(index) {
         "oninput": "validity.valid||(value='')"
     });
 });
-
-
 
 
 /* Add Loader to body */
@@ -780,12 +776,12 @@ function commonAjax(url, type, data, modalSelector, sMessage, eMessage, sCallBac
                             $(modalSelector).modal('hide');
                         }
                         if (!isEmptyValue(sMessage))
-                            showToast(sMessage, 'success')
+                            showToast(sMessage, 'success');
                         if (!isEmptyValue(sCallBack))
                             window[sCallBack.functionName](response, sCallBack.param1, sCallBack.param2, sCallBack.param3)
                     } else {
                         if (!isEmptyValue(eMessage))
-                            showToast(eMessage, 'error')
+                            showToast(eMessage, 'error');
                         if (!isEmptyValue(eCallBack))
                             window[eCallBack.functionName](response, eCallBack.param1, eCallBack.param2, eCallBack.param3)
                     }
@@ -796,13 +792,13 @@ function commonAjax(url, type, data, modalSelector, sMessage, eMessage, sCallBac
                             $(modalSelector).modal('hide');
                         }
                         if (!isEmptyValue(sMessage))
-                            showToast(sMessage, 'success')
+                            showToast(sMessage, 'success');
                         if (!isEmptyValue(sCallBack))
                             window[sCallBack.functionName](response, sCallBack.param1, sCallBack.param2, sCallBack.param3)
                     } else {
-                        (isEmptyValue(eMessage)) ? showToast(response.message, 'error'): showToast(eMessage, 'error')
+                        (isEmptyValue(eMessage)) ? showToast(response.message, 'error'): showToast(eMessage, 'error');
                         if (!isEmptyValue(eCallBack))
-                            window[eCallBack.functionName](response, eCallBack.param1, eCallBack.param2, eCallBack.param3)
+                            window[eCallBack.functionName](response, eCallBack.param1, eCallBack.param2, eCallBack.param3);
                     }
                 }
             } catch (err) {

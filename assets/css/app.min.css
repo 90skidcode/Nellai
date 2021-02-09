@@ -88,9 +88,11 @@
     .navbar-brand-box {
         width: auto
     }
+
     .logo span.logo-lg {
         display: none
     }
+
     .logo span.logo-sm {
         display: inline-block
     }
@@ -102,8 +104,8 @@
 
 .header-item {
     height: 70px;
-    -webkit-box-shadow: none!important;
-    box-shadow: none!important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
     color: #555b6d;
     border: 0;
     border-radius: 0
@@ -230,9 +232,10 @@ body[data-sidebar=dark] .logo-light {
     .navbar-header .dropdown {
         position: static
     }
+
     .navbar-header .dropdown .dropdown-menu {
-        left: 10px!important;
-        right: 10px!important
+        left: 10px !important;
+        right: 10px !important
     }
 }
 
@@ -269,7 +272,7 @@ body[data-layout=horizontal] .page-content {
 .page-title-box h4 {
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 16px!important
+    font-size: 16px !important
 }
 
 .footer {
@@ -294,7 +297,7 @@ body[data-layout=horizontal] .page-content {
 }
 
 body[data-layout=horizontal] .footer {
-    left: 0!important
+    left: 0 !important
 }
 
 .right-bar {
@@ -307,7 +310,7 @@ body[data-layout=horizontal] .footer {
     transition: all .2s ease-out;
     width: 280px;
     z-index: 9999;
-    float: right!important;
+    float: right !important;
     right: -290px;
     top: 0;
     bottom: 0
@@ -352,8 +355,9 @@ body[data-layout=horizontal] .footer {
     .right-bar {
         overflow: auto
     }
+
     .right-bar .slimscroll-menu {
-        height: auto!important
+        height: auto !important
     }
 }
 
@@ -487,7 +491,7 @@ body[data-layout=horizontal] .footer {
 }
 
 .menu-title {
-    padding: 12px 20px!important;
+    padding: 12px 20px !important;
     letter-spacing: .05em;
     pointer-events: none;
     cursor: default;
@@ -498,28 +502,30 @@ body[data-layout=horizontal] .footer {
 }
 
 .mm-active {
-    color: #f6f6f6!important
+    color: #f6f6f6 !important
 }
 
 .mm-active .active {
-    color: #f6f6f6!important
+    color: #f6f6f6 !important
 }
 
 .mm-active .active i {
-    color: #f6f6f6!important
+    color: #f6f6f6 !important
 }
 
 .mm-active>i {
-    color: #f6f6f6!important
+    color: #f6f6f6 !important
 }
 
 @media (max-width:992px) {
     .vertical-menu {
         display: none
     }
+
     .main-content {
-        margin-left: 0!important
+        margin-left: 0 !important
     }
+
     body.sidebar-enable .vertical-menu {
         display: block
     }
@@ -530,7 +536,7 @@ body[data-layout=horizontal] .footer {
 }
 
 .vertical-collpsed .navbar-brand-box {
-    width: 70px!important
+    width: 70px !important
 }
 
 .vertical-collpsed .logo span.logo-lg {
@@ -544,31 +550,31 @@ body[data-layout=horizontal] .footer {
 
 .vertical-collpsed .vertical-menu {
     position: absolute;
-    width: 70px!important;
+    width: 70px !important;
     z-index: 5
 }
 
 .vertical-collpsed .vertical-menu .simplebar-content-wrapper,
 .vertical-collpsed .vertical-menu .simplebar-mask {
-    overflow: visible!important
+    overflow: visible !important
 }
 
 .vertical-collpsed .vertical-menu .simplebar-scrollbar {
-    display: none!important
+    display: none !important
 }
 
 .vertical-collpsed .vertical-menu .simplebar-offset {
-    bottom: 0!important
+    bottom: 0 !important
 }
 
 .vertical-collpsed .vertical-menu #sidebar-menu .badge,
 .vertical-collpsed .vertical-menu #sidebar-menu .collapse.in,
 .vertical-collpsed .vertical-menu #sidebar-menu .menu-title {
-    display: none!important
+    display: none !important
 }
 
 .vertical-collpsed .vertical-menu #sidebar-menu .nav.collapse {
-    height: inherit!important
+    height: inherit !important
 }
 
 .vertical-collpsed .vertical-menu #sidebar-menu .has-arrow:after {
@@ -625,7 +631,7 @@ body[data-layout=horizontal] .footer {
     left: 70px;
     position: absolute;
     width: 190px;
-    height: auto!important;
+    height: auto !important;
     -webkit-box-shadow: 3px 5px 10px 0 rgba(54, 61, 71, .1);
     box-shadow: 3px 5px 10px 0 rgba(54, 61, 71, .1)
 }
@@ -659,7 +665,7 @@ body[data-layout=horizontal] .footer {
 .vertical-collpsed .vertical-menu #sidebar-menu>ul ul li:hover>ul {
     display: block;
     left: 190px;
-    height: auto!important;
+    height: auto !important;
     margin-top: -36px;
     position: absolute;
     width: 190px
@@ -731,27 +737,27 @@ body[data-sidebar=dark].vertical-collpsed .vertical-menu #sidebar-menu>ul ul {
 }
 
 body[data-sidebar=dark].vertical-collpsed .vertical-menu #sidebar-menu ul li.mm-active .active {
-    color: #f6f6f6!important
+    color: #f6f6f6 !important
 }
 
 body[data-sidebar=dark].vertical-collpsed .vertical-menu #sidebar-menu ul li.mm-active .active i {
-    color: #f6f6f6!important
+    color: #f6f6f6 !important
 }
 
 body[data-sidebar=dark] .mm-active {
-    color: #fff!important
+    color: #fff !important
 }
 
 body[data-sidebar=dark] .mm-active>i {
-    color: #fff!important
+    color: #fff !important
 }
 
 body[data-sidebar=dark] .mm-active .active {
-    color: #fff!important
+    color: #fff !important
 }
 
 body[data-sidebar=dark] .mm-active .active i {
-    color: #fff!important
+    color: #fff !important
 }
 
 body[data-sidebar=dark] .menu-title {
@@ -759,7 +765,7 @@ body[data-sidebar=dark] .menu-title {
 }
 
 body[data-layout=horizontal] .main-content {
-    margin-left: 0!important
+    margin-left: 0 !important
 }
 
 body[data-sidebar-size=small] .navbar-brand-box {
@@ -773,7 +779,7 @@ body[data-sidebar-size=small] .vertical-menu {
 
 body[data-sidebar-size=small] .vertical-menu .badge,
 body[data-sidebar-size=small] .vertical-menu .has-arrow:after {
-    display: none!important
+    display: none !important
 }
 
 body[data-sidebar-size=small] .main-content {
@@ -829,12 +835,12 @@ body[data-sidebar=colored] .navbar-brand-box .logo-light {
 }
 
 body[data-sidebar=colored] .mm-active {
-    color: #fff!important
+    color: #fff !important
 }
 
 body[data-sidebar=colored] .mm-active .active,
 body[data-sidebar=colored] .mm-active>i {
-    color: #fff!important
+    color: #fff !important
 }
 
 body[data-sidebar=colored] #sidebar-menu ul li.menu-title {
@@ -867,7 +873,7 @@ body[data-sidebar=colored].vertical-collpsed .vertical-menu #sidebar-menu>ul>li:
 }
 
 body[data-sidebar=colored].vertical-collpsed .vertical-menu #sidebar-menu ul li.mm-active .active {
-    color: #f6f6f6!important
+    color: #f6f6f6 !important
 }
 
 .topnav {
@@ -923,6 +929,7 @@ body[data-sidebar=colored].vertical-collpsed .vertical-menu #sidebar-menu ul li.
 }
 
 @media (min-width:1200px) {
+
     body[data-layout=horizontal] .container-fluid,
     body[data-layout=horizontal] .navbar-header {
         max-width: 85%
@@ -933,36 +940,44 @@ body[data-sidebar=colored].vertical-collpsed .vertical-menu #sidebar-menu ul li.
     .topnav .navbar-nav .nav-item:first-of-type .nav-link {
         padding-left: 0
     }
+
     .topnav .dropdown-item {
         padding: .5rem 1.5rem;
         min-width: 180px
     }
+
     .topnav .dropdown.mega-dropdown .mega-dropdown-menu {
         left: 0;
         right: auto
     }
+
     .topnav .dropdown .dropdown-menu {
         margin-top: 0;
         border-radius: 0 0 .25rem .25rem
     }
+
     .topnav .dropdown .dropdown-menu .arrow-down::after {
         right: 15px;
         -webkit-transform: rotate(-135deg) translateY(-50%);
         transform: rotate(-135deg) translateY(-50%);
         position: absolute
     }
+
     .topnav .dropdown .dropdown-menu .dropdown .dropdown-menu {
         position: absolute;
-        top: 0!important;
+        top: 0 !important;
         left: 100%;
         display: none
     }
+
     .topnav .dropdown:hover>.dropdown-menu {
         display: block
     }
+
     .topnav .dropdown:hover>.dropdown-menu>.dropdown:hover>.dropdown-menu {
         display: block
     }
+
     .navbar-toggle {
         display: none
     }
@@ -1002,20 +1017,25 @@ body[data-sidebar=colored].vertical-collpsed .vertical-menu #sidebar-menu ul li.
     .navbar-brand-box .logo-dark {
         display: block
     }
+
     .navbar-brand-box .logo-dark span.logo-sm {
         display: block
     }
+
     .navbar-brand-box .logo-light {
         display: none
     }
+
     .topnav {
         max-height: 360px;
         overflow-y: auto;
         padding: 0
     }
+
     .topnav .navbar-nav .nav-link {
         padding: .75rem 1.1rem
     }
+
     .topnav .dropdown .dropdown-menu {
         background-color: transparent;
         border: none;
@@ -1023,20 +1043,25 @@ body[data-sidebar=colored].vertical-collpsed .vertical-menu #sidebar-menu ul li.
         box-shadow: none;
         padding-left: 15px
     }
+
     .topnav .dropdown .dropdown-menu.dropdown-mega-menu-xl {
         width: auto
     }
+
     .topnav .dropdown .dropdown-menu.dropdown-mega-menu-xl .row {
         margin: 0
     }
+
     .topnav .dropdown .dropdown-item {
         position: relative;
         background-color: transparent
     }
+
     .topnav .dropdown .dropdown-item.active,
     .topnav .dropdown .dropdown-item:active {
         color: #556ee6
     }
+
     .topnav .arrow-down::after {
         right: 15px;
         position: absolute
@@ -1047,21 +1072,26 @@ body[data-sidebar=colored].vertical-collpsed .vertical-menu #sidebar-menu ul li.
     body[data-layout=horizontal][data-topbar=light] .navbar-brand-box .logo-dark {
         display: block
     }
+
     body[data-layout=horizontal][data-topbar=light] .navbar-brand-box .logo-light {
         display: none
     }
+
     body[data-layout=horizontal][data-topbar=light] .topnav {
         background-color: #556ee6
     }
+
     body[data-layout=horizontal][data-topbar=light] .topnav .navbar-nav .nav-link {
         color: rgba(255, 255, 255, .6)
     }
+
     body[data-layout=horizontal][data-topbar=light] .topnav .navbar-nav .nav-link:focus,
     body[data-layout=horizontal][data-topbar=light] .topnav .navbar-nav .nav-link:hover {
         color: rgba(255, 255, 255, .9)
     }
+
     body[data-layout=horizontal][data-topbar=light] .topnav .navbar-nav>.dropdown.active>a {
-        color: rgba(255, 255, 255, .9)!important
+        color: rgba(255, 255, 255, .9) !important
     }
 }
 
@@ -1113,15 +1143,18 @@ body[data-layout=horizontal][data-topbar=colored] .noti-icon i {
     body[data-layout=horizontal][data-topbar=colored] .topnav {
         background-color: #556ee6
     }
+
     body[data-layout=horizontal][data-topbar=colored] .topnav .navbar-nav .nav-link {
         color: rgba(255, 255, 255, .6)
     }
+
     body[data-layout=horizontal][data-topbar=colored] .topnav .navbar-nav .nav-link:focus,
     body[data-layout=horizontal][data-topbar=colored] .topnav .navbar-nav .nav-link:hover {
         color: rgba(255, 255, 255, .9)
     }
+
     body[data-layout=horizontal][data-topbar=colored] .topnav .navbar-nav>.dropdown.active>a {
-        color: rgba(255, 255, 255, .9)!important
+        color: rgba(255, 255, 255, .9) !important
     }
 }
 
@@ -1219,8 +1252,8 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
 }
 
 .waves-notransition {
-    -webkit-transition: none!important;
-    transition: none!important
+    -webkit-transition: none !important;
+    transition: none !important
 }
 
 .waves-button,
@@ -1402,51 +1435,51 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
 }
 
 .font-size-10 {
-    font-size: 10px!important
+    font-size: 10px !important
 }
 
 .font-size-11 {
-    font-size: 11px!important
+    font-size: 11px !important
 }
 
 .font-size-12 {
-    font-size: 12px!important
+    font-size: 12px !important
 }
 
 .font-size-13 {
-    font-size: 13px!important
+    font-size: 13px !important
 }
 
 .font-size-14 {
-    font-size: 14px!important
+    font-size: 14px !important
 }
 
 .font-size-15 {
-    font-size: 15px!important
+    font-size: 15px !important
 }
 
 .font-size-16 {
-    font-size: 16px!important
+    font-size: 16px !important
 }
 
 .font-size-17 {
-    font-size: 17px!important
+    font-size: 17px !important
 }
 
 .font-size-18 {
-    font-size: 18px!important
+    font-size: 18px !important
 }
 
 .font-size-20 {
-    font-size: 20px!important
+    font-size: 20px !important
 }
 
 .font-size-22 {
-    font-size: 22px!important
+    font-size: 22px !important
 }
 
 .font-size-24 {
-    font-size: 24px!important
+    font-size: 24px !important
 }
 
 .font-weight-medium {
@@ -1619,6 +1652,7 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
 }
 
 @-webkit-keyframes chase-dot {
+
     100%,
     80% {
         -webkit-transform: rotate(360deg);
@@ -1627,6 +1661,7 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
 }
 
 @keyframes chase-dot {
+
     100%,
     80% {
         -webkit-transform: rotate(360deg);
@@ -1639,6 +1674,7 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
         -webkit-transform: scale(.4);
         transform: scale(.4)
     }
+
     0%,
     100% {
         -webkit-transform: scale(1);
@@ -1651,6 +1687,7 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
         -webkit-transform: scale(.4);
         transform: scale(.4)
     }
+
     0%,
     100% {
         -webkit-transform: scale(1);
@@ -1707,7 +1744,7 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
 }
 
 .custom-checkbox-outline .custom-control-input:checked~.custom-control-label:before {
-    background-color: transparent!important
+    background-color: transparent !important
 }
 
 .custom-radio-outline .custom-control-label::before {
@@ -1724,7 +1761,7 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
 }
 
 .custom-radio-outline .custom-control-input:checked~.custom-control-label:before {
-    background-color: transparent!important
+    background-color: transparent !important
 }
 
 .custom-checkbox-primary .custom-control-input:checked~.custom-control-label:before,
@@ -1993,7 +2030,7 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
 }
 
 .card-radio-input:checked+.card-radio {
-    border-color: #f6f6f6!important
+    border-color: #f6f6f6 !important
 }
 
 .navs-carousel .owl-nav {
@@ -2003,22 +2040,24 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
 .navs-carousel .owl-nav button {
     width: 30px;
     height: 30px;
-    line-height: 28px!important;
-    font-size: 20px!important;
-    border-radius: 50%!important;
-    background-color: rgba(85, 110, 230, .25)!important;
-    color: #f6f6f6!important;
-    margin: 4px 8px!important
+    line-height: 28px !important;
+    font-size: 20px !important;
+    border-radius: 50% !important;
+    background-color: rgba(85, 110, 230, .25) !important;
+    color: #f6f6f6 !important;
+    margin: 4px 8px !important
 }
 
 @media print {
+
     .footer,
     .navbar-header,
     .page-title-box,
     .right-bar,
     .vertical-menu {
-        display: none!important
+        display: none !important
     }
+
     .card-body,
     .main-content,
     .page-content,
@@ -2027,12 +2066,15 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
         padding: 0;
         margin: 0
     }
+
     .card {
         border: 0
     }
+
     .no-print {
         display: none;
     }
+
     .yes-print {
         display: block;
     }
@@ -2074,21 +2116,21 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
     top: 0;
     bottom: 0;
     right: 0;
-    width: auto!important;
-    height: auto!important;
+    width: auto !important;
+    height: auto !important;
     z-index: 0
 }
 
 .simplebar-offset {
-    direction: inherit!important;
-    -webkit-box-sizing: inherit!important;
-    box-sizing: inherit!important;
-    resize: none!important;
+    direction: inherit !important;
+    -webkit-box-sizing: inherit !important;
+    box-sizing: inherit !important;
+    resize: none !important;
     position: absolute;
     top: 0;
-    left: 0!important;
+    left: 0 !important;
     bottom: 0;
-    right: 0!important;
+    right: 0 !important;
     padding: 0;
     margin: 0;
     -webkit-overflow-scrolling: touch
@@ -2096,8 +2138,8 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
 
 .simplebar-content-wrapper {
     direction: inherit;
-    -webkit-box-sizing: border-box!important;
-    box-sizing: border-box!important;
+    -webkit-box-sizing: border-box !important;
+    box-sizing: border-box !important;
     position: relative;
     display: block;
     height: 100%;
@@ -2107,7 +2149,7 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
     max-width: 100%;
     max-height: 100%;
     scrollbar-width: none;
-    padding: 0!important
+    padding: 0 !important
 }
 
 .simplebar-content-wrapper::-webkit-scrollbar,
@@ -2129,8 +2171,8 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
 }
 
 .simplebar-height-auto-observer-wrapper {
-    -webkit-box-sizing: inherit!important;
-    box-sizing: inherit!important;
+    -webkit-box-sizing: inherit !important;
+    box-sizing: inherit !important;
     height: 100%;
     width: 100%;
     max-width: 1px;
@@ -2280,7 +2322,7 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
 
 .tui-full-calendar-layout,
 .tui-full-calendar-timegrid-timezone {
-    background-color: #fff!important
+    background-color: #fff !important
 }
 
 .tui-full-calendar-dayname-container,
@@ -2290,7 +2332,7 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
 .tui-full-calendar-timegrid-gridline,
 .tui-full-calendar-timegrid-timezone,
 .tui-full-calendar-weekday-grid-line {
-    border-color: #f6f6f6!important
+    border-color: #f6f6f6 !important
 }
 
 .tui-full-calendar-weekday-exceed-in-week {
@@ -2305,7 +2347,7 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
 }
 
 .tui-full-calendar-timegrid-hour {
-    color: #495057!important
+    color: #495057 !important
 }
 
 .tui-full-calendar-time-schedule,
@@ -2318,8 +2360,8 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
 }
 
 .gu-transit {
-    border: 1px dashed #74788d!important;
-    background-color: #eff2f7!important
+    border: 1px dashed #74788d !important;
+    background-color: #eff2f7 !important
 }
 
 #session-timeout-dialog .close {
@@ -2342,7 +2384,7 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
 .irs--square .irs-from,
 .irs--square .irs-single,
 .irs--square .irs-to {
-    background: #f6f6f6!important;
+    background: #f6f6f6 !important;
     font-size: 11px
 }
 
@@ -2374,7 +2416,7 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
     width: 12px;
     height: 12px;
     top: 26px;
-    background-color: #fff!important
+    background-color: #fff !important
 }
 
 .swal2-container .swal2-title {
@@ -2446,48 +2488,48 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
 }
 
 .toast-primary {
-    border: 2px solid #f6f6f6!important;
-    background-color: rgba(85, 110, 230, .8)!important
+    border: 2px solid #f6f6f6 !important;
+    background-color: rgba(85, 110, 230, .8) !important
 }
 
 .toast-secondary {
-    border: 2px solid #74788d!important;
-    background-color: rgba(116, 120, 141, .8)!important
+    border: 2px solid #74788d !important;
+    background-color: rgba(116, 120, 141, .8) !important
 }
 
 .toast-success {
-    border: 2px solid #34c38f!important;
-    background-color: rgba(52, 195, 143, .8)!important
+    border: 2px solid #34c38f !important;
+    background-color: rgba(52, 195, 143, .8) !important
 }
 
 .toast-info {
-    border: 2px solid #50a5f1!important;
-    background-color: rgba(80, 165, 241, .8)!important
+    border: 2px solid #50a5f1 !important;
+    background-color: rgba(80, 165, 241, .8) !important
 }
 
 .toast-warning {
-    border: 2px solid #f1b44c!important;
-    background-color: rgba(241, 180, 76, .8)!important
+    border: 2px solid #f1b44c !important;
+    background-color: rgba(241, 180, 76, .8) !important
 }
 
 .toast-danger {
-    border: 2px solid #f46a6a!important;
-    background-color: rgba(244, 106, 106, .8)!important
+    border: 2px solid #f46a6a !important;
+    background-color: rgba(244, 106, 106, .8) !important
 }
 
 .toast-pink {
-    border: 2px solid #e83e8c!important;
-    background-color: rgba(232, 62, 140, .8)!important
+    border: 2px solid #e83e8c !important;
+    background-color: rgba(232, 62, 140, .8) !important
 }
 
 .toast-light {
-    border: 2px solid #eff2f7!important;
-    background-color: rgba(239, 242, 247, .8)!important
+    border: 2px solid #eff2f7 !important;
+    background-color: rgba(239, 242, 247, .8) !important
 }
 
 .toast-dark {
-    border: 2px solid #343a40!important;
-    background-color: rgba(52, 58, 64, .8)!important
+    border: 2px solid #343a40 !important;
+    background-color: rgba(52, 58, 64, .8) !important
 }
 
 .toast-error {
@@ -2601,8 +2643,8 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
 }
 
 .select2-container--open .select2-selection--single .select2-selection__arrow b {
-    border-color: transparent transparent #adb5bd transparent!important;
-    border-width: 0 6px 6px 6px!important
+    border-color: transparent transparent #adb5bd transparent !important;
+    border-width: 0 6px 6px 6px !important
 }
 
 .select2-container--default .select2-search--dropdown {
@@ -2650,7 +2692,7 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
 .select2-container .select2-selection--multiple {
     min-height: 38px;
     background-color: #fff;
-    border: 1px solid #ced4da!important
+    border: 1px solid #ced4da !important
 }
 
 .select2-container .select2-selection--multiple .select2-selection__rendered {
@@ -2918,7 +2960,7 @@ input[switch=dark]:checked+label {
 .datepicker {
     border: 1px solid #eff2f7;
     padding: 8px;
-    z-index: 999!important
+    z-index: 999 !important
 }
 
 .datepicker table tr th {
@@ -2937,11 +2979,11 @@ input[switch=dark]:checked+label {
 .datepicker table tr td.today.disabled,
 .datepicker table tr td.today.disabled:hover,
 .datepicker table tr td.today:hover {
-    background-color: #f6f6f6!important;
+    background-color: #f6f6f6 !important;
     background-image: none;
     -webkit-box-shadow: none;
     box-shadow: none;
-    color: #fff!important
+    color: #fff !important
 }
 
 .datepicker table tr td span.focused,
@@ -2972,7 +3014,7 @@ input[switch=dark]:checked+label {
 }
 
 .bootstrap-datepicker-inline .datepicker-inline {
-    width: auto!important;
+    width: auto !important;
     display: inline-block
 }
 
@@ -3021,62 +3063,62 @@ input[switch=dark]:checked+label {
 }
 
 .tox-tinymce {
-    border: 1px solid #ced4da!important
+    border: 1px solid #ced4da !important
 }
 
 .tox .tox-statusbar {
-    border-top: 1px solid #eff2f7!important
+    border-top: 1px solid #eff2f7 !important
 }
 
 .tox .tox-edit-area__iframe,
 .tox .tox-menubar,
 .tox .tox-statusbar {
-    background-color: #fff!important;
-    background: 0 0!important
+    background-color: #fff !important;
+    background: 0 0 !important
 }
 
 .tox .tox-mbtn {
-    color: #495057!important
+    color: #495057 !important
 }
 
 .tox .tox-mbtn:hover:not(:disabled):not(.tox-mbtn--active) {
-    background-color: #eff2f7!important
+    background-color: #eff2f7 !important
 }
 
 .tox .tox-tbtn:hover {
-    background-color: #eff2f7!important
+    background-color: #eff2f7 !important
 }
 
 .tox .tox-toolbar,
 .tox .tox-toolbar__overflow,
 .tox .tox-toolbar__primary {
-    background: #eff2f7!important
+    background: #eff2f7 !important
 }
 
 .tox .tox-toolbar__primary {
-    border-top-color: #eff2f7!important
+    border-top-color: #eff2f7 !important
 }
 
 .tox .tox-tbtn {
-    color: #495057!important
+    color: #495057 !important
 }
 
 .tox .tox-tbtn svg {
-    fill: #495057!important
+    fill: #495057 !important
 }
 
 .tox .tox-edit-area__iframe {
-    background-color: #fff!important
+    background-color: #fff !important
 }
 
 .tox .tox-statusbar a,
 .tox .tox-statusbar__path-item,
 .tox .tox-statusbar__wordcount {
-    color: #495057!important
+    color: #495057 !important
 }
 
 .tox:not([dir=rtl]) .tox-toolbar__group:not(:last-of-type) {
-    border-right: 1px solid #dee4ef!important
+    border-right: 1px solid #dee4ef !important
 }
 
 .note-editor.note-frame {
@@ -3099,8 +3141,8 @@ input[switch=dark]:checked+label {
 }
 
 .note-btn-group .note-btn {
-    background-color: #eff2f7!important;
-    border-color: #eff2f7!important
+    background-color: #eff2f7 !important;
+    border-color: #eff2f7 !important
 }
 
 .note-status-output {
@@ -3126,7 +3168,7 @@ input[switch=dark]:checked+label {
 }
 
 .note-toolbar {
-    padding: 0 0 5px 5px!important
+    padding: 0 0 5px 5px !important
 }
 
 .dropzone {
@@ -3160,7 +3202,7 @@ input[switch=dark]:checked+label {
 @media (max-width:991.98px) {
     .twitter-bs-wizard .twitter-bs-wizard-nav .step-number {
         display: block;
-        margin: 0 auto 8px!important
+        margin: 0 auto 8px !important
     }
 }
 
@@ -3218,7 +3260,7 @@ input[switch=dark]:checked+label {
 }
 
 .table-rep-plugin .table-responsive {
-    border: none!important
+    border: none !important
 }
 
 .table-rep-plugin .btn-group .btn-default {
@@ -3241,9 +3283,9 @@ input[switch=dark]:checked+label {
 
 .table-rep-plugin .btn-group.pull-right .dropdown-menu {
     right: 0;
-    -webkit-transform: none!important;
-    transform: none!important;
-    top: 100%!important
+    -webkit-transform: none !important;
+    transform: none !important;
+    top: 100% !important
 }
 
 .table-rep-plugin tbody th {
@@ -3253,11 +3295,11 @@ input[switch=dark]:checked+label {
 
 .table-rep-plugin .checkbox-row {
     padding-left: 40px;
-    color: #495057!important
+    color: #495057 !important
 }
 
 .table-rep-plugin .checkbox-row:hover {
-    background-color: #f6f8fa!important
+    background-color: #f6f8fa !important
 }
 
 .table-rep-plugin .checkbox-row label {
@@ -3280,7 +3322,7 @@ input[switch=dark]:checked+label {
     position: absolute;
     transition: .3s ease-in-out;
     width: 17px;
-    outline: 0!important
+    outline: 0 !important
 }
 
 .table-rep-plugin .checkbox-row label::after {
@@ -3301,7 +3343,7 @@ input[switch=dark]:checked+label {
     cursor: pointer;
     opacity: 0;
     z-index: 1;
-    outline: 0!important
+    outline: 0 !important
 }
 
 .table-rep-plugin .checkbox-row input[type=checkbox]:disabled+label {
@@ -3334,7 +3376,7 @@ input[switch=dark]:checked+label {
 }
 
 .table-rep-plugin .fixed-solution .sticky-table-header {
-    top: 70px!important;
+    top: 70px !important;
     background-color: #556ee6
 }
 
@@ -3358,7 +3400,7 @@ input[switch=dark]:checked+label {
 
 @media (min-width:992px) {
     body[data-layout=horizontal] .fixed-solution .sticky-table-header {
-        top: 120px!important
+        top: 120px !important
     }
 }
 
@@ -3375,8 +3417,8 @@ input[switch=dark]:checked+label {
 }
 
 .table-editable tbody td.focus {
-    -webkit-box-shadow: inset 0 0 1px 1px #f6f6f6!important;
-    box-shadow: inset 0 0 1px 1px #f6f6f6!important
+    -webkit-box-shadow: inset 0 0 1px 1px #f6f6f6 !important;
+    box-shadow: inset 0 0 1px 1px #f6f6f6 !important
 }
 
 .glyphicon {
@@ -3396,25 +3438,25 @@ input[switch=dark]:checked+label {
 }
 
 .dt-autofill-list {
-    border: none!important;
-    background-color: #fff!important
+    border: none !important;
+    background-color: #fff !important
 }
 
 .dt-autofill-list .dt-autofill-button,
 .dt-autofill-list .dt-autofill-question {
-    border-bottom-color: #f6f6f6!important
+    border-bottom-color: #f6f6f6 !important
 }
 
 .dt-autofill-list ul li:hover {
-    background-color: #f6f6f6!important
+    background-color: #f6f6f6 !important
 }
 
 .apex-charts {
-    min-height: 10px!important
+    min-height: 10px !important
 }
 
 .apex-charts text {
-    font-family: Poppins, sans-serif!important;
+    font-family: Poppins, sans-serif !important;
     fill: #adb5bd
 }
 
@@ -3424,7 +3466,7 @@ input[switch=dark]:checked+label {
 
 .apexcharts-tooltip-text,
 .apexcharts-tooltip-title {
-    font-family: Poppins, sans-serif!important
+    font-family: Poppins, sans-serif !important
 }
 
 .apexcharts-legend-series {
@@ -3437,18 +3479,18 @@ input[switch=dark]:checked+label {
 }
 
 .apexcharts-legend-text {
-    color: #74788d!important;
-    font-family: Poppins, sans-serif!important;
-    font-size: 13px!important
+    color: #74788d !important;
+    font-family: Poppins, sans-serif !important;
+    font-size: 13px !important
 }
 
 .apexcharts-pie-label {
-    fill: #fff!important
+    fill: #fff !important
 }
 
 .apexcharts-xaxis text,
 .apexcharts-yaxis text {
-    font-family: Poppins, sans-serif!important;
+    font-family: Poppins, sans-serif !important;
     fill: #adb5bd
 }
 
@@ -3477,22 +3519,22 @@ input[switch=dark]:checked+label {
 .jqstooltip {
     -webkit-box-sizing: content-box;
     box-sizing: content-box;
-    width: auto!important;
-    height: auto!important;
-    background-color: #343a40!important;
+    width: auto !important;
+    height: auto !important;
+    background-color: #343a40 !important;
     -webkit-box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175);
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175);
-    padding: 5px 10px!important;
+    padding: 5px 10px !important;
     border-radius: 3px;
-    border-color: #212529!important
+    border-color: #212529 !important
 }
 
 .jqsfield {
-    color: #eff2f7!important;
-    font-size: 12px!important;
-    line-height: 18px!important;
-    font-family: Poppins, sans-serif!important;
-    font-weight: 500!important
+    color: #eff2f7 !important;
+    font-size: 12px !important;
+    line-height: 18px !important;
+    font-family: Poppins, sans-serif !important;
+    font-weight: 500 !important
 }
 
 .gmaps,
@@ -3622,7 +3664,7 @@ input[switch=dark]:checked+label {
 
 .product-color a.active .product-color-item,
 .product-color a:hover .product-color-item {
-    border-color: #f6f6f6!important
+    border-color: #f6f6f6 !important
 }
 
 .visa-card .visa-logo {
@@ -3683,6 +3725,7 @@ input[switch=dark]:checked+label {
         float: none;
         width: 100%
     }
+
     .email-rightbar {
         margin: 0
     }
@@ -4067,8 +4110,8 @@ input[switch=dark]:checked+label {
 
 .chat-input {
     border-radius: 30px;
-    background-color: #eff2f7!important;
-    border-color: #eff2f7!important;
+    background-color: #eff2f7 !important;
+    border-color: #eff2f7 !important;
     padding-right: 120px
 }
 
@@ -4114,6 +4157,7 @@ input[switch=dark]:checked+label {
     .currency-value {
         position: relative
     }
+
     .currency-value:after {
         content: "\F04E1";
         font-family: "Material Design Icons";
@@ -4155,7 +4199,7 @@ input[switch=dark]:checked+label {
 }
 
 .section.bg-white {
-    background-color: #fff!important
+    background-color: #fff !important
 }
 
 .small-title {
@@ -4226,6 +4270,7 @@ input[switch=dark]:checked+label {
 }
 
 @media (max-width:991.98px) {
+
     .navigation .navbar-nav .nav-item .nav-link.active,
     .navigation .navbar-nav .nav-item .nav-link:hover {
         color: #556ee6
@@ -4234,7 +4279,7 @@ input[switch=dark]:checked+label {
 
 @media (max-width:991.98px) {
     .navigation .navbar-nav .nav-item .nav-link {
-        line-height: 28px!important
+        line-height: 28px !important
     }
 }
 
@@ -4366,7 +4411,7 @@ input[switch=dark]:checked+label {
 
 .client-images img {
     max-height: 34px;
-    width: auto!important;
+    width: auto !important;
     margin: 12px auto;
     opacity: .7;
     -webkit-transition: all .4s;
@@ -4565,9 +4610,11 @@ input[switch=dark]:checked+label {
     .float-sm-left {
         float: left !important
     }
+
     .float-sm-right {
         float: right !important
     }
+
     .float-sm-none {
         float: none !important
     }
@@ -4577,9 +4624,11 @@ input[switch=dark]:checked+label {
     .float-md-left {
         float: left !important
     }
+
     .float-md-right {
         float: right !important
     }
+
     .float-md-none {
         float: none !important
     }
@@ -4589,9 +4638,11 @@ input[switch=dark]:checked+label {
     .float-lg-left {
         float: left !important
     }
+
     .float-lg-right {
         float: right !important
     }
+
     .float-lg-none {
         float: none !important
     }
@@ -4601,9 +4652,11 @@ input[switch=dark]:checked+label {
     .float-xl-left {
         float: left !important
     }
+
     .float-xl-right {
         float: right !important
     }
+
     .float-xl-none {
         float: none !important
     }
@@ -5212,341 +5265,430 @@ input[switch=dark]:checked+label {
     .m-sm-0 {
         margin: 0 !important
     }
+
     .mt-sm-0,
     .my-sm-0 {
         margin-top: 0 !important
     }
+
     .mr-sm-0,
     .mx-sm-0 {
         margin-right: 0 !important
     }
+
     .mb-sm-0,
     .my-sm-0 {
         margin-bottom: 0 !important
     }
+
     .ml-sm-0,
     .mx-sm-0 {
         margin-left: 0 !important
     }
+
     .m-sm-1 {
         margin: 0.25rem !important
     }
+
     .mt-sm-1,
     .my-sm-1 {
         margin-top: 0.25rem !important
     }
+
     .mr-sm-1,
     .mx-sm-1 {
         margin-right: 0.25rem !important
     }
+
     .mb-sm-1,
     .my-sm-1 {
         margin-bottom: 0.25rem !important
     }
+
     .ml-sm-1,
     .mx-sm-1 {
         margin-left: 0.25rem !important
     }
+
     .m-sm-2 {
         margin: 0.5rem !important
     }
+
     .mt-sm-2,
     .my-sm-2 {
         margin-top: 0.5rem !important
     }
+
     .mr-sm-2,
     .mx-sm-2 {
         margin-right: 0.5rem !important
     }
+
     .mb-sm-2,
     .my-sm-2 {
         margin-bottom: 0.5rem !important
     }
+
     .ml-sm-2,
     .mx-sm-2 {
         margin-left: 0.5rem !important
     }
+
     .m-sm-3 {
         margin: 1rem !important
     }
+
     .mt-sm-3,
     .my-sm-3 {
         margin-top: 1rem !important
     }
+
     .mr-sm-3,
     .mx-sm-3 {
         margin-right: 1rem !important
     }
+
     .mb-sm-3,
     .my-sm-3 {
         margin-bottom: 1rem !important
     }
+
     .ml-sm-3,
     .mx-sm-3 {
         margin-left: 1rem !important
     }
+
     .m-sm-4 {
         margin: 1.5rem !important
     }
+
     .mt-sm-4,
     .my-sm-4 {
         margin-top: 1.5rem !important
     }
+
     .mr-sm-4,
     .mx-sm-4 {
         margin-right: 1.5rem !important
     }
+
     .mb-sm-4,
     .my-sm-4 {
         margin-bottom: 1.5rem !important
     }
+
     .ml-sm-4,
     .mx-sm-4 {
         margin-left: 1.5rem !important
     }
+
     .m-sm-5 {
         margin: 3rem !important
     }
+
     .mt-sm-5,
     .my-sm-5 {
         margin-top: 3rem !important
     }
+
     .mr-sm-5,
     .mx-sm-5 {
         margin-right: 3rem !important
     }
+
     .mb-sm-5,
     .my-sm-5 {
         margin-bottom: 3rem !important
     }
+
     .ml-sm-5,
     .mx-sm-5 {
         margin-left: 3rem !important
     }
+
     .p-sm-0 {
         padding: 0 !important
     }
+
     .pt-sm-0,
     .py-sm-0 {
         padding-top: 0 !important
     }
+
     .pr-sm-0,
     .px-sm-0 {
         padding-right: 0 !important
     }
+
     .pb-sm-0,
     .py-sm-0 {
         padding-bottom: 0 !important
     }
+
     .pl-sm-0,
     .px-sm-0 {
         padding-left: 0 !important
     }
+
     .p-sm-1 {
         padding: 0.25rem !important
     }
+
     .pt-sm-1,
     .py-sm-1 {
         padding-top: 0.25rem !important
     }
+
     .pr-sm-1,
     .px-sm-1 {
         padding-right: 0.25rem !important
     }
+
     .pb-sm-1,
     .py-sm-1 {
         padding-bottom: 0.25rem !important
     }
+
     .pl-sm-1,
     .px-sm-1 {
         padding-left: 0.25rem !important
     }
+
     .p-sm-2 {
         padding: 0.5rem !important
     }
+
     .pt-sm-2,
     .py-sm-2 {
         padding-top: 0.5rem !important
     }
+
     .pr-sm-2,
     .px-sm-2 {
         padding-right: 0.5rem !important
     }
+
     .pb-sm-2,
     .py-sm-2 {
         padding-bottom: 0.5rem !important
     }
+
     .pl-sm-2,
     .px-sm-2 {
         padding-left: 0.5rem !important
     }
+
     .p-sm-3 {
         padding: 1rem !important
     }
+
     .pt-sm-3,
     .py-sm-3 {
         padding-top: 1rem !important
     }
+
     .pr-sm-3,
     .px-sm-3 {
         padding-right: 1rem !important
     }
+
     .pb-sm-3,
     .py-sm-3 {
         padding-bottom: 1rem !important
     }
+
     .pl-sm-3,
     .px-sm-3 {
         padding-left: 1rem !important
     }
+
     .p-sm-4 {
         padding: 1.5rem !important
     }
+
     .pt-sm-4,
     .py-sm-4 {
         padding-top: 1.5rem !important
     }
+
     .pr-sm-4,
     .px-sm-4 {
         padding-right: 1.5rem !important
     }
+
     .pb-sm-4,
     .py-sm-4 {
         padding-bottom: 1.5rem !important
     }
+
     .pl-sm-4,
     .px-sm-4 {
         padding-left: 1.5rem !important
     }
+
     .p-sm-5 {
         padding: 3rem !important
     }
+
     .pt-sm-5,
     .py-sm-5 {
         padding-top: 3rem !important
     }
+
     .pr-sm-5,
     .px-sm-5 {
         padding-right: 3rem !important
     }
+
     .pb-sm-5,
     .py-sm-5 {
         padding-bottom: 3rem !important
     }
+
     .pl-sm-5,
     .px-sm-5 {
         padding-left: 3rem !important
     }
+
     .m-sm-n1 {
         margin: -0.25rem !important
     }
+
     .mt-sm-n1,
     .my-sm-n1 {
         margin-top: -0.25rem !important
     }
+
     .mr-sm-n1,
     .mx-sm-n1 {
         margin-right: -0.25rem !important
     }
+
     .mb-sm-n1,
     .my-sm-n1 {
         margin-bottom: -0.25rem !important
     }
+
     .ml-sm-n1,
     .mx-sm-n1 {
         margin-left: -0.25rem !important
     }
+
     .m-sm-n2 {
         margin: -0.5rem !important
     }
+
     .mt-sm-n2,
     .my-sm-n2 {
         margin-top: -0.5rem !important
     }
+
     .mr-sm-n2,
     .mx-sm-n2 {
         margin-right: -0.5rem !important
     }
+
     .mb-sm-n2,
     .my-sm-n2 {
         margin-bottom: -0.5rem !important
     }
+
     .ml-sm-n2,
     .mx-sm-n2 {
         margin-left: -0.5rem !important
     }
+
     .m-sm-n3 {
         margin: -1rem !important
     }
+
     .mt-sm-n3,
     .my-sm-n3 {
         margin-top: -1rem !important
     }
+
     .mr-sm-n3,
     .mx-sm-n3 {
         margin-right: -1rem !important
     }
+
     .mb-sm-n3,
     .my-sm-n3 {
         margin-bottom: -1rem !important
     }
+
     .ml-sm-n3,
     .mx-sm-n3 {
         margin-left: -1rem !important
     }
+
     .m-sm-n4 {
         margin: -1.5rem !important
     }
+
     .mt-sm-n4,
     .my-sm-n4 {
         margin-top: -1.5rem !important
     }
+
     .mr-sm-n4,
     .mx-sm-n4 {
         margin-right: -1.5rem !important
     }
+
     .mb-sm-n4,
     .my-sm-n4 {
         margin-bottom: -1.5rem !important
     }
+
     .ml-sm-n4,
     .mx-sm-n4 {
         margin-left: -1.5rem !important
     }
+
     .m-sm-n5 {
         margin: -3rem !important
     }
+
     .mt-sm-n5,
     .my-sm-n5 {
         margin-top: -3rem !important
     }
+
     .mr-sm-n5,
     .mx-sm-n5 {
         margin-right: -3rem !important
     }
+
     .mb-sm-n5,
     .my-sm-n5 {
         margin-bottom: -3rem !important
     }
+
     .ml-sm-n5,
     .mx-sm-n5 {
         margin-left: -3rem !important
     }
+
     .m-sm-auto {
         margin: auto !important
     }
+
     .mt-sm-auto,
     .my-sm-auto {
         margin-top: auto !important
     }
+
     .mr-sm-auto,
     .mx-sm-auto {
         margin-right: auto !important
     }
+
     .mb-sm-auto,
     .my-sm-auto {
         margin-bottom: auto !important
     }
+
     .ml-sm-auto,
     .mx-sm-auto {
         margin-left: auto !important
@@ -5557,341 +5699,430 @@ input[switch=dark]:checked+label {
     .m-md-0 {
         margin: 0 !important
     }
+
     .mt-md-0,
     .my-md-0 {
         margin-top: 0 !important
     }
+
     .mr-md-0,
     .mx-md-0 {
         margin-right: 0 !important
     }
+
     .mb-md-0,
     .my-md-0 {
         margin-bottom: 0 !important
     }
+
     .ml-md-0,
     .mx-md-0 {
         margin-left: 0 !important
     }
+
     .m-md-1 {
         margin: 0.25rem !important
     }
+
     .mt-md-1,
     .my-md-1 {
         margin-top: 0.25rem !important
     }
+
     .mr-md-1,
     .mx-md-1 {
         margin-right: 0.25rem !important
     }
+
     .mb-md-1,
     .my-md-1 {
         margin-bottom: 0.25rem !important
     }
+
     .ml-md-1,
     .mx-md-1 {
         margin-left: 0.25rem !important
     }
+
     .m-md-2 {
         margin: 0.5rem !important
     }
+
     .mt-md-2,
     .my-md-2 {
         margin-top: 0.5rem !important
     }
+
     .mr-md-2,
     .mx-md-2 {
         margin-right: 0.5rem !important
     }
+
     .mb-md-2,
     .my-md-2 {
         margin-bottom: 0.5rem !important
     }
+
     .ml-md-2,
     .mx-md-2 {
         margin-left: 0.5rem !important
     }
+
     .m-md-3 {
         margin: 1rem !important
     }
+
     .mt-md-3,
     .my-md-3 {
         margin-top: 1rem !important
     }
+
     .mr-md-3,
     .mx-md-3 {
         margin-right: 1rem !important
     }
+
     .mb-md-3,
     .my-md-3 {
         margin-bottom: 1rem !important
     }
+
     .ml-md-3,
     .mx-md-3 {
         margin-left: 1rem !important
     }
+
     .m-md-4 {
         margin: 1.5rem !important
     }
+
     .mt-md-4,
     .my-md-4 {
         margin-top: 1.5rem !important
     }
+
     .mr-md-4,
     .mx-md-4 {
         margin-right: 1.5rem !important
     }
+
     .mb-md-4,
     .my-md-4 {
         margin-bottom: 1.5rem !important
     }
+
     .ml-md-4,
     .mx-md-4 {
         margin-left: 1.5rem !important
     }
+
     .m-md-5 {
         margin: 3rem !important
     }
+
     .mt-md-5,
     .my-md-5 {
         margin-top: 3rem !important
     }
+
     .mr-md-5,
     .mx-md-5 {
         margin-right: 3rem !important
     }
+
     .mb-md-5,
     .my-md-5 {
         margin-bottom: 3rem !important
     }
+
     .ml-md-5,
     .mx-md-5 {
         margin-left: 3rem !important
     }
+
     .p-md-0 {
         padding: 0 !important
     }
+
     .pt-md-0,
     .py-md-0 {
         padding-top: 0 !important
     }
+
     .pr-md-0,
     .px-md-0 {
         padding-right: 0 !important
     }
+
     .pb-md-0,
     .py-md-0 {
         padding-bottom: 0 !important
     }
+
     .pl-md-0,
     .px-md-0 {
         padding-left: 0 !important
     }
+
     .p-md-1 {
         padding: 0.25rem !important
     }
+
     .pt-md-1,
     .py-md-1 {
         padding-top: 0.25rem !important
     }
+
     .pr-md-1,
     .px-md-1 {
         padding-right: 0.25rem !important
     }
+
     .pb-md-1,
     .py-md-1 {
         padding-bottom: 0.25rem !important
     }
+
     .pl-md-1,
     .px-md-1 {
         padding-left: 0.25rem !important
     }
+
     .p-md-2 {
         padding: 0.5rem !important
     }
+
     .pt-md-2,
     .py-md-2 {
         padding-top: 0.5rem !important
     }
+
     .pr-md-2,
     .px-md-2 {
         padding-right: 0.5rem !important
     }
+
     .pb-md-2,
     .py-md-2 {
         padding-bottom: 0.5rem !important
     }
+
     .pl-md-2,
     .px-md-2 {
         padding-left: 0.5rem !important
     }
+
     .p-md-3 {
         padding: 1rem !important
     }
+
     .pt-md-3,
     .py-md-3 {
         padding-top: 1rem !important
     }
+
     .pr-md-3,
     .px-md-3 {
         padding-right: 1rem !important
     }
+
     .pb-md-3,
     .py-md-3 {
         padding-bottom: 1rem !important
     }
+
     .pl-md-3,
     .px-md-3 {
         padding-left: 1rem !important
     }
+
     .p-md-4 {
         padding: 1.5rem !important
     }
+
     .pt-md-4,
     .py-md-4 {
         padding-top: 1.5rem !important
     }
+
     .pr-md-4,
     .px-md-4 {
         padding-right: 1.5rem !important
     }
+
     .pb-md-4,
     .py-md-4 {
         padding-bottom: 1.5rem !important
     }
+
     .pl-md-4,
     .px-md-4 {
         padding-left: 1.5rem !important
     }
+
     .p-md-5 {
         padding: 3rem !important
     }
+
     .pt-md-5,
     .py-md-5 {
         padding-top: 3rem !important
     }
+
     .pr-md-5,
     .px-md-5 {
         padding-right: 3rem !important
     }
+
     .pb-md-5,
     .py-md-5 {
         padding-bottom: 3rem !important
     }
+
     .pl-md-5,
     .px-md-5 {
         padding-left: 3rem !important
     }
+
     .m-md-n1 {
         margin: -0.25rem !important
     }
+
     .mt-md-n1,
     .my-md-n1 {
         margin-top: -0.25rem !important
     }
+
     .mr-md-n1,
     .mx-md-n1 {
         margin-right: -0.25rem !important
     }
+
     .mb-md-n1,
     .my-md-n1 {
         margin-bottom: -0.25rem !important
     }
+
     .ml-md-n1,
     .mx-md-n1 {
         margin-left: -0.25rem !important
     }
+
     .m-md-n2 {
         margin: -0.5rem !important
     }
+
     .mt-md-n2,
     .my-md-n2 {
         margin-top: -0.5rem !important
     }
+
     .mr-md-n2,
     .mx-md-n2 {
         margin-right: -0.5rem !important
     }
+
     .mb-md-n2,
     .my-md-n2 {
         margin-bottom: -0.5rem !important
     }
+
     .ml-md-n2,
     .mx-md-n2 {
         margin-left: -0.5rem !important
     }
+
     .m-md-n3 {
         margin: -1rem !important
     }
+
     .mt-md-n3,
     .my-md-n3 {
         margin-top: -1rem !important
     }
+
     .mr-md-n3,
     .mx-md-n3 {
         margin-right: -1rem !important
     }
+
     .mb-md-n3,
     .my-md-n3 {
         margin-bottom: -1rem !important
     }
+
     .ml-md-n3,
     .mx-md-n3 {
         margin-left: -1rem !important
     }
+
     .m-md-n4 {
         margin: -1.5rem !important
     }
+
     .mt-md-n4,
     .my-md-n4 {
         margin-top: -1.5rem !important
     }
+
     .mr-md-n4,
     .mx-md-n4 {
         margin-right: -1.5rem !important
     }
+
     .mb-md-n4,
     .my-md-n4 {
         margin-bottom: -1.5rem !important
     }
+
     .ml-md-n4,
     .mx-md-n4 {
         margin-left: -1.5rem !important
     }
+
     .m-md-n5 {
         margin: -3rem !important
     }
+
     .mt-md-n5,
     .my-md-n5 {
         margin-top: -3rem !important
     }
+
     .mr-md-n5,
     .mx-md-n5 {
         margin-right: -3rem !important
     }
+
     .mb-md-n5,
     .my-md-n5 {
         margin-bottom: -3rem !important
     }
+
     .ml-md-n5,
     .mx-md-n5 {
         margin-left: -3rem !important
     }
+
     .m-md-auto {
         margin: auto !important
     }
+
     .mt-md-auto,
     .my-md-auto {
         margin-top: auto !important
     }
+
     .mr-md-auto,
     .mx-md-auto {
         margin-right: auto !important
     }
+
     .mb-md-auto,
     .my-md-auto {
         margin-bottom: auto !important
     }
+
     .ml-md-auto,
     .mx-md-auto {
         margin-left: auto !important
@@ -5902,341 +6133,430 @@ input[switch=dark]:checked+label {
     .m-lg-0 {
         margin: 0 !important
     }
+
     .mt-lg-0,
     .my-lg-0 {
         margin-top: 0 !important
     }
+
     .mr-lg-0,
     .mx-lg-0 {
         margin-right: 0 !important
     }
+
     .mb-lg-0,
     .my-lg-0 {
         margin-bottom: 0 !important
     }
+
     .ml-lg-0,
     .mx-lg-0 {
         margin-left: 0 !important
     }
+
     .m-lg-1 {
         margin: 0.25rem !important
     }
+
     .mt-lg-1,
     .my-lg-1 {
         margin-top: 0.25rem !important
     }
+
     .mr-lg-1,
     .mx-lg-1 {
         margin-right: 0.25rem !important
     }
+
     .mb-lg-1,
     .my-lg-1 {
         margin-bottom: 0.25rem !important
     }
+
     .ml-lg-1,
     .mx-lg-1 {
         margin-left: 0.25rem !important
     }
+
     .m-lg-2 {
         margin: 0.5rem !important
     }
+
     .mt-lg-2,
     .my-lg-2 {
         margin-top: 0.5rem !important
     }
+
     .mr-lg-2,
     .mx-lg-2 {
         margin-right: 0.5rem !important
     }
+
     .mb-lg-2,
     .my-lg-2 {
         margin-bottom: 0.5rem !important
     }
+
     .ml-lg-2,
     .mx-lg-2 {
         margin-left: 0.5rem !important
     }
+
     .m-lg-3 {
         margin: 1rem !important
     }
+
     .mt-lg-3,
     .my-lg-3 {
         margin-top: 1rem !important
     }
+
     .mr-lg-3,
     .mx-lg-3 {
         margin-right: 1rem !important
     }
+
     .mb-lg-3,
     .my-lg-3 {
         margin-bottom: 1rem !important
     }
+
     .ml-lg-3,
     .mx-lg-3 {
         margin-left: 1rem !important
     }
+
     .m-lg-4 {
         margin: 1.5rem !important
     }
+
     .mt-lg-4,
     .my-lg-4 {
         margin-top: 1.5rem !important
     }
+
     .mr-lg-4,
     .mx-lg-4 {
         margin-right: 1.5rem !important
     }
+
     .mb-lg-4,
     .my-lg-4 {
         margin-bottom: 1.5rem !important
     }
+
     .ml-lg-4,
     .mx-lg-4 {
         margin-left: 1.5rem !important
     }
+
     .m-lg-5 {
         margin: 3rem !important
     }
+
     .mt-lg-5,
     .my-lg-5 {
         margin-top: 3rem !important
     }
+
     .mr-lg-5,
     .mx-lg-5 {
         margin-right: 3rem !important
     }
+
     .mb-lg-5,
     .my-lg-5 {
         margin-bottom: 3rem !important
     }
+
     .ml-lg-5,
     .mx-lg-5 {
         margin-left: 3rem !important
     }
+
     .p-lg-0 {
         padding: 0 !important
     }
+
     .pt-lg-0,
     .py-lg-0 {
         padding-top: 0 !important
     }
+
     .pr-lg-0,
     .px-lg-0 {
         padding-right: 0 !important
     }
+
     .pb-lg-0,
     .py-lg-0 {
         padding-bottom: 0 !important
     }
+
     .pl-lg-0,
     .px-lg-0 {
         padding-left: 0 !important
     }
+
     .p-lg-1 {
         padding: 0.25rem !important
     }
+
     .pt-lg-1,
     .py-lg-1 {
         padding-top: 0.25rem !important
     }
+
     .pr-lg-1,
     .px-lg-1 {
         padding-right: 0.25rem !important
     }
+
     .pb-lg-1,
     .py-lg-1 {
         padding-bottom: 0.25rem !important
     }
+
     .pl-lg-1,
     .px-lg-1 {
         padding-left: 0.25rem !important
     }
+
     .p-lg-2 {
         padding: 0.5rem !important
     }
+
     .pt-lg-2,
     .py-lg-2 {
         padding-top: 0.5rem !important
     }
+
     .pr-lg-2,
     .px-lg-2 {
         padding-right: 0.5rem !important
     }
+
     .pb-lg-2,
     .py-lg-2 {
         padding-bottom: 0.5rem !important
     }
+
     .pl-lg-2,
     .px-lg-2 {
         padding-left: 0.5rem !important
     }
+
     .p-lg-3 {
         padding: 1rem !important
     }
+
     .pt-lg-3,
     .py-lg-3 {
         padding-top: 1rem !important
     }
+
     .pr-lg-3,
     .px-lg-3 {
         padding-right: 1rem !important
     }
+
     .pb-lg-3,
     .py-lg-3 {
         padding-bottom: 1rem !important
     }
+
     .pl-lg-3,
     .px-lg-3 {
         padding-left: 1rem !important
     }
+
     .p-lg-4 {
         padding: 1.5rem !important
     }
+
     .pt-lg-4,
     .py-lg-4 {
         padding-top: 1.5rem !important
     }
+
     .pr-lg-4,
     .px-lg-4 {
         padding-right: 1.5rem !important
     }
+
     .pb-lg-4,
     .py-lg-4 {
         padding-bottom: 1.5rem !important
     }
+
     .pl-lg-4,
     .px-lg-4 {
         padding-left: 1.5rem !important
     }
+
     .p-lg-5 {
         padding: 3rem !important
     }
+
     .pt-lg-5,
     .py-lg-5 {
         padding-top: 3rem !important
     }
+
     .pr-lg-5,
     .px-lg-5 {
         padding-right: 3rem !important
     }
+
     .pb-lg-5,
     .py-lg-5 {
         padding-bottom: 3rem !important
     }
+
     .pl-lg-5,
     .px-lg-5 {
         padding-left: 3rem !important
     }
+
     .m-lg-n1 {
         margin: -0.25rem !important
     }
+
     .mt-lg-n1,
     .my-lg-n1 {
         margin-top: -0.25rem !important
     }
+
     .mr-lg-n1,
     .mx-lg-n1 {
         margin-right: -0.25rem !important
     }
+
     .mb-lg-n1,
     .my-lg-n1 {
         margin-bottom: -0.25rem !important
     }
+
     .ml-lg-n1,
     .mx-lg-n1 {
         margin-left: -0.25rem !important
     }
+
     .m-lg-n2 {
         margin: -0.5rem !important
     }
+
     .mt-lg-n2,
     .my-lg-n2 {
         margin-top: -0.5rem !important
     }
+
     .mr-lg-n2,
     .mx-lg-n2 {
         margin-right: -0.5rem !important
     }
+
     .mb-lg-n2,
     .my-lg-n2 {
         margin-bottom: -0.5rem !important
     }
+
     .ml-lg-n2,
     .mx-lg-n2 {
         margin-left: -0.5rem !important
     }
+
     .m-lg-n3 {
         margin: -1rem !important
     }
+
     .mt-lg-n3,
     .my-lg-n3 {
         margin-top: -1rem !important
     }
+
     .mr-lg-n3,
     .mx-lg-n3 {
         margin-right: -1rem !important
     }
+
     .mb-lg-n3,
     .my-lg-n3 {
         margin-bottom: -1rem !important
     }
+
     .ml-lg-n3,
     .mx-lg-n3 {
         margin-left: -1rem !important
     }
+
     .m-lg-n4 {
         margin: -1.5rem !important
     }
+
     .mt-lg-n4,
     .my-lg-n4 {
         margin-top: -1.5rem !important
     }
+
     .mr-lg-n4,
     .mx-lg-n4 {
         margin-right: -1.5rem !important
     }
+
     .mb-lg-n4,
     .my-lg-n4 {
         margin-bottom: -1.5rem !important
     }
+
     .ml-lg-n4,
     .mx-lg-n4 {
         margin-left: -1.5rem !important
     }
+
     .m-lg-n5 {
         margin: -3rem !important
     }
+
     .mt-lg-n5,
     .my-lg-n5 {
         margin-top: -3rem !important
     }
+
     .mr-lg-n5,
     .mx-lg-n5 {
         margin-right: -3rem !important
     }
+
     .mb-lg-n5,
     .my-lg-n5 {
         margin-bottom: -3rem !important
     }
+
     .ml-lg-n5,
     .mx-lg-n5 {
         margin-left: -3rem !important
     }
+
     .m-lg-auto {
         margin: auto !important
     }
+
     .mt-lg-auto,
     .my-lg-auto {
         margin-top: auto !important
     }
+
     .mr-lg-auto,
     .mx-lg-auto {
         margin-right: auto !important
     }
+
     .mb-lg-auto,
     .my-lg-auto {
         margin-bottom: auto !important
     }
+
     .ml-lg-auto,
     .mx-lg-auto {
         margin-left: auto !important
@@ -6247,341 +6567,430 @@ input[switch=dark]:checked+label {
     .m-xl-0 {
         margin: 0 !important
     }
+
     .mt-xl-0,
     .my-xl-0 {
         margin-top: 0 !important
     }
+
     .mr-xl-0,
     .mx-xl-0 {
         margin-right: 0 !important
     }
+
     .mb-xl-0,
     .my-xl-0 {
         margin-bottom: 0 !important
     }
+
     .ml-xl-0,
     .mx-xl-0 {
         margin-left: 0 !important
     }
+
     .m-xl-1 {
         margin: 0.25rem !important
     }
+
     .mt-xl-1,
     .my-xl-1 {
         margin-top: 0.25rem !important
     }
+
     .mr-xl-1,
     .mx-xl-1 {
         margin-right: 0.25rem !important
     }
+
     .mb-xl-1,
     .my-xl-1 {
         margin-bottom: 0.25rem !important
     }
+
     .ml-xl-1,
     .mx-xl-1 {
         margin-left: 0.25rem !important
     }
+
     .m-xl-2 {
         margin: 0.5rem !important
     }
+
     .mt-xl-2,
     .my-xl-2 {
         margin-top: 0.5rem !important
     }
+
     .mr-xl-2,
     .mx-xl-2 {
         margin-right: 0.5rem !important
     }
+
     .mb-xl-2,
     .my-xl-2 {
         margin-bottom: 0.5rem !important
     }
+
     .ml-xl-2,
     .mx-xl-2 {
         margin-left: 0.5rem !important
     }
+
     .m-xl-3 {
         margin: 1rem !important
     }
+
     .mt-xl-3,
     .my-xl-3 {
         margin-top: 1rem !important
     }
+
     .mr-xl-3,
     .mx-xl-3 {
         margin-right: 1rem !important
     }
+
     .mb-xl-3,
     .my-xl-3 {
         margin-bottom: 1rem !important
     }
+
     .ml-xl-3,
     .mx-xl-3 {
         margin-left: 1rem !important
     }
+
     .m-xl-4 {
         margin: 1.5rem !important
     }
+
     .mt-xl-4,
     .my-xl-4 {
         margin-top: 1.5rem !important
     }
+
     .mr-xl-4,
     .mx-xl-4 {
         margin-right: 1.5rem !important
     }
+
     .mb-xl-4,
     .my-xl-4 {
         margin-bottom: 1.5rem !important
     }
+
     .ml-xl-4,
     .mx-xl-4 {
         margin-left: 1.5rem !important
     }
+
     .m-xl-5 {
         margin: 3rem !important
     }
+
     .mt-xl-5,
     .my-xl-5 {
         margin-top: 3rem !important
     }
+
     .mr-xl-5,
     .mx-xl-5 {
         margin-right: 3rem !important
     }
+
     .mb-xl-5,
     .my-xl-5 {
         margin-bottom: 3rem !important
     }
+
     .ml-xl-5,
     .mx-xl-5 {
         margin-left: 3rem !important
     }
+
     .p-xl-0 {
         padding: 0 !important
     }
+
     .pt-xl-0,
     .py-xl-0 {
         padding-top: 0 !important
     }
+
     .pr-xl-0,
     .px-xl-0 {
         padding-right: 0 !important
     }
+
     .pb-xl-0,
     .py-xl-0 {
         padding-bottom: 0 !important
     }
+
     .pl-xl-0,
     .px-xl-0 {
         padding-left: 0 !important
     }
+
     .p-xl-1 {
         padding: 0.25rem !important
     }
+
     .pt-xl-1,
     .py-xl-1 {
         padding-top: 0.25rem !important
     }
+
     .pr-xl-1,
     .px-xl-1 {
         padding-right: 0.25rem !important
     }
+
     .pb-xl-1,
     .py-xl-1 {
         padding-bottom: 0.25rem !important
     }
+
     .pl-xl-1,
     .px-xl-1 {
         padding-left: 0.25rem !important
     }
+
     .p-xl-2 {
         padding: 0.5rem !important
     }
+
     .pt-xl-2,
     .py-xl-2 {
         padding-top: 0.5rem !important
     }
+
     .pr-xl-2,
     .px-xl-2 {
         padding-right: 0.5rem !important
     }
+
     .pb-xl-2,
     .py-xl-2 {
         padding-bottom: 0.5rem !important
     }
+
     .pl-xl-2,
     .px-xl-2 {
         padding-left: 0.5rem !important
     }
+
     .p-xl-3 {
         padding: 1rem !important
     }
+
     .pt-xl-3,
     .py-xl-3 {
         padding-top: 1rem !important
     }
+
     .pr-xl-3,
     .px-xl-3 {
         padding-right: 1rem !important
     }
+
     .pb-xl-3,
     .py-xl-3 {
         padding-bottom: 1rem !important
     }
+
     .pl-xl-3,
     .px-xl-3 {
         padding-left: 1rem !important
     }
+
     .p-xl-4 {
         padding: 1.5rem !important
     }
+
     .pt-xl-4,
     .py-xl-4 {
         padding-top: 1.5rem !important
     }
+
     .pr-xl-4,
     .px-xl-4 {
         padding-right: 1.5rem !important
     }
+
     .pb-xl-4,
     .py-xl-4 {
         padding-bottom: 1.5rem !important
     }
+
     .pl-xl-4,
     .px-xl-4 {
         padding-left: 1.5rem !important
     }
+
     .p-xl-5 {
         padding: 3rem !important
     }
+
     .pt-xl-5,
     .py-xl-5 {
         padding-top: 3rem !important
     }
+
     .pr-xl-5,
     .px-xl-5 {
         padding-right: 3rem !important
     }
+
     .pb-xl-5,
     .py-xl-5 {
         padding-bottom: 3rem !important
     }
+
     .pl-xl-5,
     .px-xl-5 {
         padding-left: 3rem !important
     }
+
     .m-xl-n1 {
         margin: -0.25rem !important
     }
+
     .mt-xl-n1,
     .my-xl-n1 {
         margin-top: -0.25rem !important
     }
+
     .mr-xl-n1,
     .mx-xl-n1 {
         margin-right: -0.25rem !important
     }
+
     .mb-xl-n1,
     .my-xl-n1 {
         margin-bottom: -0.25rem !important
     }
+
     .ml-xl-n1,
     .mx-xl-n1 {
         margin-left: -0.25rem !important
     }
+
     .m-xl-n2 {
         margin: -0.5rem !important
     }
+
     .mt-xl-n2,
     .my-xl-n2 {
         margin-top: -0.5rem !important
     }
+
     .mr-xl-n2,
     .mx-xl-n2 {
         margin-right: -0.5rem !important
     }
+
     .mb-xl-n2,
     .my-xl-n2 {
         margin-bottom: -0.5rem !important
     }
+
     .ml-xl-n2,
     .mx-xl-n2 {
         margin-left: -0.5rem !important
     }
+
     .m-xl-n3 {
         margin: -1rem !important
     }
+
     .mt-xl-n3,
     .my-xl-n3 {
         margin-top: -1rem !important
     }
+
     .mr-xl-n3,
     .mx-xl-n3 {
         margin-right: -1rem !important
     }
+
     .mb-xl-n3,
     .my-xl-n3 {
         margin-bottom: -1rem !important
     }
+
     .ml-xl-n3,
     .mx-xl-n3 {
         margin-left: -1rem !important
     }
+
     .m-xl-n4 {
         margin: -1.5rem !important
     }
+
     .mt-xl-n4,
     .my-xl-n4 {
         margin-top: -1.5rem !important
     }
+
     .mr-xl-n4,
     .mx-xl-n4 {
         margin-right: -1.5rem !important
     }
+
     .mb-xl-n4,
     .my-xl-n4 {
         margin-bottom: -1.5rem !important
     }
+
     .ml-xl-n4,
     .mx-xl-n4 {
         margin-left: -1.5rem !important
     }
+
     .m-xl-n5 {
         margin: -3rem !important
     }
+
     .mt-xl-n5,
     .my-xl-n5 {
         margin-top: -3rem !important
     }
+
     .mr-xl-n5,
     .mx-xl-n5 {
         margin-right: -3rem !important
     }
+
     .mb-xl-n5,
     .my-xl-n5 {
         margin-bottom: -3rem !important
     }
+
     .ml-xl-n5,
     .mx-xl-n5 {
         margin-left: -3rem !important
     }
+
     .m-xl-auto {
         margin: auto !important
     }
+
     .mt-xl-auto,
     .my-xl-auto {
         margin-top: auto !important
     }
+
     .mr-xl-auto,
     .mx-xl-auto {
         margin-right: auto !important
     }
+
     .mb-xl-auto,
     .my-xl-auto {
         margin-bottom: auto !important
     }
+
     .ml-xl-auto,
     .mx-xl-auto {
         margin-left: auto !important
@@ -6626,9 +7035,11 @@ input[switch=dark]:checked+label {
     .text-sm-left {
         text-align: left !important
     }
+
     .text-sm-right {
         text-align: right !important
     }
+
     .text-sm-center {
         text-align: center !important
     }
@@ -6638,9 +7049,11 @@ input[switch=dark]:checked+label {
     .text-md-left {
         text-align: left !important
     }
+
     .text-md-right {
         text-align: right !important
     }
+
     .text-md-center {
         text-align: center !important
     }
@@ -6650,9 +7063,11 @@ input[switch=dark]:checked+label {
     .text-lg-left {
         text-align: left !important
     }
+
     .text-lg-right {
         text-align: right !important
     }
+
     .text-lg-center {
         text-align: center !important
     }
@@ -6662,9 +7077,11 @@ input[switch=dark]:checked+label {
     .text-xl-left {
         text-align: left !important
     }
+
     .text-xl-right {
         text-align: right !important
     }
+
     .text-xl-center {
         text-align: center !important
     }
@@ -6835,7 +7252,7 @@ a.text-dark:focus {
 }
 
 .bg-primary {
-    background-color: #e36766!important
+    background-color: #e36766 !important
 }
 
 .bg-secondary {
@@ -6890,4 +7307,15 @@ a.text-dark:focus {
     right: 20px;
     width: 14px;
     font-size: 10px;
+}
+
+table.table.attendance-table td {
+    padding: 15px;
+    border: 1px solid #ecebeb;
+}
+
+table.table.attendance-table tr:first-child td,
+span#month,
+span#year {
+    font-weight: bold;
 }

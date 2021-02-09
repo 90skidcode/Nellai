@@ -150,9 +150,7 @@ function listEmployee(val) {
             "employee_name": "employee_name"
         },
         "condition": {
-            "status": '1',
-            "department_id": $("[name='department_id']").val(),
-            "branch_id": value
+            "status": '1'
         },
         "like": ""
     }
