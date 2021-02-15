@@ -1,10 +1,8 @@
 $(document).ready(function() {
     onScan.attachTo(document, {
         suffixKeyCodes: [13],
-        reactToKeydown: true,
+        reactToPaste: true,
         onScan: function(sCode) {
-            console.log(sCode);
-            $('input:focus').prop("disable", true);
             let selectdObject = data.find(o => o.value === sCode);
             let trcount = $('table tr.add-row').length - 1;
             $('input').each(function() {
@@ -21,8 +19,8 @@ $(document).ready(function() {
                         return false;
                     }
                 });
-                if (flag && typeof(selectdObject) != 'undefined') {
-                    $('table tr.add-row').eq(trcount).find('.autoComplete').attr('data-id', sCode).val(sCode);
+                if (flag) {
+                    $('table tr.add-row').eq(trcount).find('.autoComplete').attr('data-id', sCode).val(selectdObject.text);
                     $('tr.add-row').eq(trcount).find('.quantity').val(1).focus();
                     $('tr.add-row').eq(trcount).find('.costperunit').val(selectdObject.price);
                 }
@@ -35,10 +33,14 @@ $(document).ready(function() {
                         return false;
                     }
                 });
-                if (flag && typeof(selectdObject) != 'undefined') {
+                if (flag) {
                     $('#button-add-item').trigger('click');
                     let trcount = $('table tr.add-row').length - 1;
-                    $('table tr.add-row').eq(trcount).find('.autoComplete').attr('data-id', sCode).val(sCode);
+                    $('table tr.add-row').eq(trcount).find('.autoComplete').attr('data-id', sCode).val(selectdObject.text)
+                    const displaySelect = new SlimSelect({
+                        select: '.' + $('table tr.add-row').eq(trcount).find('.autoComplete').attr('data-class')
+                    });
+                    displaySelect.set(selectdObject.text);
                     $('tr.add-row').eq(trcount).find('.quantity').val(1).focus();
                     $('tr.add-row').eq(trcount).find('.costperunit').val(selectdObject.price);
                 }
@@ -134,14 +136,16 @@ $(document).on('click', '#button-add-item', function() {
                                                             </button>
                                                         </td>
                                                         <td scope="row">
-                                                        <select name="" id=""  data-id="" data-class="${className}" class="autoComplete form-control  ${className}"> <option value="">Select</option>
-                                                        <option value="1005">Idly</option>
-                                                        <option value="1004">Pongal</option></select>
+                                                        <select name="" id=""  data-id="" data-class="${className}" class="autoComplete ${className}"></select>
                                                         </td>
                                                         <td><input type="number" name="" id="" onkeyup="billCalculation()" class="form-control quantity"> </td>
                                                         <td> <input type="number" name="" id="" class="form-control costperunit" readonly tabindex='-1'> </td>
                                                         <td> <input type="number" name="" id="" class="form-control row-cost" readonly tabindex='-1'> </td>
                                                     </tr>`);
+        const displaySelect = new SlimSelect({
+            select: '.' + className
+        });
+        displaySelect.setData(itemdata());
 
     } else
         showToast("Please fill all the fields", "error");

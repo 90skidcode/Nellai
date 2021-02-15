@@ -1,7 +1,30 @@
+$.getJSON("assets/json/menu.json", function(data) {
+    console.log(data);
+    let html = '';
+    $.each(data, function(i, v) {
+        if (v.menutype)
+            $.each(v.menu, function(inx, val) {
+                html += `<li>
+                    <a href="${val.menulink}" class="waves-effect">
+                        <i class="bx ${val.menuicon}"></i>
+                        <span>${val.menulabel}</span>
+                    </a>`;
+                if (val.submenu) {
+                    html += `<ul class="sub-menu mm-collapse" aria-expanded="false">`;
+                    $.each(val.submenu, function(index, value) {
+                        html += `<li><a href="${value.menulink}">${value.menulabel}</a></li>`;
+                    });
+                    html += `</ul>`;
+                }
+                html += `</li>`;
+            });
+        $("#side-menu").html(html);
+    });
+});
+
 /**
  * Menu 
- */
-
+ 
 $("#side-menu.store").html(
     `
     <li>
@@ -68,7 +91,7 @@ $("#side-menu.kitchen").html(
     ` <li>
         <a href="javascript: void(0);" class="has-arrow waves-effect">
             <i class="bx bxs-flame"></i>
-            <span>kitchen</span>
+            <span>Kitchen</span>
         </a>
         <ul class="sub-menu mm-collapse" aria-expanded="false">
             <li><a href="kitchen-in-list.html">Kitchen IN</a></li>
@@ -121,8 +144,7 @@ $("#side-menu.outlet").html(
      `
 );
 
-$("#side-menu.employee").html(
-    ` 
+$("#side-menu.employee").html(` 
     <li>
         <a href="javascript: void(0);" class="has-arrow waves-effect">
             <i class="bx bx bxs-user"></i>
@@ -139,7 +161,7 @@ $("#side-menu.employee").html(
     </li>  
 
     <li>
-        <a href="product.html" class="has-arrow waves-effect">
+        <a href="javascript: void(0);" class="has-arrow waves-effect">
             <i class='bx bx-calendar-plus'></i>
             <span>Leave</span>
         </a>
@@ -150,7 +172,7 @@ $("#side-menu.employee").html(
     </li>
 
     <li>
-        <a href="product.html" class="has-arrow waves-effect">
+        <a href="javascript: void(0);" class="has-arrow waves-effect">
         <i class='bx bx-slider-alt'></i>
             <span>Setting</span>
         </a>
@@ -165,10 +187,17 @@ $("#side-menu.employee").html(
             <span>Attendance</span>
         </a>
     </li>
-     `
-);
-
-
+    <li>
+        <a  class="has-arrow waves-effect">
+        <i class='bx bx-dollar'></i>
+            <span>Salary</span>
+        </a>
+        <ul class="sub-menu mm-collapse" aria-expanded="false">
+            <li><a href="salary-list.html">Salary List</a></li>
+            <li><a href="salary-report.html">Salary Report</a></li>              
+        </ul>
+    </li>`);
+*/
 
 ! function(t) {
     "use strict";
@@ -1171,4 +1200,37 @@ function hasDuplicates(array) {
         }
     }
     return false;
+}
+
+/**
+ * Find Array of Objects
+ * @param {*} serachString  eg: "string 1" 
+ * @param {*} key  eg: "name" 
+ * @param {*} array eg: [
+    { name:"string 1", value:"this", other: "that" },
+    { name:"string 2", value:"this", other: "that" }
+]
+ */
+
+function findInArrayOfObject(serachString, key, array) {
+    for (var i = 0; i < array.length; i++) {
+        if (array[i][key] === serachString) {
+            return array[i];
+        }
+    }
+}
+
+/**
+ * String to capitalize 
+ * Eg: "Hi to all".capitalize();
+ */
+
+String.prototype.capitalize = function() {
+    let text = this.split("_");
+    text = text[0].split(" ");
+    let replecedText = '';
+    $.each(text, function(i, v) {
+        replecedText += v.charAt(0).toUpperCase() + v.slice(1) + " ";
+    })
+    return replecedText;
 }

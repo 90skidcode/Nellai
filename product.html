@@ -161,19 +161,35 @@
                         <div class="modal-body">
                             <form id="product-add">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="product_code">Item Code</label>
-                                            <input type="text" readonly name="product_code" class="form-control" value="">
+                                            <input type="text" name="product_code" class="form-control" value="">
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="formrow-email-input">Item Name</label>
                                             <input type="text" class="form-control" name="product_name" required>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="formrow-email-input">Quantity</label>
+                                            <input type="number" class="form-control" name="quantity" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="quantity_limit">Quantity Low Limit</label>
+                                            <select name="quantity_type" class="form-control" required>
+                                                <option value="">Select</option>
+                                                <option value="kg">Kg</option>
+                                                <option value="g">Grams</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
                                         <div class="form-group">
                                             <label for="quantity_limit">Quantity Low Limit</label>
                                             <input type="number" class="form-control" name="quantity_limit" required>
@@ -185,24 +201,25 @@
                                             <textarea class="form-control" name="product_desc"></textarea>
                                         </div>
                                     </div>
-                                    <p class="font-weight-bold">Deductions</p>
+                                    <p class="font-weight-bold">Ingredient</p>
                                     <div class="table-responsive" id="deductions-table">
                                         <table class="table table-centered table-nowrap table-bordered table-striped">
                                             <thead class="bg-gray">
                                                 <tr>
                                                     <th> </th>
-                                                    <th>Deductions Type</th>
-                                                    <th>Amount</th>
+                                                    <th>Ingredient Name</th>
+                                                    <th>Quantity</th>
+                                                    <th>Quantity Type</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr id="addIngredients">
                                                     <td class="text-center border-right-0">
-                                                        <button type="button" id="button-add-ingredients" count="1" data-toggle="tooltip" title="Add" data-original-title="Add" class="btn btn-icon btn-outline-success btn-lg">
+                                                        <button type="button" id="button-add-ingredients" count="1" class="btn btn-icon btn-outline-success btn-lg">
                                                             <i class="fa fa-plus"></i>
                                                         </button>
                                                     </td>
-                                                    <td colspan="2" class="text-right"></td>
+                                                    <td colspan="3" class="text-right"></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -249,6 +266,28 @@
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade delete" tabindex="-1" role="dialog" aria-labelledby="editOutletOutLabel" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editOutletOutLabel">Delete Product</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <p class="mb-2 col-md-12">Are you sure want to Delete?</p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger delete" data-dismiss="modal">Delete</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>

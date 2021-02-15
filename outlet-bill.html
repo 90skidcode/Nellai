@@ -122,8 +122,12 @@
                                                             </button>
                                                         </td>
                                                         <td scope="row">
-                                                            <select name="" id="" class="form-control autoComplte"></select>
-                                                            <input type="text" type="text" class="autoComplete autoComplete-1" data-id="" name="">
+                                                            <select name="" id="" class="form-control autoComplete">
+                                                                <option value="">Select</option>
+                                                                <option value="1005">Idly</option>
+                                                                <option value="1004">Pongal</option>
+                                                            </select>
+                                                            <input type="hidden" type="text" class="autoComplete-1" data-id="" name="">
                                                         </td>
                                                         <td><input type="number" name="" id="" class="form-control quantity" onkeyup="billCalculation()"> </td>
                                                         <td> <input type="number" name="" id="" class="form-control costperunit" readonly tabindex='-1'> </td>
@@ -254,7 +258,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.7.0/slimselect.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.7.0/slimselect.min.css" rel="stylesheet"></link>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.6.1/slimselect.min.css'>
-    <link rel="stylesheet" href="./style.css">
     <!-- Auto Conplete -->
     <script src="assets/libs/selectize/selectize.js"></script>
     <!-- Scanner Detection -->

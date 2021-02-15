@@ -1,185 +1,202 @@
 $(document).ready(function() {
-    displayAttendanceListInit();
+    // displayAttendanceListInit();
     var currentDate = new Date();
-
-    function generateCalendar(d) {
-        function monthDays(month, year) {
-            var result = [];
-            var days = new Date(year, month, 0).getDate();
-            for (var i = 1; i <= days; i++) {
-                result.push(i);
-            }
-            return result;
-        }
-        Date.prototype.monthDays = function() {
-            var d = new Date(this.getFullYear(), this.getMonth() + 1, 0);
-            return d.getDate();
-        };
-        var details = {
-            // totalDays: monthDays(d.getMonth(), d.getFullYear()),
-            totalDays: d.monthDays(),
-            weekDays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-            months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        };
-        var start = new Date(d.getFullYear(), d.getMonth()).getDay();
-        var cal = [];
-        var day = 1;
-        for (var i = 0; i <= 6; i++) {
-            cal.push(['<tr>']);
-            for (var j = 0; j < 7; j++) {
-                if (i === 0) {
-                    cal[i].push('<td>' + details.weekDays[j] + '</td>');
-                } else if (day > details.totalDays) {
-                    cal[i].push('<td>&nbsp;</td>');
-                } else {
-                    if (i === 1 && j < start) {
-                        cal[i].push('<td>&nbsp;</td>');
-                    } else {
-                        cal[i].push('<td class="day">' + day++ + '</td>');
-                    }
-                }
-            }
-            cal[i].push('</tr>');
-        }
-        cal = cal.reduce(function(a, b) {
-            return a.concat(b);
-        }, []).join('');
-        $('table').append(cal);
-        let lastCount = true;
-        $('table tr:last-child td').each(function() {
-            if ($(this).text())
-                lastCount = false;
-        });
-        if (lastCount)
-            $('table tr:last-child').remove();
-        $('#month').text(details.months[d.getMonth()]);
-        $('#year').text(d.getFullYear());
-        $('td.day').mouseover(function() {
-            $(this).addClass('hover');
-        }).mouseout(function() {
-            $(this).removeClass('hover');
-        });
-    }
     $('#left').click(function() {
-        $('table').text('');
+        $('.attendance-table').html('');
         if (currentDate.getMonth() === 0) {
             currentDate = new Date(currentDate.getFullYear() - 1, 11);
-            generateCalendar(currentDate);
+            displayAttendanceListInit(currentDate);
         } else {
             currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1)
-            generateCalendar(currentDate);
+            displayAttendanceListInit(currentDate);
         }
     });
     $('#right').click(function() {
-        $('table').html('<tr></tr>');
+        $('.attendance-table').html('<tr></tr>');
         if (currentDate.getMonth() === 11) {
             currentDate = new Date(currentDate.getFullYear() + 1, 0);
-            generateCalendar(currentDate);
+            displayAttendanceListInit(currentDate);
         } else {
             currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1)
-            generateCalendar(currentDate);
+            displayAttendanceListInit(currentDate);
         }
     });
-    generateCalendar(currentDate);
+    displayAttendanceListInit(currentDate);
 });
+
+function generateCalendar(responce, d) {
+    function monthDays(month, year) {
+        var result = [];
+        var days = new Date(year, month, 0).getDate();
+        for (var i = 1; i <= days; i++) {
+            result.push(i);
+        }
+        return result;
+    }
+
+    Date.prototype.monthDays = function() {
+        var d = new Date(this.getFullYear(), this.getMonth() + 1, 0);
+        return d.getDate();
+    };
+
+    var details = {
+        // totalDays: monthDays(d.getMonth(), d.getFullYear()),
+        totalDays: d.monthDays(),
+        weekDays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    };
+
+    var start = new Date(d.getFullYear(), d.getMonth()).getDay();
+    var cal = [];
+    var day = 1;
+    for (var i = 0; i <= 6; i++) {
+        cal.push(['<tr>']);
+        for (var j = 0; j < 7; j++) {
+            if (i === 0) {
+                cal[i].push('<td>' + details.weekDays[j] + '</td>');
+            } else if (day > details.totalDays) {
+                cal[i].push('<td class="border-light">&nbsp;</td>');
+            } else {
+                if (i === 1 && j < start) {
+                    cal[i].push('<td class="border-light">&nbsp;</td>');
+                } else {
+                    let numerical = day++;
+                    let today = new Date();
+                    let dd = String(today.getDate()).padStart(2, '0');
+                    let mm = String(today.getMonth());
+                    let yyyy = today.getFullYear();
+                    let dateStatus = '';
+                    if (numerical == dd && d.getMonth() == mm && d.getFullYear() == yyyy)
+                        dateStatus = 'currentdate';
+                    else if (dd > numerical && d.getMonth() == mm && d.getFullYear() == yyyy)
+                        dateStatus = 'pastdate';
+                    else if (d.getMonth() < mm && d.getFullYear() == yyyy)
+                        dateStatus = 'pastdate';
+                    else if (d.getFullYear() < yyyy)
+                        dateStatus = 'pastdate';
+                    let checkAttendanceData = findInArrayOfObject(yyyy + "-" + (d.getMonth() + 1).toString().padStart(2, '0') + "-" + numerical.toString().padStart(2, '0'), "attendence_date", responce.result);
+                    let checkAttendance = '';
+                    (typeof(checkAttendanceData) != 'undefined') ? checkAttendance = '<span title="Attendance filled for ' + checkAttendanceData.employee_count + ' employee" class="attendance-count">' + checkAttendanceData.employee_count + '</span>': checkAttendance = '';
+                    cal[i].push('<td class="day ' + dateStatus + '" data-date="' + numerical + '" data-month="' + (d.getMonth() + 1) + '" data-year="' + d.getFullYear() + '" >' + numerical + '' + checkAttendance + '</td>');
+                }
+            }
+        }
+        cal[i].push('</tr>');
+    }
+    cal = cal.reduce(function(a, b) {
+        return a.concat(b);
+    }, []).join('');
+    $('.attendance-table').append(cal);
+    let lastCount = true;
+    $('.attendance-table tr:last-child td').each(function() {
+        if ($(this).text().trim())
+            lastCount = false;
+    });
+    if (lastCount)
+        $('.attendance-table tr:last-child').remove();
+    $('#month').text(details.months[d.getMonth()]);
+    $('#year').text(d.getFullYear());
+    $('td.day').mouseover(function() {
+        $(this).addClass('hover');
+    }).mouseout(function() {
+        $(this).removeClass('hover');
+    });
+}
 
 var button = `<div class="text-sm-right">
 <button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Attendance </button>
 </div>`;
 
-function displayAttendanceListInit() {
-    let data = {
-        "query": "fetch",
-        "databasename": "attandance_master",
+function displayAttendanceListInit(currentDate) {
+    let data = { "list_key": "getAttendenceIndication", "branch_id": "2", "department_id": "2", "attendence_year": "2021", "attendence_month": "2" }
+    commonAjax('', 'POST', data, '', '', '', {
+        "functionName": "generateCalendar",
+        "param1": currentDate
+    });
+
+    let dataEmp = {
+        "query": 'fetch',
+        "databasename": 'employee_master',
         "column": {
-            "*": "*"
+            "employee_id": "employee_id",
+            "employee_name": "employee_name"
         },
-        'condition': {
-            'created_by': $('[name="created_by"]').val()
+        "condition": {
+            "branch_id": "2",
+            "department_id": "2"
         },
         "like": ""
     }
-    commonAjax('database.php', 'POST', data, '', '', '', {
-        "functionName": "displayAttendanceList",
-        "param1": "table-attendance-list"
-    }, {
-        "functionName": "displayAttendanceList",
-        "param1": "table-attendance-list"
+    commonAjax('database.php', 'POST', dataEmp, '', '', '', {
+        "functionName": "setValueToVariable"
     });
 }
+var employeeList = '';
 
-function displayAttendanceList(response, dataTableId) {
-    var tableHeader = [{
-        "data": "attendence_date"
-    }, /* EDIT */ /* DELETE */ {
-        "data": "created_at",
-        mRender: function(data, type, row) {
-            return `<td class="text-right">
-                     <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-id="${row.attendance_master_id}" data-target=".add"><i class="mdi mdi-pencil font-size-14"></i></a>
-                    <a class="text-danger delete-row" title="Delete" data-toggle="modal" data-id="${row.attendance_master_id}" data-target=".delete"><i class="mdi mdi-close font-size-14"></i></a>
-                </td>`;
-        }
-    }];
-    dataTableDisplay(response, tableHeader, false, dataTableId, button);
+function setValueToVariable(res) {
+    employeeList = res;
 }
 
 /**
  * To Add Attendance
  */
 
-$(document).on('click', '[data-target=".add"]', function() {
-    $(".attendance-add").removeAttr('data-id');
-    $("#attendance-add")[0].reset();
-});
+$(document).on('click', '.day', function() {
+    if ($(this).hasClass('pastdate') || $(this).hasClass('currentdate')) {
+        $(".attendance-add").removeAttr('data-id');
+        $("#attendance-add")[0].reset();
+        $("h3.title").html($(this).attr('data-date') + ' - ' + $("#month").html() + ' - ' + $("#year").html());
+        $('.attendance-add').attr({ 'data-date': $(this).attr('data-date'), 'data-month': $(this).attr('data-month'), 'data-year': $(this).attr('data-year') });
+        $('.add').modal('show');
+        let html = '';
+        $.each(employeeList, function(index, value) {
+            html += `<tr>
+                    <td class="emp-id" data-value="${value.employee_id}">${value.employee_id}</td>
+                    <td >${value.employee_name}</td>
+                    <td ><input type="checkbox" class="form-control present"></td>
+                    <td class="in-time"><input type="time" class="form-control form-status"></td>
+                    <td class="out-time"><input type="time" class="form-control form-status"></td>
+                    <td class="ot"><input type="number" class="form-control form-status"></td>            
+                </tr>`;
+        });
+        $('.add-attendance-list tbody').html(html);
+        $('.add-attendance-list tbody tr').each(function() {
+            if (!$(this).find('.present').is(':checked'))
+                $(this).find('.form-status').prop('readonly', true);
+        });
+        let data = { "list_key": "getAttendenceDatewise", "branch_id": "2", "department_id": "2", "attendence_date": $("#year").html() + '-' + $(this).attr('data-month').toString().padStart(2, '0') + '-' + $(this).attr('data-date').toString().padStart(2, '0') }
+        commonAjax('', 'POST', data, '', '', '', {
+            "functionName": "getAttendenceDatewise"
+        });
 
-/**
- * To Edit Attendance
- */
-
-$(document).on('click', ".edit-row", function() {
-    $(".attendance-add").attr('data-id', $(this).attr('data-id'));
-    $("#attendance-add")[0].reset();
-    let data = {
-        "query": "fetch",
-        "databasename": "attendance_master",
-        "column": {
-            "*": "*"
-        },
-        'condition': {
-            'attendance_master_id': $(this).attr('data-id')
-        },
-        "like": ""
     }
-    commonAjax('database.php', 'POST', data, '', '', '', {
-        "functionName": "multipleSetValue"
-    });
 });
 
-/**
- * To detele row
- */
+function getAttendenceDatewise(res) {
+    if (typeof(res.result) != 'undefined') {
+        $.each(res.result.attendence, function(i, v) {
+            let findDom = $(".emp-id[data-value='" + v.employee_id + "']").closest('tr');
+            if (v.attendence_leave == '1')
+                findDom.find('.present').trigger('click');
+            findDom.find('.in-time input').val(v.attendence_in);
+            findDom.find('.out-time input').val(v.attendence_out);
+            findDom.find('.ot input').val(v.attendence_ot);
+        });
 
-$(document).on('click', ".delete-row", function() {
-    $(".delete .btn-delete").attr('data-detete', $(this).attr('data-id'));
-});
-
-$(document).on('click', ".btn-delete", function() {
-    var data = {
-        'query': 'update',
-        'databasename': 'attendance_master',
-        'condition': {
-            'attendance_master_id': $(".btn-delete").attr('data-detete')
-        },
-        'values': {
-            'status': '0'
-        }
+        $.each(res.result.leave, function(i, v) {
+            let findDom = $(".emp-id[data-value='" + v.employee_id + "']").closest('tr');
+            findDom.find('.present').prop({ "checked": false, "readonly": true });
+            findDom.find('.in-time input').val(" ");
+            findDom.find('.out-time input').val(" ");
+            findDom.find('.ot input').val(" ");
+        });
     }
-    $("#delete").modal('hide');
-    commonAjax('database.php', 'POST', data, '', 'Record Deleted Sucessfully', '', {
-        "functionName": "locationReload"
-    })
-});
+}
 
+/** Make readonly or remove */
+$(document).on('click', '.present', function() {
+    (!$(this).is(':checked')) ? $(this).closest('tr').find('.form-status').prop({ 'readonly': true, 'required': false }).removeClass('is-invalid').val(' '): $(this).closest('tr').find('.form-status').prop({ 'readonly': false, 'required': true })
+});
 
 /**
  * Add Leave Master
@@ -187,35 +204,35 @@ $(document).on('click', ".btn-delete", function() {
 
 $('.attendance-add').click(function() {
     if (checkRequired('#attendance-add')) {
-        var id = $(this).attr('data-id');
-        if (isEmptyValue(id)) {
-            // Add New
-            var data = {
-                "query": 'add',
-                "databasename": 'attendance_master',
-                "values": $("#attendance-add").serializeObject()
-            }
-            commonAjax('database.php', 'POST', data, '.add', 'Attendance added successfully', '', {
-                "functionName": "locationReload"
-            })
-            $("#table-attendance-list").dataTable().fnDraw();
-        } else {
-            // Edit
-            var data = {
-                "query": 'update',
-                "databasename": 'attendance_master',
-                "values": $("#attendance-add").serializeObject(),
-                "condition": {
-                    "attendance_master_id": id
-                }
-            }
-            commonAjax('database.php', 'POST', data, '.add', 'Attendance updated successfully', '', {
-                "functionName": "locationReload"
-            })
+        let listData = [];
+        $('.add-attendance-list tbody tr').each(function() {
+            let checkboxValue = '2';
+            if ($(this).find('.present').is(':checked'))
+                checkboxValue = '1';
+            listData.push({
+                "employee_id": $(this).find('.emp-id').text(),
+                "attendence_leave": checkboxValue,
+                "attendence_in": $(this).find('.in-time input').val(),
+                "attendence_out": $(this).find('.out-time input').val(),
+                "attendence_ot": $(this).find('.ot input').val(),
+            });
+        });
+        var data = {
+            "list_key": 'attendence_insert',
+            "attendence_date": $(this).attr('data-year') + '-' + $(this).attr('data-month') + '-' + $(this).attr('data-date'),
+            "attendencelist": listData
         }
+
+        console.log(JSON.stringify(data));
+        commonAjax('', 'POST', data, '.add', 'Attendance added successfully', '', {
+            "functionName": "modalClose"
+        });
     }
 });
 
+function modalClose() {
+    $('.add').modal('hide');
+}
 
 /**
  * To delete a row

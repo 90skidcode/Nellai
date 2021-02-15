@@ -1,0 +1,202 @@
+[{
+    "menutype": "superadmin",
+    "menulink": "dashboard.html",
+    "menu": [{
+        "menulabel": "Dashboards",
+        "menuicon": "bx-layout",
+        "menulink": "dashboard.html",
+        "submenu": ""
+    }, {
+        "menulabel": "Employee",
+        "menuicon": "bxs-user",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+            "menulabel": "Employee List",
+            "menulink": "employee-dashboard.html"
+        }]
+    }, {
+        "menulabel": "Leave",
+        "menuicon": "bx-calendar-plus",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+            "menulabel": "Leave List",
+            "menulink": "leave-list.html"
+        }, {
+            "menulabel": "Leave Type List",
+            "menulink": "leave-type-list.html"
+        }]
+    }, {
+        "menulabel": "Setting",
+        "menuicon": "bx-slider-alt",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+            "menulabel": "Department List",
+            "menulink": "department-list.html"
+        }, {
+            "menulabel": "Branch List",
+            "menulink": "branch-list.html"
+        }, {
+            "menulabel": "Allowence List",
+            "menulink": "allowence-list.html"
+        }, {
+            "menulabel": "Deductions List",
+            "menulink": "deductions-list.html"
+        }, {
+            "menulabel": "Grade List",
+            "menulink": "grade-list.html"
+        }, {
+            "menulabel": "Designation List",
+            "menulink": "designation-list.html"
+        }, {
+            "menulabel": "Qulification List",
+            "menulink": "qualification-list.html"
+        }]
+    }, {
+        "menulabel": "Attendance",
+        "menuicon": "bx-fingerprint",
+        "menulink": "attendance-list.html",
+        "submenu": ""
+    }, {
+        "menulabel": "Salary",
+        "menuicon": "bx-dollar",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+            "menulabel": "Salary List",
+            "menulink": "salary-list.html"
+        }, {
+            "menulabel": "Salary Report",
+            "menulink": "salary-report.html"
+        }]
+    }]
+}, {
+    "menutype": "store",
+    "menulink": "store-in-list.html",
+    "menu": [{
+        "menulabel": "Dashboards",
+        "menuicon": "bx-layout",
+        "menulink": "dashboard.html",
+        "submenu": ""
+    }, {
+        "menulabel": "Store",
+        "menuicon": "bx-building-house",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+                "menulabel": "Store IN",
+                "menulink": "dashboard.html"
+            },
+            {
+                "menulabel": "Store OUT",
+                "menulink": "store-out-list.html"
+            }, {
+                "menulabel": "Store Damage",
+                "menulink": "store-damage-list.html"
+            }
+        ]
+    }, {
+        "menulabel": "Products",
+        "menuicon": "bxl-product-hunt",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+                "menulabel": "Products List",
+                "menulink": "product.html"
+            },
+            {
+                "menulabel": "Products Report",
+                "menulink": "product-report.html"
+            }
+        ]
+    }]
+}, {
+    "menutype": "pulverizing",
+    "menulink": "pulverizing-in-list.html",
+    "menu": [{
+        "menulabel": "Pulverizing",
+        "menuicon": "bxs-factory",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+            "menulabel": "Pulverizing IN",
+            "menulink": "pulverizing-in-list.html"
+        }, {
+            "menulabel": "Pulverizing OUT",
+            "menulink": "pulverizing-out-list.html"
+        }, {
+            "menulabel": "Pulverizing Damage",
+            "menulink": "pulverizing-damage-list.html"
+        }]
+    }, {
+        "menulabel": "Pulverizing Store",
+        "menuicon": "bxl-product-hunt",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+                "menulabel": "Products List",
+                "menulink": "pulverizing-product-report.html"
+            },
+            {
+                "menulabel": "Products Report",
+                "menulink": "pulverizing-product-report.html"
+            }
+        ]
+    }]
+}, {
+    "menutype": "kitchen",
+    "menulink": "kitchen-in-list.html",
+    "menu": [{
+        "menulabel": "Kitchen",
+        "menuicon": "bxs-flame",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+            "menulabel": "Kitchen IN",
+            "menulink": "kitchen-in-list.html"
+        }, {
+            "menulabel": "Kitchen OUT",
+            "menulink": "kitchen-out-list.html"
+        }, {
+            "menulabel": "Kitchen Damage",
+            "menulink": "kitchen-damage-list.html"
+        }]
+    }, {
+        "menulabel": "Kitchen Store",
+        "menuicon": "bxl-product-hunt",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+                "menulabel": "Kitchen List",
+                "menulink": "kitchen-product.html"
+            },
+            {
+                "menulabel": "Kitchen Report",
+                "menulink": "kitchen-product-report.html"
+            }
+        ]
+    }]
+}, {
+    "menutype": "outlet",
+    "menulink": "outlet-in-list.html",
+    "menu": [{
+        "menulabel": "Outlet",
+        "menuicon": "bxs-flame",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+            "menulabel": "Outlet IN",
+            "menulink": "outlet-in-list.html"
+        }, {
+            "menulabel": "Outlet OUT",
+            "menulink": "outlet-out-list.html"
+        }, {
+            "menulabel": "Outlet Damage",
+            "menulink": "outlet-damage-list.html"
+        }]
+    }, {
+        "menulabel": "Outlet Store",
+        "menuicon": "bxl-product-hunt",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+                "menulabel": "Outlet List",
+                "menulink": "outlet-product.html"
+            },
+            {
+                "menulabel": "Outlet Report",
+                "menulink": "outlet-product-report.html"
+            }
+        ]
+    }]
+}]

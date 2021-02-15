@@ -40,7 +40,7 @@ function listEmployee() {
         "query": 'fetch',
         "databasename": 'employee_master',
         "column": {
-            "employee_master_id": "employee_master_id",
+            "employee_id": "employee_master_id",
             "employee_name": "employee_name"
         },
         "condition": {
@@ -48,7 +48,7 @@ function listEmployee() {
         },
         "like": ""
     }
-    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='employee_id']", "param2": "employee_name", "param3": "employee_master_id" })
+    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='employee_id']", "param2": "employee_name", "param3": "employee_id" })
 }
 
 /**

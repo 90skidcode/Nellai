@@ -60,7 +60,7 @@ function listDesignation() {
             "employee_designation": "employee_designation"
         },
         "condition": {
-            "status": '1'
+            "status": '2'
         },
         "like": ""
     }

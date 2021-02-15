@@ -13,9 +13,7 @@ function displayDesignationListInit() {
         "column": {
             "*": "*"
         },
-        'condition': {
-            'status': '1'
-        },
+        'condition': "",
         "like": ""
     }
     commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "displayDesignationList", "param1": "table-designation-list" }, { "functionName": "displayDesignationList", "param1": "table-designation-list" });
@@ -31,16 +29,23 @@ function displayDesignationList(response, dataTableId) {
         mRender: function(data, type, row) {
             if (row.status == '1')
                 return `<span class="badge badge-pill badge-success font-size-12">Active</span>`;
+            if (row.status == '2')
+                return `<span class="badge badge-pill badge-warning font-size-12">Admin</span>`;
+            if (row.status == '3')
+                return `<span class="badge badge-pill badge-warning font-size-12">Super Admin</span>`;
             else
                 return `<span class="badge badge-pill badge-danger font-size-12">In Active</span>`;
         }
     }, /* EDIT */ /* DELETE */ {
-        "data": "created_at",
+        "data": "status",
         mRender: function(data, type, row) {
-            return `<td class="text-right">
-                     <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-id="${row.employee_designation_id}" data-target=".add"><i class="mdi mdi-pencil font-size-14"></i></a>
-                    <a class="text-danger delete-row" title="Delete" data-toggle="modal" data-id="${row.employee_designation_id}" data-target=".delete"><i class="mdi mdi-close font-size-14"></i></a>
-                </td>`;
+            if (row.status == '1' || row.status == '2' || row.status == '3')
+                return ``;
+            else
+                return `<td class="text-right">
+                            <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-id="${row.employee_designation_id}" data-target=".add"><i class="mdi mdi-pencil font-size-14"></i></a>
+                            <a class="text-danger delete-row" title="Delete" data-toggle="modal" data-id="${row.employee_designation_id}" data-target=".delete"><i class="mdi mdi-close font-size-14"></i></a>
+                        </td>`;
         }
     }];
     dataTableDisplay(response, tableHeader, false, dataTableId, button);

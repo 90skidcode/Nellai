@@ -1,0 +1,8 @@
+# REST Client tests on https://github.com/tronalddump-io/tronald-app
+@baseUrl = https://glowmedia.in/nellai/api/services.php;
+
+### Get a random clever quote
+POST {{baseUrl}} HTTP/1.1
+Accept: application/json
+
+{"product_code":"10002","product_name":"Manjal","quantity":"1","quantity_type":"kg","quantity_limit":"10","product_desc":"hhh","created_by":"1000488","list_key":"ProductUpdate"}

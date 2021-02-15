@@ -5,6 +5,7 @@ $(document).ready(function() {
 var button = `<div class="text-sm-right">
 <button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Product </button>
 </div>`;
+var productDataList = '';
 
 function displayProductListInit() {
     let data = {
@@ -33,10 +34,16 @@ function displayProductList(response, dataTableId) {
                         <a class="mr-3 text-info" title="Report" href="product-report.html?id=${row.product_code}"><i class="mdi mdi-clipboard-list-outline font-size-18"></i></a>
                         <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-id="${row.product_code}" data-target=".add"><i class="mdi mdi-pencil font-size-14"></i></a>
                         <a class="mr-3 text-info barcode-row" title="BarCode Print" data-toggle="modal" data-id="${row.product_code}" data-target=".barcode-print"><i class="mdi mdi-barcode-scan font-size-14"></i></a>
-                        <a class="text-danger delete-row" title="Delete" data-toggle="modal" data-id="${row.product_code}" data-target=".delete"><i class="mdi mdi-close font-size-14"></i></a>
+                        
                     </td>`;
+            /**<a class="text-danger delete-row" title="Delete" data-toggle="modal" data-id="${row.product_code}" data-target=".delete"><i class="mdi mdi-close font-size-14"></i></a> */
         }
     }];
+
+    $.each(response, function(i, v) {
+        productDataList += `<option value='${v.product_code}'>${v.product_name}</option>`
+    });
+
     dataTableDisplay(response, tableHeader, false, dataTableId, button);
 }
 
@@ -46,27 +53,35 @@ function displayProductList(response, dataTableId) {
 
 $(document).on('click', '[data-target=".add"]', function() {
     formReset();
+    $("#deductions-table table tbody tr:not(#addIngredients)").remove();
     var id = $(this).attr('data-id');
     if (!isEmptyValue(id)) {
         let data = { "list_key": "getProducts", "condition": { "product_master.product_code": id } };
-        commonAjax('', 'POST', data, '', '', '', { "functionName": "productSetValue" });
+        commonAjax('', 'POST', data, '', '', '', { "functionName": "productSetValue", "param1": id });
+        $(".product-add").attr('data-id', id);
+        $("[name='product_code']").prop('readonly', true);
+    } else {
+        $("[name='product_code']").prop('readonly', false);
+        $(".product-add").removeAttr('data-id', id);
     }
 });
 
-function productSetValue(response) {
+function productSetValue(response, id) {
     multipleSetValue(response.result);
-    if (response[0].allowance) {
-        let gradeAllowance = JSON.parse(response[0].allowance);
-        $.each(gradeAllowance, function(index, value) {
-            if (index)
-                $('#button-add-allowance').trigger('click');
+    let data = { "list_key": "getIngredient", "condition": { "product_code": id } };
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "ingredientSetValue" });
+}
+
+function ingredientSetValue(response) {
+    if (response.result) {
+        $.each(response.result, function(index, value) {
+            $('#button-add-ingredients').trigger('click');
             $.each(value, function(i, v) {
                 $('tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v);
             })
         })
     }
 }
-
 
 /**
  * To Barcode Preview
@@ -90,13 +105,14 @@ $(document).on('click', '.print-barcode', function() {
     for (let i = 0; i < $("#no_of_labels").val(); i++) {
         mywindow.document.write('<svg class="barcode"></svg>');
     }
-    mywindow.document.write("</body><script>JsBarcode('.barcode', '1005');window.print();</script></html>");
+    mywindow.document.write("</body><script>JsBarcode('.barcode', '1005',{width:2.2,height:55,margin:15,fontSize:10,displayValue: true    });window.print();</script></html>");
     mywindow.print();
     // mywindow.close();
 
     return true;
+    window.open("barcode.html");
 });
-
+//for (let i = 0; i < $("#no_of_labels").val(); i++) {
 /**
  * Add Product
  */
@@ -106,24 +122,16 @@ $('.product-add').click(function() {
         var id = $(this).attr('data-id');
         if (isEmptyValue(id)) {
             // Add New
-            var data = {
-                "query": 'add',
-                "databasename": 'product_master',
-                "values": $("#product-add").serializeObject()
-            }
-            commonAjax('', 'POST', data, '.add', 'Allowence added successfully', '', { "functionName": "locationReload" })
-            $("#table-product-list").dataTable().fnDraw();
+            var data = $("#product-add").serializeObject();
+            data['list_key'] = 'insertProduct';
+            console.log(JSON.stringify(data));
+            commonAjax('', 'POST', data, '.add', 'Product added successfully', '', { "functionName": "locationReload" })
         } else {
             // Edit
-            var data = {
-                "query": 'update',
-                "databasename": 'product_master',
-                "values": $("#product-add").serializeObject(),
-                "condition": {
-                    "product_code": id
-                }
-            }
-            commonAjax('database.php', 'POST', data, '.add', 'Allowence updated successfully', '', { "functionName": "locationReload" })
+            var data = $("#product-add").serializeObject();
+            data['list_key'] = 'ProductUpdate';
+            console.log(JSON.stringify(data));
+            commonAjax('', 'POST', data, '.add', 'Product updated successfully', '', { "functionName": "locationReload" })
         }
     }
 });
@@ -134,15 +142,15 @@ $('.product-add').click(function() {
  */
 
 $(document).on('click', ".delete-row", function() {
-    $(".delete .btn-delete").attr('data-detete', $(this).attr('data-id'));
+    $(".delete").attr('data-detete', $(this).attr('data-id'));
 });
 
 $(document).on('click', ".btn-delete", function() {
     var data = {
         'query': 'update',
-        'databasename': 'employee_product',
+        'databasename': 'product_master',
         'condition': {
-            'employee_product_id': $(".btn-delete").attr('data-detete')
+            'product_code': $(".btn-delete").attr('data-detete')
         },
         'values': {
             'status': '0'
@@ -156,22 +164,27 @@ $(document).on('click', ".btn-delete", function() {
 $(document).on('click', '#button-add-ingredients', function() {
     let c = $(this).attr('count');
     $(this).attr('count', parseInt($(this).attr('count')) + 1);
-    $(this).closest('table').find('#addAllowance').before(`  <tr>
+    $(this).closest('table').find('#addIngredients').before(`  <tr>
     <td class="text-center">
         <button type="button" title="Reject" class="btn btn-icon btn-outline-danger btn-lg">
         <i class="fa fa-trash"></i>
     </button>
     </td>
     <td scope="row">
-        <select name="allowance_type" class="form-control">${allowenceDataList}</select>
+        <select name="ingredient_product_code" class="form-control">${productDataList}</select>
     </td>
     <td>
-        <input type="number" name="allowance_amount" class="form-control text-right" required>
+        <input type="number" name="ingredient_quantity" class="form-control" required>
+    </td>
+    <td> 
+        <select name="ingredient_quantity_type" class="form-control" required>
+            <option value="">Select</option>
+            <option value="kg">Kg</option>
+            <option value="g">Grams</option>
+        </select>
     </td>
 </tr>`);
 });
-
-
 
 /**
  * To delete a row
@@ -201,20 +214,6 @@ $(document).on('click keyup blur', '#deductions-table .btn-outline-danger, #allo
     totalCalculation();
 });
 
-function totalCalculation() {
-    var allowanceTotal = 0;
-    $('[name="allowance_amount"]').each(function() {
-        allowanceTotal += Number($(this).val());
-    })
-    $('.allowance-total').html('<b>Rs.' + allowanceTotal + '</b>');
-    var deductionsTotal = 0;
-    $('[name="deductions_amount"]').each(function() {
-        deductionsTotal += Number($(this).val());
-    })
-    $('.deductions-total').html('<b> Rs.' + deductionsTotal + '</b>');
-    var ctcTotal = allowanceTotal - deductionsTotal;
-    $('.ctc-total').html('<b class="font-size-18">Rs.' + ctcTotal + '</b>');
-}
 
 /**
  * To reset form while clicking the Add or Edit

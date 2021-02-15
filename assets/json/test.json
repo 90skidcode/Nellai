@@ -1,0 +1,36 @@
+{
+    "message": "success",
+    "status_code": 200,
+    "result": {
+        "grade": [{
+            "employee_name": "Vijay",
+            "employee_grade": "G2",
+            "employee_type": "Direct Employee",
+            "allowance": [{
+                "allowance_name": "HRA",
+                "allowance_type": "1"
+            }, {
+                "allowance_name": "Basic pay",
+                "allowance_type": "2"
+            }],
+            "deductions": [{
+                "deductions_name": "PF",
+                "deductions_type": "1"
+            }, {
+                "deductions_name": "ESI",
+                "deductions_type": "2"
+            }, {
+                "deductions_name": "Income Tax",
+                "deductions_type": "3"
+            }]
+        }],
+        "attendence": [{
+            "working_days": "5",
+            "present": "3",
+            "gendral_leave": "2",
+            "sick_leave": "0",
+            "ot": "5",
+            "lwp": "0"
+        }]
+    }
+}
