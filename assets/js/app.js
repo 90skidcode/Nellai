@@ -1,9 +1,12 @@
+var menuFlag = false;
 $.getJSON("assets/json/menu.json", function(data) {
     let html = '';
     if (sessionStorage.getItem("employee")) {
         $.each(data, function(i, v) {
             if (v.menuid == JSON.parse(sessionStorage.getItem("employee")).result[0].employee_designation_id) {
                 $.each(v.menu, function(inx, val) {
+                    if (val.menulink == window.location.pathname.split('/').slice(-1)[0])
+                        menuFlag = true;
                     html += `<li>
                     <a href="${val.menulink}" class="waves-effect">
                         <i class="bx ${val.menuicon}"></i>
@@ -28,7 +31,13 @@ $.getJSON("assets/json/menu.json", function(data) {
 
         $('form').append(`<input type="hidden" class="form-control" name="created_by" value="${JSON.parse(sessionStorage.getItem("employee")).result[0].login_username}"><input type="hidden" class="form-control" name="status" value="1">`);
         $(".login-user-name").html(JSON.parse(sessionStorage.getItem("employee")).result[0].employee_name);
+        if (!menuFlag)
+            window.open('index.html', '_self');
+    } else {
+        if (window.location.pathname.split('/').slice(-1)[0] && window.location.pathname.split('/').slice(-1)[0] != 'index.html')
+            window.open('index.html', '_self');
     }
+
 });
 
 /**
