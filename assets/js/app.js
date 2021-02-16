@@ -19,7 +19,6 @@ $.getJSON("assets/json/menu.json", function(data) {
                     html += `</li>`;
                 });
                 $("#side-menu").html(html);
-
             }
         });
 
