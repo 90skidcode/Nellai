@@ -22,6 +22,13 @@ $.getJSON("assets/json/menu.json", function(data) {
 
             }
         });
+
+        /**
+         * Add Status & creted by for all form
+         */
+
+        $('form').append(`<input type="hidden" class="form-control" name="created_by" value="${JSON.parse(sessionStorage.getItem("employee")).result[0].login_username}"><input type="hidden" class="form-control" name="status" value="1">`);
+        $(".login-user-name").html(JSON.parse(sessionStorage.getItem("employee")).result[0].employee_name);
     }
 });
 
@@ -887,11 +894,6 @@ function listSelect2(data, selector, jsonLabel, jsonValue) {
 
 }
 
-/**
- * Add Status & creted by for all form
- */
-
-$('form').append(`<input type="hidden" class="form-control" name="created_by" value="${JSON.parse(sessionStorage.getItem("employee")).result[0].login_username}"><input type="hidden" class="form-control" name="status" value="1">`);
 
 
 /**
