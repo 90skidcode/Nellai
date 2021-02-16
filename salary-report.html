@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <title>Nellai Krishna Foods PVT. LTD</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Designation List Template" name="description" />
+    <meta content="Premium Multipurpose Admin & Salary List Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
@@ -112,117 +112,80 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0 font-size-18">Designation List</h4>
-
+                                <h4 class="mb-0 font-size-18">Salary Report</h4>
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Designation Lists</a></li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Salary Report</a></li>
                                     </ol>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                     <!-- end page title -->
 
                     <!-- end row -->
-
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <table id="table-designation-list" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <form id="salary-report">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="formrow-email-input">Month</label>
+                                                    <input type="month" name="month" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="formrow-email-input">Department ID</label>
+                                                    <select name="department_id" class="form-control"></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="formrow-email-input">Branch ID</label>
+                                                    <select name="branch_id" class="form-control"></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label for="formrow-email-input">Employee Type</label>
+                                                    <select name="employee_type" class="form-control"></select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1 p-3">
+                                                <button type="button" class="btn btn-primary float-right search">Search</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <table id="table-salary-list" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                         <thead>
                                             <tr>
-                                                <th>Designation ID</th>
-                                                <th>Designation Name</th>
-                                                <th>Status</th>
-                                                <th>Action</th>
+                                                <th>Employee ID</th>
+                                                <th>Employee Name</th>
+                                                <th>Department</th>
+                                                <th>Branch</th>
+                                                <th>Salary Amount</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-
-                                        </tbody>
+                                        <tbody></tbody>
                                     </table>
+                                    <button type="button" class="btn btn-primary float-right">Print</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- end row -->
-
-
-                    <div class="modal fade add" tabindex="-1" role="dialog" aria-labelledby="addDesignationLabel" style="display: none;" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-xs" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="addDesignationLabel">Add Designation List</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="checkout-tabs">
-                                        <form id="designation-add">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="formrow-email-input">Designation ID</label>
-                                                        <input type="text" name="employee_designation_id" class="form-control" readonly>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="formrow-email-input">Designation Name</label>
-                                                        <input type="text" name="employee_designation" class="form-control" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary designation-add">Save</button>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal fade delete" tabindex="-1" role="dialog" aria-labelledby="deleteDesignationLabel" style="display: none;" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="deleteDesignationLabel">Delete Designation</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <p class="mb-2 col-md-12">Are you sure want to Delete?</p>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger btn-delete" data-dismiss="modal">Delete</button>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
                 <!-- container-fluid -->
             </div>
             <!-- End Page-content -->
-
-
         </div>
         <!-- end main content-->
-
     </div>
     <!-- END layout-wrapper -->
-
-
 
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
@@ -234,34 +197,13 @@
     <script src="assets/libs/simplebar/simplebar.min.js"></script>
     <script src="assets/libs/node-waves/waves.min.js"></script>
 
-    <!-- Required datatable js -->
-    <script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <!-- Buttons examples -->
-    <script src="assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
-    <script src="assets/libs/jszip/jszip.min.js"></script>
-    <script src="assets/libs/pdfmake/build/pdfmake.min.js"></script>
-    <script src="assets/libs/pdfmake/build/vfs_fonts.js"></script>
-    <script src="assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
-
-    <!-- Responsive examples -->
-    <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-
     <!-- Select 2 -->
     <script src="assets/libs/select2/js/select2.min.js"></script>
     <!-- toastr plugin -->
     <script src="assets/libs/toastr/build/toastr.min.js"></script>
-
     <script src="assets/js/app.js"></script>
     <!-- Page js -->
-    <script src="assets/js/pages/designation-list.js"></script>
-
-
-
-
+    <script src="assets/js/pages/salary-report.js"></script>
 </body>
 
 </html>

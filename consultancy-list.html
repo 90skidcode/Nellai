@@ -3,12 +3,10 @@
 
 
 <head>
-
     <meta charset="utf-8" />
     <title>Nellai Krishna Foods PVT. LTD</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Salary List Dashboard Template" name="description" />
-    <meta content="Themesbrand" name="author" />
+
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
 
@@ -112,155 +110,103 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0 font-size-18">Salary List</h4>
+                                <h4 class="mb-0 font-size-18">Consultancy List</h4>
+
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Salary List</a></li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Consultancy Lists</a></li>
                                     </ol>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                     <!-- end page title -->
 
                     <!-- end row -->
+
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <table id="table-salary-list" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <table id="table-consultancy-list" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                         <thead>
                                             <tr>
-                                                <th>Employee ID</th>
-                                                <th>Employee Name</th>
-                                                <th>Department</th>
-                                                <th>Branch</th>
-                                                <th>Salary Amount</th>
+                                                <th>Consultancy ID</th>
+                                                <th>Consultancy Name</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody></tbody>
+                                        <tbody>
+
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- end row -->
-                    <div class="modal fade salary" tabindex="-1" role="dialog" aria-labelledby="addKitchenOutLabel" style="display: none;" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+
+
+                    <div class="modal fade add" tabindex="-1" role="dialog" aria-labelledby="addConsultancyLabel" style="display: none;" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-xs" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="addKitchenOutLabel">Salary</h5>
+                                    <h5 class="modal-title" id="addConsultancyLabel">Add Consultancy List</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
                                 </div>
-
                                 <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <form id="salary-add">
-
-                                                <p class="font-weight-bold">Earning</p>
-                                                <div class="table-responsive" id="allowance-table">
-                                                    <table class="table table-centered table-nowrap table-bordered table-striped">
-                                                        <thead class="bg-gray">
-                                                            <tr>
-                                                                <th class="text-center">Allowance Type</th>
-                                                                <th class="text-center">Amount</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td class="text-right">Total Allowance</td>
-                                                                <td class="text-right allowance-total"></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                    <div class="checkout-tabs">
+                                        <form id="consultancy-add">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="formrow-email-input">Consultancy ID</label>
+                                                        <input type="text" name="consultancy_master_id" class="form-control" readonly>
+                                                    </div>
                                                 </div>
-                                                <p class="font-weight-bold">Deductions</p>
-                                                <div class="table-responsive" id="deductions-table">
-                                                    <table class="table table-centered table-nowrap table-bordered table-striped">
-                                                        <thead class="bg-gray">
-                                                            <tr>
-                                                                <th class="text-center">Deductions Type</th>
-                                                                <th class="text-center">Amount</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td class="text-right">Total Deductions</td>
-                                                                <td class="text-right deductions-total"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-right">Total Salary</td>
-                                                                <td class="text-right ctc-total"></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-
-
-                                            </form>
-                                        </div>
-
-                                        <div class="col-md-4">
-
-                                            <p class="font-weight-bold">Attendance</p>
-                                            <div class="table-responsive" id="attendance-table">
-                                                <table class="table table-centered table-nowrap table-bordered table-striped">
-                                                    <thead class="bg-gray">
-                                                        <tr>
-                                                            <th>Attendance Type</th>
-                                                            <th>Count</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="formrow-password-input">Remarks</label>
-                                                    <textarea class="form-control" id="remarks"></textarea>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="formrow-email-input">Consultancy Name</label>
+                                                        <input type="text" name="consultancy_name" class="form-control" required>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary salary-add">Save</button>
+                                    <button type="button" class="btn btn-primary consultancy-add">Save</button>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="modal fade delete" tabindex="-1" role="dialog" aria-labelledby="editKitchenOutLabel" style="display: none;" aria-hidden="true">
+                    <div class="modal fade delete" tabindex="-1" role="dialog" aria-labelledby="deleteConsultancyLabel" style="display: none;" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="editKitchenOutLabel">Delete Kitchen In Details</h5>
+                                    <h5 class="modal-title" id="deleteConsultancyLabel">Delete Consultancy</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                            </button>
+                                        <span aria-hidden="true">×</span>
+                                    </button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
                                         <p class="mb-2 col-md-12">Are you sure want to Delete?</p>
                                     </div>
-
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                                    <button type="button" class="btn btn-danger btn-delete" data-dismiss="modal">Delete</button>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-
 
                 </div>
                 <!-- container-fluid -->
@@ -309,7 +255,10 @@
 
     <script src="assets/js/app.js"></script>
     <!-- Page js -->
-    <script src="assets/js/pages/salary-list.js"></script>
+    <script src="assets/js/pages/consultancy-list.js"></script>
+
+
+
 
 </body>
 

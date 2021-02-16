@@ -1,25 +1,28 @@
 $.getJSON("assets/json/menu.json", function(data) {
-    console.log(data);
     let html = '';
-    $.each(data, function(i, v) {
-        if (v.menutype)
-            $.each(v.menu, function(inx, val) {
-                html += `<li>
+    if (sessionStorage.getItem("employee")) {
+        $.each(data, function(i, v) {
+            if (v.menuid == JSON.parse(sessionStorage.getItem("employee")).result[0].employee_designation_id) {
+                $.each(v.menu, function(inx, val) {
+                    html += `<li>
                     <a href="${val.menulink}" class="waves-effect">
                         <i class="bx ${val.menuicon}"></i>
                         <span>${val.menulabel}</span>
                     </a>`;
-                if (val.submenu) {
-                    html += `<ul class="sub-menu mm-collapse" aria-expanded="false">`;
-                    $.each(val.submenu, function(index, value) {
-                        html += `<li><a href="${value.menulink}">${value.menulabel}</a></li>`;
-                    });
-                    html += `</ul>`;
-                }
-                html += `</li>`;
-            });
-        $("#side-menu").html(html);
-    });
+                    if (val.submenu) {
+                        html += `<ul class="sub-menu mm-collapse" aria-expanded="false">`;
+                        $.each(val.submenu, function(index, value) {
+                            html += `<li><a href="${value.menulink}">${value.menulabel}</a></li>`;
+                        });
+                        html += `</ul>`;
+                    }
+                    html += `</li>`;
+                });
+                $("#side-menu").html(html);
+
+            }
+        });
+    }
 });
 
 /**
@@ -888,7 +891,7 @@ function listSelect2(data, selector, jsonLabel, jsonValue) {
  * Add Status & creted by for all form
  */
 
-$('form').append(`<input type="hidden" class="form-control" name="created_by" value="1000488"><input type="hidden" class="form-control" name="status" value="1">`);
+$('form').append(`<input type="hidden" class="form-control" name="created_by" value="${JSON.parse(sessionStorage.getItem("employee")).result[0].login_username}"><input type="hidden" class="form-control" name="status" value="1">`);
 
 
 /**
@@ -1233,4 +1236,13 @@ String.prototype.capitalize = function() {
         replecedText += v.charAt(0).toUpperCase() + v.slice(1) + " ";
     })
     return replecedText;
+}
+
+
+/**
+ * NUmbers with Commas In Indian Formate
+ * @param {*} x Eg: 12345 : 12,234
+ */
+function numberWithCommas(x) {
+    return "Rs." + x.toString().replace(/(\d)(?=(\d\d)+\d$)/g, "$1,");
 }

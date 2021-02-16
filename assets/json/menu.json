@@ -1,5 +1,6 @@
 [{
     "menutype": "superadmin",
+    "menuid": "1",
     "menulink": "dashboard.html",
     "menu": [{
         "menulabel": "Dashboards",
@@ -50,6 +51,9 @@
         }, {
             "menulabel": "Qulification List",
             "menulink": "qualification-list.html"
+        }, {
+            "menulabel": "Consultancy List",
+            "menulink": "consultancy-list.html"
         }]
     }, {
         "menulabel": "Attendance",
@@ -70,6 +74,7 @@
     }]
 }, {
     "menutype": "store",
+    "menuid": "2",
     "menulink": "store-in-list.html",
     "menu": [{
         "menulabel": "Dashboards",
@@ -108,6 +113,7 @@
     }]
 }, {
     "menutype": "pulverizing",
+    "menuid": "3",
     "menulink": "pulverizing-in-list.html",
     "menu": [{
         "menulabel": "Pulverizing",
@@ -139,6 +145,7 @@
     }]
 }, {
     "menutype": "kitchen",
+    "menuid": "4",
     "menulink": "kitchen-in-list.html",
     "menu": [{
         "menulabel": "Kitchen",
@@ -170,6 +177,7 @@
     }]
 }, {
     "menutype": "outlet",
+    "menuid": "5",
     "menulink": "outlet-in-list.html",
     "menu": [{
         "menulabel": "Outlet",

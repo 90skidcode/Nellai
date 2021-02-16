@@ -15,13 +15,11 @@ $(document).ready(function() {
     listGrade();
     listDepartment();
     listBranch();
-    listEmployee();
+    listConsultancy();
     $("[name='department_id']").select2().on('change', function() {
         listBranch();
     });
-    $("[name='branch_id']").select2().on('change', function() {
-        listEmployee();
-    })
+
     listAllowence();
     listDeductions();
 });
@@ -127,10 +125,6 @@ function listBranch() {
         "like": ""
     }
     commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='branch_id']", "param2": "branch_name", "param3": "branch_master_id" }, { "functionName": "listSelect2", "param1": "[name='branch_id']", "param2": "branch_name", "param3": "branch_master_id" });
-    setTimeout(function() {
-        listEmployee($("[name='branch_id']").val());
-    }, 1000);
-
 }
 
 
@@ -138,23 +132,20 @@ function listBranch() {
  * List Employee in select 2
  */
 
-function listEmployee(val) {
-    var value = '';
-    (val) ? value = val: value = $("[name='branch_id']").val();
-    (value) ? value = value: value = 0;
+function listConsultancy(val) {
     let data = {
         "query": 'fetch',
-        "databasename": 'employee_master',
+        "databasename": 'consultancy_master',
         "column": {
-            "employee_master_id": "employee_master_id",
-            "employee_name": "employee_name"
+            "consultancy_master_id": "consultancy_master_id",
+            "consultancy_name": "consultancy_name"
         },
         "condition": {
             "status": '1'
         },
         "like": ""
     }
-    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='employee_reporting_to']", "param2": "employee_name", "param3": "employee_master_id" }, { "functionName": "listSelect2", "param1": "[name='employee_reporting_to']", "param2": "employee_name", "param3": "employee_master_id" })
+    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='employee_type']", "param2": "consultancy_name", "param3": "consultancy_master_id" }, { "functionName": "listSelect2", "param1": "[name='employee_type']", "param2": "consultancy_name", "param3": "consultancy_master_id" })
 }
 
 var button = `<div class="text-sm-right">
