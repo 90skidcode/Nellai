@@ -185,7 +185,7 @@ function getAttendenceDatewise(res) {
 
         $.each(res.result.leave, function(i, v) {
             let findDom = $(".emp-id[data-value='" + v.employee_id + "']").closest('tr');
-            findDom.find('.present').prop({ "checked": false, "readonly": true });
+            findDom.find('.present').prop({ "checked": false, "disabled": true });
             findDom.find('.in-time input').val(" ");
             findDom.find('.out-time input').val(" ");
             findDom.find('.ot input').val(" ");

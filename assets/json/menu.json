@@ -173,7 +173,7 @@
     "menulink": "outlet-in-list.html",
     "menu": [{
         "menulabel": "Outlet",
-        "menuicon": "bxs-flame",
+        "menuicon": "bxs-store-alt",
         "menulink": "javascript: void(0);",
         "submenu": [{
             "menulabel": "Outlet IN",

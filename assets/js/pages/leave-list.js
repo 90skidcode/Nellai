@@ -56,27 +56,17 @@ function listEmployee() {
  */
 
 function displayLeaveListInit() {
-    let data = {
-        "query": 'fetch',
-        "databasename": ' leave_management',
-        "column": {
-            "*": "*",
-        },
-        "condition": {
-            "status": '1'
-        },
-        "like": ""
-    }
-    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "displayLeaveList", "param1": "table-leave-list" }, { "functionName": "displayLeaveList", "param1": "table-leave-list" });
+    let data = { "list_key": "getLeaveManagement", "condition": { "leave_management.status": "1" } }
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "displayLeaveList", "param1": "table-leave-list" }, { "functionName": "displayLeaveList", "param1": "table-leave-list" });
 }
 
 function displayLeaveList(response, dataTableId) {
     var tableHeader = [{
         "data": "leave_management_id"
     }, {
-        "data": "employee_id"
+        "data": "employee_name"
     }, {
-        "data": "leave_master_id"
+        "data": "leave_name"
     }, {
         "data": "no_of_days"
     }, {
@@ -94,7 +84,7 @@ function displayLeaveList(response, dataTableId) {
                 </td>`;
         }
     }];
-    dataTableDisplay(response, tableHeader, false, dataTableId, button);
+    dataTableDisplay(response.result, tableHeader, false, dataTableId, button);
 }
 
 /**

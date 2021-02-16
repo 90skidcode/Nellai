@@ -543,7 +543,7 @@ function listAllowence() {
     commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "dataAllowence" })
 }
 
-var allowenceDataList = '';
+var allowenceDataList = '<option value="">Select</option>';
 
 function dataAllowence(responce) {
     $.each(responce, function(i, v) {
@@ -571,7 +571,7 @@ function listDeductions() {
     commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "dataDeductions" })
 }
 
-var deductionsDataList = '';
+var deductionsDataList = '<option value="">Select</option>';
 
 function dataDeductions(responce) {
     $.each(responce, function(i, v) {
@@ -620,8 +620,17 @@ $(document).on('click', '#button-add-allowance', function() {
     <td scope="row">
         <select name="allowance_type" class="form-control">${allowenceDataList}</select>
     </td>
+    <td class="display-none">
+        <input type="hidden" name="allowance_name" class="form-control text-right">
+    </td>
+    <td class="display-none">
+        <input type="hidden" name="deductions_name" class="form-control text-right">
+    </td>
     <td>
-        <input type="number" name="allowance_amount" class="form-control text-right" required>
+        <input type="number" name="allowance_amount_monthly" class="form-control text-right" required>
+    </td>
+    <td>
+        <input type="number" name="allowance_amount_yearly" class="form-control text-right" required readonly>
     </td>
 </tr>`);
 });
@@ -639,7 +648,10 @@ $(document).on('click', '#button-add-deductions', function() {
         <select name="deductions_type" class="form-control">${deductionsDataList}</select>
     </td>
     <td>
-        <input type="number" name="deductions_amount" class="form-control text-right" required>
+        <input type="number" name="deductions_amount_monthly" class="form-control text-right" required>
+    </td>
+    <td>
+        <input type="number" name="deductions_amount_yearly" class="form-control text-right" required readonly>
     </td>
 </tr>`);
 });
@@ -669,23 +681,38 @@ $(document).on('click', '#deductions-table .btn-outline-danger', function() {
  * For Total Calculation
  */
 
-$(document).on('click keyup blur', '#deductions-table .btn-outline-danger, #allowance-table .btn-outline-danger, [name="allowance_amount"], [name="deductions_amount"]', function() {
+$(document).on('click keyup blur', '#deductions-table .btn-outline-danger, #allowance-table .btn-outline-danger, [name="allowance_amount_monthly"], [name="allowance_amount_yearly"], [name="deductions_amount_monthly"], [name="deductions_amount_yearly"]', function() {
     totalCalculation();
 });
 
 function totalCalculation() {
-    var allowanceTotal = 0;
-    $('[name="allowance_amount"]').each(function() {
-        allowanceTotal += Number($(this).val());
+    var allowanceTotalMonthly = 0;
+    $('[name="allowance_amount_monthly"]').each(function() {
+        allowanceTotalMonthly += Number($(this).val());
     })
-    $('.allowance-total').html('<b>Rs.' + allowanceTotal + '</b>');
-    var deductionsTotal = 0;
-    $('[name="deductions_amount"]').each(function() {
-        deductionsTotal += Number($(this).val());
+    $('.allowance-total-monthly').html('<b>Rs.' + allowanceTotalMonthly + '</b>');
+    var deductionsTotalMonthly = 0;
+    $('[name="deductions_amount_monthly"]').each(function() {
+        deductionsTotalMonthly += Number($(this).val());
     })
-    $('.deductions-total').html('<b> Rs.' + deductionsTotal + '</b>');
-    var ctcTotal = allowanceTotal - deductionsTotal;
-    $('.ctc-total').html('<b class="font-size-18">Rs.' + ctcTotal + '</b>');
+    $('.deductions-total-monthly').html('<b> Rs.' + deductionsTotalMonthly + '</b>');
+    var ctcTotalMonthly = allowanceTotalMonthly - deductionsTotalMonthly;
+    $('.ctc-total-monthly').html('<b class="font-size-18">Rs.' + ctcTotalMonthly + '</b>');
+
+
+    var allowanceTotalYearly = 0;
+    $('[name="allowance_amount_yearly"]').each(function() {
+        allowanceTotalYearly += Number($(this).val());
+    })
+    $('.allowance-total-yearly').html('<b>Rs.' + allowanceTotalYearly + '</b>');
+    var deductionsTotalYearly = 0;
+    $('[name="deductions_amount_yearly"]').each(function() {
+        deductionsTotalYearly += Number($(this).val());
+    })
+    $('.deductions-total-yearly').html('<b> Rs.' + deductionsTotalYearly + '</b>');
+    var ctcTotalYearly = allowanceTotalYearly - deductionsTotalYearly;
+    $('.ctc-total-yearly').html('<b class="font-size-18">Rs.' + ctcTotalYearly + '</b>');
+
 }
 
 /**
@@ -699,11 +726,32 @@ function formReset() {
     $('#deductions-table .btn-outline-danger').closest('table').find("tbody tr:not('#addDeductions')").remove();
     $('#button-add-allowance').trigger('click');
     $('#button-add-deductions').trigger('click');
-    $('.allowance-total').html('');
-    $('.deductions-total').html('');
-    $('.ctc-total').html('');
+    $('.allowance-total-monthly').html('');
+    $('.allowance-total-yearly').html('');
+    $('.deductions-total-monthly').html('');
+    $('.deductions-total-yearly').html('');
+    $('.ctc-total-monthly').html('');
+    $('.ctc-total-yearly').html('');
 }
 
+
+$(document).on('keyup', '[name="deductions_amount_monthly"]', function() {
+    $(this).closest('tr').find('[name="deductions_amount_yearly"]').val(Number($(this).val()) * Number(12));
+    totalCalculation();
+});
+
+$(document).on('keyup', '[name="allowance_amount_monthly"]', function() {
+    $(this).closest('tr').find('[name="allowance_amount_yearly"]').val(Number($(this).val()) * Number(12));
+    totalCalculation();
+});
+
+$(document).on('change', '[name="allowance_type"]', function() {
+    $(this).closest('tr').find('[name="allowance_name"]').val($(this).find('option:selected').text());
+});
+
+$(document).on('change', '[name="deductions_type"]', function() {
+    $(this).closest('tr').find('[name="deductions_name"]').val($(this).find('option:selected').text());
+});
 
 /**
  * Update CTC Master
@@ -717,10 +765,13 @@ $('.ctc-add').click(function() {
         values['deductions'] = JSON.stringify(tableRowTOArrayOfObjects('#deductions-table tbody tr:not(#addDeductions)'));
         if (!hasDuplicates(values['allowance_type']) && !hasDuplicates(values['deductions_type'])) {
             delete values['allowance_type'];
-            delete values['allowance_amount'];
+            delete values['allowance_amount_monthly'];
+            delete values['allowance_amount_yearly'];
             delete values['deductions_type'];
-            delete values['deductions_amount'];
-
+            delete values['deductions_amount_monthly'];
+            delete values['deductions_amount_yearly'];
+            delete values['deductions_name'];
+            delete values['allowance_name'];
             // Edit
             var data = {
                 "query": 'update',

@@ -5,8 +5,8 @@ $(document).ready(function() {
     var y = d.getFullYear();
     var ym = y + "-" + m;
     button = `<div class="text-sm-right">
-<input type="month" id="month-year" value="${ym}">
-</div>`;
+                    <input type="month" id="month-year" value="${ym}">
+                </div>`;
     displaySalaryListInit(m, y);
 });
 
@@ -48,15 +48,13 @@ function displaySalaryList(response, dataTableId) {
         "data": "salary_process_status",
         mRender: function(data, type, row) {
             return `<td class="text-right">
-                     <a class="mr-3 text-info salary-row" title="Edit" data-toggle="modal" data-id="${row.employee_id}" data-target=".salary"><i class="mdi mdi-pencil font-size-14"></i></a>
-                    <a class="text-danger delete-row" title="Delete" data-toggle="modal" data-id="${row.employee_id}" data-target=".delete"><i class="mdi mdi-close font-size-14"></i></a>
-                </td>`;
+                        <a class="mr-3 text-info salary-row" title="Edit" data-toggle="modal" data-id="${row.employee_id}" data-target=".salary"><i class="mdi mdi-pencil font-size-14"></i></a>
+                        <a class="text-danger delete-row" title="Delete" data-toggle="modal" data-id="${row.employee_id}" data-target=".delete"><i class="mdi mdi-close font-size-14"></i></a>
+                    </td>`;
         }
     }];
     dataTableDisplay(response.result, tableHeader, false, dataTableId, button);
-
 }
-
 
 /**
  * Change date
@@ -68,8 +66,6 @@ $(document).on('change', '#month-year', function() {
     $('#table-salary-list').dataTable().fnDestroy();
     displaySalaryListInit(date[1], date[0]);
 });
-
-
 
 /**
  * To Edit Salary
@@ -115,7 +111,6 @@ $(document).on('click', ".btn-delete", function() {
     commonAjax('database.php', 'POST', data, '', 'Record Deleted Sucessfully', '', { "functionName": "locationReload" })
 });
 
-
 /**
  * Add Salary Master
  */
@@ -123,30 +118,33 @@ $(document).on('click', ".btn-delete", function() {
 $('.salary-add').click(function() {
     if (checkRequired('#salary-add')) {
         var id = $(this).attr('data-id');
-        if (isEmptyValue(id)) {
+        var values = $("#salary-add").serializeObject();
+        values['allowance'] = JSON.stringify(tableRowTOArrayOfObjects('#allowance-table tbody tr:not(#addAllowance)'));
+        values['deductions'] = JSON.stringify(tableRowTOArrayOfObjects('#deductions-table tbody tr:not(#addDeductions)'));
+        if (!hasDuplicates(values['allowance_name']) && !hasDuplicates(values['deductions_name'])) {
+            delete values['allowance_name'];
+            delete values['allowance_amount_monthly'];
+            delete values['deductions_name'];
+            delete values['deductions_amount_monthly'];
+            delete values['deductions_name'];
+            delete values['allowance_name'];
+            let date = $("#month-year").val().split("-");
             // Add New
             var data = {
-                "query": 'add',
-                "databasename": 'salary_management',
-                "values": $("#salary-add").serializeObject()
+                "list_key": "salary_insert",
+                "employee_id": id,
+                "salary_details": values,
+                "salary_total": $(".salary-total").html(),
+                "salary_month": date[1],
+                "salary_year": date[0],
+                "remarks": $("#remarks").val(),
+                "created_by": JSON.parse(sessionStorage.getItem("employee")).result[0].login_username
             }
-            commonAjax('database.php', 'POST', data, '.add', 'Salary added successfully', '', { "functionName": "locationReload" })
-            $("#table-salary-list").dataTable().fnDraw();
-        } else {
-            // Edit
-            var data = {
-                "query": 'update',
-                "databasename": 'salary_management',
-                "values": $("#salary-add").serializeObject(),
-                "condition": {
-                    "salary_management_id": id
-                }
-            }
-            commonAjax('database.php', 'POST', data, '.add', 'Salary updated successfully', '', { "functionName": "locationReload" })
-        }
+            commonAjax('', 'POST', data, '.add', 'Salary added successfully', '', { "functionName": "locationReload" })
+        } else
+            showToast("Check Duplicate Allowance and Deductions", 'error');
     }
 });
-
 
 /**
  * To delete a row
@@ -171,7 +169,6 @@ $(document).on('blur change', '[name="no_of_days"], [name="start_date"]', functi
     }
 });
 
-
 /*********************************************************************************
  * *******************************************************************************
  * Add Salary
@@ -181,13 +178,12 @@ $(document).on('blur change', '[name="no_of_days"], [name="start_date"]', functi
 $(document).on('click', '.salary-row', function() {
     let date = $("#month-year").val().split("-");
     $(".salary-add").removeAttr('data-id');
-    $(".ctc-add").attr('data-id', $(this).attr('data-id'));
+    $(".salary-add").attr('data-id', $(this).attr('data-id'));
     let data = { "list_key": "getsalaryProceesing", "salary_year": date[0], "salary_month": date[1], "employee_id": $(this).attr('data-id') };
     commonAjax('', 'POST', data, '', '', '', { "functionName": "salaryDOMbuild" });
 });
 
 function salaryDOMbuild(responce) {
-    console.log(responce);
     let attendanceTable = '';
     let attendanceData = responce.result.attendence[0];
     $.each(attendanceData, function(i, v) {
@@ -197,56 +193,51 @@ function salaryDOMbuild(responce) {
                             </tr>`;
     })
     $("#attendance-table tbody").html(attendanceTable);
-
     let allowanceTable = '';
     let allowanceData = JSON.parse(responce.result.grade[0].allowance);
     $.each(allowanceData, function(i, v) {
         allowanceTable += `<tr>
-                                <td>${v.allowance_type.toString().replace(/_/g, " ").capitalize()}</td>
-                                <td><input type="text" class="form-control text-right" name="${v.allowance_type}" value=${v.allowance_amount}></td>
-                            </tr>`;
+                                <td><input type="text"  class="form-control" readonly name="allowance_name" value=${v.allowance_name.toString().replace(/_/g, " ").capitalize()}"></td>
+                                <td><input type="number"  class="form-control text-right" name="allowance_amount_monthly" value=${v.allowance_amount_monthly}></td>
+                        </tr>`;
     });
-
     allowanceTable += `
-        <tr>
+        <tr id="addAllowance">
             <td class="text-right font-weight-bold">Total Allowance</td>
             <td class="text-right font-weight-bold allowance-total"></td>
         </tr>
     `;
     $("#allowance-table tbody").html(allowanceTable);
-
     let deductionsTable = '';
     let deductionsData = JSON.parse(responce.result.grade[0].deductions);
     $.each(deductionsData, function(i, v) {
         deductionsTable += `<tr>
-                                <td>${v.deductions_type.toString().replace(/_/g, " ").capitalize()}</td>
-                                <td><input type="text"  class="form-control text-right" name="${v.deductions_type}" value=${v.deductions_amount}></td>
+                                <td><input type="text"  class="form-control" readonly name="deductions_name" value=${v.deductions_name.toString().replace(/_/g, " ").capitalize()}"></td>
+                                <td><input type="number"  class="form-control text-right" name="deductions_amount_monthly" value=${v.deductions_amount_monthly}></td>
                             </tr>`;
     });
-
-    deductionsTable += `<tr>
+    deductionsTable += `<tr id="addDeductions">
                             <td class="text-right font-weight-bold">Total Deductions</td>
                             <td class="text-right font-weight-bold deductions-total"></td>
                         </tr>
-                        <tr>
+                        <tr  id="addDeductions">
                             <td class="text-right font-weight-bold">Total Salary</td>
                             <td class="text-right font-weight-bold font-size-20 salary-total"></td>
                         </tr>`;
-
     $("#deductions-table tbody").html(deductionsTable);
     $('#allowance-table input').trigger('blur');
 }
 
 $(document).on('blur', '.modal.salary input', function() {
     let allowanceTotal = 0;
-    $('#allowance-table input').each(function() {
+    $('#allowance-table input[type="number"]').each(function() {
         allowanceTotal += Number($(this).val());
     });
     $(".allowance-total").html(allowanceTotal);
     let deductionsTotal = 0;
-    $('#deductions-table input').each(function() {
+    $('#deductions-table input[type="number"]').each(function() {
         deductionsTotal += Number($(this).val());
     });
     $(".deductions-total").html(deductionsTotal);
-    $(".salary-total").html(allowanceTotal + deductionsTotal);
+    $(".salary-total").html(allowanceTotal - deductionsTotal);
 });

@@ -412,8 +412,6 @@
                         </div>
                     </div>
 
-
-
                     <div class="modal fade salary" tabindex="-1" role="dialog" aria-labelledby="addKitchenOutLabel" style="display: none;" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                             <div class="modal-content">
@@ -435,7 +433,9 @@
                                                             <tr>
                                                                 <th> </th>
                                                                 <th>Allowance Type</th>
-                                                                <th>Amount</th>
+                                                                <th class="display-none">Allowance Name</th>
+                                                                <th>Monthly Amount</th>
+                                                                <th>Year Amount</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -448,8 +448,9 @@
                                                                 <td colspan="2" class="text-right"></td>
                                                             </tr>
                                                             <tr id="addAllowance">
-                                                                <td colspan="2" class="text-right">Total Allowance</td>
-                                                                <td class="text-right allowance-total"></td>
+                                                                <td colspan="2" class="text-right font-weight-bold">Total Allowance</td>
+                                                                <td class="text-right allowance-total-monthly"></td>
+                                                                <td class="text-right allowance-total-yearly"></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -461,7 +462,9 @@
                                                             <tr>
                                                                 <th> </th>
                                                                 <th>Deductions Type</th>
-                                                                <th>Amount</th>
+                                                                <th class="display-none">Deductions Name</th>
+                                                                <th>Monthly Amount</th>
+                                                                <th>Year Amount</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -471,15 +474,17 @@
                                                                         <i class="fa fa-plus"></i>
                                                                     </button>
                                                                 </td>
-                                                                <td colspan="2" class="text-right"></td>
+                                                                <td colspan="3" class="text-right"></td>
                                                             </tr>
                                                             <tr id="addDeductions">
-                                                                <td colspan="2" class="text-right">Total Deductions</td>
-                                                                <td colspan="2" class="text-right deductions-total"></td>
+                                                                <td colspan="2" class="text-right font-weight-bold">Total Deductions</td>
+                                                                <td class="text-right deductions-total-monthly"></td>
+                                                                <td class="text-right deductions-total-yearly"></td>
                                                             </tr>
                                                             <tr id="addDeductions">
-                                                                <td colspan="2" class="text-right">Total CTC</td>
-                                                                <td colspan="2" class="text-right ctc-total"></td>
+                                                                <td colspan="2" class="text-right font-weight-bold">Total CTC</td>
+                                                                <td class="text-right ctc-total-monthly"></td>
+                                                                <td class="text-right ctc-total-yearly"></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
