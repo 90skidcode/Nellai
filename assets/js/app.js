@@ -15,6 +15,8 @@ $.getJSON("assets/json/menu.json", function(data) {
                     if (val.submenu) {
                         html += `<ul class="sub-menu mm-collapse" aria-expanded="false">`;
                         $.each(val.submenu, function(index, value) {
+                            if (value.menulink == window.location.pathname.split('/').slice(-1)[0])
+                                menuFlag = true;
                             html += `<li><a href="${value.menulink}">${value.menulabel}</a></li>`;
                         });
                         html += `</ul>`;
