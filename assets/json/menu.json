@@ -87,7 +87,10 @@
         "menulink": "javascript: void(0);",
         "submenu": [{
                 "menulabel": "Store IN",
-                "menulink": "dashboard.html"
+                "menulink": "store-in-list.html"
+            }, {
+                "menulabel": "Vendor",
+                "menulink": "vendor-list.html"
             },
             {
                 "menulabel": "Store OUT",

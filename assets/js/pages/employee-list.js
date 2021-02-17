@@ -4,26 +4,22 @@ $(document).ready(function() {
     listState($('#country').val());
     $('#country').select2().on('change', function() {
         listState($(this).val());
-    })
+    });
     $('#state').select2().on('change', function() {
         listCity($(this).val());
     });
-
     displayEmployeeListInit();
     listQualification();
     listDesignation();
     listGrade();
     listDepartment();
-    listBranch();
     listConsultancy();
     $("[name='department_id']").select2().on('change', function() {
         listBranch();
     });
-
     listAllowence();
     listDeductions();
 });
-
 
 /**
  * List Qualification in select 2
@@ -103,6 +99,9 @@ function listDepartment() {
         "like": ""
     }
     commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='department_id']", "param2": "department_name", "param3": "department_master_id" }, { "functionName": "listSelect2", "param1": "[name='department_id']", "param2": "department_name", "param3": "department_master_id" })
+    setTimeout(function() {
+        listBranch();
+    }, 2000);
 }
 
 /**
