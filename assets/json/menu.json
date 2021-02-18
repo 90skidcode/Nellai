@@ -88,9 +88,6 @@
         "submenu": [{
                 "menulabel": "Store IN",
                 "menulink": "store-in-list.html"
-            }, {
-                "menulabel": "Vendor",
-                "menulink": "vendor-list.html"
             },
             {
                 "menulabel": "Store OUT",
@@ -180,7 +177,7 @@
     }]
 }, {
     "menutype": "outlet",
-    "menuid": "5",
+    "menuid": "6",
     "menulink": "outlet-in-list.html",
     "menu": [{
         "menulabel": "Outlet",
@@ -207,6 +204,53 @@
             {
                 "menulabel": "Outlet Report",
                 "menulink": "outlet-product-report.html"
+            }
+        ]
+    }]
+}, {
+    "menutype": "finance",
+    "menuid": "5",
+    "menulink": "attendance-list.html",
+    "menu": [{
+        "menulabel": "Attendance",
+        "menuicon": "bx-fingerprint",
+        "menulink": "attendance-list.html",
+        "submenu": ""
+    }, {
+        "menulabel": "Salary",
+        "menuicon": "bx-dollar",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+            "menulabel": "Salary List",
+            "menulink": "salary-list.html"
+        }, {
+            "menulabel": "Salary Report",
+            "menulink": "salary-report.html"
+        }]
+    }, {
+        "menulabel": "Products",
+        "menuicon": "bxl-product-hunt",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+                "menulabel": "Products List",
+                "menulink": "product.html"
+            },
+            {
+                "menulabel": "Products Report",
+                "menulink": "product-report.html"
+            }
+        ]
+    }, {
+        "menulabel": "Vendor",
+        "menuicon": "bx-user-plus",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+                "menulabel": "Vendor List",
+                "menulink": "vendor-list.html"
+            },
+            {
+                "menulabel": "Vendor Report",
+                "menulink": "vendor-report.html"
             }
         ]
     }]

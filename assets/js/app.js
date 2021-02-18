@@ -3,7 +3,7 @@ $.getJSON("assets/json/menu.json", function(data) {
     let html = '';
     if (sessionStorage.getItem("employee")) {
         $.each(data, function(i, v) {
-            if (v.menuid == JSON.parse(sessionStorage.getItem("employee")).result[0].employee_designation_id) {
+            if (v.menuid == JSON.parse(sessionStorage.getItem("employee")).result[0].department_id) {
                 $.each(v.menu, function(inx, val) {
                     if (val.menulink == window.location.pathname.split('/').slice(-1)[0])
                         menuFlag = true;
@@ -32,7 +32,7 @@ $.getJSON("assets/json/menu.json", function(data) {
          */
 
         $('form').append(`<input type="hidden" class="form-control" name="created_by" value="${JSON.parse(sessionStorage.getItem("employee")).result[0].login_username}"><input type="hidden" class="form-control" name="status" value="1">`);
-        $(".login-user-name").html(JSON.parse(sessionStorage.getItem("employee")).result[0].employee_name);
+        $(".login-user-name").html(JSON.parse(sessionStorage.getItem("employee")).result[0].employee_name + " " + "<i class='bx bx-log-in-circle bx-fade-right font-size-22'></i>");
         if (!menuFlag)
             window.open('index.html', '_self');
     } else {
@@ -885,6 +885,7 @@ function isEmptyValue(value) {
 
 function listSelect2(data, selector, jsonLabel, jsonValue) {
     let select2Data = [];
+    select2Data.push({ 'id': "", 'text': "Select" })
     let i = 1;
     if (JSON.stringify(data) != '{}') {
         data.forEach(element => {

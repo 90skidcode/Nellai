@@ -526,7 +526,9 @@ body[data-layout=horizontal] .footer {
 }
 
 .vertical-collpsed .main-content {
-    margin-left: 70px
+    margin-left: 70px;
+    height: 100vh;
+    overflow-y: auto;
 }
 
 .vertical-collpsed .navbar-brand-box {
