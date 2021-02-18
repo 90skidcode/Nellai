@@ -6956,4 +6956,5 @@ td.day.hover {
 .internet-connect.col-md-12.bg-danger.p-3 {
     position: absolute;
     top: 0;
+    z-index: 99999;
 }
