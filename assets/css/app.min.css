@@ -6952,3 +6952,8 @@ td.day.hover {
 
 
 /* Ends */
+
+.internet-connect.col-md-12.bg-danger.p-3 {
+    position: absolute;
+    top: 0;
+}

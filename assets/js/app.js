@@ -1253,9 +1253,27 @@ String.prototype.capitalize = function() {
 
 
 /**
- * NUmbers with Commas In Indian Formate
+ * Numbers with Commas In Indian Formate
  * @param {*} x Eg: 12345 : 12,234
  */
 function numberWithCommas(x) {
     return "Rs." + x.toString().replace(/(\d)(?=(\d\d)+\d$)/g, "$1,");
+}
+
+/**
+ * Check Connection
+ */
+
+setInterval(function() {
+    checkconnection()
+}, 5000);
+
+function checkconnection() {
+    var status = navigator.onLine;
+    if (status) {
+        $('.internet-connect').remove();
+    } else {
+        $('.internet-connect').remove();
+        $('body').prepend('<div class="internet-connect col-md-12 bg-danger p-3"><p class=" text-center">Check your Internet connection !!</p></div>').fadeIn();
+    }
 }
