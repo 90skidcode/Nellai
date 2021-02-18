@@ -110,6 +110,22 @@
                 "menulink": "product-report.html"
             }
         ]
+    }, {
+        "menulabel": "Attendance",
+        "menuicon": "bx-fingerprint",
+        "menulink": "attendance-list.html",
+        "submenu": ""
+    }, {
+        "menulabel": "Leave",
+        "menuicon": "bx-calendar-plus",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+            "menulabel": "Leave List",
+            "menulink": "leave-list.html"
+        }, {
+            "menulabel": "Leave Type List",
+            "menulink": "leave-type-list.html"
+        }]
     }]
 }, {
     "menutype": "pulverizing",
@@ -134,6 +150,17 @@
         "menuicon": "bx-fingerprint",
         "menulink": "attendance-list.html",
         "submenu": ""
+    }, {
+        "menulabel": "Leave",
+        "menuicon": "bx-calendar-plus",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+            "menulabel": "Leave List",
+            "menulink": "leave-list.html"
+        }, {
+            "menulabel": "Leave Type List",
+            "menulink": "leave-type-list.html"
+        }]
     }, {
         "menulabel": "Pulverizing Store",
         "menuicon": "bxl-product-hunt",
@@ -165,6 +192,22 @@
         }, {
             "menulabel": "Kitchen Damage",
             "menulink": "kitchen-damage-list.html"
+        }]
+    }, {
+        "menulabel": "Attendance",
+        "menuicon": "bx-fingerprint",
+        "menulink": "attendance-list.html",
+        "submenu": ""
+    }, {
+        "menulabel": "Leave",
+        "menuicon": "bx-calendar-plus",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+            "menulabel": "Leave List",
+            "menulink": "leave-list.html"
+        }, {
+            "menulabel": "Leave Type List",
+            "menulink": "leave-type-list.html"
         }]
     }, {
         "menulabel": "Kitchen Store",
@@ -199,6 +242,22 @@
             "menulink": "outlet-damage-list.html"
         }]
     }, {
+        "menulabel": "Attendance",
+        "menuicon": "bx-fingerprint",
+        "menulink": "attendance-list.html",
+        "submenu": ""
+    }, {
+        "menulabel": "Leave",
+        "menuicon": "bx-calendar-plus",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+            "menulabel": "Leave List",
+            "menulink": "leave-list.html"
+        }, {
+            "menulabel": "Leave Type List",
+            "menulink": "leave-type-list.html"
+        }]
+    }, {
         "menulabel": "Outlet Store",
         "menuicon": "bxl-product-hunt",
         "menulink": "javascript: void(0);",
@@ -231,6 +290,17 @@
         }, {
             "menulabel": "Salary Report",
             "menulink": "salary-report.html"
+        }]
+    }, {
+        "menulabel": "Leave",
+        "menuicon": "bx-calendar-plus",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+            "menulabel": "Leave List",
+            "menulink": "leave-list.html"
+        }, {
+            "menulabel": "Leave Type List",
+            "menulink": "leave-type-list.html"
         }]
     }, {
         "menulabel": "Products",
