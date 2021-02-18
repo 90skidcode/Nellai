@@ -165,7 +165,7 @@ $(document).on('click', '.day', function() {
                 if (!$(this).find('.present').is(':checked'))
                     $(this).find('.form-status').prop('readonly', true);
             });
-            let data = { "list_key": "getAttendenceDatewise", "branch_id": "2", "department_id": "2", "attendence_date": $("#year").html() + '-' + $(this).attr('data-month').toString().padStart(2, '0') + '-' + $(this).attr('data-date').toString().padStart(2, '0') }
+            let data = { "list_key": "getAttendenceDatewise", "branch_id": JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id, "department_id": JSON.parse(sessionStorage.getItem("employee")).result[0].department_id, "attendence_date": $("#year").html() + '-' + $(this).attr('data-month').toString().padStart(2, '0') + '-' + $(this).attr('data-date').toString().padStart(2, '0') }
             commonAjax('', 'POST', data, '', '', '', {
                 "functionName": "getAttendenceDatewise"
             });
