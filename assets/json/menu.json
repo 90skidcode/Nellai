@@ -1,6 +1,6 @@
 [{
     "menutype": "superadmin",
-    "menuid": "1",
+    "menuid": "6",
     "menulink": "dashboard.html",
     "menu": [{
         "menulabel": "Dashboards",
@@ -74,7 +74,7 @@
     }]
 }, {
     "menutype": "store",
-    "menuid": "3",
+    "menuid": "1",
     "menulink": "store-in-list.html",
     "menu": [{
         "menulabel": "Dashboards",
@@ -150,7 +150,7 @@
     }]
 }, {
     "menutype": "kitchen",
-    "menuid": "4",
+    "menuid": "3",
     "menulink": "kitchen-in-list.html",
     "menu": [{
         "menulabel": "Kitchen",
@@ -182,7 +182,7 @@
     }]
 }, {
     "menutype": "outlet",
-    "menuid": "6",
+    "menuid": "4",
     "menulink": "outlet-in-list.html",
     "menu": [{
         "menulabel": "Outlet",
