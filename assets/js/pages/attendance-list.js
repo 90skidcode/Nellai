@@ -108,7 +108,7 @@ var button = `<div class="text-sm-right">
 </div>`;
 
 function displayAttendanceListInit(currentDate) {
-    let data = { "list_key": "getAttendenceIndication", "branch_id": "2", "department_id": "2", "attendence_year": "2021", "attendence_month": "2" }
+    let data = { "list_key": "getAttendenceIndication", "branch_id": JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id, "department_id": JSON.parse(sessionStorage.getItem("employee")).result[0].department_id, "attendence_year": new Date(currentDate).getFullYear(), "attendence_month": (new Date(currentDate).getMonth() + 1).toString().padStart(2, '0') }
     commonAjax('', 'POST', data, '', '', '', {
         "functionName": "generateCalendar",
         "param1": currentDate

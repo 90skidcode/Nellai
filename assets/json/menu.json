@@ -74,7 +74,7 @@
     }]
 }, {
     "menutype": "store",
-    "menuid": "2",
+    "menuid": "3",
     "menulink": "store-in-list.html",
     "menu": [{
         "menulabel": "Dashboards",
@@ -113,7 +113,7 @@
     }]
 }, {
     "menutype": "pulverizing",
-    "menuid": "3",
+    "menuid": "2",
     "menulink": "pulverizing-in-list.html",
     "menu": [{
         "menulabel": "Pulverizing",
@@ -129,6 +129,11 @@
             "menulabel": "Pulverizing Damage",
             "menulink": "pulverizing-damage-list.html"
         }]
+    }, {
+        "menulabel": "Attendance",
+        "menuicon": "bx-fingerprint",
+        "menulink": "attendance-list.html",
+        "submenu": ""
     }, {
         "menulabel": "Pulverizing Store",
         "menuicon": "bxl-product-hunt",
