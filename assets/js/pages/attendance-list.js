@@ -122,8 +122,8 @@ function displayAttendanceListInit(currentDate) {
             "employee_name": "employee_name"
         },
         "condition": {
-            "branch_id": "2",
-            "department_id": "2"
+            "branch_id": JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id,
+            "department_id": JSON.parse(sessionStorage.getItem("employee")).result[0].department_id
         },
         "like": ""
     }
