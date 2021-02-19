@@ -3,6 +3,7 @@ $(document).ready(function() {
     listVendor();
     listBranch();
     listProduct();
+    $("[name='request_mode']").select2({ 'disabled': 'readonly' });
 });
 
 var button = ``;
@@ -48,6 +49,7 @@ function listBranch() {
         "like": ""
     }
     commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='request_branch_id_to']", "param2": "branch_name", "param3": "branch_master_id" })
+    $("[name='request_branch_id_to']").select2({ 'disabled': 'readonly' });
 }
 
 /**
