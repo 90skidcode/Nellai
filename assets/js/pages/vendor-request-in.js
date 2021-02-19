@@ -1,0 +1,267 @@
+$(document).ready(function() {
+    listVendor();
+    listBranch();
+    listProduct();
+    displayVendorRequestListInit();
+});
+
+var button = `<div class="text-sm-right">
+<button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add VendorRequest </button>
+</div>`;
+
+/**
+ * List Vendor in select 2
+ */
+
+function listVendor() {
+    let data = {
+        "query": 'fetch',
+        "databasename": 'vendor_master',
+        "column": {
+            "vendor_master_id": "vendor_master_id",
+            "vendor_name": "vendor_name"
+        },
+        "condition": {
+            "status": '1'
+        },
+        "like": ""
+    }
+    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='vendor_id']", "param2": "vendor_name", "param3": "vendor_master_id" });
+}
+
+
+/**
+ * List Vendor in select 2
+ */
+
+function listBranch() {
+    let data = {
+        "query": 'fetch',
+        "databasename": 'branch_master',
+        "column": {
+            "branch_master_id": "branch_master_id",
+            "branch_name": "branch_name"
+        },
+        "condition": {
+            "department_master_id": "1",
+            "status": '1'
+        },
+        "like": ""
+    }
+    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='request_branch_id_to']", "param2": "branch_name", "param3": "branch_master_id" })
+}
+
+/**
+ * List Product in select 2
+ */
+
+function listProduct() {
+    let data = {
+        "query": 'fetch',
+        "databasename": 'product_master',
+        "column": {
+            "product_master_id": "product_master_id",
+            "product_name": "product_name"
+        },
+        "condition": {
+            "status": '1'
+        },
+        "like": ""
+    }
+    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "dataProduct" })
+}
+
+var productDataList = '<option value="">Select</option>';
+
+function dataProduct(responce) {
+    $.each(responce, function(i, v) {
+        productDataList += `<option value='${v.product_master_id}'>${v.product_name}</option>`
+    });
+}
+
+function displayVendorRequestListInit() {
+    let data = {
+        "list_key": "getRequest",
+        "condition": {
+            "request_branch_id_from": JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id
+        }
+    }
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "displayVendorRequestList", "param1": "table-vendor-request-list" }, { "functionName": "displayVendorRequestList", "param1": "table-vendor-request-list" });
+}
+
+function displayVendorRequestList(response, dataTableId) {
+    var tableHeader = [{
+        "data": "bill_no"
+    }, {
+        "data": "created_at"
+    }, {
+        "data": "vendor_name"
+    }, {
+        "data": "product_total",
+        mRender: function(data, type, row) {
+            return numberWithCommas(data);
+        }
+    }, {
+        "data": "request_mode"
+    }, {
+        "data": "tracking_status",
+        mRender: function(data, type, row) {
+            if (data == '5')
+                return `<span class="badge badge-pill badge-warning font-size-12">CEO Approval Pending</span>`;
+            if (data == '4')
+                return `<span class="badge badge-pill badge-warning font-size-12">Waiting For Stocks</span>`;
+            else
+                return `<span class="badge badge-pill badge-success font-size-12">Order recived</span>`;
+        }
+    }, /* EDIT */ /* DELETE */ {
+        "data": "created_at",
+        mRender: function(data, type, row) {
+            return `<td class="text-right">
+                        <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-target=".add"  data-id="${row.request_code}"><i class="mdi mdi-pencil font-size-18"></i></a>
+                        <a class="text-danger" title="Delete" data-toggle="modal" data-target=".delete"  data-id="${row.request_code}"><i class="mdi mdi-close font-size-18"></i></a>                
+                    </td>`;
+        }
+    }];
+    dataTableDisplay(response.result, tableHeader, false, dataTableId, button);
+}
+
+/**
+ * To Add VendorRequest
+ */
+
+$(document).on('click', '[data-target=".add"]', function() {
+    $(".vendor-request-add").removeAttr('data-id');
+});
+
+/**
+ * To detele row
+ */
+
+$(document).on('click', ".delete-row", function() {
+    $(".delete .btn-delete").attr('data-detete', $(this).attr('data-id'));
+});
+
+$(document).on('click', ".btn-delete", function() {
+    var data = {
+        'query': 'update',
+        'databasename': 'employee_qualification',
+        'condition': {
+            'employee_qualification_id': $(".btn-delete").attr('data-detete')
+        },
+        'values': {
+            'status': '0'
+        }
+    }
+    $("#delete").modal('hide');
+    commonAjax('database.php', 'POST', data, '', 'Record Deleted Sucessfully', '', { "functionName": "locationReload" })
+});
+
+
+$(document).on('click', '#button-add-item', function() {
+    let c = $(this).attr('count');
+    $(this).attr('count', parseInt($(this).attr('count')) + 1);
+    $(this).closest('table').find('#addItem').before(`<tr>
+    <td class="text-center"><button type="button" title="Reject" class="btn btn-icon btn-outline-danger btn-lg">
+    <i class="fa fa-trash"></i>
+        </button></td>
+    <td scope="row">
+        <select name="product_id" class="form-control select2" required>${productDataList}</select>
+    </td>
+    <td> <input type="number" name="quantity" class="form-control text-right" required> </td>
+    <td> <input type="number" name="cost" class="form-control text-right" required> </td>
+    <td> <input type="number" name="total" class="form-control text-right" readonly>
+    <input type="hidden" name="status" class="form-control text-right" > </td></tr>
+`);
+    totalVendorCalculation();
+});
+
+/**
+ * To Edit VendorRequest
+ */
+
+$(document).on('click', ".edit-row", function() {
+    $(".employee-add").attr('data-id', $(this).attr('data-id'));
+    let data = {
+        "list_key": "getRequest",
+        "condition": { 'request_management.request_code': $(this).attr('data-id'), "request_branch_id_from": JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id }
+    }
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "VendorRequestSetValue" });
+});
+
+/***
+ * VendorRequest Set Value
+ */
+
+function VendorRequestSetValue(response) {
+    multipleSetValue(response.result);
+    if (response[0].result.employee_experience) {
+        let employeeExperience = JSON.parse(response[0].result.employee_experience);
+        $.each(employeeExperience, function(index, value) {
+            if (index)
+                $('#button-add-item').trigger('click');
+            $.each(value, function(i, v) {
+                $('tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v);
+            })
+        })
+    }
+    if (response[0].employee_documents)
+        docShow('employee_documents');
+}
+
+
+/**
+ * Add Leave Master
+ */
+
+$('.vendor-request-add').click(function() {
+    if (checkRequired('#add-vendor-request')) {
+        var id = $(this).attr('data-id');
+        if (isEmptyValue(id)) {
+            // Add New
+            var data = {
+                "list_key": "createrequest",
+                "vendor_id": $("[name='vendor_id']").val(),
+                "request_mode": $("[name='request_mode']").val(),
+                "request_branch_id_from": JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id,
+                "request_branch_id_to": $("[name='request_branch_id_to']").val(),
+                "department_id": JSON.parse(sessionStorage.getItem("employee")).result[0].department_id,
+                "employee_id": JSON.parse(sessionStorage.getItem("employee")).result[0].login_username,
+                "remarks": $("[name='remarks']").val(),
+                "product_total": $(".vendor-full-total").html(),
+                "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#request-vendor-list tbody tr:not(#addItem)'))
+            }
+            commonAjax('', 'POST', data, '.add', 'VendorRequest added successfully', '', { "functionName": "locationReload" })
+        }
+    }
+});
+
+
+$(document).on('keyup', '[name="quantity"], [name="cost"]', function() {
+    totalVendorCalculation();
+});
+
+function totalVendorCalculation() {
+    let t = 0
+    $("#request-vendor-list tbody tr:not(#addItem)").each(function() {
+        let q = $(this).find('[name="quantity"]').val();
+        let c = $(this).find('[name="cost"]').val();
+        let qc = 0;
+        if (q && c)
+            qc = q * c;
+        $(this).find('[name="total"]').val(qc);
+        t += qc;
+    });
+    $(".vendor-full-total").html(t);
+
+}
+
+/**
+ * To delete a row
+ */
+
+$(document).on('click', '.btn-outline-danger', function() {
+    if ($(this).closest('table').find("#button-add-item").attr('count') != '1') {
+        $(this).closest('tr').remove();
+        $(this).closest('table').find("#button-add-item").attr('count', parseInt($(this).closest('table').find("#button-add-item").attr('count')) - 1);
+    }
+});

@@ -3,11 +3,12 @@ $(document).ready(function() {
     listLevaeType();
     listEmployee();
 });
-
-var button = `<div class="text-sm-right">
-<button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Leave </button>
-</div>`;
-
+var button = ``;
+if (JSON.parse(sessionStorage.getItem("employee")).result[0].employee_designation_id != "1") {
+    button = `<div class="text-sm-right">
+                <button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Leave </button>
+              </div>`;
+}
 
 /**
  * List Levae Type in select 2
@@ -28,7 +29,6 @@ function listLevaeType() {
     }
     commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='leave_master_id']", "param2": "leave_name", "param3": "leave_master_id" })
 }
-
 
 
 /**

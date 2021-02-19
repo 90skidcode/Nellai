@@ -17,8 +17,6 @@ $(document).ready(function() {
 });
 
 $(document).on('click', '#button-add-item', function() {
-
-
     let c = $(this).attr('count');
     $(this).attr('count', parseInt($(this).attr('count')) + 1);
 

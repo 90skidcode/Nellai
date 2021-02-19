@@ -56,11 +56,6 @@
             "menulink": "consultancy-list.html"
         }]
     }, {
-        "menulabel": "Attendance",
-        "menuicon": "bx-fingerprint",
-        "menulink": "attendance-list.html",
-        "submenu": ""
-    }, {
         "menulabel": "Salary",
         "menuicon": "bx-dollar",
         "menulink": "javascript: void(0);",
@@ -70,6 +65,17 @@
         }, {
             "menulabel": "Salary Report",
             "menulink": "salary-report.html"
+        }]
+    }, {
+        "menulabel": "Approvel",
+        "menuicon": "bx-check-shield",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+            "menulabel": "Approvel Vendor request",
+            "menulink": "approve-to-vendor-list.html"
+        }, {
+            "menulabel": "Request to Vendor Report",
+            "menulink": "request-to-vendor-report.html"
         }]
     }]
 }, {
@@ -290,6 +296,17 @@
         }, {
             "menulabel": "Salary Report",
             "menulink": "salary-report.html"
+        }]
+    }, {
+        "menulabel": "Request",
+        "menuicon": "bxs-file-plus",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+            "menulabel": "Request to Vendor",
+            "menulink": "request-to-vendor-list.html"
+        }, {
+            "menulabel": "Request to Vendor Report",
+            "menulink": "request-to-vendor-report.html"
         }]
     }, {
         "menulabel": "Leave",
