@@ -25,6 +25,7 @@ function listVendor() {
         "like": ""
     }
     commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='vendor_id']", "param2": "vendor_name", "param3": "vendor_master_id" });
+    $("[name='vendor_id']").select2({ 'disabled': 'readonly' });
 }
 
 
@@ -80,7 +81,7 @@ function dataProduct(responce) {
 function displayVendorRequestListInit() {
     let data = {
         "list_key": "getRequest",
-        "condition": { 'request_management.tracking_status': "5", "request_branch_id_from": JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id }
+        "condition": { 'request_management.tracking_status': "5" }
     }
     commonAjax('', 'POST', data, '', '', '', { "functionName": "displayVendorRequestList", "param1": "table-vendor-request-list" }, { "functionName": "displayVendorRequestList", "param1": "table-vendor-request-list" });
 }
@@ -113,26 +114,13 @@ function displayVendorRequestList(response, dataTableId) {
         "data": "created_at",
         mRender: function(data, type, row) {
             return `<td class="text-right">
-                    <a class="mr-3 text-info" title="View" data-toggle="modal" data-target=".view" data-id="${row.request_code}"><i class="mdi mdi-eye font-size-18"></i></a>
-                    <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-target=".add"  data-id="${row.request_code}"><i class="mdi mdi-pencil font-size-18"></i></a>
-                    <a class="mr-3 text-success" title="Check Approve"  data-id="${row.request_code}"><i class="mdi mdi-check-decagram font-size-18"></i></a>
-                    <a class="text-danger" title="Delete" data-toggle="modal" data-target=".delete"  data-id="${row.request_code}"><i class="mdi mdi-close font-size-18"></i></a>                
-                             </td>`;
+                        <a class="mr-3 text-success edit-row" title="Check Approve"  data-toggle="modal" data-target=".add"  data-id="${row.request_code}"><i class="mdi mdi-check-decagram font-size-18"></i></a>
+                        <a class="text-danger" title="Delete" data-toggle="modal" data-target=".delete"  data-id="${row.request_code}"><i class="mdi mdi-close font-size-18"></i></a>                
+                    </td>`;
         }
     }];
     dataTableDisplay(response.result, tableHeader, false, dataTableId, button);
 }
-
-/**
- * To Add VendorRequest
- */
-
-$(document).on('click', '[data-target=".add"]', function() {
-    $(".vendor-request-add").removeAttr('data-id');
-});
-
-
-
 
 
 /**
@@ -170,9 +158,10 @@ $(document).on('click', '#button-add-item', function() {
     <td scope="row">
         <select name="product_id" class="form-control select2">${productDataList}</select>
     </td>
-    <td> <input type="number" name="quantity" class="form-control text-right"> </td>
-    <td> <input type="number" name="cost" class="form-control text-right"> </td>
-    <td> <input type="number" name="total" class="form-control text-right" readonly> </td></tr>
+    <td> <input type="number" name="quantity" class="form-control text-right" required> </td>
+    <td> <input type="number" name="cost" class="form-control text-right" required> </td>
+    <td> <input type="number" name="total" class="form-control text-right" readonly>
+    <input type="hidden" name="status" value="1" class="form-control text-right" > </td></tr>
 `);
     totalVendorCalculation();
 });
@@ -196,19 +185,18 @@ $(document).on('click', ".edit-row", function() {
  */
 
 function VendorRequestSetValue(response) {
-    multipleSetValue(response);
-    if (response[0].employee_experience) {
-        let employeeExperience = JSON.parse(response[0].employee_experience);
-        $.each(employeeExperience, function(index, value) {
-            if (index)
-                $('#button-add-item').trigger('click');
+    multipleSetValue(response.result);
+    if (response.result[0].request_product_details) {
+        let requestProductDetails = JSON.parse(response.result[0].request_product_details);
+        $.each(requestProductDetails, function(index, value) {
+            $('#button-add-item').trigger('click');
             $.each(value, function(i, v) {
-                $('tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v);
-            })
+                $('#request-vendor-list tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v);
+            });
         })
     }
-    if (response[0].employee_documents)
-        docShow('employee_documents');
+
+    $('[name="remarks"]').val(" ");
 }
 
 
@@ -224,19 +212,15 @@ $('.vendor-request-add').click(function() {
             var data = {
                 "list_key": "createrequest",
                 "vendor_id": $("[name='vendor_id']").val(),
-                "request_mode": $("[name='request_mode']").val(),
-                "request_branch_id_from": JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id,
-                "request_branch_id_to": $("[name='request_branch_id_to']").val(),
-                "bill_no": "1000",
-                "department_id": JSON.parse(sessionStorage.getItem("employee")).result[0].department_id,
+                "request_code": $("[name='request_code']").val(),
+                "tracking_status": "4",
                 "employee_id": JSON.parse(sessionStorage.getItem("employee")).result[0].login_username,
                 "remarks": $("[name='remarks']").val(),
                 "product_total": $(".vendor-full-total").html(),
                 "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#request-vendor-list tbody tr:not(#addItem)'))
             }
             console.log(JSON.stringify(data));
-            commonAjax('', 'POST', data, '.add', 'VendorRequest added successfully', '', { "functionName": "locationReload" })
-            $("#request-vendor-list").dataTable().fnDraw();
+            commonAjax('', 'POST', data, '.add', 'Vendor Request Approved successfully', '', { "functionName": "locationReload" })
         }
     }
 });

@@ -116,10 +116,14 @@ function displayVendorRequestList(response, dataTableId) {
     }, /* EDIT */ /* DELETE */ {
         "data": "created_at",
         mRender: function(data, type, row) {
-            return `<td class="text-right">
+            if (row.tracking_status == '5')
+                return `<td class="text-right">
                         <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-target=".add"  data-id="${row.request_code}"><i class="mdi mdi-pencil font-size-18"></i></a>
                         <a class="text-danger" title="Delete" data-toggle="modal" data-target=".delete"  data-id="${row.request_code}"><i class="mdi mdi-close font-size-18"></i></a>                
                     </td>`;
+
+            else
+                return ``;
         }
     }];
     dataTableDisplay(response.result, tableHeader, false, dataTableId, button);
@@ -170,7 +174,7 @@ $(document).on('click', '#button-add-item', function() {
     <td> <input type="number" name="quantity" class="form-control text-right" required> </td>
     <td> <input type="number" name="cost" class="form-control text-right" required> </td>
     <td> <input type="number" name="total" class="form-control text-right" readonly>
-    <input type="hidden" name="status" class="form-control text-right" > </td></tr>
+    <input type="hidden" name="status" value="1" class="form-control text-right" > </td></tr>
 `);
     totalVendorCalculation();
 });
@@ -194,18 +198,15 @@ $(document).on('click', ".edit-row", function() {
 
 function VendorRequestSetValue(response) {
     multipleSetValue(response.result);
-    if (response[0].result.employee_experience) {
-        let employeeExperience = JSON.parse(response[0].result.employee_experience);
-        $.each(employeeExperience, function(index, value) {
-            if (index)
-                $('#button-add-item').trigger('click');
+    if (response.result[0].request_product_details) {
+        let requestProductDetails = JSON.parse(response.result[0].request_product_details);
+        $.each(requestProductDetails, function(index, value) {
+            $('#button-add-item').trigger('click');
             $.each(value, function(i, v) {
-                $('tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v);
-            })
+                $('#request-vendor-list tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v);
+            });
         })
     }
-    if (response[0].employee_documents)
-        docShow('employee_documents');
 }
 
 
