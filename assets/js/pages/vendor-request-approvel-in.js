@@ -159,7 +159,7 @@ $(document).on('click', '#button-add-item', function() {
     <i class="fa fa-trash"></i>
         </button></td>
     <td scope="row">
-        <select name="product_id" class="form-control select2" required>${productDataList}</select>
+        <select name="product_code" class="form-control select2" required>${productDataList}</select>
     </td>
     <td> <input type="number" name="quantity" class="form-control text-right" required> </td>
     <td> <input type="number" name="cost" class="form-control text-right" required> </td>

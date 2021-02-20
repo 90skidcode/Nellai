@@ -119,7 +119,7 @@ function displayStoreInList(response, dataTableId) {
         mRender: function(data, type, row) {
             return `<td class="text-right">
                         <a class="mr-3 text-success edit-row" title="Check Approve"  data-toggle="modal" data-target=".add"  data-id="${row.request_code}"><i class="mdi mdi-check-decagram font-size-18"></i></a>
-                        <a class="text-danger" title="Delete" data-toggle="modal" data-target=".delete"  data-id="${row.request_code}"><i class="mdi mdi-close font-size-18"></i></a>                
+                                        
                     </td>`;
         }
     }];
