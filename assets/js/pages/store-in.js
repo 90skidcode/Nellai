@@ -188,7 +188,8 @@ function StoreInSetValue(response) {
                 $('#store-in tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v);
             });
             $('[name="product_code"]').select2({ 'disabled': 'readonly' });
-        })
+        });
+        $(".remarks-past").html("<b> Remarks: </b> " + response.result[0].remarks);
         $(".vendor-full-total").html(numberWithCommas(response.result[0].product_total));
         $('[name="remarks"]').val(" ");
     }
