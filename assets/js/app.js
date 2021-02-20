@@ -1,4 +1,5 @@
 var menuFlag = false;
+var userSession = JSON.parse(sessionStorage.getItem("employee")).result[0];
 $.getJSON("assets/json/menu.json", function(data) {
     let html = '';
     if (sessionStorage.getItem("employee")) {

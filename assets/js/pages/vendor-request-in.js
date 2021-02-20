@@ -60,7 +60,7 @@ function listProduct() {
         "query": 'fetch',
         "databasename": 'product_master',
         "column": {
-            "product_master_id": "product_master_id",
+            "product_code": "product_code",
             "product_name": "product_name"
         },
         "condition": {
@@ -75,7 +75,7 @@ var productDataList = '<option value="">Select</option>';
 
 function dataProduct(responce) {
     $.each(responce, function(i, v) {
-        productDataList += `<option value='${v.product_master_id}'>${v.product_name}</option>`
+        productDataList += `<option value='${v.product_code}'>${v.product_name}</option>`
     });
 }
 
@@ -108,8 +108,10 @@ function displayVendorRequestList(response, dataTableId) {
         mRender: function(data, type, row) {
             if (data == '5')
                 return `<span class="badge badge-pill badge-warning font-size-12">CEO Approval Pending</span>`;
-            if (data == '4')
+            if (data == '3')
                 return `<span class="badge badge-pill badge-warning font-size-12">Waiting For Stocks</span>`;
+            if (data == '6')
+                return `<span class="badge badge-pill badge-warning font-size-12">Partial Pending</span>`;
             else
                 return `<span class="badge badge-pill badge-success font-size-12">Order recived</span>`;
         }
@@ -164,7 +166,7 @@ $(document).on('click', ".btn-delete", function() {
 $(document).on('click', '#button-add-item', function() {
     let c = $(this).attr('count');
     $(this).attr('count', parseInt($(this).attr('count')) + 1);
-    $(this).closest('table').find('#addItem').before(`<tr>
+    $(this).closest('table').find('#addItem').before(`<tr class="remove-row">
     <td class="text-center"><button type="button" title="Reject" class="btn btn-icon btn-outline-danger btn-lg">
     <i class="fa fa-trash"></i>
         </button></td>
@@ -197,6 +199,7 @@ $(document).on('click', ".edit-row", function() {
  */
 
 function VendorRequestSetValue(response) {
+    $(".remove-row").remove();
     multipleSetValue(response.result);
     if (response.result[0].request_product_details) {
         let requestProductDetails = JSON.parse(response.result[0].request_product_details);
@@ -207,6 +210,7 @@ function VendorRequestSetValue(response) {
             });
         })
     }
+    $(".vendor-full-total").html(response.result[0].product_total);
 }
 
 
@@ -223,6 +227,8 @@ $('.vendor-request-add').click(function() {
                 "list_key": "createrequest",
                 "vendor_id": $("[name='vendor_id']").val(),
                 "request_mode": $("[name='request_mode']").val(),
+                "request_code": $("[name='request_code']").val(),
+                "tracking_status": "5",
                 "request_branch_id_from": JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id,
                 "request_branch_id_to": $("[name='request_branch_id_to']").val(),
                 "department_id": JSON.parse(sessionStorage.getItem("employee")).result[0].department_id,

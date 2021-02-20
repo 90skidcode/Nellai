@@ -248,6 +248,10 @@
             "menulink": "outlet-damage-list.html"
         }]
     }, {
+        "menulabel": "Outlet bill",
+        "menuicon": "bxs-printer",
+        "menulink": "outlet-bill.html"
+    }, {
         "menulabel": "Attendance",
         "menuicon": "bx-fingerprint",
         "menulink": "attendance-list.html",

@@ -157,3 +157,7 @@ $(document).on('click', '.btn-outline-danger', function() {
         $(this).closest('tr').remove();
     }
 });
+
+$(document).on('keyup blur keypress', 'table tr input,table tr select', function() {
+    billCalculation();
+})

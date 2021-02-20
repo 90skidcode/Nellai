@@ -179,12 +179,15 @@ function displayEmployeeList(response, dataTableId) {
     }, /* EDIT */ /* DELETE */ {
         "data": "created_at",
         mRender: function(data, type, row) {
-            return `<td class="text-right">
+            if (row.status == '1') {
+                return `<td class="text-right">
                      <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-id="${row.employee_master_id}" data-target=".add"><i class="mdi mdi-pencil font-size-14"></i></a>
                      <a class="mr-3 text-info salary-row" title="CTC" data-toggle="modal" data-id="${row.employee_id}" data-target=".salary"><i class="fa fa-dollar-sign font-size-14"></i></a>
                      <a class="mr-3 text-info login-row" title="Add Login" data-toggle="modal" data-id="${row.employee_id}" data-target=".login"><i class="fa fa-key font-size-14"></i></a>
                      <a class="text-danger delete-row" title="Delete" data-toggle="modal" data-id="${row.employee_master_id}" data-target=".delete"><i class="mdi mdi-close font-size-14"></i></a>
                 </td>`;
+            } else
+                return ``;
         }
     }];
     dataTableDisplay(response.result, tableHeader, false, dataTableId, button);

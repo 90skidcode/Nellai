@@ -148,10 +148,11 @@ $(document).on('click', '.day', function() {
         $("h3.title").html($(this).attr('data-date') + ' - ' + $("#month").html() + ' - ' + $("#year").html());
         $('.attendance-add').attr({ 'data-date': $(this).attr('data-date'), 'data-month': $(this).attr('data-month'), 'data-year': $(this).attr('data-year') });
         let html = '';
-        if (employeeList) {
-            $('.add').modal('show');
-            $.each(employeeList, function(index, value) {
-                html += `<tr>
+        if (userSession.employee_designation_id == '3') {
+            if (employeeList) {
+                $('.add').modal('show');
+                $.each(employeeList, function(index, value) {
+                    html += `<tr>
                     <td class="emp-id" data-value="${value.employee_id}">${value.employee_id}</td>
                     <td >${value.employee_name}</td>
                     <td ><input type="checkbox" class="form-control present"></td>
@@ -159,18 +160,20 @@ $(document).on('click', '.day', function() {
                     <td class="out-time"><input type="time" class="form-control form-status"></td>
                     <td class="ot"><input type="number" class="form-control form-status"></td>            
                 </tr>`;
-            });
-            $('.add-attendance-list tbody').html(html);
-            $('.add-attendance-list tbody tr').each(function() {
-                if (!$(this).find('.present').is(':checked'))
-                    $(this).find('.form-status').prop('readonly', true);
-            });
-            let data = { "list_key": "getAttendenceDatewise", "branch_id": JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id, "department_id": JSON.parse(sessionStorage.getItem("employee")).result[0].department_id, "attendence_date": $("#year").html() + '-' + $(this).attr('data-month').toString().padStart(2, '0') + '-' + $(this).attr('data-date').toString().padStart(2, '0') }
-            commonAjax('', 'POST', data, '', '', '', {
-                "functionName": "getAttendenceDatewise"
-            });
+                });
+                $('.add-attendance-list tbody').html(html);
+                $('.add-attendance-list tbody tr').each(function() {
+                    if (!$(this).find('.present').is(':checked'))
+                        $(this).find('.form-status').prop('readonly', true);
+                });
+                let data = { "list_key": "getAttendenceDatewise", "branch_id": JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id, "department_id": JSON.parse(sessionStorage.getItem("employee")).result[0].department_id, "attendence_date": $("#year").html() + '-' + $(this).attr('data-month').toString().padStart(2, '0') + '-' + $(this).attr('data-date').toString().padStart(2, '0') }
+                commonAjax('', 'POST', data, '', '', '', {
+                    "functionName": "getAttendenceDatewise"
+                });
+            } else
+                showToast("No Employee Found.", "error");
         } else
-            showToast("No Employee Found.", "error");
+            showToast("Only Manager can add attendance", "error");
     }
 });
 
