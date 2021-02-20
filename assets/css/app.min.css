@@ -6970,3 +6970,7 @@ td.day.hover {
     top: 0;
     z-index: 99999;
 }
+
+input[type="checkbox"][readonly] {
+    pointer-events: none;
+}

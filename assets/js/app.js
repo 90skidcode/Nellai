@@ -1,8 +1,9 @@
 var menuFlag = false;
-var userSession = JSON.parse(sessionStorage.getItem("employee")).result[0];
+var userSession = '';
 $.getJSON("assets/json/menu.json", function(data) {
     let html = '';
     if (sessionStorage.getItem("employee")) {
+        userSession = JSON.parse(sessionStorage.getItem("employee")).result[0];
         $.each(data, function(i, v) {
             if (v.menuid == JSON.parse(sessionStorage.getItem("employee")).result[0].department_id) {
                 $.each(v.menu, function(inx, val) {

@@ -83,7 +83,7 @@ function dataProduct(responce) {
 function displayStoreInListInit() {
     let data = {
         "list_key": "getRequest",
-        "condition": { 'request_management.tracking_status': "3" }
+        "condition_in": { 'request_management.tracking_status': "3,4,6" }
     }
     commonAjax('', 'POST', data, '', '', '', { "functionName": "displayStoreInList", "param1": "store-in-list" }, { "functionName": "displayStoreInList", "param1": "store-in-list" });
 }
@@ -117,10 +117,13 @@ function displayStoreInList(response, dataTableId) {
     }, /* EDIT */ /* DELETE */ {
         "data": "created_at",
         mRender: function(data, type, row) {
-            return `<td class="text-right">
+            if (row.tracking_status != '4') {
+                return `<td class="text-right">
                         <a class="mr-3 text-success edit-row" title="Check Approve"  data-toggle="modal" data-target=".add"  data-id="${row.request_code}"><i class="mdi mdi-check-decagram font-size-18"></i></a>
                                         
                     </td>`;
+            } else
+                return ``;
         }
     }];
     dataTableDisplay(response.result, tableHeader, false, dataTableId, button);
@@ -172,7 +175,10 @@ function StoreInSetValue(response) {
         let requestProductDetails = JSON.parse(response.result[0].request_product_details);
         $(".remove-row").remove();
         $.each(requestProductDetails, function(index, value) {
-            $('#store-in').find('#addItem').before(`<tr class="remove-row">
+            var bg = '';
+            if (value.status == '2')
+                bg = 'bg-soft-success'
+            $('#store-in').find('#addItem').before(`<tr class="remove-row ${bg}">
                         <td scope="row">
                             <input type="checkbox" name="status"  class="form-control text-right" >
                         </td>
@@ -187,6 +193,8 @@ function StoreInSetValue(response) {
             $.each(value, function(i, v) {
                 $('#store-in tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v);
             });
+            $('[name="status"][value="2"]').prop('checked', true);
+            $('[name="status"][value="2"]').attr({ 'readonly': true, tabIndex: "-1" });
             $('[name="product_code"]').select2({ 'disabled': 'readonly' });
         });
         $(".remarks-past").html("<b> Remarks: </b> " + response.result[0].remarks);

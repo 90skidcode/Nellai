@@ -137,6 +137,8 @@ function displayVendorRequestList(response, dataTableId) {
 
 $(document).on('click', '[data-target=".add"]', function() {
     $(".vendor-request-add").removeAttr('data-id');
+    $("#add-vendor-request")[0].reset();
+    $(".remove-row").remove();
 });
 
 /**

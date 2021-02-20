@@ -168,6 +168,7 @@ $(document).on('click', '#button-add-item', function() {
 `);
     totalVendorCalculation();
 });
+
 /**
  * To Edit VendorRequest
  */
@@ -187,6 +188,7 @@ $(document).on('click', ".edit-row", function() {
  */
 
 function VendorRequestSetValue(response) {
+    $("#add-vendor-request")[0].reset();
     $(".remove-row").remove();
     multipleSetValue(response.result);
     if (response.result[0].request_product_details) {
