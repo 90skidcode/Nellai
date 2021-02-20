@@ -177,17 +177,17 @@ function StoreInSetValue(response) {
                             <input type="checkbox" name="status"  class="form-control text-right" >
                         </td>
                         <td scope="row">
-                            <select name="product_id" class="form-control select2">${productDataList}</select>
+                            <select name="product_code" class="form-control select2">${productDataList}</select>
                         </td>
                         <td> <input type="number" name="quantity" class="form-control text-right" required readonly> </td>
                         <td> <input type="number" name="cost" class="form-control text-right" required readonly> </td>
                         <td> <input type="number" name="total" class="form-control text-right" readonly>
                         </td></tr>
                     `);
-            $('[name="product_id"]').select2({ 'disabled': 'readonly' });
             $.each(value, function(i, v) {
                 $('#store-in tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v);
             });
+            $('[name="product_code"]').select2({ 'disabled': 'readonly' });
         })
         $(".vendor-full-total").html(numberWithCommas(response.result[0].product_total));
         $('[name="remarks"]').val(" ");
