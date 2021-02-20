@@ -1,16 +1,35 @@
 $(document).ready(function() {
+    listFinance();
     listBranch();
     listProduct();
-    displayPulverizingRequestListInit();
+    displayFinanceRequestListInit();
 });
 
-var button = `<div class="text-sm-right">
-<button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add PulverizingRequest </button>
-</div>`;
+var button = ``;
+
+/**
+ * List Finance in select 2
+ */
+
+function listFinance() {
+    let data = {
+        "query": 'fetch',
+        "databasename": 'finance_master',
+        "column": {
+            "finance_master_id": "finance_master_id",
+            "finance_name": "finance_name"
+        },
+        "condition": {
+            "status": '1'
+        },
+        "like": ""
+    }
+    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='finance_id']", "param2": "finance_name", "param3": "finance_master_id" });
+}
 
 
 /**
- * List Pulverizing in select 2
+ * List Finance in select 2
  */
 
 function listBranch() {
@@ -54,21 +73,21 @@ var productDataList = '<option value="">Select</option>';
 
 function dataProduct(responce) {
     $.each(responce, function(i, v) {
-        productDataList += `<option value='${v.product_code}'>${v.product_code} - ${v.product_name}</option>`
+        productDataList += `<option value='${v.product_code}'>${v.product_name}</option>`
     });
 }
 
-function displayPulverizingRequestListInit() {
+function displayFinanceRequestListInit() {
     let data = {
         "list_key": "getRequest",
-        "condition": {
-            "request_branch_id_from": JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id
-        }
+
+        "condition_in": { 'request_management.tracking_status': "2" }
+
     }
-    commonAjax('', 'POST', data, '', '', '', { "functionName": "displayPulverizingRequestList", "param1": "table-pulverizing-list" }, { "functionName": "displayPulverizingRequestList", "param1": "table-pulverizing-list" });
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "displayFinanceRequestList", "param1": "table-finance-request-list" }, { "functionName": "displayFinanceRequestList", "param1": "table-finance-request-list" });
 }
 
-function displayPulverizingRequestList(response, dataTableId) {
+function displayFinanceRequestList(response, dataTableId) {
     var tableHeader = [{
         "data": "bill_no"
     }, {
@@ -81,10 +100,6 @@ function displayPulverizingRequestList(response, dataTableId) {
     }, {
         "data": "tracking_status",
         mRender: function(data, type, row) {
-            if (data == '1')
-                return `<span class="badge badge-pill badge-warning font-size-12">Manager Approval Pending</span>`;
-            if (data == '1')
-                return `<span class="badge badge-pill badge-warning font-size-12">Finance Approval Pending</span>`;
             if (data == '5')
                 return `<span class="badge badge-pill badge-warning font-size-12">CEO Approval Pending</span>`;
             if (data == '3')
@@ -97,12 +112,13 @@ function displayPulverizingRequestList(response, dataTableId) {
     }, /* EDIT */ /* DELETE */ {
         "data": "created_at",
         mRender: function(data, type, row) {
-            if (row.tracking_status == '1' && JSON.parse(sessionStorage.getItem('employee')).result[0].employee_designation_id == '3') {
+            if (row.tracking_status == '2')
                 return `<td class="text-right">
                         <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-target=".add"  data-id="${row.request_code}"><i class="mdi mdi-pencil font-size-18"></i></a>
                         <a class="text-danger" title="Delete" data-toggle="modal" data-target=".delete"  data-id="${row.request_code}"><i class="mdi mdi-close font-size-18"></i></a>                
                     </td>`;
-            } else
+
+            else
                 return ``;
         }
     }];
@@ -110,12 +126,12 @@ function displayPulverizingRequestList(response, dataTableId) {
 }
 
 /**
- * To Add PulverizingRequest
+ * To Add FinanceRequest
  */
 
 $(document).on('click', '[data-target=".add"]', function() {
-    $(".pulverizing-add").removeAttr('data-id');
-    $("#add-pulverizing")[0].reset();
+    $(".finance-request-add").removeAttr('data-id');
+    $("#add-finance-request")[0].reset();
     $(".remove-row").remove();
 });
 
@@ -154,30 +170,31 @@ $(document).on('click', '#button-add-item', function() {
         <select name="product_code" class="form-control select2" required>${productDataList}</select>
     </td>
     <td> <input type="number" name="quantity" class="form-control text-right" required> </td>
+    <td> <input type="number" name="cost" class="form-control text-right" required> </td>
+    <td> <input type="number" name="total" class="form-control text-right" readonly>
     <input type="hidden" name="status" value="1" class="form-control text-right" > </td></tr>
 `);
-    $('[name="product_code"]').select2();
-    totalPulverizingCalculation();
+    totalFinanceCalculation();
 });
 
 /**
- * To Edit PulverizingRequest
+ * To Edit FinanceRequest
  */
 
 $(document).on('click', ".edit-row", function() {
     $(".employee-add").attr('data-id', $(this).attr('data-id'));
     let data = {
         "list_key": "getRequest",
-        "condition": { 'request_management.request_code': $(this).attr('data-id'), "request_branch_id_from": JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id }
+        "condition": { 'request_management.request_code': $(this).attr('data-id') }
     }
-    commonAjax('', 'POST', data, '', '', '', { "functionName": "PulverizingRequestSetValue" });
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "FinanceRequestSetValue" });
 });
 
 /***
- * PulverizingRequest Set Value
+ * FinanceRequest Set Value
  */
 
-function PulverizingRequestSetValue(response) {
+function FinanceRequestSetValue(response) {
     $(".remove-row").remove();
     multipleSetValue(response.result);
     if (response.result[0].request_product_details) {
@@ -185,10 +202,11 @@ function PulverizingRequestSetValue(response) {
         $.each(requestProductDetails, function(index, value) {
             $('#button-add-item').trigger('click');
             $.each(value, function(i, v) {
-                $('#request-vendor-list tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v);
+                $('#request-finance-list tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v);
             });
         })
     }
+    $(".finance-full-total").html(response.result[0].product_total);
 }
 
 
@@ -196,35 +214,34 @@ function PulverizingRequestSetValue(response) {
  * Add Leave Master
  */
 
-$('.pulverizing-add').click(function() {
-    if (checkRequired('#add-pulverizing')) {
+$('.finance-request-add').click(function() {
+    if (checkRequired('#add-finance-request')) {
         var id = $(this).attr('data-id');
         if (isEmptyValue(id)) {
             // Add New
             var data = {
                 "list_key": "createrequest",
                 "request_code": $("[name='request_code']").val(),
-                "tracking_status": (JSON.parse(sessionStorage.getItem('employee')).result[0].employee_designation_id) ? "2" : "1",
-                "request_branch_id_from": JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id,
+                "tracking_status": "3",
                 "request_branch_id_to": $("[name='request_branch_id_to']").val(),
-                "department_id": JSON.parse(sessionStorage.getItem("employee")).result[0].department_id,
                 "employee_id": JSON.parse(sessionStorage.getItem("employee")).result[0].login_username,
                 "remarks": $("[name='remarks']").val(),
-                "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#request-vendor-list tbody tr:not(#addItem)'))
+                "product_total": $(".finance-full-total").html(),
+                "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#request-finance-list tbody tr:not(#addItem)'))
             }
-            commonAjax('', 'POST', data, '.add', 'Pulverizing Request added successfully', '', { "functionName": "locationReload" })
+            commonAjax('', 'POST', data, '.add', 'FinanceRequest added successfully', '', { "functionName": "locationReload" })
         }
     }
 });
 
 
 $(document).on('keyup', '[name="quantity"], [name="cost"]', function() {
-    totalPulverizingCalculation();
+    totalFinanceCalculation();
 });
 
-function totalPulverizingCalculation() {
+function totalFinanceCalculation() {
     let t = 0
-    $("#request-vendor-list tbody tr:not(#addItem)").each(function() {
+    $("#request-finance-list tbody tr:not(#addItem)").each(function() {
         let q = $(this).find('[name="quantity"]').val();
         let c = $(this).find('[name="cost"]').val();
         let qc = 0;
@@ -233,7 +250,7 @@ function totalPulverizingCalculation() {
         $(this).find('[name="total"]').val(qc);
         t += qc;
     });
-    $(".vendor-full-total").html(t);
+    $(".finance-full-total").html(t);
 
 }
 

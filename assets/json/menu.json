@@ -349,5 +349,16 @@
                 "menulink": "vendor-report.html"
             }
         ]
+    }, {
+        "menulabel": "Approvel",
+        "menuicon": "bx-check-shield",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+            "menulabel": "Approvel request",
+            "menulink": "finance-request-in.html"
+        }, {
+            "menulabel": "Request to Vendor Report",
+            "menulink": "request-to-vendor-report.html"
+        }]
     }]
 }]
