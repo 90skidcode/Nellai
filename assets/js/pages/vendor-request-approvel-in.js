@@ -76,7 +76,7 @@ var productDataList = '<option value="">Select</option>';
 
 function dataProduct(responce) {
     $.each(responce, function(i, v) {
-        productDataList += `<option value='${v.product_master_id}'>${v.product_name}</option>`
+        productDataList += `<option value='${v.product_code}'>${v.product_name}</option>`
     });
 }
 
