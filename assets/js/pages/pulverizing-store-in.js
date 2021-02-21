@@ -83,7 +83,7 @@ function displayPulverizingRequestList(response, dataTableId) {
         mRender: function(data, type, row) {
             if (data == '1')
                 return `<span class="badge badge-pill badge-warning font-size-12">Manager Approval Pending</span>`;
-            if (data == '1')
+            if (data == '2')
                 return `<span class="badge badge-pill badge-warning font-size-12">Finance Approval Pending</span>`;
             if (data == '5')
                 return `<span class="badge badge-pill badge-warning font-size-12">CEO Approval Pending</span>`;
@@ -205,8 +205,8 @@ $('.pulverizing-add').click(function() {
                 "list_key": "createrequest",
                 "request_code": $("[name='request_code']").val(),
                 "tracking_status": (JSON.parse(sessionStorage.getItem('employee')).result[0].employee_designation_id) ? "2" : "1",
-                "request_branch_id_from": $("[name='request_branch_id_to']").val(),
-                "request_branch_id_to": JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id,
+                "request_branch_id_from": JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id,
+                "request_branch_id_to": $("[name='request_branch_id_to']").val(),
                 "department_id": JSON.parse(sessionStorage.getItem("employee")).result[0].department_id,
                 "employee_id": JSON.parse(sessionStorage.getItem("employee")).result[0].login_username,
                 "remarks": $("[name='remarks']").val(),

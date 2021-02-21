@@ -728,16 +728,6 @@ toastr.options = {
 }
 
 
-/* Input for number no negative numbers */
-
-$("input[type=number]").each(function(index) {
-    $(this).attr({
-        "min": "0",
-        "oninput": "validity.valid||(value='')"
-    });
-});
-
-
 /* Add Loader to body */
 $('body').prepend(`
     <div id="preloader" class="display-none">
@@ -1278,4 +1268,34 @@ function checkconnection() {
         $('.internet-connect').remove();
         $('body').prepend('<div class="internet-connect col-md-12 bg-danger p-3"><p class=" text-center">Check your Internet connection !!</p></div>').fadeIn();
     }
+}
+
+
+/**
+ *  Wheel Scroll Stop in JS
+ */
+
+wheelRoll();
+
+function wheelRoll() {
+    $('input').on("wheel mousewheel", function(e) {
+        if (e.originalEvent.deltaY > 0) {
+            e.preventDefault();
+            return;
+        } else if (e.originalEvent.wheelDeltaY < 0) {
+            e.preventDefault();
+            return;
+        }
+    });
+
+    $('input').attr({ 'min': 0 });
+
+    /* Input for number no negative numbers */
+
+    $("input[type=number]").each(function(index) {
+        $(this).attr({
+            "min": "0",
+            "oninput": "validity.valid||(value='')"
+        });
+    });
 }

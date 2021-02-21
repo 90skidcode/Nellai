@@ -223,7 +223,7 @@ $('.finance-request-add').click(function() {
                 "list_key": "createrequest",
                 "request_code": $("[name='request_code']").val(),
                 "tracking_status": "3",
-                "request_branch_id_from": $("[name='request_branch_id_to']").val(),
+                "request_branch_id_to": $("[name='request_branch_id_to']").val(),
                 "employee_id": JSON.parse(sessionStorage.getItem("employee")).result[0].login_username,
                 "remarks": $("[name='remarks']").val(),
                 "product_total": $(".finance-full-total").html(),

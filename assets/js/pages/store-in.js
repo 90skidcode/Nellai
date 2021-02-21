@@ -83,7 +83,7 @@ function dataProduct(responce) {
 function displayStoreInListInit() {
     let data = {
         "list_key": "getRequest",
-        "condition_in": { 'request_management.tracking_status': "3,4,6" }
+        "condition_in": { 'request_management.tracking_status': "3,4,6", 'request_management.department_id': '5', 'request_management.request_branch_id_to': JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id }
     }
     commonAjax('', 'POST', data, '', '', '', { "functionName": "displayStoreInList", "param1": "store-in-list" }, { "functionName": "displayStoreInList", "param1": "store-in-list" });
 }

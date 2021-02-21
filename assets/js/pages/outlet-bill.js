@@ -142,6 +142,7 @@ $(document).on('click', '#button-add-item', function() {
                                                         <td> <input type="number" name="" id="" class="form-control costperunit" readonly tabindex='-1'> </td>
                                                         <td> <input type="number" name="" id="" class="form-control row-cost" readonly tabindex='-1'> </td>
                                                     </tr>`);
+        wheelRoll();
 
     } else
         showToast("Please fill all the fields", "error");
