@@ -108,7 +108,7 @@ var button = `<div class="text-sm-right">
 </div>`;
 
 function displayAttendanceListInit(currentDate) {
-    let data = { "list_key": "getAttendenceIndication", "branch_id": JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id, "department_id": JSON.parse(sessionStorage.getItem("employee")).result[0].department_id, "attendence_year": new Date(currentDate).getFullYear(), "attendence_month": (new Date(currentDate).getMonth() + 1).toString().padStart(2, '0') }
+    let data = { "list_key": "getAttendenceIndication", "branch_id": userSession.branch_id, "department_id": userSession.department_id, "attendence_year": new Date(currentDate).getFullYear(), "attendence_month": (new Date(currentDate).getMonth() + 1).toString().padStart(2, '0') }
     commonAjax('', 'POST', data, '', '', '', {
         "functionName": "generateCalendar",
         "param1": currentDate
@@ -122,8 +122,8 @@ function displayAttendanceListInit(currentDate) {
             "employee_name": "employee_name"
         },
         "condition": {
-            "branch_id": JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id,
-            "department_id": JSON.parse(sessionStorage.getItem("employee")).result[0].department_id
+            "branch_id": userSession.branch_id,
+            "department_id": userSession.department_id
         },
         "like": ""
     }
@@ -166,7 +166,7 @@ $(document).on('click', '.day', function() {
                     if (!$(this).find('.present').is(':checked'))
                         $(this).find('.form-status').prop('readonly', true);
                 });
-                let data = { "list_key": "getAttendenceDatewise", "branch_id": JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id, "department_id": JSON.parse(sessionStorage.getItem("employee")).result[0].department_id, "attendence_date": $("#year").html() + '-' + $(this).attr('data-month').toString().padStart(2, '0') + '-' + $(this).attr('data-date').toString().padStart(2, '0') }
+                let data = { "list_key": "getAttendenceDatewise", "branch_id": userSession.branch_id, "department_id": userSession.department_id, "attendence_date": $("#year").html() + '-' + $(this).attr('data-month').toString().padStart(2, '0') + '-' + $(this).attr('data-date').toString().padStart(2, '0') }
                 commonAjax('', 'POST', data, '', '', '', {
                     "functionName": "getAttendenceDatewise"
                 });

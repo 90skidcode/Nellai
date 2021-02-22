@@ -80,9 +80,7 @@ function dataProduct(responce) {
 function displayFinanceRequestListInit() {
     let data = {
         "list_key": "getRequest",
-
-        "condition_in": { 'request_management.tracking_status': "2" }
-
+        "condition_in": { 'request_management.tracking_status': "2,3,4,7", 'request_management.vendor_id': 0 }
     }
     commonAjax('', 'POST', data, '', '', '', { "functionName": "displayFinanceRequestList", "param1": "table-finance-request-list" }, { "functionName": "displayFinanceRequestList", "param1": "table-finance-request-list" });
 }
@@ -100,14 +98,7 @@ function displayFinanceRequestList(response, dataTableId) {
     }, {
         "data": "tracking_status",
         mRender: function(data, type, row) {
-            if (data == '5')
-                return `<span class="badge badge-pill badge-warning font-size-12">CEO Approval Pending</span>`;
-            if (data == '3')
-                return `<span class="badge badge-pill badge-warning font-size-12">Waiting For Stocks</span>`;
-            if (data == '6')
-                return `<span class="badge badge-pill badge-warning font-size-12">Partial Pending</span>`;
-            else
-                return `<span class="badge badge-pill badge-success font-size-12">Order recived</span>`;
+            return trackingStatus(data);
         }
     }, /* EDIT */ /* DELETE */ {
         "data": "created_at",
@@ -117,7 +108,6 @@ function displayFinanceRequestList(response, dataTableId) {
                         <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-target=".add"  data-id="${row.request_code}"><i class="mdi mdi-pencil font-size-18"></i></a>
                         <a class="text-danger" title="Delete" data-toggle="modal" data-target=".delete"  data-id="${row.request_code}"><i class="mdi mdi-close font-size-18"></i></a>                
                     </td>`;
-
             else
                 return ``;
         }
@@ -206,7 +196,9 @@ function FinanceRequestSetValue(response) {
             });
         })
     }
-    $(".finance-full-total").html(response.result[0].product_total);
+    $(".remarks-past").html("<b> Remarks: </b> " + response.result[0].remarks);
+    $('[name="remarks"]').val(" ");
+    $(".finance-full-total").html(numberWithCommas(response.result[0].product_total));
 }
 
 
@@ -224,9 +216,9 @@ $('.finance-request-add').click(function() {
                 "request_code": $("[name='request_code']").val(),
                 "tracking_status": "3",
                 "request_branch_id_to": $("[name='request_branch_id_to']").val(),
-                "employee_id": JSON.parse(sessionStorage.getItem("employee")).result[0].login_username,
+                "employee_id": userSession.login_username,
                 "remarks": $("[name='remarks']").val(),
-                "product_total": $(".finance-full-total").html(),
+                "product_total": removeCommas($(".finance-full-total").html()),
                 "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#request-finance-list tbody tr:not(#addItem)'))
             }
             commonAjax('', 'POST', data, '.add', 'FinanceRequest added successfully', '', { "functionName": "locationReload" })
@@ -235,7 +227,7 @@ $('.finance-request-add').click(function() {
 });
 
 
-$(document).on('keyup', '[name="quantity"], [name="cost"]', function() {
+$(document).on('keyup keypress blur', '[name="quantity"], [name="cost"]', function() {
     totalFinanceCalculation();
 });
 
@@ -250,7 +242,7 @@ function totalFinanceCalculation() {
         $(this).find('[name="total"]').val(qc);
         t += qc;
     });
-    $(".finance-full-total").html(t);
+    $(".finance-full-total").html(numberWithCommas(t));
 
 }
 

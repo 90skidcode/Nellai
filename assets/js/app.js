@@ -1,11 +1,13 @@
 var menuFlag = false;
 var userSession = '';
+if (sessionStorage.getItem("employee"))
+    userSession = JSON.parse(sessionStorage.getItem("employee")).result[0];
 $.getJSON("assets/json/menu.json", function(data) {
     let html = '';
     if (sessionStorage.getItem("employee")) {
         userSession = JSON.parse(sessionStorage.getItem("employee")).result[0];
         $.each(data, function(i, v) {
-            if (v.menuid == JSON.parse(sessionStorage.getItem("employee")).result[0].department_id) {
+            if (v.menuid == userSession.department_id) {
                 $.each(v.menu, function(inx, val) {
                     if (val.menulink == window.location.pathname.split('/').slice(-1)[0])
                         menuFlag = true;
@@ -33,8 +35,8 @@ $.getJSON("assets/json/menu.json", function(data) {
          * Add Status & creted by for all form
          */
 
-        $('form').append(`<input type="hidden" class="form-control" name="created_by" value="${JSON.parse(sessionStorage.getItem("employee")).result[0].login_username}"><input type="hidden" class="form-control" name="status" value="1">`);
-        $(".login-user-name").html(JSON.parse(sessionStorage.getItem("employee")).result[0].employee_name + " " + "<i class='bx bx-log-in-circle bx-fade-right font-size-22'></i>");
+        $('form').append(`<input type="hidden" class="form-control" name="created_by" value="${userSession.login_username}"><input type="hidden" class="form-control" name="status" value="1">`);
+        $(".login-user-name").html(userSession.employee_name + " " + "<i class='bx bx-log-in-circle bx-fade-right font-size-22'></i>");
         if (!menuFlag)
             window.open('index.html', '_self');
     } else {
@@ -1252,6 +1254,16 @@ function numberWithCommas(x) {
     return "Rs." + x.toString().replace(/(\d)(?=(\d\d)+\d$)/g, "$1,");
 }
 
+
+/**
+ * Numbers with Commas are removed
+ * @param {*} x Eg: Rs.12,234 : 12234
+ */
+
+function removeCommas(x) {
+    return x.replace(/,/g, "").replace(/Rs./g, "")
+}
+
 /**
  * Check Connection
  */
@@ -1298,4 +1310,28 @@ function wheelRoll() {
             "oninput": "validity.valid||(value='')"
         });
     });
+}
+
+
+/**
+ * Tracking Staus Indicator
+ */
+
+function trackingStatus(data) {
+    if (data == '1')
+        return `<span class="badge badge-pill badge-warning font-size-12">Manager Approval Pending</span>`;
+    if (data == '2')
+        return `<span class="badge badge-pill badge-warning font-size-12">Finance Approval Pending</span>`;
+    if (data == '3')
+        return `<span class="badge badge-pill badge-warning font-size-12">Waiting For Stocks</span>`;
+    if (data == '4')
+        return `<span class="badge badge-pill badge-success font-size-12">Order recived</span>`;
+    if (data == '5')
+        return `<span class="badge badge-pill badge-warning font-size-12">CEO Approval Pending</span>`;
+    if (data == '6')
+        return `<span class="badge badge-pill badge-warning font-size-12">Partial Pending</span>`;
+    if (data == '7')
+        return `<span class="badge badge-pill badge-warning font-size-12">Send to consern Department</span>`;
+    else
+        return ``;
 }

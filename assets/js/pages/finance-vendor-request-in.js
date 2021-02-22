@@ -83,10 +83,10 @@ function displayVendorRequestListInit() {
     let data = {
         "list_key": "getRequest",
         "condition": {
-            "request_branch_id_from": JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id
+            "request_branch_id_from": userSession.branch_id
         }
     }
-    commonAjax('', 'POST', data, '', '', '', { "functionName": "displayVendorRequestList", "param1": "table-vendor-request-list" }, { "functionName": "displayVendorRequestList", "param1": "table-vendor-request-list" });
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "displayVendorRequestList", "param1": "table-finance-request-list" }, { "functionName": "displayVendorRequestList", "param1": "table-finance-request-list" });
 }
 
 function displayVendorRequestList(response, dataTableId) {
@@ -106,14 +106,7 @@ function displayVendorRequestList(response, dataTableId) {
     }, {
         "data": "tracking_status",
         mRender: function(data, type, row) {
-            if (data == '5')
-                return `<span class="badge badge-pill badge-warning font-size-12">CEO Approval Pending</span>`;
-            if (data == '3')
-                return `<span class="badge badge-pill badge-warning font-size-12">Waiting For Stocks</span>`;
-            if (data == '6')
-                return `<span class="badge badge-pill badge-warning font-size-12">Partial Pending</span>`;
-            else
-                return `<span class="badge badge-pill badge-success font-size-12">Order recived</span>`;
+            return trackingStatus(data);
         }
     }, /* EDIT */ /* DELETE */ {
         "data": "created_at",
@@ -136,8 +129,8 @@ function displayVendorRequestList(response, dataTableId) {
  */
 
 $(document).on('click', '[data-target=".add"]', function() {
-    $(".vendor-request-add").removeAttr('data-id');
-    $("#add-vendor-request")[0].reset();
+    $(".finance-request-add").removeAttr('data-id');
+    $("#add-finance-request")[0].reset();
     $(".remove-row").remove();
 });
 
@@ -180,6 +173,7 @@ $(document).on('click', '#button-add-item', function() {
     <td> <input type="number" name="total" class="form-control text-right" readonly>
     <input type="hidden" name="status" value="1" class="form-control text-right" > </td></tr>
 `);
+    $('.select2').select2();
     totalVendorCalculation();
 });
 
@@ -191,7 +185,7 @@ $(document).on('click', ".edit-row", function() {
     $(".employee-add").attr('data-id', $(this).attr('data-id'));
     let data = {
         "list_key": "getRequest",
-        "condition": { 'request_management.request_code': $(this).attr('data-id'), "request_branch_id_from": JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id }
+        "condition": { 'request_management.request_code': $(this).attr('data-id'), "request_branch_id_from": userSession.branch_id }
     }
     commonAjax('', 'POST', data, '', '', '', { "functionName": "VendorRequestSetValue" });
 });
@@ -208,11 +202,11 @@ function VendorRequestSetValue(response) {
         $.each(requestProductDetails, function(index, value) {
             $('#button-add-item').trigger('click');
             $.each(value, function(i, v) {
-                $('#request-vendor-list tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v);
+                $('#request-finance-list tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v);
             });
         })
     }
-    $(".vendor-full-total").html(response.result[0].product_total);
+    $(".finance-full-total").html(numberWithCommas(response.result[0].product_total));
 }
 
 
@@ -220,8 +214,8 @@ function VendorRequestSetValue(response) {
  * Add Leave Master
  */
 
-$('.vendor-request-add').click(function() {
-    if (checkRequired('#add-vendor-request')) {
+$('.finance-request-add').click(function() {
+    if (checkRequired('#add-finance-request')) {
         var id = $(this).attr('data-id');
         if (isEmptyValue(id)) {
             // Add New
@@ -231,13 +225,13 @@ $('.vendor-request-add').click(function() {
                 "request_mode": $("[name='request_mode']").val(),
                 "request_code": $("[name='request_code']").val(),
                 "tracking_status": "5",
-                "request_branch_id_from": JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id,
+                "request_branch_id_from": userSession.branch_id,
                 "request_branch_id_to": $("[name='request_branch_id_to']").val(),
-                "department_id": JSON.parse(sessionStorage.getItem("employee")).result[0].department_id,
-                "employee_id": JSON.parse(sessionStorage.getItem("employee")).result[0].login_username,
+                "department_id": userSession.department_id,
+                "employee_id": userSession.login_username,
                 "remarks": $("[name='remarks']").val(),
-                "product_total": $(".vendor-full-total").html(),
-                "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#request-vendor-list tbody tr:not(#addItem)'))
+                "product_total": removeCommas($(".finance-full-total").html()),
+                "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#request-finance-list tbody tr:not(#addItem)'))
             }
             commonAjax('', 'POST', data, '.add', 'VendorRequest added successfully', '', { "functionName": "locationReload" })
         }
@@ -245,13 +239,13 @@ $('.vendor-request-add').click(function() {
 });
 
 
-$(document).on('keyup', '[name="quantity"], [name="cost"]', function() {
+$(document).on('keyup keypress blur', '[name="quantity"], [name="cost"]', function() {
     totalVendorCalculation();
 });
 
 function totalVendorCalculation() {
     let t = 0
-    $("#request-vendor-list tbody tr:not(#addItem)").each(function() {
+    $("#request-finance-list tbody tr:not(#addItem)").each(function() {
         let q = $(this).find('[name="quantity"]').val();
         let c = $(this).find('[name="cost"]').val();
         let qc = 0;
@@ -260,7 +254,7 @@ function totalVendorCalculation() {
         $(this).find('[name="total"]').val(qc);
         t += qc;
     });
-    $(".vendor-full-total").html(t);
+    $(".finance-full-total").html(numberWithCommas(t));
 
 }
 

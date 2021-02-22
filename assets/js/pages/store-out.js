@@ -75,14 +75,14 @@ var productDataList = '<option value="">Select</option>';
 
 function dataProduct(responce) {
     $.each(responce, function(i, v) {
-        productDataList += `<option value='${v.product_code}'>${v.product_name}</option>`
+        productDataList += `<option value='${v.product_code}'>${v.product_code} - ${v.product_name}</option>`
     });
 }
 
 function displayStoreInListInit() {
     let data = {
         "list_key": "getRequest",
-        "condition_in": { 'request_management.tracking_status': "3,4,6", 'request_management.vendor_id': "0", 'request_management.request_branch_id_to': JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id }
+        "condition_in": { 'request_management.tracking_status': "3,4,6,7", 'request_management.vendor_id': "0", 'request_management.request_branch_id_to': userSession.branch_id }
     }
     commonAjax('', 'POST', data, '', '', '', { "functionName": "displayStoreInList", "param1": "store-in-list" }, { "functionName": "displayStoreInList", "param1": "store-in-list" });
 }
@@ -93,33 +93,21 @@ function displayStoreInList(response, dataTableId) {
     }, {
         "data": "created_at"
     }, {
-        "data": "vendor_name"
-    }, {
         "data": "product_total",
         mRender: function(data, type, row) {
             return numberWithCommas(data);
         }
     }, {
-        "data": "request_mode"
-    }, {
         "data": "tracking_status",
         mRender: function(data, type, row) {
-            if (data == '5')
-                return `<span class="badge badge-pill badge-warning font-size-12">CEO Approval Pending</span>`;
-            if (data == '3')
-                return `<span class="badge badge-pill badge-warning font-size-12">Waiting For Stocks</span>`;
-            if (data == '6')
-                return `<span class="badge badge-pill badge-warning font-size-12">Partial Pending</span>`;
-            else
-                return `<span class="badge badge-pill badge-success font-size-12">Order recived</span>`;
+            return trackingStatus(data);
         }
     }, /* EDIT */ /* DELETE */ {
         "data": "created_at",
         mRender: function(data, type, row) {
-            if (row.tracking_status != '4') {
+            if (row.tracking_status == '3') {
                 return `<td class="text-right">
-                        <a class="mr-3 text-success edit-row" title="Check Approve"  data-toggle="modal" data-target=".add"  data-id="${row.request_code}"><i class="mdi mdi-check-decagram font-size-18"></i></a>
-                                        
+                        <a class="mr-3 text-success edit-row" title="Check Approve"  data-toggle="modal" data-target=".add"  data-id="${row.request_code}"><i class="mdi mdi-check-decagram font-size-18"></i></a>       
                     </td>`;
             } else
                 return ``;
@@ -178,23 +166,20 @@ function StoreInSetValue(response) {
             if (value.status == '2')
                 bg = 'bg-soft-success'
             $('#store-in').find('#addItem').before(`<tr class="remove-row ${bg}">
-                        <td scope="row">
-                            <input type="checkbox" name="status"  class="form-control text-right" >
-                        </td>
+                       
                         <td scope="row">
                             <select name="product_code" class="form-control select2">${productDataList}</select>
                         </td>
                         <td> <input type="number" name="quantity" class="form-control text-right" required readonly> </td>
                         <td> <input type="number" name="cost" class="form-control text-right" required readonly> </td>
                         <td> <input type="number" name="total" class="form-control text-right" readonly>
+                        <input type="hidden" name="status" value="2" >
                         </td></tr>
                     `);
             $.each(value, function(i, v) {
                 $('#store-in tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v);
             });
-            $('[name="status"][value="2"]').prop('checked', true);
-            $('[name="status"][value="2"]').attr({ 'readonly': true, tabIndex: "-1" });
-            $('[name="product_code"]').select2({ 'disabled': 'readonly' });
+            $('.select2').select2({ 'disabled': 'readonly' });
         });
         $(".remarks-past").html("<b> Remarks: </b> " + response.result[0].remarks);
         $(".vendor-full-total").html(numberWithCommas(response.result[0].product_total));
@@ -213,19 +198,14 @@ $(document).on('click', '[name="status"]', function() {
 $('.store-in-add').click(function() {
     if (checkRequired('#add-store-in')) {
         var id = $(this).attr('data-id');
-        let tracking_status = 4;
-        $('#store-in tbody [name="status"]').each(function() {
-            if ($(this).val() == '1')
-                tracking_status = 6;
-        });
         if (isEmptyValue(id)) {
             // Add New
             var data = {
                 "list_key": "createrequest",
                 "vendor_id": $("[name='vendor_id']").val(),
                 "request_code": $("[name='request_code']").val(),
-                "tracking_status": tracking_status,
-                "employee_id": JSON.parse(sessionStorage.getItem("employee")).result[0].login_username,
+                "tracking_status": 7,
+                "employee_id": userSession.login_username,
                 "remarks": $("[name='remarks']").val(),
                 "product_total": $(".vendor-full-total").html(),
                 "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#store-in tbody tr:not(#addItem)'))

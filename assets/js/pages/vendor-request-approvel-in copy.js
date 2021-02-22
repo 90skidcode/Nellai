@@ -105,7 +105,14 @@ function displayVendorRequestList(response, dataTableId) {
     }, {
         "data": "tracking_status",
         mRender: function(data, type, row) {
-            return trackingStatus(data);
+            if (data == '5')
+                return `<span class="badge badge-pill badge-warning font-size-12">CEO Approval Pending</span>`;
+            if (data == '3')
+                return `<span class="badge badge-pill badge-warning font-size-12">Waiting For Stocks</span>`;
+            if (data == '6')
+                return `<span class="badge badge-pill badge-warning font-size-12">Partial Pending</span>`;
+            else
+                return `<span class="badge badge-pill badge-success font-size-12">Order recived</span>`;
         }
     }, /* EDIT */ /* DELETE */ {
         "data": "created_at",
@@ -170,7 +177,7 @@ $(document).on('click', ".edit-row", function() {
     $(".employee-add").attr('data-id', $(this).attr('data-id'));
     let data = {
         "list_key": "getRequest",
-        "request_branch_id_from": userSession.branch_id,
+        "request_branch_id_from": JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id,
         "condition": { 'request_management.request_code': $(this).attr('data-id') }
     }
     commonAjax('', 'POST', data, '', '', '', { "functionName": "VendorRequestSetValue" });
@@ -213,7 +220,7 @@ $('.vendor-request-add').click(function() {
                 "vendor_id": $("[name='vendor_id']").val(),
                 "request_code": $("[name='request_code']").val(),
                 "tracking_status": "3",
-                "employee_id": userSession.login_username,
+                "employee_id": JSON.parse(sessionStorage.getItem("employee")).result[0].login_username,
                 "remarks": $("[name='remarks']").val(),
                 "product_total": $(".vendor-full-total").html(),
                 "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#request-vendor-list tbody tr:not(#addItem)'))

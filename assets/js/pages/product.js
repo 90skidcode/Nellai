@@ -92,29 +92,7 @@ $(document).on('click', '[data-target=".barcode-print"]', function() {
     $("#no_of_labels").val('');
 });
 
-/**
- * To print Barcode
- */
 
-$(document).on('click', '.print-barcode', function() {
-    var mywindow = window.open('', 'my div', 'height=400,width=600');
-    mywindow.document.write('<html><head><title>my div</title>');
-    mywindow.document.write('<script src="assets/libs/jquery/jquery.min.js"></script><script src="assets/libs/JsBarcode/JsBarcode.all.min.js"></script>');
-    mywindow.document.write('</head><body >');
-    for (let i = 0; i < $("#no_of_labels").val(); i++) {
-        mywindow.document.write('<svg class="barcode"></svg>');
-    }
-    mywindow.document.write("</body><script>JsBarcode('.barcode', '1005',{width:2.2,height:55,margin:15,fontSize:10,displayValue: true    });window.print();</script></html>");
-    mywindow.print();
-    // mywindow.close();
-
-    return true;
-    window.open("barcode.html");
-});
-//for (let i = 0; i < $("#no_of_labels").val(); i++) {
-/**
- * Add Product
- */
 
 $('.product-add').click(function() {
     if (checkRequired('#product-add')) {
@@ -122,14 +100,22 @@ $('.product-add').click(function() {
         if (isEmptyValue(id)) {
             // Add New
             var data = $("#product-add").serializeObject();
+            if (typeof(data['ingredient_product_code']) == "string") {
+                data['ingredient_product_code'] = data['ingredient_product_code'].split(" ");
+                data['ingredient_quantity'] = data['ingredient_quantity'].split(" ");
+                data['ingredient_quantity_type'] = data['ingredient_quantity_type'].split(" ");
+            }
             data['list_key'] = 'insertProduct';
-            console.log(JSON.stringify(data));
             commonAjax('', 'POST', data, '.add', 'Product added successfully', '', { "functionName": "locationReload" })
         } else {
             // Edit
             var data = $("#product-add").serializeObject();
             data['list_key'] = 'ProductUpdate';
-            console.log(JSON.stringify(data));
+            if (typeof(data['ingredient_product_code']) == "string") {
+                data['ingredient_product_code'] = data['ingredient_product_code'].split(" ");
+                data['ingredient_quantity'] = data['ingredient_quantity'].split(" ");
+                data['ingredient_quantity_type'] = data['ingredient_quantity_type'].split(" ");
+            }
             commonAjax('', 'POST', data, '.add', 'Product updated successfully', '', { "functionName": "locationReload" })
         }
     }
@@ -205,13 +191,6 @@ $(document).on('click', '#deductions-table .btn-outline-danger', function() {
     }
 });
 
-/**
- * For Total Calculation
- */
-
-$(document).on('click keyup blur', '#deductions-table .btn-outline-danger, #allowance-table .btn-outline-danger, [name="allowance_amount"], [name="deductions_amount"]', function() {
-    totalCalculation();
-});
 
 
 /**

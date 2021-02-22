@@ -173,11 +173,11 @@
         "menulink": "javascript: void(0);",
         "submenu": [{
                 "menulabel": "Products List",
-                "menulink": "pulverizing-product-report.html"
+                "menulink": "product.html"
             },
             {
                 "menulabel": "Products Report",
-                "menulink": "pulverizing-product-report.html"
+                "menulink": "product-report.html"
             }
         ]
     }]
@@ -307,7 +307,7 @@
         "menulink": "javascript: void(0);",
         "submenu": [{
             "menulabel": "Request to Vendor",
-            "menulink": "request-to-vendor-list.html"
+            "menulink": "finance-vendor-request-in.html"
         }, {
             "menulabel": "Request to Vendor Report",
             "menulink": "request-to-vendor-report.html"

@@ -4,7 +4,7 @@ $(document).ready(function() {
     listEmployee();
 });
 var button = ``;
-if (JSON.parse(sessionStorage.getItem("employee")).result[0].employee_designation_id != "1") {
+if (userSession.employee_designation_id != "1") {
     button = `<div class="text-sm-right">
                 <button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Leave </button>
               </div>`;

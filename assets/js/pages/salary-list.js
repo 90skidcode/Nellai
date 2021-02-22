@@ -138,7 +138,7 @@ $('.salary-add').click(function() {
                 "salary_month": date[1],
                 "salary_year": date[0],
                 "remarks": $("#remarks").val(),
-                "created_by": JSON.parse(sessionStorage.getItem("employee")).result[0].login_username
+                "created_by": userSession.login_username
             }
             commonAjax('', 'POST', data, '.add', 'Salary added successfully', '', { "functionName": "locationReload" })
         } else

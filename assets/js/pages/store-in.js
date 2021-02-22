@@ -83,7 +83,8 @@ function dataProduct(responce) {
 function displayStoreInListInit() {
     let data = {
         "list_key": "getRequest",
-        "condition_in": { 'request_management.tracking_status': "3,4,6", 'request_management.department_id': '5', 'request_management.request_branch_id_to': JSON.parse(sessionStorage.getItem("employee")).result[0].branch_id }
+        "condition_in": { 'request_management.tracking_status': "3,4,6", 'request_management.request_branch_id_to': userSession.branch_id },
+        "condition_not_in": { 'request_management.vendor_id': "0" }
     }
     commonAjax('', 'POST', data, '', '', '', { "functionName": "displayStoreInList", "param1": "store-in-list" }, { "functionName": "displayStoreInList", "param1": "store-in-list" });
 }
@@ -105,14 +106,7 @@ function displayStoreInList(response, dataTableId) {
     }, {
         "data": "tracking_status",
         mRender: function(data, type, row) {
-            if (data == '5')
-                return `<span class="badge badge-pill badge-warning font-size-12">CEO Approval Pending</span>`;
-            if (data == '3')
-                return `<span class="badge badge-pill badge-warning font-size-12">Waiting For Stocks</span>`;
-            if (data == '6')
-                return `<span class="badge badge-pill badge-warning font-size-12">Partial Pending</span>`;
-            else
-                return `<span class="badge badge-pill badge-success font-size-12">Order recived</span>`;
+            return trackingStatus(data);
         }
     }, /* EDIT */ /* DELETE */ {
         "data": "created_at",
@@ -226,7 +220,7 @@ $('.store-in-add').click(function() {
                 "vendor_id": $("[name='vendor_id']").val(),
                 "request_code": $("[name='request_code']").val(),
                 "tracking_status": tracking_status,
-                "employee_id": JSON.parse(sessionStorage.getItem("employee")).result[0].login_username,
+                "employee_id": userSession.login_username,
                 "remarks": $("[name='remarks']").val(),
                 "product_total": $(".vendor-full-total").html(),
                 "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#store-in tbody tr:not(#addItem)'))
