@@ -1332,6 +1332,8 @@ function trackingStatus(data) {
         return `<span class="badge badge-pill badge-warning font-size-12">Partial Pending</span>`;
     if (data == '7')
         return `<span class="badge badge-pill badge-warning font-size-12">Send to consern Department</span>`;
+    if (data == '10')
+        return `<span class="badge badge-pill badge-danger font-size-12">Deleted</span>`;
     else
         return ``;
 }

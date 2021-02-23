@@ -11,8 +11,8 @@ var button = ``;
 
 if (userSession.employee_designation_id == '4') {
     button = ` <div class="text-sm-right">
-    <button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Pulverizing Request IN </button>
-    <button type="button" data-toggle="modal" data-target=".add-in" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Product Request IN </button>
+                    <button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Pulverizing Request IN </button>
+                    <button type="button" data-toggle="modal" data-target=".add-in" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Product Request IN </button>
                </div>`;
 }
 
@@ -90,7 +90,7 @@ function displayPulverizingRequestList(response, dataTableId) {
     }, {
         "data": "product_total",
         mRender: function(data, type, row) {
-            return numberWithCommas(data);
+            return (data != "0") ? numberWithCommas(data) : "";
         }
     }, {
         "data": "tracking_status",
@@ -100,26 +100,27 @@ function displayPulverizingRequestList(response, dataTableId) {
     }, /* EDIT */ /* DELETE */ {
         "data": "created_at",
         mRender: function(data, type, row) {
+            if (row.request_status == '2') {
+                return `<td class="text-right"><a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
+                </td>`;
+            }
             if (row.tracking_status == '1' && JSON.parse(sessionStorage.getItem('employee')).result[0].employee_designation_id == '3' && !row.item_code) {
                 return `<td class="text-right">
-                        <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-target=".add"  data-id="${row.request_code}"><i class="mdi mdi-pencil font-size-18"></i></a>
-                        <a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
-                        <a class="text-danger" title="Delete" data-toggle="modal" data-target=".delete"  data-id="${row.request_code}"><i class="mdi mdi-close font-size-18"></i></a>                
-                    </td>`;
-            }
-            if (row.tracking_status == '1' && JSON.parse(sessionStorage.getItem('employee')).result[0].employee_designation_id == '3' && row.item_code) {
+                            <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-target=".add"  data-id="${row.request_code}"><i class="mdi mdi-pencil font-size-18"></i></a>
+                            <a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
+                            <a class="text-danger delete-row" title="Delete" data-toggle="modal" data-target=".delete"  data-id="${row.request_code}"><i class="mdi mdi-close font-size-18"></i></a>                
+                        </td>`;
+            } else if (row.tracking_status == '1' && JSON.parse(sessionStorage.getItem('employee')).result[0].employee_designation_id == '3' && row.item_code) {
                 return `<td class="text-right">
-                        <a class="mr-3 text-info self-approve-row" title="Edit" data-toggle="modal" data-target=".add-in"  data-id="${row.request_code}"><i class="mdi mdi-pencil font-size-18"></i></a>
-                        <a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
-                        <a class="text-danger" title="Delete" data-toggle="modal" data-target=".delete"  data-id="${row.request_code}"><i class="mdi mdi-close font-size-18"></i></a>                
-                    </td>`;
-            }
-            if (row.tracking_status == '7') {
+                            <a class="mr-3 text-info self-approve-row" title="Edit" data-toggle="modal" data-target=".add-in"  data-id="${row.request_code}"><i class="mdi mdi-pencil font-size-18"></i></a>
+                            <a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
+                            <a class="text-danger delete-row" title="Delete" data-toggle="modal" data-target=".delete"  data-id="${row.request_code}"><i class="mdi mdi-close font-size-18"></i></a>                
+                        </td>`;
+            } else if (row.tracking_status == '7') {
                 return `<td class="text-right">
-                <a class="mr-3 text-info approve-row" title="Approve" data-toggle="modal" data-target=".approve"  data-id="${row.request_code}"><i class="mdi mdi-check-decagram font-size-18"></i></a>
-                <a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
-                        
-                </td>`;
+                            <a class="mr-3 text-info approve-row" title="Approve" data-toggle="modal" data-target=".approve"  data-id="${row.request_code}"><i class="mdi mdi-check-decagram font-size-18"></i></a>
+                            <a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a> 
+                        </td>`;
             } else
                 return `<td class="text-right"><a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
                 </td>`;
@@ -137,30 +138,6 @@ $(document).on('click', '[data-target=".add"]', function() {
     $("#add-pulverizing")[0].reset();
     $(".remove-row").remove();
 });
-
-/**
- * To detele row
- */
-
-$(document).on('click', ".delete-row", function() {
-    $(".delete .btn-delete").attr('data-detete', $(this).attr('data-id'));
-});
-
-$(document).on('click', ".btn-delete", function() {
-    var data = {
-        'query': 'update',
-        'databasename': 'employee_qualification',
-        'condition': {
-            'employee_qualification_id': $(".btn-delete").attr('data-detete')
-        },
-        'values': {
-            'status': '0'
-        }
-    }
-    $("#delete").modal('hide');
-    commonAjax('database.php', 'POST', data, '', 'Record Deleted Sucessfully', '', { "functionName": "locationReload" })
-});
-
 
 $(document).on('click', '#button-add-item', function() {
     let c = $(this).attr('count');
@@ -381,7 +358,7 @@ $('.add-within-pulverizing').click(function() {
             "remarks": $("#add-within-pulverizing [name='remarks']").val(),
             "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#add-within-pulverizing-list tbody tr:not(#addItem)'))
         }
-        commonAjax('', 'POST', data, '.add', 'Pulverizing Request added successfully', '', { "functionName": "locationReload" })
+        commonAjax('', 'POST', data, '.add', (userSession.employee_designation_id == '3') ? "Product added successfully" : "Product Request added successfully", '', { "functionName": "locationReload" })
     }
 });
 
@@ -461,3 +438,17 @@ function infoStatus(responce) {
     });
     $('.info-status').html(html);
 }
+
+/**
+ * To detele row
+ */
+
+$(document).on('click', ".delete-row", function() {
+    $(".delete .btn-delete").attr('data-detete', $(this).attr('data-id'));
+});
+
+$(document).on('click', ".delete .btn-delete", function() {
+    var data = { "list_key": "deleteRequest", "request_status": "2", "request_code": $(this).attr('data-detete') }
+    $("#delete").modal('hide');
+    commonAjax('', 'POST', data, '', 'Record Deleted Sucessfully', '', { "functionName": "locationReload" })
+});
