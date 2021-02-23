@@ -1,6 +1,6 @@
 var lang = eval(langjson[$('#locale').val()]);
-$(document).ready(function () {
-    $("#myselect").change(function () {
+$(document).ready(function() {
+    $("#myselect").change(function() {
         $("#locale").val($("#myselect").val());
         updateLanguageInfo();
     });
@@ -16,7 +16,7 @@ function updateLanguageInfo() {
         data: {
             "language": language
         },
-        success: function (data) {
+        success: function(data) {
             if (language == 'ar') {
                 localStorage.setItem("align", "rtl");
             } else {
@@ -27,8 +27,8 @@ function updateLanguageInfo() {
             }
             window.location.href = updateQueryStringParameter(location.href, "language", language);
         },
-        error: function (err) {
-            //console.log('error>>>>'+err);
+        error: function(err) {
+            console.log('error>>>>' + err);
         }
     })
 }
@@ -43,7 +43,7 @@ function updateQueryStringParameter(uri, key, value) {
     }
 }
 
-$(function () {
+$(function() {
     $('#smbody').trumbowyg({
         btns: [
             ['viewHTML'],
@@ -52,8 +52,7 @@ $(function () {
             ['strong', 'em', 'del'],
             ['superscript', 'subscript'],
             ['link'],
-            'table',
-            ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+            'table', ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
             ['unorderedList', 'orderedList'],
             ['horizontalRule'],
             ['removeformat'],

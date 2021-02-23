@@ -142,7 +142,6 @@ $(document).on('click', ".edit-row", function() {
 function gradeSetValue(response) {
     multipleSetValue(response);
     if (response[0].allowance) {
-        console.log(typeof(response[0].allowance), response[0].allowance);
         let gradeAllowance = JSON.parse(response[0].allowance);
         $.each(gradeAllowance, function(index, value) {
             if (index)
@@ -208,7 +207,6 @@ $('.grade-add').click(function() {
             delete values['deductions_amount_yearly'];
             delete values['deductions_name'];
             delete values['allowance_name'];
-            console.log(values);
             if (isEmptyValue(id)) {
                 // Add New
                 var data = {

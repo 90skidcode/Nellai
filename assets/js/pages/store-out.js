@@ -210,7 +210,6 @@ $('.store-in-add').click(function() {
                 "product_total": $(".vendor-full-total").html(),
                 "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#store-in tbody tr:not(#addItem)'))
             }
-            console.log(JSON.stringify(data));
             commonAjax('', 'POST', data, '.add', 'Store In successfully', '', { "functionName": "locationReload" })
         }
     }

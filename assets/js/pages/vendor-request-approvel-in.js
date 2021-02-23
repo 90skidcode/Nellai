@@ -218,7 +218,6 @@ $('.vendor-request-add').click(function() {
                 "product_total": $(".vendor-full-total").html(),
                 "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#request-vendor-list tbody tr:not(#addItem)'))
             }
-            console.log(JSON.stringify(data));
             commonAjax('', 'POST', data, '.add', 'Vendor Request Approved successfully', '', { "functionName": "locationReload" })
         }
     }

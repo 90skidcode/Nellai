@@ -309,7 +309,6 @@ $('.employee-add').click(function() {
             commonAjax('', 'POST', values, '#employee-add', 'Employee added successfully', '', { "functionName": "locationReload" });
         } else {
             values['list_key'] = 'employee_update';
-            console.log(JSON.stringify(values));
             commonAjax('', 'POST', values, '', 'Employee updated successfully', '', { "functionName": "locationReload" });
         }
     }

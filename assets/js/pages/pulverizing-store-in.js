@@ -81,7 +81,10 @@ function displayPulverizingRequestList(response, dataTableId) {
     var tableHeader = [{
         "data": "bill_no"
     }, {
-        "data": "created_at"
+        "data": "created_at",
+        mRender: function(data, type, row) {
+            return formatDate(data);
+        }
     }, {
         "data": "product_total",
         mRender: function(data, type, row) {
@@ -95,9 +98,15 @@ function displayPulverizingRequestList(response, dataTableId) {
     }, /* EDIT */ /* DELETE */ {
         "data": "created_at",
         mRender: function(data, type, row) {
-            if (row.tracking_status == '1' && JSON.parse(sessionStorage.getItem('employee')).result[0].employee_designation_id == '3') {
+            if (row.tracking_status == '1' && JSON.parse(sessionStorage.getItem('employee')).result[0].employee_designation_id == '3' && !row.item_code) {
                 return `<td class="text-right">
                         <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-target=".add"  data-id="${row.request_code}"><i class="mdi mdi-pencil font-size-18"></i></a>
+                        <a class="text-danger" title="Delete" data-toggle="modal" data-target=".delete"  data-id="${row.request_code}"><i class="mdi mdi-close font-size-18"></i></a>                
+                    </td>`;
+            }
+            if (row.tracking_status == '1' && JSON.parse(sessionStorage.getItem('employee')).result[0].employee_designation_id == '3' && row.item_code) {
+                return `<td class="text-right">
+                        <a class="mr-3 text-info self-approve-row" title="Edit" data-toggle="modal" data-target=".add-in"  data-id="${row.request_code}"><i class="mdi mdi-pencil font-size-18"></i></a>
                         <a class="text-danger" title="Delete" data-toggle="modal" data-target=".delete"  data-id="${row.request_code}"><i class="mdi mdi-close font-size-18"></i></a>                
                     </td>`;
             }
@@ -187,7 +196,6 @@ function PulverizingRequestSetValue(response) {
         $.each(requestProductDetails, function(index, value) {
             $('#request-vendor-list #button-add-item').trigger('click');
             $.each(value, function(i, v) {
-                console.log('#request-vendor-list tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]', v);
                 $('#request-vendor-list tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v).trigger("change");
             });
         })
@@ -297,14 +305,12 @@ function StoreInApproveSetValue(response) {
     }
 }
 
-
 /**
  * Add Pulverizing Master
  */
 
 $('.store-in-approve').click(function() {
     if (checkRequired('#approve-vendor-request')) {
-
         var data = {
             "list_key": "createrequest",
             "request_code": $("#approve-vendor-request [name='request_code']").val(),
@@ -314,34 +320,27 @@ $('.store-in-approve').click(function() {
             "remarks": $("#approve-vendor-request [name='remarks']").val(),
             "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#approve-store-in tbody tr:not(#addItem)'))
         }
-        console.log(JSON.stringify(data))
         commonAjax('', 'POST', data, '.add', 'Pulverizing Request added successfully', '', { "functionName": "locationReload" })
-
     }
 });
-
-
-
 
 /**
  * Add Product With IN
  */
 
-
-$(document).on('click', ".edit-row", function() {
-    $(".employee-add").attr('data-id', $(this).attr('data-id'));
+$(document).on('click', ".self-approve-row", function() {
     let data = {
         "list_key": "getRequest",
         "condition": { 'request_management.request_code': $(this).attr('data-id'), "request_branch_id_from": userSession.branch_id }
     }
-    commonAjax('', 'POST', data, '', '', '', { "functionName": "PulverizingRequestSetValue" });
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "pulverizingApproveSetValue" });
 });
 
 /***
  * PulverizingRequest Set Value
  */
 
-function PulverizingRequestSetValue(response) {
+function pulverizingApproveSetValue(response) {
     $(".remove-row").remove();
     multipleSetValue(response.result);
     if (response.result[0].request_product_details) {
@@ -349,7 +348,6 @@ function PulverizingRequestSetValue(response) {
         $.each(requestProductDetails, function(index, value) {
             $('#add-within-pulverizing-list #button-add-item').trigger('click');
             $.each(value, function(i, v) {
-                console.log('#add-within-pulverizing-list tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]', v);
                 $('#add-within-pulverizing-list tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v).trigger("change");
             });
         })
@@ -364,11 +362,11 @@ function PulverizingRequestSetValue(response) {
 $('.add-within-pulverizing').click(function() {
     if (checkRequired('#add-within-pulverizing')) {
         var data = {
-            "list_key": "createrequest",
+            "list_key": "createrequestsame",
             "request_code": $("#add-within-pulverizing [name='request_code']").val(),
             "item_code": $("#add-within-pulverizing [name='item_code']").val(),
             "item_quantity": $("#add-within-pulverizing [name='item_quantity']").val(),
-            "tracking_status": (userSession.employee_designation_id) ? "4" : "1",
+            "tracking_status": (userSession.employee_designation_id == '3') ? "4" : "1",
             "request_branch_id_from": userSession.branch_id,
             "request_branch_id_to": userSession.branch_id,
             "department_id": userSession.department_id,
@@ -376,7 +374,6 @@ $('.add-within-pulverizing').click(function() {
             "remarks": $("#add-within-pulverizing [name='remarks']").val(),
             "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#add-within-pulverizing-list tbody tr:not(#addItem)'))
         }
-        console.log(JSON.stringify(data));
         commonAjax('', 'POST', data, '.add', 'Pulverizing Request added successfully', '', { "functionName": "locationReload" })
     }
 });

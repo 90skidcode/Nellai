@@ -3,7 +3,6 @@ $(document).ready(function() {
         suffixKeyCodes: [13],
         reactToKeydown: true,
         onScan: function(sCode) {
-            console.log(sCode);
             $('input:focus').prop("disable", true);
             let selectdObject = data.find(o => o.value === sCode);
             let trcount = $('table tr.add-row').length - 1;

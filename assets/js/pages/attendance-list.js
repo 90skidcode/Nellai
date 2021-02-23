@@ -227,8 +227,6 @@ $('.attendance-add').click(function() {
             "attendence_date": $(this).attr('data-year') + '-' + $(this).attr('data-month') + '-' + $(this).attr('data-date'),
             "attendencelist": listData
         }
-
-        console.log(JSON.stringify(data));
         commonAjax('', 'POST', data, '.add', 'Attendance added successfully', '', {
             "functionName": "modalClose"
         });
