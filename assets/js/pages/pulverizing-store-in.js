@@ -39,6 +39,7 @@ function listBranch() {
 /**
  * List Product in select 2
  */
+var listProductArray = '';
 
 function listProduct() {
     let data = {
@@ -59,6 +60,7 @@ function listProduct() {
 var productDataList = '<option value="">Select</option>';
 
 function dataProduct(responce) {
+    listProductArray = responce;
     $.each(responce, function(i, v) {
         productDataList += `<option value='${v.product_code}'>${v.product_code} - ${v.product_name}</option>`
     });
@@ -101,21 +103,26 @@ function displayPulverizingRequestList(response, dataTableId) {
             if (row.tracking_status == '1' && JSON.parse(sessionStorage.getItem('employee')).result[0].employee_designation_id == '3' && !row.item_code) {
                 return `<td class="text-right">
                         <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-target=".add"  data-id="${row.request_code}"><i class="mdi mdi-pencil font-size-18"></i></a>
+                        <a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
                         <a class="text-danger" title="Delete" data-toggle="modal" data-target=".delete"  data-id="${row.request_code}"><i class="mdi mdi-close font-size-18"></i></a>                
                     </td>`;
             }
             if (row.tracking_status == '1' && JSON.parse(sessionStorage.getItem('employee')).result[0].employee_designation_id == '3' && row.item_code) {
                 return `<td class="text-right">
                         <a class="mr-3 text-info self-approve-row" title="Edit" data-toggle="modal" data-target=".add-in"  data-id="${row.request_code}"><i class="mdi mdi-pencil font-size-18"></i></a>
+                        <a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
                         <a class="text-danger" title="Delete" data-toggle="modal" data-target=".delete"  data-id="${row.request_code}"><i class="mdi mdi-close font-size-18"></i></a>                
                     </td>`;
             }
             if (row.tracking_status == '7') {
                 return `<td class="text-right">
                 <a class="mr-3 text-info approve-row" title="Approve" data-toggle="modal" data-target=".approve"  data-id="${row.request_code}"><i class="mdi mdi-check-decagram font-size-18"></i></a>
-            </td>`;
+                <a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
+                        
+                </td>`;
             } else
-                return ``;
+                return `<td class="text-right"><a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
+                </td>`;
         }
     }];
     dataTableDisplay(response.result, tableHeader, false, dataTableId, button);
@@ -377,3 +384,80 @@ $('.add-within-pulverizing').click(function() {
         commonAjax('', 'POST', data, '.add', 'Pulverizing Request added successfully', '', { "functionName": "locationReload" })
     }
 });
+
+
+
+/************************************************************************
+ * Check Tracking
+ */
+
+$(document).on('click', ".info-row", function() {
+    let data = {
+        "list_key": "getRequestTracking",
+        "condition": { 'request_code': $(this).attr('data-id') }
+    }
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "infoStatus" });
+});
+
+function infoStatus(responce) {
+    let html = ``;
+    $.each(responce.result.tracking, function(i, v) {
+        var total = 0;
+        html += `<div class="card pl-3 pr-3 pt-2"><div class="row"><div class=" w-100 pb-1">${trackingStatus(v.tracking_status)}</div>
+        <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="font-weight-bold">Bill No</label>
+                        <p>${responce.result.request[0].bill_no}</p>     
+                    </div>
+                </div>
+                <div class="col-md-2">
+                <div class="form-group">
+                    <label class="font-weight-bold">Vendor Name</label>
+                    <p>${(v.vendor_name)? v.vendor_name : ""}</p>     
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="font-weight-bold">Created By</label>
+                    <p>${v.created_by_name}</p>     
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="font-weight-bold">Updated By</label>
+                    <p>${v.employee_id} - ${v.employee_name}</p>     
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="font-weight-bold">Item Name</label>
+                    <p>${v.item_code} - ${(typeof(findInArrayOfObject(v.item_code, 'product_code', listProductArray)) != 'undefined') ? findInArrayOfObject(v.item_code, 'request_code', listProductArray) : ""}</p>     
+                </div>
+            </div>
+            <table id="list" class="table table-centered table-nowrap table-bordered table-striped">
+            <thead class="bg-gray">
+                <tr>
+                   
+                    <th class="w-40">Item</th>
+                    <th class="w-20">Quantity (KGS)</th>
+                    <th class="w-20">Cost per kg</th>
+                    <th class="w-10">Total</th>
+                </tr>
+            </thead>`;
+        $.each(JSON.parse(v.request_product_details), function(inx, val) {
+            html += `<tbody> 
+                <tr>
+                    <th class="w-40">${val.product_code} - ${(typeof(findInArrayOfObject(val.product_code, 'product_code', listProductArray)) != 'undefined') ? findInArrayOfObject(val.product_code, 'product_code', listProductArray).product_name : ""}</th>
+                    <th class="w-20 text-right">${val.quantity}</th>
+                    <th class="w-20 text-right">${(emptySetToZero(val.cost))? emptySetToZero(val.cost) : ""}</th>
+                    <th class="w-10 text-right">${(emptySetToZero(val.cost))? numberWithCommas(emptySetToZero(val.cost)) : ""}</th>
+                </tr>
+            </tbody>`;
+            total += emptySetToZero(Number(val.total));
+        });
+        html += `</table>
+            <p class="col-md-12 text-right">${(total)?numberWithCommas(total):""}</p>
+            <p class="col-md-12 font-weight-bold">Remarks : ${v.remarks}</p></div></div>`;
+    });
+    $('.info-status').html(html);
+}

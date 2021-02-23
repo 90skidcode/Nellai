@@ -91,7 +91,10 @@ function displayStoreInList(response, dataTableId) {
     var tableHeader = [{
         "data": "bill_no"
     }, {
-        "data": "created_at"
+        "data": "created_at",
+        mRender: function(data, type, row) {
+            return formatDate(data);
+        }
     }, {
         "data": "product_total",
         mRender: function(data, type, row) {

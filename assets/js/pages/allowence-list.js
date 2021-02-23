@@ -38,9 +38,9 @@ function displayAllowenceList(response, dataTableId) {
         "data": "created_at",
         mRender: function(data, type, row) {
             return `<td class="text-right">
-                     <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-id="${row.allowence_master_id}" data-target=".add"><i class="mdi mdi-pencil font-size-14"></i></a>
-                    <a class="text-danger delete-row" title="Delete" data-toggle="modal" data-id="${row.allowence_master_id}" data-target=".delete"><i class="mdi mdi-close font-size-14"></i></a>
-                </td>`;
+                        <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-id="${row.allowence_master_id}" data-target=".add"><i class="mdi mdi-pencil font-size-14"></i></a>
+                        <a class="text-danger delete-row" title="Delete" data-toggle="modal" data-id="${row.allowence_master_id}" data-target=".delete"><i class="mdi mdi-close font-size-14"></i></a>
+                          </td>`;
         }
     }];
     dataTableDisplay(response, tableHeader, false, dataTableId, button);

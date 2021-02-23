@@ -1225,7 +1225,7 @@ function hasDuplicates(array) {
 function findInArrayOfObject(serachString, key, array) {
     for (var i = 0; i < array.length; i++) {
         if (array[i][key] === serachString) {
-            return array[i];
+            return (typeof(array[i]) != 'undefined') ? array[i] : "";
         }
     }
 }
