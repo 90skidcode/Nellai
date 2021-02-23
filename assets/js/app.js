@@ -1478,7 +1478,7 @@ function infoStatus(responce) {
             total += emptySetToZero(Number(val.total));
         });
         html += `</table>
-            <p class="col-md-12 text-right">${(total)?numberWithCommas(total):""}</p>`;
+            <p class="col-md-12 text-right">${(total)?numberWithCommas(total):""}</p></div>`;
     });
     $('.info-status').html(html);
 }
