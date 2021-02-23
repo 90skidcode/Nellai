@@ -568,7 +568,6 @@ $.fn.serializeObject = function() {
 function dataTableDisplay(data, column, filter, dataTableId, button) {
     $('#' + dataTableId).DataTable({
         lengthChange: !1,
-        buttons: ["excel", "pdf"],
         'columns': column,
         'data': data,
         initComplete: function() {
@@ -602,6 +601,7 @@ function dataTableDisplay(data, column, filter, dataTableId, button) {
             $(".dataTables_filter label input").attr('placeholder', 'Search...').removeClass('form-control-sm');
             $(".paging_simple_numbers > .pagination").addClass('pagination-rounded justify-content-end mb-2"');
             $(".dataTables_info").addClass('text-dark');
+            $(".dataTables_wrapper .row:first-child .col-sm-12.col-md-6:first-child").html(`<button onclick="tableToExcel('${dataTableId}', 'W3C Example Table')" class='btn btn-sm btn-primary'>Excel</button>`);
         },
         "drawCallback": function() {
             $(".paging_simple_numbers > .pagination").addClass('pagination-rounded justify-content-end mb-2"');
@@ -1400,7 +1400,6 @@ $(document).on('click', ".info-row", function() {
 function infoStatus(responce) {
     let html = ``;
     $.each(responce.result.tracking, function(i, v) {
-        var total = 0;
         html += `<div class="card pl-3 pr-3 pt-2"><div class="row"><div class="w-100 header-badge">${trackingStatus(v.tracking_status)}</div>
         <div class="col-md-2">
                     <div class="form-group">
@@ -1475,11 +1474,28 @@ function infoStatus(responce) {
                     <th class="w-10 text-right">${(emptySetToZero(val.cost))? numberWithCommas(emptySetToZero(val.cost)) : ""}</th>
                 </tr>
             </tbody>`;
-            total += emptySetToZero(Number(val.total));
         });
         html += `</table>
-            <p class="col-md-12 text-right">${(total)?numberWithCommas(total):""}</p>
+            <p class="col-md-12 text-right font-weight-bolder text-success font-size-20">${(v.product_total)?numberWithCommas(v.product_total):""}</p>
             </div></div>`;
     });
     $('.info-status').html(html);
 }
+
+
+
+/**
+ * Export to Excel
+ */
+
+var tableToExcel = (function() {
+    var uri = 'data:application/vnd.ms-excel;base64,',
+        template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body><table>{table}</table></body></html>',
+        base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) },
+        format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
+    return function(table, name) {
+        if (!table.nodeType) table = document.getElementById(table)
+        var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+        window.location.href = uri + base64(format(template, ctx))
+    }
+})()

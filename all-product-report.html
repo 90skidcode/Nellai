@@ -1,18 +1,18 @@
 <!doctype html>
 <html lang="en">
 
-
 <head>
 
     <meta charset="utf-8" />
     <title>Nellai Krishna Foods PVT. LTD</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Deductions List Template" name="description" />
+    <meta content="Nellai Store" name="description" />
     <meta content="Gandhi Selvaraj & Vijay" name="author" />
     <meta http-equiv="content-type" content="text/plain; charset=UTF-8" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
-
+    <!-- Select 2-->
+    <link href="assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
     <!-- Bootstrap Css -->
     <link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
@@ -21,8 +21,7 @@
     <link href="assets/libs/toastr/build/toastr.min.css" rel="stylesheet" type="text/css">
     <!-- App Css-->
     <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-    <!-- Select 2 -->
-    <link href="assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body data-sidebar="dark" data-sidebar="dark" data-keep-enlarged="true" class="vertical-collpsed">
@@ -59,7 +58,7 @@
                 </div>
 
                 <div class="d-flex">
-                    <div class="dropdown d-none d-lg-inline-block ml-1">
+                    <div class="dropdown d-none d-lg-inline-block ml-2">
                         <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
                                 <i class="bx bx-fullscreen"></i>
                             </button>
@@ -85,7 +84,7 @@
                 <!--- Sidemenu -->
                 <div id="sidebar-menu">
                     <!-- Left Menu Start -->
-                    <ul class="metismenu list-unstyled employee" id="side-menu">
+                    <ul class="metismenu list-unstyled kitchen" id="side-menu">
 
 
                     </ul>
@@ -107,35 +106,34 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0 font-size-18">Deductions List</h4>
-
+                                <h4 class="mb-0 font-size-18">Product Report</h4>
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Deductions Lists</a></li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Product</a></li>
+                                        <li class="breadcrumb-item active">All Product List</li>
                                     </ol>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                     <!-- end page title -->
 
-                    <!-- end row -->
-
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <table id="table-deductions-list" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <table id="all-product-report-list" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                         <thead>
                                             <tr>
-                                                <th>Deductions ID</th>
-                                                <th>Deductions Name</th>
-                                                <th>Status</th>
+                                                <th>Item code</th>
+                                                <th>Item Name</th>
+                                                <th>Avaliable Quantity (Kgs)</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
+
                                         <tbody>
+
 
                                         </tbody>
                                     </table>
@@ -144,71 +142,12 @@
                         </div>
                     </div>
                     <!-- end row -->
-
-
-                    <div class="modal fade add" tabindex="-1" role="dialog" aria-labelledby="addDeductionsLabel" style="display: none;" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-xs" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="addDeductionsLabel">Add Deductions List</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="checkout-tabs">
-                                        <form id="deductions-add">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="formrow-email-input">Deductions ID</label>
-                                                        <input type="text" name="deductions_master_id" class="form-control" readonly>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="formrow-email-input">Deductions Name</label>
-                                                        <input type="text" name="deductions_name" class="form-control" required>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary deductions-add">Save</button>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal fade delete" tabindex="-1" role="dialog" aria-labelledby="deleteDeductionsLabel" style="display: none;" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="deleteDeductionsLabel">Delete Deductions</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <p class="mb-2 col-md-12">Are you sure want to Delete?</p>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger btn-delete" data-dismiss="modal">Delete</button>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
                 <!-- container-fluid -->
             </div>
             <!-- End Page-content -->
+
+            <!-- Modal -->
 
 
         </div>
@@ -237,18 +176,15 @@
     <!-- Responsive examples -->
     <script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-
     <!-- Select 2 -->
     <script src="assets/libs/select2/js/select2.min.js"></script>
+    <!-- Page js -->
+    <script src="assets/js/pages/all-product.js"></script>
+
     <!-- toastr plugin -->
     <script src="assets/libs/toastr/build/toastr.min.js"></script>
 
     <script src="assets/js/app.js"></script>
-    <!-- Page js -->
-    <script src="assets/js/pages/deductions-list.js"></script>
-
-
-
 
 </body>
 

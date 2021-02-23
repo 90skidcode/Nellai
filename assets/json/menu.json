@@ -97,7 +97,7 @@
             },
             {
                 "menulabel": "Store OUT",
-                "menulink": "store-out-list.html"
+                "menulink": "product-out-list.html"
             }, {
                 "menulabel": "Store Damage",
                 "menulink": "store-damage-list.html"
@@ -146,7 +146,7 @@
             "menulink": "product-in-list.html"
         }, {
             "menulabel": "Pulverizing OUT",
-            "menulink": "pulverizing-out-list.html"
+            "menulink": "product-out-list.html"
         }, {
             "menulabel": "Pulverizing Damage",
             "menulink": "pulverizing-damage-list.html"
@@ -172,8 +172,8 @@
         "menuicon": "bxl-product-hunt",
         "menulink": "javascript: void(0);",
         "submenu": [{
-                "menulabel": "Products List",
-                "menulink": "product.html"
+                "menulabel": "All Product Report",
+                "menulink": "all-product-report.html"
             },
             {
                 "menulabel": "Products Report",
@@ -194,7 +194,7 @@
             "menulink": "product-in-list.html"
         }, {
             "menulabel": "Kitchen OUT",
-            "menulink": "kitchen-out-list.html"
+            "menulink": "product-out-list.html"
         }, {
             "menulabel": "Kitchen Damage",
             "menulink": "kitchen-damage-list.html"
@@ -220,11 +220,11 @@
         "menuicon": "bxl-product-hunt",
         "menulink": "javascript: void(0);",
         "submenu": [{
-                "menulabel": "Kitchen List",
-                "menulink": "kitchen-product.html"
+                "menulabel": "All Product Report",
+                "menulink": "all-product-report.html"
             },
             {
-                "menulabel": "Kitchen Report",
+                "menulabel": "Single Kitchen Report",
                 "menulink": "kitchen-product-report.html"
             }
         ]
@@ -242,7 +242,7 @@
             "menulink": "product-in-list.html"
         }, {
             "menulabel": "Outlet OUT",
-            "menulink": "outlet-out-list.html"
+            "menulink": "product-out-list.html"
         }, {
             "menulabel": "Outlet Damage",
             "menulink": "outlet-damage-list.html"

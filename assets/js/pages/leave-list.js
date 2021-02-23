@@ -4,7 +4,7 @@ $(document).ready(function() {
     listEmployee();
 });
 var button = ``;
-if (userSession.employee_designation_id != "1") {
+if (userSession.employee_designation_id == "3") {
     button = `<div class="text-sm-right">
                 <button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Leave </button>
               </div>`;
@@ -44,7 +44,8 @@ function listEmployee() {
             "employee_name": "employee_name"
         },
         "condition": {
-            "status": '1'
+            "status": '1',
+            "branch_id": userSession.branch_id
         },
         "like": ""
     }

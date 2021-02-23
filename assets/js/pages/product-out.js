@@ -72,8 +72,10 @@ function listProduct() {
 }
 
 var productDataList = '<option value="">Select</option>';
+var listProductArray = '';
 
 function dataProduct(responce) {
+    listProductArray = responce;
     $.each(responce, function(i, v) {
         productDataList += `<option value='${v.product_code}'>${v.product_code} - ${v.product_name}</option>`
     });
@@ -84,7 +86,7 @@ function displayProductInListInit() {
         "list_key": "getRequest",
         "condition_in": { 'request_management.tracking_status': "3,4,6,7", 'request_management.vendor_id': "0", 'request_management.request_branch_id_to': userSession.branch_id }
     }
-    commonAjax('', 'POST', data, '', '', '', { "functionName": "displayProductInList", "param1": "store-in-list" }, { "functionName": "displayProductInList", "param1": "store-in-list" });
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "displayProductInList", "param1": "product-in-list" }, { "functionName": "displayProductInList", "param1": "product-in-list" });
 }
 
 function displayProductInList(response, dataTableId) {
@@ -170,7 +172,7 @@ function ProductInSetValue(response) {
             var bg = '';
             if (value.status == '2')
                 bg = 'bg-soft-success'
-            $('#store-in').find('#addItem').before(`<tr class="remove-row ${bg}">
+            $('#product-in').find('#addItem').before(`<tr class="remove-row ${bg}">
                        
                         <td scope="row">
                             <select name="product_code" class="form-control select2">${productDataList}</select>
@@ -182,7 +184,7 @@ function ProductInSetValue(response) {
                         </td></tr>
                     `);
             $.each(value, function(i, v) {
-                $('#store-in tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v);
+                $('#product-in tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v);
             });
             $('.select2').select2({ 'disabled': 'readonly' });
         });
@@ -200,8 +202,8 @@ $(document).on('click', '[name="status"]', function() {
  * Add to Product
  */
 
-$('.store-in-add').click(function() {
-    if (checkRequired('#add-store-in')) {
+$('.product-in-add').click(function() {
+    if (checkRequired('#add-product-in')) {
         var id = $(this).attr('data-id');
         if (isEmptyValue(id)) {
             // Add New
@@ -213,7 +215,7 @@ $('.store-in-add').click(function() {
                 "employee_id": userSession.login_username,
                 "remarks": $("[name='remarks']").val(),
                 "product_total": $(".vendor-full-total").html(),
-                "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#store-in tbody tr:not(#addItem)'))
+                "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#product-in tbody tr:not(#addItem)'))
             }
             commonAjax('', 'POST', data, '.add', 'Product In successfully', '', { "functionName": "locationReload" })
         }

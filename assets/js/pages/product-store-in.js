@@ -300,6 +300,7 @@ $('.store-in-approve').click(function() {
             "request_code": $("#approve-vendor-request [name='request_code']").val(),
             "tracking_status": "4",
             "request_branch_id_to": $("#approve-vendor-request [name='request_branch_id_to']").val(),
+            "request_branch_id_from": userSession.branch_id,
             "employee_id": userSession.login_username,
             "remarks": $("#approve-vendor-request [name='remarks']").val(),
             "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#approve-store-in tbody tr:not(#addItem)'))
