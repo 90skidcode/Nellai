@@ -1364,3 +1364,121 @@ function formatDate(date) {
     replacement += " " + dd;
     return date.replace(pattern, replacement);
 }
+
+
+/************************************************************************
+ * Check Tracking
+ */
+
+$('body').append(`<div class="modal fade info" tabindex="-1" role="dialog" aria-labelledby="addStoreOutLabel" style="display: none;" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="addStoreOutLabel">Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body info-status">
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
+</div>`);
+
+$(document).on('click', ".info-row", function() {
+    let data = {
+        "list_key": "getRequestTracking",
+        "condition": { 'request_code': $(this).attr('data-id') }
+    }
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "infoStatus" });
+});
+
+
+function infoStatus(responce) {
+    let html = ``;
+    $.each(responce.result.tracking, function(i, v) {
+        var total = 0;
+        html += `<div class="card pl-3 pr-3 pt-2"><div class="row"><div class="w-100 header-badge">${trackingStatus(v.tracking_status)}</div>
+        <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="font-weight-bold">Bill No</label>
+                        <p>${responce.result.request[0].bill_no}</p>     
+                    </div>
+                </div>
+                <div class="col-md-2">
+                <div class="form-group">
+                    <label class="font-weight-bold">Vendor Name</label>
+                    <p>${(v.vendor_name)? v.vendor_name : ""}</p>     
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="font-weight-bold">Created By</label>
+                    <p>${v.created_by_name}</p>     
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="font-weight-bold">Updated By</label>
+                    <p>${v.employee_id} - ${v.employee_name}</p>     
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="font-weight-bold">Department By</label>
+                    <p>${v.department_name}</p>     
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="font-weight-bold">Branch From</label>
+                    <p>${v.branch_from}</p>     
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="font-weight-bold">Branch To</label>
+                    <p>${v.branch_from}</p>     
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="font-weight-bold">Item Name</label>
+                    <p>${v.item_code} - ${(typeof(findInArrayOfObject(v.item_code, 'product_code', listProductArray)) != 'undefined') ? findInArrayOfObject(v.item_code, 'request_code', listProductArray) : ""}</p>     
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="font-weight-bold">Remarks</label>
+                    <p> ${v.remarks}</p>     
+                </div>
+            </div>
+            <table id="list" class="table table-centered table-nowrap table-bordered table-striped">
+            <thead class="bg-gray">
+                <tr>
+                   
+                    <th class="w-40">Item</th>
+                    <th class="w-20  text-right">Quantity (KGS)</th>
+                    <th class="w-20  text-right">Cost per kg</th>
+                    <th class="w-10  text-right">Total</th>
+                </tr>
+            </thead>`;
+        $.each(JSON.parse(v.request_product_details), function(inx, val) {
+            html += `<tbody> 
+                <tr>
+                    <th class="w-40">${val.product_code} - ${(typeof(findInArrayOfObject(val.product_code, 'product_code', listProductArray)) != 'undefined') ? findInArrayOfObject(val.product_code, 'product_code', listProductArray).product_name : ""}</th>
+                    <th class="w-20 text-right">${val.quantity}</th>
+                    <th class="w-20 text-right">${(emptySetToZero(val.cost))? emptySetToZero(val.cost) : ""}</th>
+                    <th class="w-10 text-right">${(emptySetToZero(val.cost))? numberWithCommas(emptySetToZero(val.cost)) : ""}</th>
+                </tr>
+            </tbody>`;
+            total += emptySetToZero(Number(val.total));
+        });
+        html += `</table>
+            <p class="col-md-12 text-right">${(total)?numberWithCommas(total):""}</p>`;
+    });
+    $('.info-status').html(html);
+}

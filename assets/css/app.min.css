@@ -6990,3 +6990,9 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
+
+.header-badge {
+    background: #ccccccc2;
+    border-radius: 15px;
+    margin-bottom: 5px;
+}

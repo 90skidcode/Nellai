@@ -136,14 +136,14 @@
 }, {
     "menutype": "pulverizing",
     "menuid": "2",
-    "menulink": "pulverizing-in-list.html",
+    "menulink": "product-in-list.html",
     "menu": [{
         "menulabel": "Pulverizing",
         "menuicon": "bxs-factory",
         "menulink": "javascript: void(0);",
         "submenu": [{
             "menulabel": "Pulverizing IN",
-            "menulink": "pulverizing-in-list.html"
+            "menulink": "product-in-list.html"
         }, {
             "menulabel": "Pulverizing OUT",
             "menulink": "pulverizing-out-list.html"
@@ -184,14 +184,14 @@
 }, {
     "menutype": "kitchen",
     "menuid": "3",
-    "menulink": "kitchen-in-list.html",
+    "menulink": "product-in-list.html",
     "menu": [{
         "menulabel": "Kitchen",
         "menuicon": "bxs-flame",
         "menulink": "javascript: void(0);",
         "submenu": [{
             "menulabel": "Kitchen IN",
-            "menulink": "kitchen-in-list.html"
+            "menulink": "product-in-list.html"
         }, {
             "menulabel": "Kitchen OUT",
             "menulink": "kitchen-out-list.html"
@@ -232,14 +232,14 @@
 }, {
     "menutype": "outlet",
     "menuid": "4",
-    "menulink": "outlet-in-list.html",
+    "menulink": "product-in-list.html",
     "menu": [{
         "menulabel": "Outlet",
         "menuicon": "bxs-store-alt",
         "menulink": "javascript: void(0);",
         "submenu": [{
             "menulabel": "Outlet IN",
-            "menulink": "outlet-in-list.html"
+            "menulink": "product-in-list.html"
         }, {
             "menulabel": "Outlet OUT",
             "menulink": "outlet-out-list.html"

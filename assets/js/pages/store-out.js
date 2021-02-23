@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    displayStoreInListInit();
+    displayProductInListInit();
     listVendor();
     listBranch();
     listProduct();
@@ -79,15 +79,15 @@ function dataProduct(responce) {
     });
 }
 
-function displayStoreInListInit() {
+function displayProductInListInit() {
     let data = {
         "list_key": "getRequest",
         "condition_in": { 'request_management.tracking_status': "3,4,6,7", 'request_management.vendor_id': "0", 'request_management.request_branch_id_to': userSession.branch_id }
     }
-    commonAjax('', 'POST', data, '', '', '', { "functionName": "displayStoreInList", "param1": "store-in-list" }, { "functionName": "displayStoreInList", "param1": "store-in-list" });
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "displayProductInList", "param1": "store-in-list" }, { "functionName": "displayProductInList", "param1": "store-in-list" });
 }
 
-function displayStoreInList(response, dataTableId) {
+function displayProductInList(response, dataTableId) {
     var tableHeader = [{
         "data": "bill_no"
     }, {
@@ -111,9 +111,11 @@ function displayStoreInList(response, dataTableId) {
             if (row.tracking_status == '3') {
                 return `<td class="text-right">
                         <a class="mr-3 text-success edit-row" title="Check Approve"  data-toggle="modal" data-target=".add"  data-id="${row.request_code}"><i class="mdi mdi-check-decagram font-size-18"></i></a>       
-                    </td>`;
+                        <a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
+                        </td>`;
             } else
-                return ``;
+                return `<td class="text-right"><a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
+            </td>`;
         }
     }];
     dataTableDisplay(response.result, tableHeader, false, dataTableId, button);
@@ -144,7 +146,7 @@ $(document).on('click', ".btn-delete", function() {
 });
 
 /**
- * To Edit StoreIn
+ * To Edit ProductIn
  */
 
 $(document).on('click', ".edit-row", function() {
@@ -152,14 +154,14 @@ $(document).on('click', ".edit-row", function() {
         "list_key": "getRequest",
         "condition": { 'request_management.request_code': $(this).attr('data-id') }
     }
-    commonAjax('', 'POST', data, '', '', '', { "functionName": "StoreInSetValue" });
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "ProductInSetValue" });
 });
 
 /***
- * StoreIn Set Value
+ * ProductIn Set Value
  */
 
-function StoreInSetValue(response) {
+function ProductInSetValue(response) {
     multipleSetValue(response.result);
     if (response.result[0].request_product_details) {
         let requestProductDetails = JSON.parse(response.result[0].request_product_details);
@@ -195,7 +197,7 @@ $(document).on('click', '[name="status"]', function() {
 })
 
 /**
- * Add to Store
+ * Add to Product
  */
 
 $('.store-in-add').click(function() {
@@ -213,7 +215,7 @@ $('.store-in-add').click(function() {
                 "product_total": $(".vendor-full-total").html(),
                 "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#store-in tbody tr:not(#addItem)'))
             }
-            commonAjax('', 'POST', data, '.add', 'Store In successfully', '', { "functionName": "locationReload" })
+            commonAjax('', 'POST', data, '.add', 'Product In successfully', '', { "functionName": "locationReload" })
         }
     }
 });

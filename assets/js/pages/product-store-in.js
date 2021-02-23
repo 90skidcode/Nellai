@@ -1,7 +1,7 @@
 $(document).ready(function() {
     listBranch();
     listProduct();
-    displayPulverizingRequestListInit();
+    displayProductRequestListInit();
 });
 
 if (sessionStorage.getItem("employee"))
@@ -11,13 +11,13 @@ var button = ``;
 
 if (userSession.employee_designation_id == '4') {
     button = ` <div class="text-sm-right">
-                    <button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Pulverizing Request IN </button>
-                    <button type="button" data-toggle="modal" data-target=".add-in" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Product Request IN </button>
+                    <button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Product Other</button>
+                    <button type="button" data-toggle="modal" data-target=".add-in" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Product</button>
                </div>`;
 }
 
 /**
- * List Pulverizing in select 2
+ * List Product in select 2
  */
 
 function listBranch() {
@@ -67,19 +67,17 @@ function dataProduct(responce) {
     $('[name="item_code"]').html(productDataList);
 }
 
-
-
-function displayPulverizingRequestListInit() {
+function displayProductRequestListInit() {
     let data = {
         "list_key": "getRequest",
         "condition": {
             "request_branch_id_from": userSession.branch_id
         }
     }
-    commonAjax('', 'POST', data, '', '', '', { "functionName": "displayPulverizingRequestList", "param1": "table-pulverizing-list" }, { "functionName": "displayPulverizingRequestList", "param1": "table-pulverizing-list" });
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "displayProductRequestList", "param1": "table-product-list" }, { "functionName": "displayProductRequestList", "param1": "table-product-list" });
 }
 
-function displayPulverizingRequestList(response, dataTableId) {
+function displayProductRequestList(response, dataTableId) {
     var tableHeader = [{
         "data": "bill_no"
     }, {
@@ -130,12 +128,12 @@ function displayPulverizingRequestList(response, dataTableId) {
 }
 
 /**
- * To Add PulverizingRequest
+ * To Add ProductRequest
  */
 
 $(document).on('click', '[data-target=".add"]', function() {
-    $(".pulverizing-add").removeAttr('data-id');
-    $("#add-pulverizing")[0].reset();
+    $(".product-add").removeAttr('data-id');
+    $("#add-product")[0].reset();
     $(".remove-row").remove();
 });
 
@@ -156,7 +154,7 @@ $(document).on('click', '#button-add-item', function() {
 });
 
 /**
- * To Edit PulverizingRequest
+ * To Edit ProductRequest
  */
 
 $(document).on('click', ".edit-row", function() {
@@ -165,14 +163,14 @@ $(document).on('click', ".edit-row", function() {
         "list_key": "getRequest",
         "condition": { 'request_management.request_code': $(this).attr('data-id'), "request_branch_id_from": userSession.branch_id }
     }
-    commonAjax('', 'POST', data, '', '', '', { "functionName": "PulverizingRequestSetValue" });
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "ProductRequestSetValue" });
 });
 
 /***
- * PulverizingRequest Set Value
+ * ProductRequest Set Value
  */
 
-function PulverizingRequestSetValue(response) {
+function ProductRequestSetValue(response) {
     $(".remove-row").remove();
     multipleSetValue(response.result);
     if (response.result[0].request_product_details) {
@@ -184,40 +182,42 @@ function PulverizingRequestSetValue(response) {
             });
         })
     }
+    $(".past-remarks").html("Last Remarks : " + response.result[0].remarks);
+    $("[name='remarks']").val(" ");
 }
 
 
 /**
- * Add Pulverizing Master
+ * Add Product Master
  */
 
-$('.pulverizing-add').click(function() {
-    if (checkRequired('#add-pulverizing')) {
+$('.product-add').click(function() {
+    if (checkRequired('#add-product')) {
         var id = $(this).attr('data-id');
         if (isEmptyValue(id)) {
             // Add New
             var data = {
                 "list_key": "createrequest",
-                "request_code": $("#add-pulverizing [name='request_code']").val(),
+                "request_code": $("#add-product [name='request_code']").val(),
                 "tracking_status": (JSON.parse(sessionStorage.getItem('employee')).result[0].employee_designation_id) ? "2" : "1",
                 "request_branch_id_from": userSession.branch_id,
-                "request_branch_id_to": $("#add-pulverizing [name='request_branch_id_to']").val(),
+                "request_branch_id_to": $("#add-product [name='request_branch_id_to']").val(),
                 "department_id": userSession.department_id,
                 "employee_id": userSession.login_username,
-                "remarks": $("#add-pulverizing [name='remarks']").val(),
+                "remarks": $("#add-product [name='remarks']").val(),
                 "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#request-vendor-list tbody tr:not(#addItem)'))
             }
-            commonAjax('', 'POST', data, '.add', 'Pulverizing Request added successfully', '', { "functionName": "locationReload" })
+            commonAjax('', 'POST', data, '.add', 'Product Request added successfully', '', { "functionName": "locationReload" })
         }
     }
 });
 
 
 $(document).on('keyup', '[name="quantity"], [name="cost"]', function() {
-    totalPulverizingCalculation();
+    totalProductCalculation();
 });
 
-function totalPulverizingCalculation() {
+function totalProductCalculation() {
     let t = 0
     $("#request-vendor-list tbody tr:not(#addItem)").each(function() {
         let q = $(this).find('[name="quantity"]').val();
@@ -245,7 +245,7 @@ $(document).on('click', '.btn-outline-danger', function() {
 
 
 /**
- * To Approve Pulverizing Request
+ * To Approve Product Request
  */
 
 $(document).on('click', ".approve-row", function() {
@@ -290,7 +290,7 @@ function StoreInApproveSetValue(response) {
 }
 
 /**
- * Add Pulverizing Master
+ * Add Product Master
  */
 
 $('.store-in-approve').click(function() {
@@ -304,7 +304,7 @@ $('.store-in-approve').click(function() {
             "remarks": $("#approve-vendor-request [name='remarks']").val(),
             "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#approve-store-in tbody tr:not(#addItem)'))
         }
-        commonAjax('', 'POST', data, '.add', 'Pulverizing Request added successfully', '', { "functionName": "locationReload" })
+        commonAjax('', 'POST', data, '.add', 'Product Request added successfully', '', { "functionName": "locationReload" })
     }
 });
 
@@ -317,127 +317,53 @@ $(document).on('click', ".self-approve-row", function() {
         "list_key": "getRequest",
         "condition": { 'request_management.request_code': $(this).attr('data-id'), "request_branch_id_from": userSession.branch_id }
     }
-    commonAjax('', 'POST', data, '', '', '', { "functionName": "pulverizingApproveSetValue" });
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "productApproveSetValue" });
 });
 
 /***
- * PulverizingRequest Set Value
+ * ProductRequest Set Value
  */
 
-function pulverizingApproveSetValue(response) {
+function productApproveSetValue(response) {
     $(".remove-row").remove();
     multipleSetValue(response.result);
     if (response.result[0].request_product_details) {
         let requestProductDetails = JSON.parse(response.result[0].request_product_details);
         $.each(requestProductDetails, function(index, value) {
-            $('#add-within-pulverizing-list #button-add-item').trigger('click');
+            $('#add-within-product-list #button-add-item').trigger('click');
             $.each(value, function(i, v) {
-                $('#add-within-pulverizing-list tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v).trigger("change");
+                $('#add-within-product-list tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v).trigger("change");
             });
         })
     }
+    $(".past-remarks").html(response.result[0].remarks);
+    $("[name='remarks']").val(" ");
 }
 
 
 /**
- * Add Pulverizing Master
+ * Add Product Master
  */
 
-$('.add-within-pulverizing').click(function() {
-    if (checkRequired('#add-within-pulverizing')) {
+$('.add-within-product').click(function() {
+    if (checkRequired('#add-within-product')) {
         var data = {
             "list_key": "createrequestsame",
-            "request_code": $("#add-within-pulverizing [name='request_code']").val(),
-            "item_code": $("#add-within-pulverizing [name='item_code']").val(),
-            "item_quantity": $("#add-within-pulverizing [name='item_quantity']").val(),
+            "request_code": $("#add-within-product [name='request_code']").val(),
+            "item_code": $("#add-within-product [name='item_code']").val(),
+            "item_quantity": $("#add-within-product [name='item_quantity']").val(),
             "tracking_status": (userSession.employee_designation_id == '3') ? "4" : "1",
             "request_branch_id_from": userSession.branch_id,
             "request_branch_id_to": userSession.branch_id,
             "department_id": userSession.department_id,
             "employee_id": userSession.login_username,
-            "remarks": $("#add-within-pulverizing [name='remarks']").val(),
-            "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#add-within-pulverizing-list tbody tr:not(#addItem)'))
+            "remarks": $("#add-within-product [name='remarks']").val(),
+            "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#add-within-product-list tbody tr:not(#addItem)'))
         }
         commonAjax('', 'POST', data, '.add', (userSession.employee_designation_id == '3') ? "Product added successfully" : "Product Request added successfully", '', { "functionName": "locationReload" })
     }
 });
 
-
-
-/************************************************************************
- * Check Tracking
- */
-
-$(document).on('click', ".info-row", function() {
-    let data = {
-        "list_key": "getRequestTracking",
-        "condition": { 'request_code': $(this).attr('data-id') }
-    }
-    commonAjax('', 'POST', data, '', '', '', { "functionName": "infoStatus" });
-});
-
-function infoStatus(responce) {
-    let html = ``;
-    $.each(responce.result.tracking, function(i, v) {
-        var total = 0;
-        html += `<div class="card pl-3 pr-3 pt-2"><div class="row"><div class=" w-100 pb-1">${trackingStatus(v.tracking_status)}</div>
-        <div class="col-md-2">
-                    <div class="form-group">
-                        <label class="font-weight-bold">Bill No</label>
-                        <p>${responce.result.request[0].bill_no}</p>     
-                    </div>
-                </div>
-                <div class="col-md-2">
-                <div class="form-group">
-                    <label class="font-weight-bold">Vendor Name</label>
-                    <p>${(v.vendor_name)? v.vendor_name : ""}</p>     
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label class="font-weight-bold">Created By</label>
-                    <p>${v.created_by_name}</p>     
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label class="font-weight-bold">Updated By</label>
-                    <p>${v.employee_id} - ${v.employee_name}</p>     
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label class="font-weight-bold">Item Name</label>
-                    <p>${v.item_code} - ${(typeof(findInArrayOfObject(v.item_code, 'product_code', listProductArray)) != 'undefined') ? findInArrayOfObject(v.item_code, 'request_code', listProductArray) : ""}</p>     
-                </div>
-            </div>
-            <table id="list" class="table table-centered table-nowrap table-bordered table-striped">
-            <thead class="bg-gray">
-                <tr>
-                   
-                    <th class="w-40">Item</th>
-                    <th class="w-20">Quantity (KGS)</th>
-                    <th class="w-20">Cost per kg</th>
-                    <th class="w-10">Total</th>
-                </tr>
-            </thead>`;
-        $.each(JSON.parse(v.request_product_details), function(inx, val) {
-            html += `<tbody> 
-                <tr>
-                    <th class="w-40">${val.product_code} - ${(typeof(findInArrayOfObject(val.product_code, 'product_code', listProductArray)) != 'undefined') ? findInArrayOfObject(val.product_code, 'product_code', listProductArray).product_name : ""}</th>
-                    <th class="w-20 text-right">${val.quantity}</th>
-                    <th class="w-20 text-right">${(emptySetToZero(val.cost))? emptySetToZero(val.cost) : ""}</th>
-                    <th class="w-10 text-right">${(emptySetToZero(val.cost))? numberWithCommas(emptySetToZero(val.cost)) : ""}</th>
-                </tr>
-            </tbody>`;
-            total += emptySetToZero(Number(val.total));
-        });
-        html += `</table>
-            <p class="col-md-12 text-right">${(total)?numberWithCommas(total):""}</p>
-            <p class="col-md-12 font-weight-bold">Remarks : ${v.remarks}</p></div></div>`;
-    });
-    $('.info-status').html(html);
-}
 
 /**
  * To detele row
