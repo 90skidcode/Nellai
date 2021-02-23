@@ -41,7 +41,6 @@ function listBranch() {
             "branch_name": "branch_name"
         },
         "condition": {
-            "department_master_id": "1",
             "status": '1'
         },
         "like": ""
