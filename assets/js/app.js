@@ -1464,14 +1464,14 @@ function infoStatus(responce) {
             </div>
             <div class="col-md-2">
                 <div class="form-group">
-                    <label class="font-weight-bold">Branch From</label>
+                    <label class="font-weight-bold">Request Branch From</label>
                     <p>${v.branch_from}</p>     
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="form-group">
-                    <label class="font-weight-bold">Branch To</label>
-                    <p>${v.branch_from}</p>     
+                    <label class="font-weight-bold">Requested Branch To</label>
+                    <p>${v.branch_to}</p>     
                 </div>
             </div>
             <div class="col-md-2">
