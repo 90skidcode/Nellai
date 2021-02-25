@@ -62,11 +62,6 @@ $(document).ready(function() {
     });
 });
 
-
-function itemdata() {
-    return data;
-}
-
 /**
  * Bill Calculation
  */

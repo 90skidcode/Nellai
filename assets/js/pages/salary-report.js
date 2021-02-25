@@ -118,5 +118,4 @@ $(document).on("click", ".search", function() {
     let date = $('[name="month"]').val().split("-");
     let data = { "list_key": "salaryList", "salary_month": date[1], "salary_year": date[0], "condition": { "employee_master.branch_id": $('[name="branch_id"]').val(), "employee_master.department_id": $('[name="department_id"]').val(), "employee_master.employee_type": $('[name="employee_type"]').val(), "employee_master.status": "1" } }
     commonAjax('', 'POST', data, '', '', '', { "functionName": "displaySalaryList" }, { "functionName": "displaySalaryList" });
-
 });

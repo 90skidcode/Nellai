@@ -74,8 +74,8 @@
             "menulabel": "Approvel Vendor request",
             "menulink": "approve-to-vendor-list.html"
         }, {
-            "menulabel": "Request to Vendor Report",
-            "menulink": "request-to-vendor-report.html"
+            "menulabel": "Vendor Report",
+            "menulink": "vendor-report.html"
         }]
     }]
 }, {
