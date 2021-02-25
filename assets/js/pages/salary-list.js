@@ -130,7 +130,7 @@ $('.salary-add').click(function() {
                 "employee_id": id,
                 'allowance': JSON.stringify(tableRowTOArrayOfObjects('#allowance-table tbody tr:not(#addAllowance)')),
                 'deductions': JSON.stringify(tableRowTOArrayOfObjects('#deductions-table tbody tr:not(#addDeductions)')),
-                "salary_total": $(".salary-total").html(),
+                "salary_total": removeCommas($(".salary-total").html()),
                 "salary_month": date[1],
                 "salary_year": date[0],
                 "remarks": $("#remarks").val(),
@@ -183,6 +183,7 @@ $(document).on('click', '.salary-row', function() {
 });
 
 function salaryDOMbuild(responce) {
+
     let attendanceTable = '';
     let attendanceData = responce.result.attendence[0];
     $.each(attendanceData, function(i, v) {
@@ -194,6 +195,7 @@ function salaryDOMbuild(responce) {
     $("#attendance-table tbody").html(attendanceTable);
     let allowanceTable = '';
     let allowanceData = JSON.parse(responce.result.grade[0].allowance);
+    $('.employee-title').html(responce.result.grade[0].employee_name + " - " + responce.result.grade[0].employee_grade);
     $.each(allowanceData, function(i, v) {
         allowanceTable += `<tr>
                                 <td><input type="text"  class="form-control" readonly name="allowance_name" value=${v.allowance_name.toString().replace(/_/g, " ").capitalize()}"></td>
@@ -225,6 +227,7 @@ function salaryDOMbuild(responce) {
                         </tr>`;
     $("#deductions-table tbody").html(deductionsTable);
     $('#allowance-table input').trigger('blur');
+    $("#remarks").val((typeof(responce.result.grade[0].remarks) != 'undefined') ? responce.result.grade[0].remarks : '');
 }
 
 $(document).on('blur', '.modal.salary input', function() {
