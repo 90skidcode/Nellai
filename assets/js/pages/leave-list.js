@@ -57,7 +57,7 @@ function listEmployee() {
  */
 
 function displayLeaveListInit() {
-    let data = { "list_key": "getLeaveManagement", "condition": { "leave_management.status": "1" } }
+    let data = { "list_key": "getLeaveManagement", "condition": { "leave_management.status": "1", "leave_management.branch_id": userSession.branch_id } }
     commonAjax('', 'POST', data, '', '', '', { "functionName": "displayLeaveList", "param1": "table-leave-list" }, { "functionName": "displayLeaveList", "param1": "table-leave-list" });
 }
 
