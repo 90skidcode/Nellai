@@ -1370,6 +1370,37 @@ function formatDate(date) {
  * Check Tracking
  */
 
+/**
+ * List Product in select 2
+ */
+listProduct();
+
+function listProduct() {
+    let data = {
+        "query": 'fetch',
+        "databasename": 'product_master',
+        "column": {
+            "product_code": "product_code",
+            "product_name": "product_name"
+        },
+        "condition": {
+            "status": '1'
+        },
+        "like": ""
+    }
+    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "dataProduct" })
+}
+
+var productDataList = '<option value="">Select</option>';
+var listProductArray = '';
+
+function dataProduct(responce) {
+    listProductArray = responce;
+    $.each(responce, function(i, v) {
+        productDataList += `<option value='${v.product_code}'>${v.product_code} - ${v.product_name}</option>`
+    });
+}
+
 $('body').append(`<div class="modal fade info" tabindex="-1" role="dialog" aria-labelledby="addStoreOutLabel" style="display: none;" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
     <div class="modal-content">

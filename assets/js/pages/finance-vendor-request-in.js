@@ -1,7 +1,6 @@
 $(document).ready(function() {
     listVendor();
     listBranch();
-    listProduct();
     displayVendorRequestListInit();
 });
 
@@ -51,33 +50,7 @@ function listBranch() {
     commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='request_branch_id_to']", "param2": "branch_name", "param3": "branch_master_id" })
 }
 
-/**
- * List Product in select 2
- */
 
-function listProduct() {
-    let data = {
-        "query": 'fetch',
-        "databasename": 'product_master',
-        "column": {
-            "product_code": "product_code",
-            "product_name": "product_name"
-        },
-        "condition": {
-            "status": '1'
-        },
-        "like": ""
-    }
-    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "dataProduct" })
-}
-
-var productDataList = '<option value="">Select</option>';
-
-function dataProduct(responce) {
-    $.each(responce, function(i, v) {
-        productDataList += `<option value='${v.product_code}'>${v.product_name}</option>`
-    });
-}
 
 function displayVendorRequestListInit() {
     let data = {

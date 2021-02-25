@@ -2,7 +2,6 @@ $(document).ready(function() {
     displayProductInListInit();
     listVendor();
     listBranch();
-    listProduct();
     $("[name='request_mode']").select2({ 'disabled': 'readonly' });
 });
 
@@ -51,35 +50,7 @@ function listBranch() {
     $("[name='request_branch_id_to']").select2({ 'disabled': 'readonly' });
 }
 
-/**
- * List Product in select 2
- */
 
-function listProduct() {
-    let data = {
-        "query": 'fetch',
-        "databasename": 'product_master',
-        "column": {
-            "product_code": "product_code",
-            "product_name": "product_name"
-        },
-        "condition": {
-            "status": '1'
-        },
-        "like": ""
-    }
-    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "dataProduct" })
-}
-
-var productDataList = '<option value="">Select</option>';
-var listProductArray = '';
-
-function dataProduct(responce) {
-    listProductArray = responce;
-    $.each(responce, function(i, v) {
-        productDataList += `<option value='${v.product_code}'>${v.product_code} - ${v.product_name}</option>`
-    });
-}
 
 function displayProductInListInit() {
     let data = {

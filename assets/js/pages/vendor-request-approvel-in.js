@@ -2,7 +2,6 @@ $(document).ready(function() {
     displayVendorRequestListInit();
     listVendor();
     listBranch();
-    listProduct();
     $("[name='request_mode']").select2({ 'disabled': 'readonly' });
 });
 
@@ -52,38 +51,9 @@ function listBranch() {
     $("[name='request_branch_id_to']").select2({ 'disabled': 'readonly' });
 }
 
-/**
- * List Product in select 2
- */
-
-function listProduct() {
-    let data = {
-        "query": 'fetch',
-        "databasename": 'product_master',
-        "column": {
-            "product_code": "product_code",
-            "product_name": "product_name"
-        },
-        "condition": {
-            "status": '1'
-        },
-        "like": ""
-    }
-    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "dataProduct" })
-}
-
-var productDataList = '<option value="">Select</option>';
-
-function dataProduct(responce) {
-    $.each(responce, function(i, v) {
-        productDataList += `<option value='${v.product_code}'>${v.product_name}</option>`
-    });
-}
-
 function displayVendorRequestListInit() {
     let data = {
-        "list_key": "getRequest",
-        "condition": { 'request_management.tracking_status': "5" }
+        "list_key": "getRequest"
     }
     commonAjax('', 'POST', data, '', '', '', { "functionName": "displayVendorRequestList", "param1": "table-vendor-request-list" }, { "functionName": "displayVendorRequestList", "param1": "table-vendor-request-list" });
 }
@@ -113,10 +83,15 @@ function displayVendorRequestList(response, dataTableId) {
     }, /* EDIT */ /* DELETE */ {
         "data": "created_at",
         mRender: function(data, type, row) {
-            return `<td class="text-right">
+            if (row.tracking_status == '5') {
+                return `<td class="text-right">
                         <a class="mr-3 text-success edit-row" title="Check Approve"  data-toggle="modal" data-target=".add"  data-id="${row.request_code}"><i class="mdi mdi-check-decagram font-size-18"></i></a>
                         <a class="text-danger" title="Delete" data-toggle="modal" data-target=".delete"  data-id="${row.request_code}"><i class="mdi mdi-close font-size-18"></i></a>                
                     </td>`;
+            } else {
+                return `<td class="text-right"><a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
+            </td>`;
+            }
         }
     }];
     dataTableDisplay(response.result, tableHeader, false, dataTableId, button);

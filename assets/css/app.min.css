@@ -2038,6 +2038,9 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
     .yes-print {
         display: block;
     }
+    .display-none .yes-print {
+        display: block !important;
+    }
 }
 
 [data-simplebar] {
