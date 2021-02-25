@@ -5,6 +5,7 @@ $(document).ready(function() {
     var y = d.getFullYear();
     var ym = y + "-" + m;
     $("#month-year").val(ym);
+    $("#month-year").attr('max', ym);
     displaySalaryListInit(m, y);
 });
 
