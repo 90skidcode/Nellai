@@ -125,32 +125,32 @@
                                 <div class="card-body">
                                     <form id="salary-report">
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-md-2 no-print">
                                                 <div class="form-group">
                                                     <label for="formrow-email-input">Month</label>
                                                     <input type="month" name="month" class="form-control">
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 no-print">
                                                 <div class="form-group">
                                                     <label for="formrow-email-input">Department ID</label>
                                                     <select name="department_id" class="form-control"></select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 no-print">
                                                 <div class="form-group">
                                                     <label for="formrow-email-input">Branch ID</label>
                                                     <select name="branch_id" class="form-control"></select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 no-print">
                                                 <div class="form-group">
                                                     <label for="formrow-email-input">Employee Type</label>
                                                     <select name="employee_type" class="form-control"></select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-1 p-3">
+                                            <div class="col-md-1 p-3 no-print">
                                                 <button type="button" class="btn btn-primary float-right search">Search</button>
                                             </div>
                                         </div>
@@ -162,12 +162,13 @@
                                                 <th>Employee Name</th>
                                                 <th>Department</th>
                                                 <th>Branch</th>
-                                                <th>Salary Amount</th>
+                                                <th>Consultancy Name</th>
+                                                <th class="text-right">Salary Amount</th>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>
                                     </table>
-                                    <button type="button" class="btn btn-primary float-right">Print</button>
+                                    <button type="button" class="btn btn-primary float-right no-print" onclick="window.print()">Print</button>
                                 </div>
                             </div>
                         </div>

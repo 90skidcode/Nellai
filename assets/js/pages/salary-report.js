@@ -36,12 +36,13 @@ function displaySalaryList(responce) {
                     <td>${v.employee_name}</td>
                     <td>${v.department_name}</td>
                     <td>${v.branch_name}</td>
+                    <td>${v.consultancy_name}</td>                    
                     <td class="text-right">${numberWithCommas(v.salary_total)}</td>
                 </tr>`;
         total += Number(v.salary_total);
     });
     html += `<tr>
-                <td colspan="4" class="text-right font-weight-bolder">Total Salary</td>
+                <td colspan="5" class="text-right font-weight-bolder font-size-20">Total Salary</td>
                 <td class="text-right font-weight-bolder font-size-20">${numberWithCommas(total)}</td>
             </tr>`;
 
@@ -115,7 +116,7 @@ function listConsultancy() {
 
 $(document).on("click", ".search", function() {
     let date = $('[name="month"]').val().split("-");
-    let data = { "list_key": "salaryList", "salary_month": date[1], "salary_year": date[0], "condition": { "employee_master.branch_id": $('[name="branch_id"]').val(), "employee_master.department_id": $('[name="department_id"]').val(), "employee_master.employee_type": "1", "employee_master.status": $('[name="employee_type"]').val() } }
+    let data = { "list_key": "salaryList", "salary_month": date[1], "salary_year": date[0], "condition": { "employee_master.branch_id": $('[name="branch_id"]').val(), "employee_master.department_id": $('[name="department_id"]').val(), "employee_master.employee_type": $('[name="employee_type"]').val(), "employee_master.status": "1" } }
     commonAjax('', 'POST', data, '', '', '', { "functionName": "displaySalaryList" }, { "functionName": "displaySalaryList" });
 
 });
