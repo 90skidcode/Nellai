@@ -4,9 +4,7 @@ $(document).ready(function() {
     var m = (d.getMonth() + 1).toString().padStart(2, '0');
     var y = d.getFullYear();
     var ym = y + "-" + m;
-    button = `<div class="text-sm-right">
-                    <input type="month" id="month-year" value="${ym}">
-                </div>`;
+    $("#month-year").val(ym);
     displaySalaryListInit(m, y);
 });
 
@@ -29,6 +27,8 @@ function displaySalaryList(response, dataTableId) {
         "data": "department_name"
     }, {
         "data": "branch_name"
+    }, {
+        "data": "consultancy_name"
     }, {
         "data": "salary_total",
         mRender: function(data, type, row) {
