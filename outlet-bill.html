@@ -20,6 +20,9 @@
     <link href="assets/libs/selectize/selectize.css" rel="stylesheet" type="text/css">
     <!-- App Css-->
     <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+
+    <!-- CSS file -->
+    <link rel="stylesheet" href="assets/libs/EasyAutocomplete-1.3.5/easy-autocomplete.min.css">
 </head>
 
 <body data-sidebar="dark" data-sidebar="dark" data-keep-enlarged="true" class="vertical-collpsed">
@@ -99,46 +102,43 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="table-responsive">
-                                            <table class="table table-centered table-nowrap table-bordered table-striped">
-                                                <thead class="bg-gray">
-                                                    <tr>
-                                                        <th width="2%"> </th>
-                                                        <th width="40%">Item Description</th>
-                                                        <th width="10%">Quantity </th>
-                                                        <th width="10%">Cost per Unit</th>
-                                                        <th width="10%">Cost</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr class="add-row">
-                                                        <td class="text-center">
-                                                            <button type="button" title="Reject" class="btn btn-icon btn-outline-danger btn-lg">
+                                            <form id="outlet-product">
+                                                <table class="table table-centered table-nowrap table-bordered table-striped">
+                                                    <thead class="bg-gray">
+                                                        <tr>
+                                                            <th width="2%"> </th>
+                                                            <th width="40%">Item Description</th>
+                                                            <th width="10%">Quantity </th>
+                                                            <th width="10%">Cost per Unit</th>
+                                                            <th width="10%">Cost</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr class="add-row">
+                                                            <td class="text-center">
+                                                                <button type="button" title="Reject" class="btn btn-icon btn-outline-danger btn-lg">
                                                                 <i class="fa fa-trash"></i>
                                                             </button>
-                                                        </td>
-                                                        <td scope="row">
-                                                            <select name="" id="" class="form-control autoComplete">
-                                                                <option value="">Select</option>
-                                                                <option value="1005">Idly</option>
-                                                                <option value="1004">Pongal</option>
-                                                            </select>
-                                                            <input type="hidden" type="text" class="autoComplete-1" data-id="" name="">
-                                                        </td>
-                                                        <td><input type="number" name="" id="" class="form-control quantity" onkeyup="billCalculation()"> </td>
-                                                        <td> <input type="number" name="" id="" class="form-control costperunit" readonly tabindex='-1'> </td>
-                                                        <td> <input type="number" name="" id="" class="form-control row-cost" readonly tabindex='-1'> </td>
-                                                    </tr>
+                                                            </td>
+                                                            <td scope="row">
+                                                                <input type="text" name="product_id" id="basics" class="form-control">
+                                                            </td>
+                                                            <td><input type="number" name="quantity" id="" class="form-control quantity" onkeyup="billCalculation()" required> </td>
+                                                            <td> <input type="number" name="costperunit" id="" class="form-control costperunit" readonly tabindex='-1' required> </td>
+                                                            <td> <input type="number" name="cost" id="" class="form-control row-cost" readonly tabindex='-1' required> </td>
+                                                        </tr>
 
-                                                    <tr id="addItem">
-                                                        <td class="text-center border-right-0">
-                                                            <button type="button" id="button-add-item" count="1" data-toggle="tooltip" title="Add" data-original-title="Add" class="btn btn-icon btn-outline-success btn-lg">
+                                                        <tr id="addItem">
+                                                            <td class="text-center border-right-0">
+                                                                <button type="button" id="button-add-item" count="1" data-toggle="tooltip" title="Add" data-original-title="Add" class="btn btn-icon btn-outline-success btn-lg">
                                                                     <i class="fa fa-plus"></i>
                                                                 </button>
-                                                        </td>
-                                                        <td colspan="5" class="text-right"></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                                            </td>
+                                                            <td colspan="5" class="text-right"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </form>
                                         </div>
 
                                     </div>
@@ -148,73 +148,74 @@
                         <div class="col-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="formrow-firstname-input">Bill No</label>
-                                                <input type="text" readonly tabindex='-1' class="form-control" id="formrow-firstname-input" value="10005">
+                                    <form id="outlet-bill">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="formrow-firstname-input">Bill No</label>
+                                                    <input type="text" readonly tabindex='-1' name="billno" class="form-control" id="formrow-firstname-input" value="">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="formrow-email-input">Order By <span class=" text-success">(F2)</span></label>
-                                                <select class="form-control order-by">        
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="formrow-email-input">Order By <span class=" text-success">(F2)</span></label>
+                                                    <select name="orderby" class="form-control order-by" required>        
                                                     <option value="Direct">Direct</option>                          
                                                     <option value="Shop">Shop</option>
                                                     <option value="Online">Online</option>                                                            
                                                     <option value="Agent">Agent</option>
                                                 </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="formrow-password-input">GST No <span class=" text-success">(F3)</span></label>
-                                                <input type="text" class="form-control gst-no">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="formrow-password-input">GST No <span class=" text-success">(F3)</span></label>
+                                                    <input type="text" name="gst-no" class="form-control gst-no">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="formrow-password-input">Payment Type <span class="text-success">(F4)</span></label>
-                                                <select class="form-control payment-type">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="formrow-password-input">Payment Type <span class="text-success">(F4)</span></label>
+                                                    <select name="paymeny-type" class="form-control payment-type" required>
                                                     <option value="Online">Cash</option>
                                                     <option value="Shop">Online</option>                                                            
                                                     <option value="Direct">Card</option>
                                                 </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="formrow-password-input">CGST</label>
+                                                    <input type="text" name="cgst" class="form-control cgst" readonly value="2.5" tabindex='-1' required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="formrow-password-input">SGST</label>
+                                                    <input type="text" name="sgst" class="form-control sgst" readonly value="2.5" tabindex='-1' required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="formrow-password-input">Total</label>
+                                                    <input type="text" name="total" class="form-control total font-weight-bold font-size-22 text-success text-right" value="0" required readonly tabindex='-1'>
+                                                </div>
+                                            </div>
+                                            <div class="p-1 border-bottom col-md-12"></div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="formrow-password-input">Customer Given <span class="text-success">(F6)</span></label>
+                                                    <input type="text" name="customer-given" class="form-control customer-given" onkeyup="billCalculation()" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="formrow-password-input">Need to return</label>
+                                                    <input type="text" name="need-to-return" class="form-control need-to-return" readonly tabindex='-1' required>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="formrow-password-input">CGST</label>
-                                                <input type="text" class="form-control cgst" readonly value="2.5" tabindex='-1'>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="formrow-password-input">SGST</label>
-                                                <input type="text" class="form-control sgst" readonly value="2.5" tabindex='-1'>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="formrow-password-input">Total</label>
-                                                <input type="text" class="form-control total font-weight-bold font-size-22 text-success text-right" value="0" readonly tabindex='-1'>
-                                            </div>
-                                        </div>
-                                        <div class="p-1 border-bottom col-md-12"></div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="formrow-password-input">Customer Given <span class="text-success">(F6)</span></label>
-                                                <input type="text" class="form-control customer-given" onkeyup="billCalculation()">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="formrow-password-input">Need to return</label>
-                                                <input type="text" class="form-control need-to-return" readonly tabindex='-1'>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                    </form>
                                 </div>
                                 <div class="text-right col-12 p-2">
                                     <button type="button" class="btn btn-success btn-save">Print (F8)</button>
@@ -227,6 +228,8 @@
             </div>
         </div>
     </div>
+
+
 
     </div>
     <!-- end row -->
@@ -250,18 +253,14 @@
     <script src="assets/libs/metismenu/metisMenu.min.js"></script>
     <script src="assets/libs/simplebar/simplebar.min.js"></script>
     <script src="assets/libs/node-waves/waves.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.7.0/slimselect.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.7.0/slimselect.min.css" rel="stylesheet"></link>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.6.1/slimselect.min.css'>
-    <!-- Auto Conplete -->
-    <script src="assets/libs/selectize/selectize.js"></script>
+    <!-- JS file -->
+    <script src="assets/libs/EasyAutocomplete-1.3.5/jquery.easy-autocomplete.min.js"></script>
     <!-- Scanner Detection -->
     <script src="assets/libs/onscan/onscan.js"></script>
     <!-- Page js -->
     <script src="assets/js/pages/outlet-bill.js"></script>
     <!-- toastr plugin -->
     <script src="assets/libs/toastr/build/toastr.min.js"></script>
-
     <script src="assets/js/app.js"></script>
 
 </body>

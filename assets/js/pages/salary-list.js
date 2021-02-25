@@ -30,7 +30,10 @@ function displaySalaryList(response, dataTableId) {
     }, {
         "data": "branch_name"
     }, {
-        "data": "salary_total"
+        "data": "salary_total",
+        mRender: function(data, type, row) {
+            return numberWithCommas(row.salary_total);
+        }
     }, {
         "data": "salary_process_status",
         mRender: function(row) {
@@ -119,21 +122,14 @@ $('.salary-add').click(function() {
     if (checkRequired('#salary-add')) {
         var id = $(this).attr('data-id');
         var values = $("#salary-add").serializeObject();
-        values['allowance'] = JSON.stringify(tableRowTOArrayOfObjects('#allowance-table tbody tr:not(#addAllowance)'));
-        values['deductions'] = JSON.stringify(tableRowTOArrayOfObjects('#deductions-table tbody tr:not(#addDeductions)'));
         if (!hasDuplicates(values['allowance_name']) && !hasDuplicates(values['deductions_name'])) {
-            delete values['allowance_name'];
-            delete values['allowance_amount_monthly'];
-            delete values['deductions_name'];
-            delete values['deductions_amount_monthly'];
-            delete values['deductions_name'];
-            delete values['allowance_name'];
             let date = $("#month-year").val().split("-");
             // Add New
             var data = {
                 "list_key": "salary_insert",
                 "employee_id": id,
-                "salary_details": values,
+                'allowance': JSON.stringify(tableRowTOArrayOfObjects('#allowance-table tbody tr:not(#addAllowance)')),
+                'deductions': JSON.stringify(tableRowTOArrayOfObjects('#deductions-table tbody tr:not(#addDeductions)')),
                 "salary_total": $(".salary-total").html(),
                 "salary_month": date[1],
                 "salary_year": date[0],
@@ -176,6 +172,9 @@ $(document).on('blur change', '[name="no_of_days"], [name="start_date"]', functi
  */
 
 $(document).on('click', '.salary-row', function() {
+    $("#attendance-table tbody").html(" ");
+    $("#allowance-table tbody").html(" ");
+    $("#deductions-table tbody").html(" ");
     let date = $("#month-year").val().split("-");
     $(".salary-add").removeAttr('data-id');
     $(".salary-add").attr('data-id', $(this).attr('data-id'));
@@ -189,7 +188,7 @@ function salaryDOMbuild(responce) {
     $.each(attendanceData, function(i, v) {
         attendanceTable += `<tr>
                                 <td>${i.toString().replace(/_/g, " ").capitalize()}</td>
-                                <td>${v}</td>
+                                <td>${(isEmptyValue(v)) ? 0 : v}</td>
                             </tr>`;
     })
     $("#attendance-table tbody").html(attendanceTable);
@@ -233,11 +232,11 @@ $(document).on('blur', '.modal.salary input', function() {
     $('#allowance-table input[type="number"]').each(function() {
         allowanceTotal += Number($(this).val());
     });
-    $(".allowance-total").html(allowanceTotal);
+    $(".allowance-total").html(numberWithCommas(allowanceTotal));
     let deductionsTotal = 0;
     $('#deductions-table input[type="number"]').each(function() {
         deductionsTotal += Number($(this).val());
     });
-    $(".deductions-total").html(deductionsTotal);
-    $(".salary-total").html(allowanceTotal - deductionsTotal);
+    $(".deductions-total").html(numberWithCommas(deductionsTotal));
+    $(".salary-total").html(numberWithCommas(allowanceTotal - deductionsTotal));
 });

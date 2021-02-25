@@ -1,4 +1,19 @@
 $(document).ready(function() {
+    let data = [{
+        "value": "1005",
+        "text": "Idly",
+        "price": "20"
+    }, {
+        "value": "1004",
+        "text": "Pongal",
+        "price": "50"
+    }];
+    var options = {
+        data: data,
+        getValue: "text",
+    };
+    $("[name='product_id']").easyAutocomplete(options);
+
     onScan.attachTo(document, {
         suffixKeyCodes: [13],
         reactToKeydown: true,
@@ -47,15 +62,6 @@ $(document).ready(function() {
     });
 });
 
-let data = [{
-    "value": "1005",
-    "text": "Idly",
-    "price": "20"
-}, {
-    "value": "1004",
-    "text": "Pongal",
-    "price": "50"
-}];
 
 function itemdata() {
     return data;
@@ -133,14 +139,15 @@ $(document).on('click', '#button-add-item', function() {
                                                             </button>
                                                         </td>
                                                         <td scope="row">
-                                                        <select name="" id=""  data-id="" data-class="${className}" class="autoComplete form-control  ${className}"> <option value="">Select</option>
+                                                        <select name="product_id" id="" required name="product_id" re  data-id="" data-class="${className}" class="autoComplete form-control  ${className}"> <option value="">Select</option>
                                                         <option value="1005">Idly</option>
                                                         <option value="1004">Pongal</option></select>
                                                         </td>
-                                                        <td><input type="number" name="" id="" onkeyup="billCalculation()" class="form-control quantity"> </td>
-                                                        <td> <input type="number" name="" id="" class="form-control costperunit" readonly tabindex='-1'> </td>
-                                                        <td> <input type="number" name="" id="" class="form-control row-cost" readonly tabindex='-1'> </td>
+                                                        <td><input type="number" name="quantity" id="" onkeyup="billCalculation()" class="form-control quantity" required> </td>
+                                                        <td> <input type="number" name="costperunit" id="" class="form-control costperunit" readonly tabindex='-1' required> </td>
+                                                        <td> <input type="number" name="cost" id="" class="form-control row-cost" readonly tabindex='-1' required> </td>
                                                     </tr>`);
+
         wheelRoll();
 
     } else
@@ -160,4 +167,15 @@ $(document).on('click', '.btn-outline-danger', function() {
 
 $(document).on('keyup blur keypress', 'table tr input,table tr select', function() {
     billCalculation();
-})
+});
+
+$(document).on('click', '.btn-save', function() {
+    if (checkRequired('#outlet-product') && checkRequired('#outlet-bill')) {
+        var data = {
+            "list_key": 'outletbill',
+            "values": $("#outlet-bill").serializeObject(),
+            "bill_details": JSON.stringify(tableRowTOArrayOfObjects('table tbody tr:not(#addItem)'))
+        }
+        commonAjax('', 'POST', data, '.add', 'Allowence added successfully', '', { "functionName": "locationReload" })
+    }
+});

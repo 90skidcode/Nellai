@@ -3,7 +3,7 @@ $(document).ready(function() {
 });
 var button = '';
 /**
- * List Leave 
+ * List Report 
  */
 
 function displayAllProductsListInit() {

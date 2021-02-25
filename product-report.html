@@ -123,20 +123,47 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-2">
                                             <div class="form-group">
                                                 <label for="formrow-firstname-input">Item Code</label>
-                                                <select class="form-control select2">
-                                                    <option>Select</option>
-                                                    <option value="ITE0001">ITE0001 - Rice</option>
-                                                    <option value="ITE0002">ITE0002 - Sunflower Oil</option>
+                                                <select class="form-control select2" name="product_code">
+                                                   
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="formrow-firstname-input">From Date</label>
+                                                <input type="date" class="form-control" name="from_date" id="from_date">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="formrow-firstname-input">To Date</label>
+                                                <input type="date" class=" form-control" name="to_date" id="to_date">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="department">Department</label>
+                                                <select class="form-control select2" name="department_id" required></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="department">Branch</label>
+                                                <select class="form-control select2" name="branch_id" required></select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <button class="btn btn-primary col-md-12 mt-3" onclick="displayAllProductsListInit()">Search</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 stock-view">
                                             <div class="form-group">
                                                 <label for="formrow-email-input">Avaliable Count (Kgs)</label>
-                                                <p class="font-size-24 font-weight-bolder text-success">25</p>
+                                                <p class="font-size-24 font-weight-bolder text-success stock-details"></p>
                                             </div>
                                         </div>
                                     </div>
@@ -145,48 +172,14 @@
                                             <tr>
                                                 <th>Sr.No</th>
                                                 <th>Date/Time</th>
-                                                <th>Desc</th>
+                                                <th>From Branch</th>
+                                                <th>To Branch</th>
+                                                <th>Product</th>
                                                 <th>Credit (Kgs)</th>
                                                 <th>Debit (Kgs)</th>
                                             </tr>
                                         </thead>
-
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>11/24/2020 12:14</td>
-                                                <td>Store IN - AVS Rice MIll</td>
-                                                <td class="text-success">25</td>
-                                                <td></td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>2</td>
-                                                <td>11/24/2020 09:14</td>
-                                                <td>Store OUT - Kitchen</td>
-                                                <td class="text-success"></td>
-                                                <td class="text-danger">5</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>11/24/2020 08:34</td>
-                                                <td>Store OUT - Pulverizing</td>
-                                                <td class="text-success"></td>
-                                                <td class="text-danger">15</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>11/24/2020 08:34</td>
-                                                <td>Store IN - SK Rice MIll</td>
-                                                <td class="text-success">20</td>
-                                                <td class="text-danger"></td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="3" class="text-right font-weight-bold">Total</td>
-                                                <td class="text-success font-weight-bold">45</td>
-                                                <td class="text-danger font-weight-bold">20</td>
-                                            </tr>
-                                        </tbody>
+                                        <tbody></tbody>
                                     </table>
                                 </div>
                             </div>
@@ -197,7 +190,13 @@
                 <!-- container-fluid -->
             </div>
             <!-- End Page-content -->
-
+            <!--
+        <tr>
+            <td colspan="3" class="text-right font-weight-bold">Total</td>
+            <td class="text-success font-weight-bold">45</td>
+            <td class="text-danger font-weight-bold">20</td>
+        </tr>
+        -->
 
 
         </div>
@@ -225,7 +224,7 @@
     </script>
     <!-- toastr plugin -->
     <script src="assets/libs/toastr/build/toastr.min.js"></script>
-
+    <script src="assets/js/pages/custom-search.js"></script>
     <script src="assets/js/app.js"></script>
 
 </body>

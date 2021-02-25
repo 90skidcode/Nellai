@@ -606,7 +606,7 @@ function dataTableDisplay(data, column, filter, dataTableId, button) {
         "drawCallback": function() {
             $(".paging_simple_numbers > .pagination").addClass('pagination-rounded justify-content-end mb-2"');
         }
-    }).buttons().container().appendTo("#" + dataTableId + "_wrapper .col-md-6:eq(0)")
+    }).container().appendTo("#" + dataTableId + "_wrapper .col-md-6:eq(0)")
 }
 
 /**
@@ -1251,7 +1251,7 @@ String.prototype.capitalize = function() {
  * @param {*} x Eg: 12345 : 12,234
  */
 function numberWithCommas(x) {
-    return "Rs." + x.toString().replace(/(\d)(?=(\d\d)+\d$)/g, "$1,");
+    return (typeof(x) != 'object') ? "Rs." + x.toString().replace(/(\d)(?=(\d\d)+\d$)/g, "$1,") : "";
 }
 
 
@@ -1471,7 +1471,7 @@ function infoStatus(responce) {
                     <th class="w-40">${val.product_code} - ${(typeof(findInArrayOfObject(val.product_code, 'product_code', listProductArray)) != 'undefined') ? findInArrayOfObject(val.product_code, 'product_code', listProductArray).product_name : ""}</th>
                     <th class="w-20 text-right">${val.quantity}</th>
                     <th class="w-20 text-right">${(emptySetToZero(val.cost))? emptySetToZero(val.cost) : ""}</th>
-                    <th class="w-10 text-right">${(emptySetToZero(val.cost))? numberWithCommas(emptySetToZero(val.cost)) : ""}</th>
+                    <th class="w-10 text-right">${(emptySetToZero(val.total))? numberWithCommas(emptySetToZero(val.total)) : ""}</th>
                 </tr>
             </tbody>`;
         });
@@ -1499,3 +1499,98 @@ var tableToExcel = (function() {
         window.location.href = uri + base64(format(template, ctx))
     }
 })()
+
+
+function PrintElem() {
+    var mywindow = window.open('', 'PRINT');
+    mywindow.document.write('<html><head><title>Payment Slip</title>');
+    mywindow.document.write('</head><body style="text-align:center;font: Georgia, "Times New Roman", Times, serif;background: #fff;font-size: 22pt;margin:20px auto auto 50px;" >');
+    mywindow.document.write('<header style="text-align:center; white-space:nowrap;overflow:hidden;line-height: 1em;">' +
+        '<p  style="font-size:16pt;white-space:nowrap;overflow:hidden;line-height: 12pt;">Payment Slip</p>' +
+        '<p style="font-size:16pt;white-space:nowrap;overflow:hidden;line-height: 1em;">' + $('.mylabelpaymentheader').html() + '</p>' +
+        '</header>');
+    mywindow.document.write('<content style="text-align:center;">' +
+        '<table style="margin-left: auto;margin-right: auto;border-collapse: collapse;font-size:16pt;">' +
+        '<tr  style="border:1px solid black"><td  style="border:1px solid black">Name:</td><td  style="border:1px solid black">' + $('.lblName').html() + '</td></tr>' +
+        '<tr style="border:1px solid black"><td style="border:1px solid black">Address:</td><td style="border:1px solid black">' + $('.lblAddress').html() + '</td></tr>' +
+        '<tr  style="border:1px solid black"><td  style="border:1px solid black">Meter No:</td><td  style="border:1px solid black">' + $('.lblMeterNo').html() + '</td></tr>' +
+        '<tr  style="border:1px solid black"><td  style="border:1px solid black">Token:</td><td  style="border:1px solid black">' + $('.lblToken').html() + '</td></tr>' +
+        '</table>' +
+
+        '</content>' +
+        '<footer>' +
+        '<hr style="margin-top:30pt;margin-bottom:30pt;">' +
+        '<p style="text-align:right;">&copy pdb</p>' +
+        '</footer>' +
+        '');
+    mywindow.document.write('</body></html>');
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.focus(); // necessary for IE >= 10*/
+    mywindow.print();
+
+    return true;
+}
+
+
+$html = `<style>
+
+                body {
+                    font-size: 10px;
+                    font-family:Calibri;
+                }
+
+                table {
+                    font-size: 10px;
+                    font-family:Calibri;
+                }
+
+            </style>
+
+            <table style="width:100%">
+
+                <tr>
+                    <td align ="left">SALE ORDER NO</td>
+                    <td align ="right">S01</td>
+                </tr>
+                <tr>
+                    <td align ="left">SALE ORDER D/TIME</td>
+                    <td align ="right">2009/01/01</td>
+                </tr>
+
+                <tr>
+                    <td align ="left">CUSTOMER</td>
+                    <td align ="right">JOHN DOE</td>
+                </tr>
+
+            </table>
+            `;
+
+
+function PrintElem() {
+    Popup($html);
+}
+
+function Popup(data) {
+    var mywindow = window.open('', 'my div', 'height=400,width=600');
+    mywindow.document.write('<html><head><title>PressReleases</title>');
+    mywindow.document.write('<link rel="stylesheet" href="css/main.css" type="text/css" />');
+    mywindow.document.write('</head><body >');
+    mywindow.document.write(data);
+    mywindow.document.write('data');
+    mywindow.document.write('</body></html>');
+    mywindow.document.close(); // necessary for IE >= 10
+
+    myDelay = setInterval(checkReadyState, 100000000);
+
+    function checkReadyState() {
+        if (mywindow.document.readyState == "complete") {
+            clearInterval(myDelay);
+            mywindow.focus(); // necessary for IE >= 10
+
+            mywindow.print();
+            mywindow.close();
+        }
+    }
+
+    return true;
+}
