@@ -37,7 +37,7 @@ function displayVendorList(responce) {
                     <td>${formatDate(v.created_at)}</td>
                     <td>${v.vendor_name}</td>
                     <td>${v.request_mode}</td>
-                    <td>${trackingStatus(v.request_status)}</td>                    
+                    <td>${trackingStatus(v.tracking_status)}</td>                    
                     <td class="text-right">${numberWithCommas(v.product_total)}</td>
                 </tr>`;
         total += Number(v.product_total);
