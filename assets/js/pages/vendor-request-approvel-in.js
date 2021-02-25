@@ -86,8 +86,9 @@ function displayVendorRequestList(response, dataTableId) {
             if (row.tracking_status == '5') {
                 return `<td class="text-right">
                         <a class="mr-3 text-success edit-row" title="Check Approve"  data-toggle="modal" data-target=".add"  data-id="${row.request_code}"><i class="mdi mdi-check-decagram font-size-18"></i></a>
-                        <a class="text-danger" title="Delete" data-toggle="modal" data-target=".delete"  data-id="${row.request_code}"><i class="mdi mdi-close font-size-18"></i></a>                
-                    </td>`;
+                        <a class="text-danger delete-row" title="Delete" data-toggle="modal" data-target=".delete"  data-id="${row.request_code}"><i class="mdi mdi-close font-size-18"></i></a>                
+                        <a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
+                        </td>`;
             } else {
                 return `<td class="text-right"><a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
             </td>`;
@@ -222,12 +223,15 @@ function totalVendorCalculation() {
 }
 
 /**
- * To delete a row
+ * To detele row
  */
 
-$(document).on('click', '.btn-outline-danger', function() {
-    if ($(this).closest('table').find("#button-add-item").attr('count') != '1') {
-        $(this).closest('tr').remove();
-        $(this).closest('table').find("#button-add-item").attr('count', parseInt($(this).closest('table').find("#button-add-item").attr('count')) - 1);
-    }
+$(document).on('click', ".delete-row", function() {
+    $(".delete .btn-delete").attr('data-detete', $(this).attr('data-id'));
+});
+
+$(document).on('click', ".delete .btn-delete", function() {
+    var data = { "list_key": "deleteRequest", "request_status": "2", "request_code": $(this).attr('data-detete') }
+    $("#delete").modal('hide');
+    commonAjax('', 'POST', data, '', 'Record Deleted Sucessfully', '', { "functionName": "locationReload" })
 });
