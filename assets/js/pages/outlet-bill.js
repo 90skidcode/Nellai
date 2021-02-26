@@ -189,6 +189,62 @@ $(document).on('click', '.btn-save', function() {
         data["branch_id"] = userSession.branch_id;
         data["department_id"] = userSession.department_id;
         console.log(JSON.stringify(data));
-        commonAjax('', 'POST', data, '.add', 'Allowence added successfully', '', { "functionName": "locationReload" })
+        commonAjax('', 'POST', data, '.add', 'Bill added successfully', '', { "functionName": "printPreview" })
     }
 });
+
+function printPreview(responce) {
+
+    // let res = { "message": "success", "status_code": 200, "result": 
+    //[{ "outlet_billing_id": "11", "bill_no": "INV10011", "branch_id": "6", "department_id": "4", 
+    //"orderby": "Direct", "gst_no": "dfsf", "payment_type": "Online", "cgst": "2.5", "sgst": "2.5", 
+    //"total": "105", "customer_given": "200", "need_to_return": "95", "bill_details": "[{\"product_id\":\"ITE001\",\"quantity\":\"2\",\"costperunit\":\"50\",\"cost\":\"100\"}]", "status": "1", "created_by": "10011", "created_at": "2021-02-26 02:22:56", "updated_at": "0000-00-00 00:00:00", "branch_name": "Outlet Avadi", "department_name": "Outlet", "employee_name": "outlet employee" }] };
+    let html = `<h5 class="text-center">Nellai Krishna Food PVT LTD</h5>
+    <p class="text-center mb-0">1st Guindy</p>
+    <p class="text-center mb-0">Chennai - 600001.</p>
+    <p class="text-center mb-0">Ph: +91 94353 56783</p>
+    <p class="text-center mb-0">email: foods@nkf.com</p>
+
+    <p class="text-center mb-0">Bill No: ${responce.result[0].bill_no}</p>
+    <p class="text-center mb-0">******************************</p>
+    <table class="w-100">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>`;
+
+    $.each(JSON.parse(responce.result[0].bill_details), function(i, v) {
+        html += `
+                    <tr>
+                        <td>${findInArrayOfObject(v.product_id, 'product_code', listBranchProductArray).product_name}</td>
+                        <td class="text-right mb-0">${v.quantity}</td>
+                        <td class="text-right mb-0">${v.cost}</td>
+                    </tr>
+        `;
+    });
+    html += `</tbody>
+                    </table>
+                    <p class="text-center mb-0">******************************</p>
+                    <p class="text-right mb-0">CGSt: ${responce.result[0].cgst}</p>
+                    <p class="text-right mb-0">SGST: ${responce.result[0].sgst}</p>
+                    <p class="text-center mb-0">******************************</p>
+                    <p class="text-right mb-0">Total: ${numberWithCommas(responce.result[0].total)}</p>
+                    <p class="text-right mb-0">SGST: ${numberWithCommas(responce.result[0].customer_given)}</p>
+                    <p class="text-right mb-0">SGST: ${numberWithCommas(responce.result[0].need_to_return)}</p>
+
+                    <p class="text-center mb-0">******************************</p>
+
+                    <p class="text-center mb-0">Thank You </p>
+                    <p class="text-center mb-0">******************************</p>
+  
+                    `;
+    $('.print-bill').printThis({
+        importCSS: false,
+        loadCSS: "assets/css/app.min.css",
+        header: html
+    });
+}
