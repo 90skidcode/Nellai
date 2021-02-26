@@ -606,7 +606,7 @@ function dataTableDisplay(data, column, filter, dataTableId, button) {
         "drawCallback": function() {
             $(".paging_simple_numbers > .pagination").addClass('pagination-rounded justify-content-end mb-2"');
         }
-    }).container().appendTo("#" + dataTableId + "_wrapper .col-md-6:eq(0)")
+    })
 }
 
 /**

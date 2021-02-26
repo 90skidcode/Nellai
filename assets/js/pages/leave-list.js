@@ -154,8 +154,10 @@ $('.leave-add').click(function() {
             var data = {
                 "query": 'add',
                 "databasename": 'leave_management',
-                "values": $("#leave-add").serializeObject()
+                "values": $("#leave-add").serializeObject(),
             }
+            data['values']["department_id"] = userSession.department_id;
+            data['values']["branch_id"] = userSession.branch_id;
             commonAjax('database.php', 'POST', data, '.add', 'Leave added successfully', '', { "functionName": "locationReload" })
             $("#table-leave-list").dataTable().fnDraw();
         } else {
@@ -168,6 +170,8 @@ $('.leave-add').click(function() {
                     "leave_management_id": id
                 }
             }
+            data['values']["department_id"] = userSession.department_id;
+            data['values']["branch_id"] = userSession.branch_id;
             commonAjax('database.php', 'POST', data, '.add', 'Leave updated successfully', '', { "functionName": "locationReload" })
         }
     }

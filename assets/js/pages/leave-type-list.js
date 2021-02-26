@@ -116,7 +116,7 @@ $('.leave-type-add').click(function() {
                 "databasename": 'leave_master',
                 "values": $("#leave-type-add").serializeObject()
             }
-            commonAjax('database.php', 'POST', data, '.add', 'Leave added successfully', '', { "functionName": "locationReload" })
+            commonAjax('database.php', 'POST', data, '.add', 'Leave Type added successfully', '', { "functionName": "locationReload" })
             $("#table-leave-list").dataTable().fnDraw();
         } else {
             // Edit
@@ -128,7 +128,7 @@ $('.leave-type-add').click(function() {
                     "leave_master_id": id
                 }
             }
-            commonAjax('database.php', 'POST', data, '.add', 'Leave updated successfully', '', { "functionName": "locationReload" })
+            commonAjax('database.php', 'POST', data, '.add', 'Leave Type updated successfully', '', { "functionName": "locationReload" })
         }
     }
 });
