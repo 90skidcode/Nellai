@@ -89,10 +89,12 @@ function displayStoreInList(response, dataTableId) {
             if (row.tracking_status != '4') {
                 return `<td class="text-right">
                         <a class="mr-3 text-success edit-row" title="Check Approve"  data-toggle="modal" data-target=".add"  data-id="${row.request_code}"><i class="mdi mdi-check-decagram font-size-18"></i></a>
-                                        
+                        <a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
+                   
                     </td>`;
             } else
-                return ``;
+                return `<td class="text-right"><a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
+                </td>`;
         }
     }];
     dataTableDisplay(response.result, tableHeader, false, dataTableId, button);
