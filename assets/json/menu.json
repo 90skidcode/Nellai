@@ -344,6 +344,9 @@
         }, {
             "menulabel": "Vendor Report",
             "menulink": "vendor-report.html"
+        }, {
+            "menulabel": "Request for Units",
+            "menulink": "finance-request-in.html"
         }]
     }, {
         "menulabel": "Outlet Report",
