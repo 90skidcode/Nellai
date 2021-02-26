@@ -158,7 +158,6 @@ $(document).on('click', '#button-add-item', function() {
                 let productdata = findInArrayOfObject($(this).val(), 'product_code', listBranchProductArray);
                 $(this).closest('tr').find('[name="costperunit"]').val(productdata.price);
                 $(this).closest('tr').find('[name="quantity"]').attr('max', productdata.available_quantity);
-                // $(this).closest('tr').find('.count').html(productdata.available_quantity);
             } catch (err) {
                 console.log(err);
             }
@@ -184,11 +183,11 @@ $(document).on('keyup blur keypress', 'table tr input,table tr select', function
 
 $(document).on('click', '.btn-save', function() {
     if (checkRequired('#outlet-product') && checkRequired('#outlet-bill')) {
-        var data = {
-            "list_key": 'outletbill',
-            "values": $("#outlet-bill").serializeObject(),
-            "bill_details": JSON.stringify(tableRowTOArrayOfObjects('table tbody tr:not(#addItem)'))
-        }
+        var data = $("#outlet-bill").serializeObject();
+        data["list_key"] = 'outletBill';
+        data["bill_details"] = JSON.stringify(tableRowTOArrayOfObjects('table tbody tr:not(#addItem)'));
+        data["branch_id"] = userSession.branch_id;
+        data["department_id"] = userSession.department_id;
         console.log(JSON.stringify(data));
         commonAjax('', 'POST', data, '.add', 'Allowence added successfully', '', { "functionName": "locationReload" })
     }
