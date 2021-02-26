@@ -53,7 +53,8 @@ function listBranch() {
 
 function displayVendorRequestListInit() {
     let data = {
-        "list_key": "getRequest"
+        "list_key": "getRequest",
+        "condition": { 'department_id': 5 }
     }
     commonAjax('', 'POST', data, '', '', '', { "functionName": "displayVendorRequestList", "param1": "table-vendor-request-list" }, { "functionName": "displayVendorRequestList", "param1": "table-vendor-request-list" });
 }
@@ -86,7 +87,7 @@ function displayVendorRequestList(response, dataTableId) {
             if (row.tracking_status == '5') {
                 return `<td class="text-right">
                         <a class="mr-3 text-success edit-row" title="Check Approve"  data-toggle="modal" data-target=".add"  data-id="${row.request_code}"><i class="mdi mdi-check-decagram font-size-18"></i></a>
-                        <a class="text-danger delete-row" title="Delete" data-toggle="modal" data-target=".delete"  data-id="${row.request_code}"><i class="mdi mdi-close font-size-18"></i></a>                
+                        <a class="mr-3 text-danger delete-row" title="Delete" data-toggle="modal" data-target=".delete"  data-id="${row.request_code}"><i class="mdi mdi-close font-size-18"></i></a>                
                         <a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
                         </td>`;
             } else {
@@ -172,7 +173,7 @@ function VendorRequestSetValue(response) {
             });
         })
     }
-    $(".vendor-full-total").html(response.result[0].product_total);
+    $(".vendor-full-total").html(numberWithCommas(response.result[0].product_total));
     $(".remarks-past").html("<b> Remarks: </b> " + response.result[0].remarks);
     $('[name="remarks"]').val(" ");
 }
@@ -194,7 +195,7 @@ $('.vendor-request-add').click(function() {
                 "tracking_status": "3",
                 "employee_id": userSession.login_username,
                 "remarks": $("[name='remarks']").val(),
-                "product_total": $(".vendor-full-total").html(),
+                "product_total": removeCommas($(".vendor-full-total").html()),
                 "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#request-vendor-list tbody tr:not(#addItem)'))
             }
             commonAjax('', 'POST', data, '.add', 'Vendor Request Approved successfully', '', { "functionName": "locationReload" })

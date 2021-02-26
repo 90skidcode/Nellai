@@ -106,11 +106,11 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0 font-size-18">Vendor Request Approvel</h4>
+                                <h4 class="mb-0 font-size-18">NKT List</h4>
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Vendor Request Approvel</a></li>
-                                        <li class="breadcrumb-item active">Vendor Request Approvel</li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">NKT List</a></li>
+                                        <li class="breadcrumb-item active">NKT List</li>
                                     </ol>
                                 </div>
                             </div>
@@ -153,121 +153,7 @@
     </div>
     <!-- END layout-wrapper -->
 
-    <!-- Modal -->
 
-    <div class="modal fade add" tabindex="-1" role="dialog" aria-labelledby="addFinance RequestOutLabel" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addFinance RequestOutLabel">Add Finance Request</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-                </button>
-                </div>
-                <div class="modal-body">
-                    <form id="add-vendor-request">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="formrow-email-input">Bill No</label>
-                                    <input type="text" name="bill_no" class="form-control" readonly>
-                                    <input type="hidden" name="request_code" class="form-control" readonly>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="formrow-email-input">Vendor Code</label>
-                                    <select name="vendor_id" class="form-control select2" required>
-                                
-                            </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="formrow-email-input">Mode of Payment</label>
-                                    <select name="request_mode" class="form-control select2" required>
-                                <option>Select</option>
-                                <option value="IMPS">IMPS</option>
-                                <option value="NET Transfer">NET Transfer</option>
-                                <option value="Cash">Cash</option>
-                            </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="formrow-email-input">Request Branch</label>
-                                    <select name="request_branch_id_to" class="form-control select2" required>
-                       
-                            </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="table-responsive">
-                            <table id="request-vendor-list" class="table table-centered table-nowrap table-bordered table-striped">
-                                <thead class="bg-gray">
-                                    <tr>
-                                        <th class=""> </th>
-                                        <th class="w-40">Item</th>
-                                        <th class="w-20">Quantity (KGS)</th>
-                                        <th class="w-10">Cost per kg</th>
-                                        <th class="w-10">Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr id="addItem">
-                                        <td class="text-center border-right-0">
-                                            <button type="button" id="button-add-item" count="1" title="Add" class="btn btn-icon btn-outline-success btn-lg">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                        </td>
-                                        <td colspan="4" class="text-right"></td>
-                                    </tr>
-                                    <tr id="addItem">
-                                        <td colspan="4">
-                                            <h6 class="m-0 text-right">Total:</h6>
-                                        </td>
-                                        <th class="vendor-full-total text-right">
-
-                                        </th>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <textarea class="form-control col-md-12" name="remarks"></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary vendor-request-add">Save</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="modal fade delete" tabindex="-1" role="dialog" aria-labelledby="editFinance RequestOutLabel" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editFinance RequestOutLabel">Delete Request Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-                </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <p class="mb-2 col-md-12">Are you sure want to Delete?</p>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
@@ -292,7 +178,7 @@
     <script src="assets/libs/select2/js/select2.min.js"></script>
 
     <!-- Page js -->
-    <script src="assets/js/pages/vendor-request-approvel-in.js"></script>
+    <script src="assets/js/pages/nkt-list.js"></script>
 
     <!-- toastr plugin -->
     <script src="assets/libs/toastr/build/toastr.min.js"></script>

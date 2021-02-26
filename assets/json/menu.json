@@ -67,16 +67,24 @@
             "menulink": "salary-report.html"
         }]
     }, {
-        "menulabel": "Approvel",
-        "menuicon": "bx-check-shield",
+        "menulabel": "Vendor",
+        "menuicon": "bx-user-plus",
         "menulink": "javascript: void(0);",
         "submenu": [{
+            "menulabel": "Vendor List",
+            "menulink": "vendor-list.html"
+        }, {
             "menulabel": "Approvel Vendor request",
             "menulink": "approve-to-vendor-list.html"
         }, {
             "menulabel": "Vendor Report",
             "menulink": "vendor-report.html"
         }]
+    }, {
+        "menulabel": "NKT Bill Status",
+        "menuicon": "bxs-report",
+        "menulink": "nkt-list.html",
+        "menu": []
     }]
 }, {
     "menutype": "store",
@@ -291,28 +299,6 @@
         "menulink": "attendance-list.html",
         "submenu": ""
     }, {
-        "menulabel": "Salary",
-        "menuicon": "bx-dollar",
-        "menulink": "javascript: void(0);",
-        "submenu": [{
-            "menulabel": "Salary List",
-            "menulink": "salary-list.html"
-        }, {
-            "menulabel": "Salary Report",
-            "menulink": "salary-report.html"
-        }]
-    }, {
-        "menulabel": "Request",
-        "menuicon": "bxs-file-plus",
-        "menulink": "javascript: void(0);",
-        "submenu": [{
-            "menulabel": "Request to Vendor",
-            "menulink": "finance-vendor-request-in.html"
-        }, {
-            "menulabel": "Request to Vendor Report",
-            "menulink": "request-to-vendor-report.html"
-        }]
-    }, {
         "menulabel": "Leave",
         "menuicon": "bx-calendar-plus",
         "menulink": "javascript: void(0);",
@@ -324,41 +310,40 @@
             "menulink": "leave-type-list.html"
         }]
     }, {
+        "menulabel": "Salary",
+        "menuicon": "bx-dollar",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+            "menulabel": "Salary List",
+            "menulink": "salary-list.html"
+        }, {
+            "menulabel": "Salary Report",
+            "menulink": "salary-report.html"
+        }]
+    }, {
         "menulabel": "Products",
         "menuicon": "bxl-product-hunt",
         "menulink": "javascript: void(0);",
         "submenu": [{
-                "menulabel": "Products List",
-                "menulink": "product.html"
-            },
-            {
-                "menulabel": "Products Report",
-                "menulink": "product-report.html"
-            }
-        ]
+            "menulabel": "Products List",
+            "menulink": "product.html"
+        }, {
+            "menulabel": "Products Report",
+            "menulink": "product-report.html"
+        }]
     }, {
         "menulabel": "Vendor",
         "menuicon": "bx-user-plus",
         "menulink": "javascript: void(0);",
         "submenu": [{
-                "menulabel": "Vendor List",
-                "menulink": "vendor-list.html"
-            },
-            {
-                "menulabel": "Vendor Report",
-                "menulink": "vendor-report.html"
-            }
-        ]
-    }, {
-        "menulabel": "Approvel",
-        "menuicon": "bx-check-shield",
-        "menulink": "javascript: void(0);",
-        "submenu": [{
-            "menulabel": "Approvel request",
-            "menulink": "finance-request-in.html"
+            "menulabel": "Vendor List",
+            "menulink": "vendor-list.html"
         }, {
-            "menulabel": "Request to Vendor Report",
-            "menulink": "request-to-vendor-report.html"
+            "menulabel": "Request to Vendor",
+            "menulink": "finance-vendor-request-in.html"
+        }, {
+            "menulabel": "Vendor Report",
+            "menulink": "vendor-report.html"
         }]
     }]
 }]

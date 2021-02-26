@@ -98,8 +98,8 @@ function displayAllProductsList(response) {
         html += `<tr>
                     <td>${i+1}</td>
                     <td>${formatDate(v.stock_date)}</td>
-                    <td>${v.to_branch}</td>
-                    <td>${v.from_branch}</td>
+                    <td>${(v.department_id == '5')? "Vendor" : v.to_branch}</td>
+                    <td>${(v.department_id == '5')? v.to_branch : v.from_branch}</td>
                     <td>${(Number(v.stock_quantity_in))? "IN": "OUT"} - ${v.product_code} - ${v.product_name}</td>
                     <td class="text-success text-right">${(Number(v.stock_quantity_in))? v.stock_quantity_in: ""}</td>
                     <td class="text-danger text-right">${(Number(v.stock_quantity_out))? v.stock_quantity_out: ""}</td>
