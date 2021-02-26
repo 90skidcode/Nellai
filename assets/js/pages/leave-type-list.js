@@ -3,7 +3,7 @@ $(document).ready(function() {
 });
 
 var button = `<div class="text-sm-right">
-<button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Leave </button>
+<button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Leave Type</button>
 </div>`;
 
 function displayLeaveListInit() {
@@ -53,8 +53,8 @@ function displayLeaveList(response, dataTableId) {
  */
 
 $(document).on('click', '[data-target=".add"]', function() {
-    $(".leave-add").removeAttr('data-id');
-    $("#leave-add")[0].reset();
+    $(".leave-type-add").removeAttr('data-id');
+    $("#leave-type-add")[0].reset();
 });
 
 /**
@@ -62,8 +62,8 @@ $(document).on('click', '[data-target=".add"]', function() {
  */
 
 $(document).on('click', ".edit-row", function() {
-    $(".leave-add").attr('data-id', $(this).attr('data-id'));
-    $("#leave-add")[0].reset();
+    $(".leave-type-add").attr('data-id', $(this).attr('data-id'));
+    $("#leave-type-add")[0].reset();
     let data = {
         "query": "fetch",
         "databasename": "leave_master",
@@ -106,15 +106,15 @@ $(document).on('click', ".btn-delete", function() {
  * Add Leave Master
  */
 
-$('.leave-add').click(function() {
-    if (checkRequired('#leave-add')) {
+$('.leave-type-add').click(function() {
+    if (checkRequired('#leave-type-add')) {
         var id = $(this).attr('data-id');
         if (isEmptyValue(id)) {
             // Add New
             var data = {
                 "query": 'add',
                 "databasename": 'leave_master',
-                "values": $("#leave-add").serializeObject()
+                "values": $("#leave-type-add").serializeObject()
             }
             commonAjax('database.php', 'POST', data, '.add', 'Leave added successfully', '', { "functionName": "locationReload" })
             $("#table-leave-list").dataTable().fnDraw();
@@ -123,7 +123,7 @@ $('.leave-add').click(function() {
             var data = {
                 "query": 'update',
                 "databasename": 'leave_master',
-                "values": $("#leave-add").serializeObject(),
+                "values": $("#leave-type-add").serializeObject(),
                 "condition": {
                     "leave_master_id": id
                 }
