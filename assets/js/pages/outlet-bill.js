@@ -48,17 +48,7 @@ $(document).ready(function() {
 
 document.addEventListener('scan', function(sScancode, iQuantity) {
     var focus = $(':focus');
-    // focus.prop("disable", true);
     focus.prop("readonly", true);
-    $('input').each(function() {
-        // $(this).val($(this).val().replace(sScancode.detail.scanCode, ''));
-        //$(this).val($(this).val().replace(processText(sScancode.detail.scanCode), ''));
-    })
-
-    setTimeout(function() {
-        // focus.prop("disable", false);
-        //focus.prop("readonly", false);
-    }, 500);
 });
 
 $('[name="quantity"]').on('click', function() {
