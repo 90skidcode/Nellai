@@ -101,20 +101,16 @@ function displayAllProductsList(response) {
                     <td>${v.department_name}</td>                 
                     <td>${v.branch_name}</td>
                     <td>${v.orderby}</td>
-                    <td>${numberWithCommas(v.total)}</td>
+                    <td class="text-right">${numberWithCommas(v.total)}</td>
                 </tr>`;
-        total += v.total;
+        total += Number(v.total);
     });
 
-    if (!$('[name="product_code"]').val())
-        $(".stock-view").hide();
-    else {
-        $(".stock-view").show();
-        html += `<tr>
-                    <td colspan="4"></td>
+
+    html += `<tr>
+                    <td colspan="5"></td>
                     <td class="text-success text-right font-weight-bolder font-size-20">${numberWithCommas(total)}</td>
                 </tr>`;
-    }
 
     $("tbody").html(html);
 }
