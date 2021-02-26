@@ -130,10 +130,8 @@
                                         <div class="col-7">
                                             <div class="text-primary p-3">
                                                 <h5 class="text-primary">Welcome Back !</h5>
-                                                <p>Dashboard</p>
-                                                <ul class="pl-3 mb-0">
-                                                    <li class="py-1">7 Outlets</li>
-                                                    <li class="py-1">2 Pulverizing Unit</li>
+                                                <ul class="pl-3 mb-0 department-count">
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -158,9 +156,8 @@
                                                 <h5 class="font-size-14 mb-0">Orders</h5>
                                             </div>
                                             <div class="text-muted mt-4">
-                                                <h4>1,452 <i class="mdi mdi-chevron-up ml-1 text-success"></i></h4>
-                                                <div class="d-flex">
-                                                    <span class="badge badge-soft-success font-size-12"> + 0.2% </span> <span class="ml-2 text-truncate">From previous period</span>
+                                                <h4 class="order-count"></h4>
+                                                <div class="d-flex order-details">
                                                 </div>
                                             </div>
                                         </div>
@@ -179,9 +176,8 @@
                                                 <h5 class="font-size-14 mb-0">Revenue</h5>
                                             </div>
                                             <div class="text-muted mt-4">
-                                                <h4>Rs. 10,28,452 <i class="mdi mdi-chevron-up ml-1 text-success"></i></h4>
-                                                <div class="d-flex">
-                                                    <span class="badge badge-soft-success font-size-12"> + 0.2% </span> <span class="ml-2 text-truncate">From previous period</span>
+                                                <h4 class="revenue-count"></h4>
+                                                <div class="d-flex revenue-details">
                                                 </div>
                                             </div>
                                         </div>
@@ -197,13 +193,11 @@
                                                             <i class="bx bx-purchase-tag-alt"></i>
                                                         </span>
                                                 </div>
-                                                <h5 class="font-size-14 mb-0">Average Daily Sales</h5>
+                                                <h5 class="font-size-14 mb-0">Average Monthly Sales</h5>
                                             </div>
                                             <div class="text-muted mt-4">
-                                                <h4>Rs. 11,116.2 <i class="mdi mdi-chevron-up ml-1 text-success"></i></h4>
-
-                                                <div class="d-flex">
-                                                    <span class="badge badge-soft-warning font-size-12"> 0% </span> <span class="ml-2 text-truncate">From previous period</span>
+                                                <h4 class="average-count"></h4>
+                                                <div class="d-flex average-details">
                                                 </div>
                                             </div>
                                         </div>
@@ -214,7 +208,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <!--   <div class="row">
                         <div class="col-xl-12">
                             <div class="card">
                                 <div class="card-body">
@@ -314,24 +308,18 @@
 
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
-
     <!-- JAVASCRIPT -->
     <script src="assets/libs/jquery/jquery.min.js"></script>
     <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/libs/metismenu/metisMenu.min.js"></script>
     <script src="assets/libs/simplebar/simplebar.min.js"></script>
     <script src="assets/libs/node-waves/waves.min.js"></script>
-
-    <!-- apexcharts -->
-    <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
-
-    <!-- Saas dashboard init -->
-    <script src="assets/js/pages/saas-dashboard.init.js"></script>
-
     <!-- toastr plugin -->
     <script src="assets/libs/toastr/build/toastr.min.js"></script>
-
+    <!-- Page js -->
     <script src="assets/js/app.js"></script>
+    <script src="assets/js/pages/dashboard.init.js"></script>
+
 
 </body>
 

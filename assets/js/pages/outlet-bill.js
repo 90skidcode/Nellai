@@ -194,11 +194,6 @@ $(document).on('click', '.btn-save', function() {
 });
 
 function printPreview(responce) {
-
-    // let res = { "message": "success", "status_code": 200, "result": 
-    //[{ "outlet_billing_id": "11", "bill_no": "INV10011", "branch_id": "6", "department_id": "4", 
-    //"orderby": "Direct", "gst_no": "dfsf", "payment_type": "Online", "cgst": "2.5", "sgst": "2.5", 
-    //"total": "105", "customer_given": "200", "need_to_return": "95", "bill_details": "[{\"product_id\":\"ITE001\",\"quantity\":\"2\",\"costperunit\":\"50\",\"cost\":\"100\"}]", "status": "1", "created_by": "10011", "created_at": "2021-02-26 02:22:56", "updated_at": "0000-00-00 00:00:00", "branch_name": "Outlet Avadi", "department_name": "Outlet", "employee_name": "outlet employee" }] };
     let html = `<h5 class="text-center">Nellai Krishna Food PVT LTD</h5>
     <p class="text-center mb-0">1st Guindy</p>
     <p class="text-center mb-0">Chennai - 600001.</p>
@@ -229,12 +224,12 @@ function printPreview(responce) {
     html += `</tbody>
                     </table>
                     <p class="text-center mb-0">******************************</p>
-                    <p class="text-right mb-0">CGSt: ${responce.result[0].cgst}</p>
+                    <p class="text-right mb-0">CGST: ${responce.result[0].cgst}</p>
                     <p class="text-right mb-0">SGST: ${responce.result[0].sgst}</p>
                     <p class="text-center mb-0">******************************</p>
                     <p class="text-right mb-0">Total: ${numberWithCommas(responce.result[0].total)}</p>
-                    <p class="text-right mb-0">SGST: ${numberWithCommas(responce.result[0].customer_given)}</p>
-                    <p class="text-right mb-0">SGST: ${numberWithCommas(responce.result[0].need_to_return)}</p>
+                    <p class="text-right mb-0">Customer Given: ${numberWithCommas(responce.result[0].customer_given)}</p>
+                    <p class="text-right mb-0">Need To Return : ${numberWithCommas(responce.result[0].need_to_return)}</p>
 
                     <p class="text-center mb-0">******************************</p>
 

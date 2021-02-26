@@ -345,5 +345,9 @@
             "menulabel": "Vendor Report",
             "menulink": "vendor-report.html"
         }]
+    }, {
+        "menulabel": "Outlet Report",
+        "menuicon": "bxs-printer",
+        "menulink": "outlet-report.html"
     }]
 }]

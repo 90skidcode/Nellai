@@ -1,1 +1,27 @@
-var options={chart:{height:359,type:"bar",stacked:!0,toolbar:{show:!1},zoom:{enabled:!0}},plotOptions:{bar:{horizontal:!1,columnWidth:"15%",endingShape:"rounded"}},dataLabels:{enabled:!1},series:[{name:"Series A",data:[44,55,41,67,22,43,36,52,24,18,36,48]},{name:"Series B",data:[13,23,20,8,13,27,18,22,10,16,24,22]},{name:"Series C",data:[11,17,15,15,21,14,11,18,17,12,20,18]}],xaxis:{categories:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]},colors:["#556ee6","#f1b44c","#34c38f"],legend:{position:"bottom"},fill:{opacity:1}},chart=new ApexCharts(document.querySelector("#stacked-column-chart"),options);chart.render();options={chart:{height:180,type:"radialBar",offsetY:-10},plotOptions:{radialBar:{startAngle:-135,endAngle:135,dataLabels:{name:{fontSize:"13px",color:void 0,offsetY:60},value:{offsetY:22,fontSize:"16px",color:void 0,formatter:function(e){return e+"%"}}}}},colors:["#556ee6"],fill:{type:"gradient",gradient:{shade:"dark",shadeIntensity:.15,inverseColors:!1,opacityFrom:1,opacityTo:1,stops:[0,50,65,91]}},stroke:{dashArray:4},series:[67],labels:["Series A"]};(chart=new ApexCharts(document.querySelector("#radialBar-chart"),options)).render();
+listDashboard();
+/**
+ * List listDashboard
+ */
+
+function listDashboard() {
+    let data = { "list_key": "getDashboardDetails" };
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "dashboard" });
+}
+
+function dashboard(response) {
+    console.log(response);
+    let res = response.result;
+
+    $('.department-count').html(`<li class="py-1 outlet-count">${res.department[0].outlet_count} Outlet</li>
+    <li class="py-1 pulverizing-count">${res.department[0].department_count} Pulverizing</li>
+    <li class="py-1 kitchen-count">${res.department[0].kitchen_count} Kitchen</li>
+    <li class="py-1 store-count">${res.department[0].store_count} Store</li>`);
+
+    $('.order-count').html(`${res.orders[0].current_sales_date} <i class="mdi mdi-chevron-up ml-1 text-success"></i>`)
+    $('.order-details').html(`<span class="badge badge-soft-success font-size-12"> + ${((Number(res.orders[0].current_sales_date)/Number(res.orders[0].previous_date_sales))*100)}% </span> <span class="ml-2 text-truncate">From previous Day</span>`);
+    $('.revenue-count').html(`${res.revenue[0].current_sales_date} <i class="mdi mdi-chevron-up ml-1 text-success"></i>`)
+    $('.revenue-details').html(`<span class="badge badge-soft-success font-size-12"> + ${((Number(res.revenue[0].current_sales_date)/Number(res.revenue[0].previous_date_sales))*100).toFixed(2)}% </span> <span class="ml-2 text-truncate">From previous Day</span>`);
+    $('.average-count').html(`${res.earning[0].current_month_sales} <i class="mdi mdi-chevron-up ml-1 text-success"></i>`)
+    $('.average-details').html(`<span class="badge badge-soft-success font-size-12"> + ${((Number(res.earning[0].current_month_sales)/emptySetToZero(res.earning[0].previous_month_sales))*100).toFixed(2)}% </span> <span class="ml-2 text-truncate">From previous Month</span>`);
+
+}
