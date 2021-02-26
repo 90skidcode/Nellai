@@ -1,49 +1,33 @@
 $(document).ready(function() {
-    let data = [{
-        "value": "1005",
-        "text": "Idly",
-        "price": "20"
-    }, {
-        "value": "1004",
-        "text": "Pongal",
-        "price": "50"
-    }];
-    var options = {
-        data: data,
-        getValue: "text",
-    };
-    $("[name='product_id']").easyAutocomplete(options);
-
+    listProduct();
     onScan.attachTo(document, {
         suffixKeyCodes: [13],
         reactToKeydown: true,
         onScan: function(sCode) {
             $('input:focus').prop("disable", true);
-            let selectdObject = data.find(o => o.value === sCode);
+            let selectdObject = findInArrayOfObject(sCode.toUpperCase(), 'product_code', listBranchProductArray);
             let trcount = $('table tr.add-row').length - 1;
-            $('input').each(function() {
-                $(this).val($(this).val().replace(sCode, ''));
-            });
-            let lastauto = $('tr.add-row').eq(trcount).find('.autoComplete').val();
+
+            let lastauto = $('tr.add-row').eq(trcount).find('.select2').val();
             let quantity = $('tr.add-row').eq(trcount).find('.quantity').val();
             if (!lastauto || !quantity) {
                 let flag = true;
-                $('tr.add-row .autoComplete').each(function() {
-                    if ($(this).attr('data-id') == sCode) {
+                $('tr.add-row select.select2').each(function() {
+                    if ($(this).val() == sCode) {
                         $(this).closest('tr').find('.quantity').val(Number($(this).closest('tr').find('.quantity').val()) + 1).focus();
                         flag = false;
                         return false;
                     }
                 });
                 if (flag && typeof(selectdObject) != 'undefined') {
-                    $('table tr.add-row').eq(trcount).find('.autoComplete').attr('data-id', sCode).val(sCode);
+                    $('table tr.add-row').eq(trcount).find('.select2').attr('data-id', sCode).val(sCode).trigger("change");;
                     $('tr.add-row').eq(trcount).find('.quantity').val(1).focus();
                     $('tr.add-row').eq(trcount).find('.costperunit').val(selectdObject.price);
                 }
             } else {
                 let flag = true;
-                $('tr.add-row .autoComplete').each(function() {
-                    if ($(this).attr('data-id') == sCode) {
+                $('tr.add-row select.select2').each(function() {
+                    if ($(this).val() == sCode) {
                         $(this).closest('tr').find('.quantity').val(Number($(this).closest('tr').find('.quantity').val()) + 1).focus();
                         flag = false;
                         return false;
@@ -52,7 +36,7 @@ $(document).ready(function() {
                 if (flag && typeof(selectdObject) != 'undefined') {
                     $('#button-add-item').trigger('click');
                     let trcount = $('table tr.add-row').length - 1;
-                    $('table tr.add-row').eq(trcount).find('.autoComplete').attr('data-id', sCode).val(sCode);
+                    $('table tr.add-row').eq(trcount).find('.select2').val(sCode).trigger("change");
                     $('tr.add-row').eq(trcount).find('.quantity').val(1).focus();
                     $('tr.add-row').eq(trcount).find('.costperunit').val(selectdObject.price);
                 }
@@ -61,6 +45,44 @@ $(document).ready(function() {
         }
     });
 });
+
+document.addEventListener('scan', function(sScancode, iQuantity) {
+    var focus = $(':focus');
+    // focus.prop("disable", true);
+    focus.prop("readonly", true);
+    $('input').each(function() {
+        // $(this).val($(this).val().replace(sScancode.detail.scanCode, ''));
+        //$(this).val($(this).val().replace(processText(sScancode.detail.scanCode), ''));
+    })
+
+    setTimeout(function() {
+        // focus.prop("disable", false);
+        //focus.prop("readonly", false);
+    }, 500);
+});
+
+$('[name="quantity"]').on('click', function() {
+    $(this).prop("readonly", false);
+})
+
+/**
+ * List Product in select 2
+ */
+function listProduct() {
+    let data = { "list_key": "getBillingavalablity", "branch_id": userSession.branch_id }
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "dataBranchProduct" })
+}
+
+var dataBranchProductlist = '<option value="">Select</option>';
+var listBranchProductArray = '';
+
+function dataBranchProduct(responce) {
+    listBranchProductArray = responce.result;
+    $.each(responce.result, function(i, v) {
+        dataBranchProductlist += `<option value='${v.product_code}'>${v.product_code} - ${v.product_name}</option>`
+    });
+    $('#button-add-item').trigger('click');
+}
 
 /**
  * Bill Calculation
@@ -117,7 +139,7 @@ $(window).keydown(function(event) {
 $(document).on('click', '#button-add-item', function() {
     let that = $(this)
     let flag = true;
-    $('tr.add-row .autoComplete').each(function() {
+    $('tr.add-row select.select2').each(function() {
         if (!$(this).val()) {
             flag = false;
             return false;
@@ -125,8 +147,6 @@ $(document).on('click', '#button-add-item', function() {
     });
 
     if (flag) {
-        var autoCompleteCount = Number($('tr.add-row input.autoComplete').length) + 1;
-        var className = "autoComplete-" + autoCompleteCount;
         that.closest('table').find('#addItem').before(`   <tr class="add-row">
                                                         <td class="text-center">
                                                             <button type="button" title="Reject" class="btn btn-icon btn-outline-danger btn-lg">
@@ -134,21 +154,29 @@ $(document).on('click', '#button-add-item', function() {
                                                             </button>
                                                         </td>
                                                         <td scope="row">
-                                                        <select name="product_id" id="" required name="product_id" re  data-id="" data-class="${className}" class="autoComplete form-control  ${className}"> <option value="">Select</option>
-                                                        <option value="1005">Idly</option>
-                                                        <option value="1004">Pongal</option></select>
-                                                        </td>
-                                                        <td><input type="number" name="quantity" id="" onkeyup="billCalculation()" class="form-control quantity" required> </td>
+                                                                <select name="product_id" class="form-control select2 select2">${dataBranchProductlist}</select>
+                                                            </td>
+                                                        <td><input type="number" name="quantity" id="" onkeyup="billCalculation()" class="form-control quantity"  required><span class="count badge-primary"> </td>
                                                         <td> <input type="number" name="costperunit" id="" class="form-control costperunit" readonly tabindex='-1' required> </td>
                                                         <td> <input type="number" name="cost" id="" class="form-control row-cost" readonly tabindex='-1' required> </td>
                                                     </tr>`);
 
         wheelRoll();
+        $('.select2').select2().on("select2:select", function(e) {
+            $(this).closest('tr').find('[name="quantity"]').focus();
+            try {
+                let productdata = findInArrayOfObject($(this).val(), 'product_code', listBranchProductArray);
+                $(this).closest('tr').find('[name="costperunit"]').val(productdata.price);
+                $(this).closest('tr').find('[name="quantity"]').attr('max', productdata.available_quantity);
+                // $(this).closest('tr').find('.count').html(productdata.available_quantity);
+            } catch (err) {
+                console.log(err);
+            }
+        });
 
     } else
         showToast("Please fill all the fields", "error");
 });
-
 
 /**
  * To delete a row
@@ -171,6 +199,7 @@ $(document).on('click', '.btn-save', function() {
             "values": $("#outlet-bill").serializeObject(),
             "bill_details": JSON.stringify(tableRowTOArrayOfObjects('table tbody tr:not(#addItem)'))
         }
+        console.log(JSON.stringify(data));
         commonAjax('', 'POST', data, '.add', 'Allowence added successfully', '', { "functionName": "locationReload" })
     }
 });

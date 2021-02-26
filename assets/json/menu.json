@@ -268,16 +268,16 @@
             "menulink": "leave-type-list.html"
         }]
     }, {
-        "menulabel": "Outlet Store",
+        "menulabel": "Outlet Stocks",
         "menuicon": "bxl-product-hunt",
         "menulink": "javascript: void(0);",
         "submenu": [{
-                "menulabel": "Outlet List",
-                "menulink": "outlet-product.html"
+                "menulabel": "All Product Stocks Report",
+                "menulink": "all-product-report.html"
             },
             {
-                "menulabel": "Outlet Report",
-                "menulink": "outlet-product-report.html"
+                "menulabel": "Products Report",
+                "menulink": "product-report.html"
             }
         ]
     }]

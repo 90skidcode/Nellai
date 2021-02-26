@@ -1365,6 +1365,19 @@ function formatDate(date) {
     return date.replace(pattern, replacement);
 }
 
+/**
+ * Split number and text 
+ * @param {*} inputText  eg: asdsa123sd return 123
+ */
+function processText(inputText) {
+    var output = [];
+    var json = inputText.split(' ');
+    json.forEach(function(item) {
+        output.push(item.replace(/\'/g, '').split(/(\d+)/).filter(Boolean));
+    });
+    return output[0][1];
+}
+
 
 /************************************************************************
  * Check Tracking
@@ -1373,9 +1386,9 @@ function formatDate(date) {
 /**
  * List Product in select 2
  */
-listProduct();
+listProducts();
 
-function listProduct() {
+function listProducts() {
     let data = {
         "query": 'fetch',
         "databasename": 'product_master',
