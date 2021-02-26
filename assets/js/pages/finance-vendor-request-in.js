@@ -94,7 +94,8 @@ function displayVendorRequestList(response, dataTableId) {
                     </td>`;
 
             else
-                return ``;
+                return `<td class="text-right"><a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
+                </td>`;
         }
     }];
     dataTableDisplay(response.result, tableHeader, false, dataTableId, button);
