@@ -167,7 +167,7 @@ function displayEmployeeList(response, dataTableId) {
     }, {
         "data": "employee_mobile"
     }, {
-        "data": "employee_designation"
+        "data": "employee_designation_name"
     }, {
         "data": "status",
         mRender: function(data, type, row) {
