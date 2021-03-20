@@ -1487,12 +1487,6 @@ function infoStatus(responce) {
                     <p>${v.branch_to}</p>     
                 </div>
             </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label class="font-weight-bold">Item Name</label>
-                    <p>${v.item_code} - ${(typeof(findInArrayOfObject(v.item_code, 'product_code', listProductArray)) != 'undefined') ? findInArrayOfObject(v.item_code, 'request_code', listProductArray) : ""}</p>     
-                </div>
-            </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="font-weight-bold">Remarks</label>
@@ -1501,8 +1495,7 @@ function infoStatus(responce) {
             </div>
             <table id="list" class="table table-centered table-nowrap table-bordered table-striped">
             <thead class="bg-gray">
-                <tr>
-                   
+                <tr>                   
                     <th class="w-40">Item</th>
                     <th class="w-20  text-right">Quantity (KGS)</th>
                     <th class="w-20  text-right">Cost per kg</th>
@@ -1577,7 +1570,6 @@ function PrintElem() {
 
 
 $html = `<style>
-
                 body {
                     font-size: 10px;
                     font-family:Calibri;
