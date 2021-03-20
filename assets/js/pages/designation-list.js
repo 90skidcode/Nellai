@@ -39,7 +39,7 @@ function displayDesignationList(response, dataTableId) {
     }, /* EDIT */ /* DELETE */ {
         "data": "status",
         mRender: function(data, type, row) {
-            if (row.status == '1' || row.status == '2' || row.status == '3')
+            if (row.status == '2')
                 return ``;
             else
                 return `<td class="text-right">
