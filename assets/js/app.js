@@ -513,13 +513,17 @@ $('input').attr('autocomplete', 'no-fill');
 
 $(document).ready(function() {
     if ($('.select2').length) {
-        $('.select2').select2();
-        $('select').on('select2:open', function(e) {
-            $('.add-new-record').remove()
-            if (typeof($(this).attr('data-hasModel')) != 'undefined' && $(this).attr('data-hasModel')) {
-                $(".select2-results__options").after('<div class="add-new-record" data-toggle="modal" data-target="#' + $(this).attr('data-hasModel') + '"><i class="anticon anticon-plus"></i> Add New Record</div>')
-            }
-        });
+        try {
+            $('.select2').select2();
+            $('select').on('select2:open', function(e) {
+                $('.add-new-record').remove()
+                if (typeof($(this).attr('data-hasModel')) != 'undefined' && $(this).attr('data-hasModel')) {
+                    $(".select2-results__options").after('<div class="add-new-record" data-toggle="modal" data-target="#' + $(this).attr('data-hasModel') + '"><i class="anticon anticon-plus"></i> Add New Record</div>')
+                }
+            });
+        } catch (err) {
+
+        }
         $(document).on('shown.bs.modal', function(e) {
             try {
                 if ($('body').find('.select2-container--open').length) {

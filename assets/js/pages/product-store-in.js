@@ -1,7 +1,42 @@
 $(document).ready(function() {
     listBranch();
     displayProductRequestListInit();
+    /**
+     * List Product in select 2
+     */
+    listProductsforTable();
+
+
 });
+
+function listProductsforTable() {
+    let data = {
+        "query": 'fetch',
+        "databasename": 'product_master',
+        "column": {
+            "product_code": "product_code",
+            "product_name": "product_name"
+        },
+        "condition": {
+            "status": '1'
+        },
+        "like": ""
+    }
+    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "dataProductforTable" })
+}
+
+var productDataListforTable = '<option value="">Select</option>';
+var listProductArrayforTable = '';
+
+function dataProductforTable(responce) {
+    listProductArrayforTable = responce;
+    $.each(responce, function(i, v) {
+        productDataListforTable += `<option value='${v.product_code}'>${v.product_code} - ${v.product_name}</option>`
+    });
+
+    $("#add-within-product [name='item_code']").html(productDataListforTable);
+    $("[name='item_code']").select2();
+}
 
 if (sessionStorage.getItem("employee"))
     userSession = JSON.parse(sessionStorage.getItem("employee")).result[0];
