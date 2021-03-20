@@ -163,6 +163,8 @@ function displayEmployeeList(response, dataTableId) {
     }, {
         "data": "department_name"
     }, {
+        "data": "branch_name"
+    }, {
         "data": "employee_mobile"
     }, {
         "data": "employee_designation_name"
