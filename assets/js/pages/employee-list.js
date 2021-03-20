@@ -53,9 +53,7 @@ function listDesignation() {
             "employee_designation_id": "employee_designation_id",
             "employee_designation": "employee_designation"
         },
-        "condition": {
-            "status": '2'
-        },
+        "condition": "",
         "like": ""
     }
     commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='employee_designation_id']", "param2": "employee_designation", "param3": "employee_designation_id" })
