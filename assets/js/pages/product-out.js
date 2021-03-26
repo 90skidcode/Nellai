@@ -1,36 +1,14 @@
 $(document).ready(function() {
     displayProductInListInit();
-    listVendor();
     listBranch();
     $("[name='request_mode']").select2({ 'disabled': 'readonly' });
 });
 
 var button = ``;
 
-/**
- * List Vendor in select 2
- */
-
-function listVendor() {
-    let data = {
-        "query": 'fetch',
-        "databasename": 'vendor_master',
-        "column": {
-            "vendor_master_id": "vendor_master_id",
-            "vendor_name": "vendor_name"
-        },
-        "condition": {
-            "status": '1'
-        },
-        "like": ""
-    }
-    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='vendor_id']", "param2": "vendor_name", "param3": "vendor_master_id" });
-    $("[name='vendor_id']").select2({ 'disabled': 'readonly' });
-}
-
 
 /**
- * List Vendor in select 2
+ * List Branch in select 2
  */
 
 function listBranch() {
@@ -174,21 +152,23 @@ $(document).on('click', '[name="status"]', function() {
  */
 
 $('.product-in-add').click(function() {
-    if (checkRequired('#add-product-in')) {
-        var id = $(this).attr('data-id');
-        if (isEmptyValue(id)) {
-            // Add New
-            var data = {
-                "list_key": "createrequest",
-                "vendor_id": $("[name='vendor_id']").val(),
-                "request_code": $("[name='request_code']").val(),
-                "tracking_status": 7,
-                "employee_id": userSession.login_username,
-                "remarks": $("[name='remarks']").val(),
-                "product_total": $(".vendor-full-total").html(),
-                "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#product-in tbody tr:not(#addItem)'))
+    $('.product-in-add').click(function() {
+        if (checkRequired('#add-product-in')) {
+            var id = $(this).attr('data-id');
+            if (isEmptyValue(id)) {
+                // Add New
+                var data = {
+                    "list_key": "createrequest",
+                    "vendor_id": $("[name='vendor_id']").val(),
+                    "request_code": $("[name='request_code']").val(),
+                    "tracking_status": 7,
+                    "employee_id": userSession.login_username,
+                    "remarks": $("[name='remarks']").val(),
+                    "product_total": $(".vendor-full-total").html(),
+                    "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#product-in tbody tr:not(#addItem)'))
+                }
+                commonAjax('', 'POST', data, '.add', 'Product In successfully', '', { "functionName": "locationReload" })
             }
-            commonAjax('', 'POST', data, '.add', 'Product In successfully', '', { "functionName": "locationReload" })
         }
-    }
-});
+    });
+})

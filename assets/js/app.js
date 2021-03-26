@@ -574,6 +574,9 @@ function dataTableDisplay(data, column, filter, dataTableId, button) {
         lengthChange: !1,
         'columns': column,
         'data': data,
+        "order": [
+            [1, "desc"]
+        ],
         initComplete: function() {
             if (filter) {
                 var i = 0;
@@ -924,7 +927,7 @@ function locationReload() {
 
 function setValue(name, value) {
     $('[name="' + name + '"]').val(value);
-    if ($('[name="' + name + '"]').hasClass('select2')) {
+    if ($('[name="' + name + '"]').prop("tagName") == 'SELECT') {
         $('[name="' + name + '"]').trigger('change');
     }
 }
@@ -1496,20 +1499,39 @@ function infoStatus(responce) {
                     <label class="font-weight-bold">Remarks</label>
                     <p> ${v.remarks}</p>     
                 </div>
-            </div>
-            <table id="list" class="table table-centered table-nowrap table-bordered table-striped">
-            <thead class="bg-gray">
-                <tr>                   
-                    <th class="w-40">Item</th>
-                    <th class="w-20  text-right">Quantity (KGS)</th>
-                    <th class="w-20  text-right">Cost per kg</th>
-                    <th class="w-10  text-right">Total</th>
-                </tr>
-            </thead>`;
+            </div>`;
+
+        if (responce.result.request[0].item_code) {
+            var vl = responce.result.request[0];
+            html += `<table id="list" class="table table-centered table-nowrap table-bordered table-striped">
+                        <thead class="bg-gray">
+                            <tr>                   
+                                <th class="w-80">Item</th>
+                                <th class="w-20  text-right">Quantity (KGS)</th>
+                            </tr>
+                        </thead>
+                        <tbody> 
+                        <tr>
+                            <th class="w-80">${vl.item_code} - ${vl.item_name}</th>
+                            <th class="w-20 text-right">${vl.item_quantity}</th>
+                        </tr>
+                        </tbody>
+                        </table>`;
+
+        }
+        html += `<table id="list" class="table table-centered table-nowrap table-bordered table-striped">
+                        <thead class="bg-gray">
+                            <tr>                   
+                                <th class="w-40">Item</th>
+                                <th class="w-20  text-right">Quantity (KGS)</th>
+                                <th class="w-20  text-right">Cost per kg</th>
+                                <th class="w-10  text-right">Total</th>
+                            </tr>
+                        </thead>`;
         $.each(JSON.parse(v.request_product_details), function(inx, val) {
             html += `<tbody> 
                 <tr>
-                    <th class="w-40">${val.product_code} - ${(typeof(findInArrayOfObject(val.product_code, 'product_code', listProductArray)) != 'undefined') ? findInArrayOfObject(val.product_code, 'product_code', listProductArray).product_name : ""}</th>
+                    <th class="w-80">${val.product_code} - ${(typeof(findInArrayOfObject(val.product_code, 'product_code', listProductArray)) != 'undefined') ? findInArrayOfObject(val.product_code, 'product_code', listProductArray).product_name : ""}</th>
                     <th class="w-20 text-right">${val.quantity}</th>
                     <th class="w-20 text-right">${(emptySetToZero(val.cost))? emptySetToZero(val.cost) : ""}</th>
                     <th class="w-10 text-right">${(emptySetToZero(val.total))? numberWithCommas(emptySetToZero(val.total)) : ""}</th>

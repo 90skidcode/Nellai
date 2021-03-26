@@ -11,6 +11,7 @@
     <meta http-equiv="content-type" content="text/plain; charset=UTF-8" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
+
     <!-- Select 2-->
     <link href="assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
     <!-- Bootstrap Css -->
@@ -106,12 +107,12 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box d-flex align-items-center justify-content-between">
-                                <h4 class="mb-0 font-size-18">Product OUT</h4>
+                                <h4 class="mb-0 font-size-18">Product Damage</h4>
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
                                         <li class="breadcrumb-item"><a href="javascript: void(0);">Product</a></li>
-                                        <li class="breadcrumb-item active">Product OUT</li>
+                                        <li class="breadcrumb-item active">Product Damage</li>
                                     </ol>
                                 </div>
 
@@ -129,7 +130,6 @@
                                             <tr>
                                                 <th>Bill No</th>
                                                 <th>Date/Time</th>
-                                                <th>Cost</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -149,7 +149,7 @@
             <!-- Modal -->
 
 
-            <div class="modal fade add" tabindex="-1" role="dialog" aria-labelledby="addProductOutLabel" style="display: none;" aria-hidden="true">
+            <div class="modal fade damage" tabindex="-1" role="dialog" aria-labelledby="addProductOutLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -159,7 +159,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="add-vendor-request">
+                            <form id="product-damage-add">
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
@@ -168,58 +168,45 @@
                                             <input type="hidden" name="request_code" class="form-control" readonly>
                                         </div>
                                     </div>
-
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="formrow-email-input">Request Branch</label>
-                                            <select name="request_branch_id_from" class="form-control select2" required>
-                                   
-                                        </select>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="table-responsive">
-                                    <table id="product-in" class="table table-centered table-nowrap table-bordered table-striped">
+                                    <table id="product-damage-table" class="table table-centered table-nowrap table-bordered table-striped">
                                         <thead class="bg-gray">
                                             <tr>
-
-                                                <th class="w-40">Item</th>
+                                                <th class="w-20"></th>
+                                                <th class="w-60">Item</th>
                                                 <th class="w-20">Quantity (KGS)</th>
-                                                <th class="w-20">Cost per kg</th>
-                                                <th class="w-10">Total</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr id="addItem">
-                                                <td colspan="3">
-                                                    <h6 class="m-0 text-right">Total:</h6>
+                                                <td class="text-center border-right-0">
+                                                    <button type="button" id="button-add-item" count="1" data-toggle="tooltip" title="Add" data-original-title="Add" class="btn btn-icon btn-outline-success btn-lg">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
                                                 </td>
-                                                <th class="vendor-full-total text-right">
-
-                                                </th>
+                                                <td colspan="4" class="text-right"></td>
                                             </tr>
                                         </tbody>
                                     </table>
+
+                                    <div class="form-group col-md-12">
+                                        <label class="pointer btn btn-primary" for="upload">Upload Damage Image Files</label>
+                                        <input type="file" id="upload" accept="image/*">
+                                        <input type="hidden" name="damage_images">
+                                    </div>
+                                    <div class="row image-prev-area d-none">
+
+                                    </div>
+
                                     <p class="col-md-12 remarks-past"> </p>
                                     <textarea class="form-control col-md-12" name="remarks"></textarea>
                                 </div>
-
-                                <form action="#" class="dropzone">
-                                    <div class="fallback">
-                                        <input name="file" id="file" type="file" multiple="multiple">
-                                    </div>
-                                    <div class="dz-message needsclick">
-                                        <div class="mb-3">
-                                            <i class="display-4 text-muted bx bxs-cloud-upload"></i>
-                                        </div>
-
-                                        <h4>Drop files here or click to upload.</h4>
-                                    </div>
-                                </form>
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary product-in-add">Product OUT</button>
+                            <button type="button" class="btn btn-danger product-damage-add">Product Damage</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
@@ -254,14 +241,12 @@
 
     <!-- Select 2 -->
     <script src="assets/libs/select2/js/select2.min.js"></script>
-
-    <!-- Page js -->
-    <script src="assets/js/pages/product-out.js"></script>
-
     <!-- toastr plugin -->
     <script src="assets/libs/toastr/build/toastr.min.js"></script>
 
     <script src="assets/js/app.js"></script>
+    <!-- Page js -->
+    <script src="assets/js/pages/product-damage.js"></script>
 
 </body>
 
