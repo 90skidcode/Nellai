@@ -1339,6 +1339,8 @@ function trackingStatus(data) {
         return `<span class="badge badge-pill badge-warning font-size-12">Partial Pending</span>`;
     if (data == '7')
         return `<span class="badge badge-pill badge-warning font-size-12">Send to consern Department</span>`;
+    if (data == '8')
+        return `<span class="badge badge-pill badge-danger font-size-12">Damaged Approved</span>`;
     if (data == '10')
         return `<span class="badge badge-pill badge-danger font-size-12">Deleted</span>`;
     else
@@ -1501,6 +1503,14 @@ function infoStatus(responce) {
                 </div>
             </div>`;
 
+        if (responce.result.request[0].damage_images) {
+            html += `<div class="row">`;
+
+            $.each(responce.result.request[0].damage_images.toString().split(","), function(inx, val) {
+                html += `<div class="col-md-3"><img class="w-100" src="http://glowmedia.in/nellai/api/uploads/${val}"></div>`
+            })
+            html += `</div>`;
+        }
         if (responce.result.request[0].item_code) {
             var vl = responce.result.request[0];
             html += `<table id="list" class="table table-centered table-nowrap table-bordered table-striped">

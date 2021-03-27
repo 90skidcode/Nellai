@@ -13,7 +13,8 @@ if (userSession.employee_designation_id == '4')
 function displayProductInListInit() {
     let data = {
         "list_key": "getRequest",
-        "condition_in": { 'request_management.tracking_status': "3,4,6,7", 'request_management.vendor_id': "0", 'request_management.request_branch_id_to': userSession.branch_id }
+        "condition_in": { 'request_management.request_branch_id_to': userSession.branch_id, 'request_management.request_branch_id_from': userSession.branch_id },
+        "condition_not_in": { 'request_management.damage_images': "0" }
     }
     commonAjax('', 'POST', data, '', '', '', { "functionName": "displayProductInList", "param1": "product-in-list" }, { "functionName": "displayProductInList", "param1": "product-in-list" });
 }
@@ -34,11 +35,12 @@ function displayProductInList(response, dataTableId) {
     }, /* EDIT */ /* DELETE */ {
         "data": "created_at",
         mRender: function(data, type, row) {
-            if (row.tracking_status == '3') {
+            if (userSession.employee_designation_id == '3' && row.tracking_status == '1') {
                 return `<td class="text-right">
-                        <a class="mr-3 text-success edit-row" title="Check Approve"  data-toggle="modal" data-target=".add"  data-id="${row.request_code}"><i class="mdi mdi-check-decagram font-size-18"></i></a>       
+                        <a class="mr-3 text-success edit-row" title="Check Approve"  data-toggle="modal" data-target=".damage"  data-id="${row.request_code}"><i class="mdi mdi-check-decagram font-size-18"></i></a>       
                         <a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
-                        </td>`;
+                        <a class="text-danger delete-row" title="Delete" data-toggle="modal" data-id="${row.request_code}" data-target="#delete"><i class="mdi mdi-close font-size-14"></i></a>
+                         </td>`;
             } else
                 return `<td class="text-right"><a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
             </td>`;
@@ -53,22 +55,13 @@ function displayProductInList(response, dataTableId) {
  */
 
 $(document).on('click', ".delete-row", function() {
-    $(".delete .btn-delete").attr('data-detete', $(this).attr('data-id'));
+    $("#delete .btn-delete").attr('data-detete', $(this).attr('data-id'));
 });
 
-$(document).on('click', ".btn-delete", function() {
-    var data = {
-        'query': 'update',
-        'databasename': 'employee_qualification',
-        'condition': {
-            'employee_qualification_id': $(".btn-delete").attr('data-detete')
-        },
-        'values': {
-            'status': '0'
-        }
-    }
+$(document).on('click', "#delete .btn-delete", function() {
+    var data = { "list_key": "deleteRequest", "request_status": "2", "request_code": $(this).attr('data-detete') }
     $("#delete").modal('hide');
-    commonAjax('database.php', 'POST', data, '', 'Record Deleted Sucessfully', '', { "functionName": "locationReload" })
+    commonAjax('', 'POST', data, '', 'Record Deleted Sucessfully', '', { "functionName": "locationReload" })
 });
 
 /**
@@ -76,28 +69,24 @@ $(document).on('click', ".btn-delete", function() {
  */
 
 $('.product-damage-add').click(function() {
-    $('.product-damage-add').click(function() {
-        if (checkRequired('#product-damage-add')) {
-            var id = $(this).attr('data-id');
-            if (isEmptyValue(id)) {
-                // Add New
-                var data = {
-                    "list_key": "createrequestsame",
-                    "request_code": $("[name='request_code']").val(),
-                    "damage_images": $("[name='damage_images']").val(),
-                    "tracking_status": (userSession.employee_designation_id == '3') ? "4" : "1",
-                    "request_branch_id_from": userSession.branch_id,
-                    "request_branch_id_to": userSession.branch_id,
-                    "department_id": userSession.department_id,
-                    "employee_id": userSession.login_username,
-                    "remarks": $("[name='remarks']").val(),
-                    "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#product-damage-table tbody tr:not(#addItem)'))
-                }
-                commonAjax('', 'POST', data, '.add', 'Product In successfully', '', { "functionName": "locationReload" })
-            }
+    if (checkRequired('#product-damage-add')) {
+        $(".product-damage-add").prop('disabled', true);
+        var data = {
+            "list_key": "createrequestsame",
+            "request_code": $("[name='request_code']").val(),
+            "damage_images": $("[name='damage_images']").val(),
+            "tracking_status": (userSession.employee_designation_id == '3') ? "8" : "1",
+            "request_branch_id_from": userSession.branch_id,
+            "request_branch_id_to": userSession.branch_id,
+            "department_id": userSession.department_id,
+            "employee_id": userSession.login_username,
+            "remarks": $("[name='remarks']").val(),
+            "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#product-damage-table tbody tr:not(#addItem)'))
         }
-    });
-})
+        commonAjax('', 'POST', data, '.add', 'Damages Approved', '', { "functionName": "locationReload" })
+        $(".product-damage-add").prop('disabled', false);
+    }
+});
 
 
 /**
@@ -109,6 +98,7 @@ $(document).on('click', '[data-target=".damage"]', function() {
     $(".image-prev-area").html(" ");
     $('#product-damage-add')[0].reset();
     $(".remove-row").remove();
+    $(".product-damage-add").prop('disabled', false);
 });
 
 $(document).on('click', '#button-add-item', function() {
@@ -147,13 +137,13 @@ $(document).on('click', ".edit-row", function() {
 
 function ProductRequestSetValue(response) {
     $(".remove-row").remove();
-    multipleSetValue(response.result);
+    multipleSetValue(response.result, 'damage_images');
     if (response.result[0].request_product_details) {
         let requestProductDetails = JSON.parse(response.result[0].request_product_details);
         $.each(requestProductDetails, function(index, value) {
-            $('#request-vendor-list #button-add-item').trigger('click');
+            $('#button-add-item').trigger('click');
             $.each(value, function(i, v) {
-                $('#request-vendor-list tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v).trigger("change");
+                $('tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v).trigger("change");
             });
         })
     }
