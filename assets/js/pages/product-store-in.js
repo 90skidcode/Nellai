@@ -274,7 +274,7 @@ function StoreInApproveSetValue(response) {
         $.each(requestProductDetails, function(index, value) {
             $('#approve-store-in').find('#addItem').before(`<tr class="remove-row">                       
                 <td scope="row">
-                    <select name="product_code" class="form-control select2">${productDataList}</select>
+                    <select name="product_code" class="form-control select2" readonly>${productDataList}</select>
                 </td>
                 <td> <input type="number" name="quantity" class="form-control text-right" required readonly> </td>
                 <td> <input type="number" name="cost" class="form-control text-right" required readonly> </td>
