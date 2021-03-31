@@ -1537,8 +1537,11 @@ function infoStatus(responce) {
                             </tr>
                         </thead>`;
         $.each(JSON.parse(v.request_product_details), function(inx, val) {
+            let bg = ''
+            if (val.status == '2')
+                bg = 'bg-success';
             html += `<tbody> 
-                <tr>
+                <tr class="${bg}">
                     <th class="w-80">${val.product_code} - ${(typeof(findInArrayOfObject(val.product_code, 'product_code', listProductArray)) != 'undefined') ? findInArrayOfObject(val.product_code, 'product_code', listProductArray).product_name : ""}</th>
                     <th class="w-20 text-right">${val.quantity}</th>
                     <th class="w-20 text-right">${(emptySetToZero(val.cost))? emptySetToZero(val.cost) : ""}</th>
