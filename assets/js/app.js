@@ -826,7 +826,7 @@ function commonAjax(url, type, data, modalSelector, sMessage, eMessage, sCallBac
                         if (!isEmptyValue(sMessage))
                             showToast(sMessage, 'success');
                         if (!isEmptyValue(sCallBack))
-                            window[sCallBack.functionName](response, sCallBack.param1, sCallBack.param2, sCallBack.param3)
+                            window[sCallBack.functionName](response, sCallBack.param1, sCallBack.param2, sCallBack.param3, sCallBack.param4)
                     } else {
                         if (!isEmptyValue(eMessage))
                             showToast(eMessage, 'error');
@@ -882,7 +882,7 @@ function isEmptyValue(value) {
  * @param {String} Value for Select 2
  */
 
-function listSelect2(data, selector, jsonLabel, jsonValue) {
+function listSelect2(data, selector, jsonLabel, jsonValue, defaultValue) {
     let select2Data = [];
     select2Data.push({ 'id': "", 'text': "Select" })
     let i = 1;
@@ -901,7 +901,11 @@ function listSelect2(data, selector, jsonLabel, jsonValue) {
     } else {
         $(selector).html('');
     }
+    if (defaultValue)
+        $(selector).val(defaultValue).trigger('change');
 
+    if (getParameter('item_code'))
+        displayAllProductsListInit();
 }
 
 

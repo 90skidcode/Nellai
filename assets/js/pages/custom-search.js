@@ -1,9 +1,14 @@
 $(document).ready(function() {
     listProduct();
-    listDepartment();
-    $("[name='department_id']").select2().on('change', function() {
-        listBranch();
-    });
+    if (userSession.department_id != 5)
+        $(".department,.branch").hide();
+    else {
+
+        listDepartment();
+        $("[name='department_id']").select2().on('change', function() {
+            listBranch();
+        });
+    }
     displayAllProductsListInit();
 });
 
@@ -24,7 +29,8 @@ function listProduct() {
         },
         "like": ""
     }
-    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='product_code']", "param2": "product_name", "param3": "product_code" })
+    let defaultValue = (getParameter('item_code')) ? getParameter('item_code') : "";
+    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='product_code']", "param2": "product_name", "param3": "product_code", "param4": defaultValue })
 
 }
 
@@ -81,8 +87,8 @@ function displayAllProductsListInit() {
         "from_date": $("#from_date").val(),
         "to_date": $("#to_date").val(),
         "condition": {
-            "stock_master_details.branch_master_id": ($("[name='branch_id']").val()),
-            "stock_master_details.department_id": ($("[name='department_id']").val()),
+            "stock_master_details.branch_master_id": (userSession.department_id == 5) ? $("[name='branch_id']").val() : userSession.branch_id,
+            "stock_master_details.department_id": (userSession.department_id == 5) ? $("[name='department_id']").val() : userSession.department_id,
             "stock_master_details.product_code": ($('[name="product_code"]').val()) ? $('[name="product_code"]').val() : ""
         }
     }
