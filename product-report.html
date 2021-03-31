@@ -160,14 +160,10 @@
                                                 <button class="btn btn-primary col-md-12 mt-3" onclick="displayAllProductsListInit()">Search</button>
                                             </div>
                                         </div>
-                                        <div class="col-md-4 stock-view">
-                                            <div class="form-group">
-                                                <label for="formrow-email-input">Avaliable Count (Kgs)</label>
-                                                <p class="font-size-24 font-weight-bolder text-success stock-details"></p>
-                                            </div>
-                                        </div>
+
                                     </div>
-                                    <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                    <button onclick="tableToExcel('product-report-list', 'product-report-list')" class='btn btn-sm btn-primary'>Excel</button>
+                                    <table class="table table-striped table-bordered dt-responsive nowrap" id="product-report-list" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>Sr.No</th>
@@ -181,6 +177,14 @@
                                         </thead>
                                         <tbody></tbody>
                                     </table>
+                                    <div class="row">
+                                        <div class="col-md-12 stock-view pull-right">
+                                            <div class="form-group text-right">
+                                                <label for="formrow-email-input">Avaliable Count (Kgs)</label>
+                                                <p class="font-size-24 font-weight-bolder text-success stock-details"></p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
