@@ -116,14 +116,15 @@
         "menuicon": "bxl-product-hunt",
         "menulink": "javascript: void(0);",
         "submenu": [{
-                "menulabel": "Products List",
-                "menulink": "product.html"
-            },
-            {
-                "menulabel": "Products Report",
-                "menulink": "product-report.html"
-            }
-        ]
+            "menulabel": "Products List",
+            "menulink": "product.html"
+        }, {
+            "menulabel": "Stock Report",
+            "menulink": "all-product-report.html"
+        }, {
+            "menulabel": "Stock Detail Report",
+            "menulink": "product-report.html"
+        }]
     }, {
         "menulabel": "Attendance",
         "menuicon": "bx-fingerprint",
@@ -180,13 +181,13 @@
         "menuicon": "bxl-product-hunt",
         "menulink": "javascript: void(0);",
         "submenu": [{
-                "menulabel": "All Product Report",
+                "menulabel": "Stock Report",
                 "menulink": "all-product-report.html"
-            },
-            {
-                "menulabel": "Products Report",
+            }, {
+                "menulabel": "Stock Detail Report",
                 "menulink": "product-report.html"
             }
+
         ]
     }]
 }, {
@@ -228,14 +229,12 @@
         "menuicon": "bxl-product-hunt",
         "menulink": "javascript: void(0);",
         "submenu": [{
-                "menulabel": "All Product Report",
-                "menulink": "all-product-report.html"
-            },
-            {
-                "menulabel": "Single Kitchen Report",
-                "menulink": "kitchen-product-report.html"
-            }
-        ]
+            "menulabel": "Stock Report",
+            "menulink": "all-product-report.html"
+        }, {
+            "menulabel": "Stock Detail Report",
+            "menulink": "product-report.html"
+        }]
     }]
 }, {
     "menutype": "outlet",
@@ -280,14 +279,12 @@
         "menuicon": "bxl-product-hunt",
         "menulink": "javascript: void(0);",
         "submenu": [{
-                "menulabel": "All Product Stocks Report",
-                "menulink": "all-product-report.html"
-            },
-            {
-                "menulabel": "Products Report",
-                "menulink": "product-report.html"
-            }
-        ]
+            "menulabel": "Stock Report",
+            "menulink": "all-product-report.html"
+        }, {
+            "menulabel": "Stock Detail Report",
+            "menulink": "product-report.html"
+        }]
     }]
 }, {
     "menutype": "finance",
@@ -328,7 +325,10 @@
             "menulabel": "Products List",
             "menulink": "product.html"
         }, {
-            "menulabel": "Products Report",
+            "menulabel": "Stock Report",
+            "menulink": "all-product-report.html"
+        }, {
+            "menulabel": "Stock Detail Report",
             "menulink": "product-report.html"
         }]
     }, {
