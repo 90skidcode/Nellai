@@ -574,9 +574,6 @@ function dataTableDisplay(data, column, filter, dataTableId, button) {
         lengthChange: !1,
         'columns': column,
         'data': data,
-        "order": [
-            [1, "desc"]
-        ],
         initComplete: function() {
             if (filter) {
                 var i = 0;
@@ -609,6 +606,7 @@ function dataTableDisplay(data, column, filter, dataTableId, button) {
             $(".paging_simple_numbers > .pagination").addClass('pagination-rounded justify-content-end mb-2"');
             $(".dataTables_info").addClass('text-dark');
             $(".dataTables_wrapper .row:first-child .col-sm-12.col-md-6:first-child").html(`<button onclick="tableToExcel('${dataTableId}', 'W3C Example Table')" class='btn btn-sm btn-primary'>Excel</button>`);
+            $("th:first-child").trigger('click');
         },
         "drawCallback": function() {
             $(".paging_simple_numbers > .pagination").addClass('pagination-rounded justify-content-end mb-2"');
