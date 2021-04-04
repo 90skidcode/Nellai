@@ -1,55 +1,10 @@
 $(document).ready(function() {
-    listProduct();
-    listDepartment();
-    $("[name='department_id']").select2().on('change', function() {
-        listBranch();
-    });
+    listBranch();
     displayAllProductsListInit();
+    if (userSession.department_id != 5)
+        $('.branch').hide();
 });
 
-/**
- * List Product in select 2
- */
-
-function listProduct() {
-    let data = {
-        "query": 'fetch',
-        "databasename": 'product_master',
-        "column": {
-            "product_code": "product_code",
-            "product_name": "product_name"
-        },
-        "condition": {
-            "status": '1'
-        },
-        "like": ""
-    }
-    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='product_code']", "param2": "product_name", "param3": "product_code" })
-
-}
-
-/**
- * List Department in select 2
- */
-
-function listDepartment() {
-    let data = {
-        "query": 'fetch',
-        "databasename": 'department_master',
-        "column": {
-            "department_master_id": "department_master_id",
-            "department_name": "department_name"
-        },
-        "condition": {
-            "status": '1'
-        },
-        "like": ""
-    }
-    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='department_id']", "param2": "department_name", "param3": "department_master_id" }, { "functionName": "listSelect2", "param1": "[name='department_id']", "param2": "department_name", "param3": "department_master_id" })
-    setTimeout(function() {
-        listBranch();
-    }, 2000);
-}
 
 /**
  * List Branch in select 2
@@ -66,7 +21,7 @@ function listBranch() {
         },
         "condition": {
             "status": '1',
-            "department_master_id": $("[name='department_id']").val()
+            "department_master_id": 4
         },
         "like": ""
     }
@@ -77,13 +32,13 @@ function listBranch() {
 
 function displayAllProductsListInit() {
     let data = {
-        "list_key": "getBillingReport",
+        "list_key": "getInvoiceReport",
         "from_date": $("#from_date").val(),
         "to_date": $("#to_date").val(),
         "condition": {
-            "outlet_billing.branch_id": ($("[name='branch_id']").val()),
-            "outlet_billing.department_id": ($("[name='department_id']").val()),
-            "outlet_billing.orderby": ($("[name='orderby']").val())
+            "outlet_billing.branch_id": (userSession.department_id != 5) ? userSession.branch_id : $("[name='branch_id']").val(),
+            "outlet_billing.department_id": '4',
+            "outlet_billing.orderby": $("[name='orderby']").val()
         }
     }
     commonAjax('', 'POST', data, '', '', '', { "functionName": "displayAllProductsList" }, { "functionName": "displayAllProductsList" });

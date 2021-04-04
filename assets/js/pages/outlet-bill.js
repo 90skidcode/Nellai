@@ -160,7 +160,7 @@ $(document).on('click', '#button-add-item', function() {
                 console.log(err);
             }
         });
-        $('[name="product_id"]').focus();
+        $('[name="product_id"]').select2('focus');
     } else
         showToast("Please fill all the fields", "error");
 });

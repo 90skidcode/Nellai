@@ -284,6 +284,9 @@
         }, {
             "menulabel": "Stock Detail Report",
             "menulink": "product-report.html"
+        }, {
+            "menulabel": "Outlet Report",
+            "menulink": "outlet-report.html"
         }]
     }]
 }, {

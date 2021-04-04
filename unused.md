@@ -45,6 +45,7 @@ file:///d:\Projects\Sample\Sample\Laragon\laragon\www\Nellai-1\assets\libs\admin
 file:///d:\Projects\Sample\Sample\Laragon\laragon\www\Nellai-1\assets\libs\admin-resources\jquery.vectormap\maps\jquery-jvectormap-world-mill-en.js
 file:///d:\Projects\Sample\Sample\Laragon\laragon\www\Nellai-1\assets\libs\admin-resources\rwd-table\rwd-table.min.css
 file:///d:\Projects\Sample\Sample\Laragon\laragon\www\Nellai-1\assets\libs\admin-resources\rwd-table\rwd-table.min.js
+file:///d:\Projects\Sample\Sample\Laragon\laragon\www\Nellai-1\assets\libs\apexcharts\apexcharts.min.js
 file:///d:\Projects\Sample\Sample\Laragon\laragon\www\Nellai-1\assets\libs\bootstrap-datepicker\css\bootstrap-datepicker.min.css
 file:///d:\Projects\Sample\Sample\Laragon\laragon\www\Nellai-1\assets\libs\bootstrap-datepicker\js\bootstrap-datepicker.min.js
 file:///d:\Projects\Sample\Sample\Laragon\laragon\www\Nellai-1\assets\libs\bootstrap-editable\css\bootstrap-editable.css
@@ -95,6 +96,7 @@ file:///d:\Projects\Sample\Sample\Laragon\laragon\www\Nellai-1\assets\libs\owl.c
 file:///d:\Projects\Sample\Sample\Laragon\laragon\www\Nellai-1\assets\libs\owl.carousel\assets\owl.theme.default.min.css
 file:///d:\Projects\Sample\Sample\Laragon\laragon\www\Nellai-1\assets\libs\owl.carousel\owl.carousel.min.js
 file:///d:\Projects\Sample\Sample\Laragon\laragon\www\Nellai-1\assets\libs\pdfmake\build\vfs_fonts.js
+file:///d:\Projects\Sample\Sample\Laragon\laragon\www\Nellai-1\assets\libs\printThis\printThis.js
 file:///d:\Projects\Sample\Sample\Laragon\laragon\www\Nellai-1\assets\libs\summernote\summernote-bs4.min.css
 file:///d:\Projects\Sample\Sample\Laragon\laragon\www\Nellai-1\assets\libs\sweetalert2\sweetalert2.min.css
 file:///d:\Projects\Sample\Sample\Laragon\laragon\www\Nellai-1\assets\libs\sweetalert2\sweetalert2.min.js
