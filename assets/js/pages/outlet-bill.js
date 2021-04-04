@@ -81,7 +81,6 @@ function dataBranchProduct(responce) {
 function billCalculation() {
     var totalCost = 0;
     $('tr.add-row').each(function() {
-
         let quantity = $(this).find('.quantity').val();
         let costperunit = $(this).find('.costperunit').val();
         if (quantity && costperunit) {
@@ -89,16 +88,14 @@ function billCalculation() {
             $(this).find('.row-cost').val(cost);
             totalCost += Number(cost);
         }
-
         let cgst = $('.cgst').val();
         let sgst = $('.sgst').val();
         let percentage = Number(cgst) + Number(sgst);
         let billamount = ((totalCost / 100) * percentage) + totalCost;
         $('.total').val(billamount);
         ($('.customer-given').val() > billamount) ? $('.need-to-return').val($('.customer-given').val() - billamount): $('.need-to-return').val(0);
-    })
+    });
 }
-
 
 /**
  * ShortCut
@@ -163,7 +160,7 @@ $(document).on('click', '#button-add-item', function() {
                 console.log(err);
             }
         });
-
+        $('[name="product_id"]').focus();
     } else
         showToast("Please fill all the fields", "error");
 });
