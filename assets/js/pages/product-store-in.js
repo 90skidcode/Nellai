@@ -5,8 +5,6 @@ $(document).ready(function() {
      * List Product in select 2
      */
     listProductsforTable();
-
-
 });
 
 function listProductsforTable() {
@@ -33,7 +31,6 @@ function dataProductforTable(responce) {
     $.each(responce, function(i, v) {
         productDataListforTable += `<option value='${v.product_code}'>${v.product_code} - ${v.product_name}</option>`
     });
-
     $("#add-within-product [name='item_code']").html(productDataListforTable);
     $("[name='item_code']").select2();
 }
@@ -44,10 +41,15 @@ if (sessionStorage.getItem("employee"))
 var button = ``;
 
 if (userSession.employee_designation_id == '4') {
-    button = ` <div class="text-sm-right">
+    if (userSession.department_id == '4') {
+        button = ` <div class="text-sm-right">
+        <button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Product Other</button>       </div>`;
+    } else {
+        button = ` <div class="text-sm-right">
                     <button type="button" data-toggle="modal" data-target=".add" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Product Other</button>
                     <button type="button" data-toggle="modal" data-target=".add-in" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Product</button>
                </div>`;
+    }
 }
 
 /**
@@ -69,8 +71,6 @@ function listBranch() {
     }
     commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='request_branch_id_to']", "param2": "branch_name", "param3": "branch_master_id" })
 }
-
-
 
 function displayProductRequestListInit() {
     let data = {

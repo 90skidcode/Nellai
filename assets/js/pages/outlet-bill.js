@@ -53,13 +53,13 @@ document.addEventListener('scan', function(sScancode, iQuantity) {
 
 $('[name="quantity"]').on('click', function() {
     $(this).prop("readonly", false);
-})
+});
 
 /**
  * List Product in select 2
  */
 function listProduct() {
-    let data = { "list_key": "getBillingavalablity", "branch_id": userSession.branch_id }
+    let data = { "list_key": "getBillingavalablity", "branch_id": userSession.branch_id };
     commonAjax('', 'POST', data, '', '', '', { "functionName": "dataBranchProduct" })
 }
 
@@ -81,6 +81,7 @@ function dataBranchProduct(responce) {
 function billCalculation() {
     var totalCost = 0;
     $('tr.add-row').each(function() {
+
         let quantity = $(this).find('.quantity').val();
         let costperunit = $(this).find('.costperunit').val();
         if (quantity && costperunit) {
@@ -188,7 +189,6 @@ $(document).on('click', '.btn-save', function() {
         data["bill_details"] = JSON.stringify(tableRowTOArrayOfObjects('table tbody tr:not(#addItem)'));
         data["branch_id"] = userSession.branch_id;
         data["department_id"] = userSession.department_id;
-        console.log(JSON.stringify(data));
         commonAjax('', 'POST', data, '.add', 'Bill added successfully', '', { "functionName": "printPreview" })
     }
 });
@@ -240,6 +240,9 @@ function printPreview(responce) {
     $('.print-bill').printThis({
         importCSS: false,
         loadCSS: "assets/css/app.min.css",
-        header: html
+        header: html,
+        afterPrint: function() {
+            location.reload();
+        }
     });
 }
