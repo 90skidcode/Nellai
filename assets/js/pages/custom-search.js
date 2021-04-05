@@ -8,7 +8,6 @@ $(document).ready(function() {
             listBranch();
         });
     }
-    displayAllProductsListInit();
 });
 
 /**
@@ -100,12 +99,12 @@ function displayAllProductsList(response) {
     let stockIn = 0;
     let stockOut = 0;
     $.each(response.result, function(i, v) {
-        html += `<tr>
+        html += `<tr class='${(Number(v.stock_quantity_in))? "text-success" : "text-danger"}'>
                     <td>${i+1}</td>
                     <td>${formatDate(v.stock_date)}</td>
                     <td>${(v.department_id == '5')? "Vendor" : v.to_branch}</td>
                     <td>${(v.department_id == '5')? v.to_branch : v.from_branch}</td>
-                    <td>${(Number(v.stock_quantity_in))? "IN": "OUT"} - ${v.product_code} - ${v.product_name}</td>
+                    <td>${(Number(v.stock_quantity_in))? " IN ": (v.damage_images)? " Damage " : " OUT "  } - ${v.product_code} - ${v.product_name}</td>
                     <td class="text-success text-right">${(Number(v.stock_quantity_in))? v.stock_quantity_in: ""}</td>
                     <td class="text-danger text-right">${(Number(v.stock_quantity_out))? v.stock_quantity_out: ""}</td>
                 </tr>`;
