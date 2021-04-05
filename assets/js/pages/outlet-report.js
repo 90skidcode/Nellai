@@ -62,5 +62,5 @@ function displayAllProductsList(response) {
                     <td class="text-success text-right font-weight-bolder font-size-20">${numberWithCommas(total)}</td>
                 </tr>`;
 
-    $("tbody").html(html);
+    $("table-list tbody").html(html);
 }

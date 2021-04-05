@@ -115,6 +115,8 @@ function displayAllProductsList(responce2, responce1) {
     let html = ``;
     let stockIn = 0;
     let stockOut = 0;
+    let creditTotal = 0;
+    let debitTotal = 0;
     var sortedData = responce2.result;
     if (userSession.department_id == '4') {
         var combineData = responce1.result.concat(responce2.result);
@@ -129,20 +131,37 @@ function displayAllProductsList(responce2, responce1) {
                     <td>${(v.department_id == '5')? "Vendor" : v.to_branch}</td>
                     <td>${(v.department_id == '5')? v.to_branch : v.from_branch}</td>
                     <td>${(Number(v.stock_quantity_in))? " IN ": (v.damage_images)? " Damage " : " OUT "  } - ${v.product_code} - ${v.product_name}</td>
-                    <td class="text-success text-right">${(Number(v.stock_quantity_in))? v.stock_quantity_in: ""}</td>
+                    <td class="text-success text-right">${(Number(v.stock_quantity_in))?  v.stock_quantity_in : ""}</td>
+                    <td class="text-danger text-right">${(Number(v.stock_quantity_in))? numberWithCommas(Number(v.stock_quantity_in) * Number(v.product_price)): ""}</td>
                     <td class="text-danger text-right">${(Number(v.stock_quantity_out))? v.stock_quantity_out: ""}</td>
+                    <td class="text-success text-right">${(Number(v.stock_quantity_out))? numberWithCommas(Number(v.stock_quantity_out) * Number(v.product_price)): ""}</td>
                 </tr>`;
         stockIn += Number(v.stock_quantity_in);
         stockOut += Number(v.stock_quantity_out);
+        creditTotal += Number(v.stock_quantity_in) * Number(v.product_price);
+        debitTotal += Number(v.stock_quantity_out) * Number(v.product_price);
     });
 
-    if (!$('[name="product_code"]').val())
+    let CheckValue = debitTotal - creditTotal;
+    if (!$('[name="product_code"]').val()) {
         $(".stock-view").hide();
-    else {
+        html += `<tr>
+        <td colspan="6" ></td>
+        <td class="text-success text-right font-weight-bolder font-size-20"></td>
+        <td class="text-danger text-right font-weight-bolder font-size-20">${numberWithCommas(creditTotal)}</td>
+        <td class="text-danger text-right font-weight-bolder font-size-20"></td>
+        <td class="text-success text-right font-weight-bolder font-size-20">${numberWithCommas(debitTotal)}</td>
+    </tr>
+    <tr>
+        <td colspan="6" ></td>
+        <td colspan="3" class="${(CheckValue > 0)? "text-success" : "text-danger"} text-right font-weight-bolder font-size-20">${(CheckValue > 0)? "Profit" : "Loss"}</td>
+        <td class="${(CheckValue > 0)? "text-success" : "text-danger"} text-right font-weight-bolder font-size-20">${numberWithCommas(CheckValue.toString().replace("-",""))}</td>
+    </tr>`;
+    } else {
         $(".stock-view").show();
         $(".stock-details").html(stockIn - stockOut);
         html += `<tr>
-                    <td colspan="5" ></td>
+                    <td colspan="8" ></td>
                     <td class="text-success text-right font-weight-bolder font-size-20">${stockIn}</td>
                     <td class="text-danger text-right font-weight-bolder font-size-20">${stockOut}</td>
                 </tr>`;
