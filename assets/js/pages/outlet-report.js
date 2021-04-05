@@ -50,9 +50,7 @@ function displayAllProductsList(response) {
     $.each(response.result, function(i, v) {
         html += `<tr>
                     <td>${v.bill_no}</td>
-                    <td>${formatDate(v.created_at)}</td>  
-                    <td>${v.department_name}</td>                 
-                    <td>${v.branch_name}</td>
+                    <td>${formatDate(v.created_at)}</td> 
                     <td>${v.orderby}</td>
                     <td class="text-right">${numberWithCommas(v.total)}</td>
                 </tr>`;
@@ -60,7 +58,7 @@ function displayAllProductsList(response) {
     });
 
     html += `<tr>
-                    <td colspan="5"></td>
+                    <td colspan="3"></td>
                     <td class="text-success text-right font-weight-bolder font-size-20">${numberWithCommas(total)}</td>
                 </tr>`;
 
