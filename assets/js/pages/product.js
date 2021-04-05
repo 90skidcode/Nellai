@@ -31,8 +31,7 @@ function displayProductList(response, dataTableId) {
         "data": "created_at",
         mRender: function(data, type, row) {
             return `<td class="text-right">    
-                        <a class="mr-3 text-info" title="Report" href="product-report.html?id=${row.product_code}"><i class="mdi mdi-clipboard-list-outline font-size-18"></i></a>
-                        <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-id="${row.product_code}" data-target=".add"><i class="mdi mdi-pencil font-size-14"></i></a>
+                       <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-id="${row.product_code}" data-target=".add"><i class="mdi mdi-pencil font-size-14"></i></a>
                     </td>`;
             /** <a class="mr-3 text-info barcode-row" title="BarCode Print" data-toggle="modal" data-id="${row.product_code}" data-target=".barcode-print"><i class="mdi mdi-barcode-scan font-size-14"></i></a>
                         <a class="text-danger delete-row" title="Delete" data-toggle="modal" data-id="${row.product_code}" data-target=".delete"><i class="mdi mdi-close font-size-14"></i></a> */

@@ -28,8 +28,6 @@ function listBranch() {
     commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='branch_id']", "param2": "branch_name", "param3": "branch_master_id" }, { "functionName": "listSelect2", "param1": "[name='branch_id']", "param2": "branch_name", "param3": "branch_master_id" });
 }
 
-
-
 function displayAllProductsListInit() {
     let data = {
         "list_key": "getInvoiceReport",
@@ -60,7 +58,6 @@ function displayAllProductsList(response) {
                 </tr>`;
         total += Number(v.total);
     });
-
 
     html += `<tr>
                     <td colspan="5"></td>

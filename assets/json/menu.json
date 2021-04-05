@@ -328,8 +328,8 @@
             "menulabel": "Products List",
             "menulink": "product.html"
         }, {
-            "menulabel": "Stock Report",
-            "menulink": "all-product-report.html"
+            "menulabel": "Product Outlet Price",
+            "menulink": "product-outlet-price.html"
         }, {
             "menulabel": "Stock Detail Report",
             "menulink": "product-report.html"
