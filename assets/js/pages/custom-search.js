@@ -99,7 +99,7 @@ function displayAllProductsList(response) {
     let stockIn = 0;
     let stockOut = 0;
     $.each(response.result, function(i, v) {
-        html += `<tr class='${(Number(v.stock_quantity_in))? "text-success" : "text-danger"}'>
+        html += `<tr class='${(!v.damage_images)? "" : "text-danger font-weight-bold"}'>
                     <td>${i+1}</td>
                     <td>${formatDate(v.stock_date)}</td>
                     <td>${(v.department_id == '5')? "Vendor" : v.to_branch}</td>

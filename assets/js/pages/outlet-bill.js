@@ -208,23 +208,24 @@ function printPreview(responce) {
             </tr>
         </thead>
         <tbody>`;
-
+    var total = 0;
     $.each(JSON.parse(responce.result[0].bill_details), function(i, v) {
         html += `
                     <tr>
                         <td>${findInArrayOfObject(v.product_id, 'product_code', listBranchProductArray).product_name}</td>
                         <td class="text-right mb-0">${v.quantity}</td>
-                        <td class="text-right mb-0">${v.cost}</td>
+                        <td class="text-right mb-0">${numberWithCommas(v.cost)}</td>
                     </tr>
         `;
+        total += v.cost;
     });
     html += `</tbody>
                     </table>
                     <p class="text-center mb-0">******************************</p>
-                    <p class="text-right mb-0">CGST: ${responce.result[0].cgst}</p>
-                    <p class="text-right mb-0">SGST: ${responce.result[0].sgst}</p>
+                    <p class="text-right mb-0">CGST (${responce.result[0].cgst}%) : ${numberWithCommas((total*2.5)/100)}</p>
+                    <p class="text-right mb-0">SGST (${responce.result[0].sgst}%) : ${numberWithCommas((total*2.5)/100)}</p>
                     <p class="text-center mb-0">******************************</p>
-                    <p class="text-right mb-0">Total: ${numberWithCommas(responce.result[0].total)}</p>
+                    <p class="text-right mb-0"><b>Total: ${numberWithCommas(responce.result[0].total)}</b></p>
                     <p class="text-right mb-0">Customer Given: ${numberWithCommas(responce.result[0].customer_given)}</p>
                     <p class="text-right mb-0">Need To Return : ${numberWithCommas(responce.result[0].need_to_return)}</p>
 
