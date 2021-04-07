@@ -147,9 +147,7 @@
             <!-- End Page-content -->
 
             <!-- Modal -->
-
-
-            <div class="modal fade damage" tabindex="-1" role="dialog" aria-labelledby="addProductOutLabel" style="display: none;" aria-hidden="true">
+            <div class="modal fade add" tabindex="-1" role="dialog" aria-labelledby="addProductOutLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -159,7 +157,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form id="product-clear-add">
+                            <form id="add-vendor-request">
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
@@ -168,34 +166,35 @@
                                             <input type="hidden" name="request_code" class="form-control" readonly>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="formrow-email-input">Request Branch</label>
+                                            <select name="request_branch_id_from" class="form-control select2" required>
+                                   
+                                        </select>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="table-responsive">
-                                    <table id="product-clear-table" class="table table-centered table-nowrap table-bordered table-striped">
+                                    <table id="product-in" class="table table-centered table-nowrap table-bordered table-striped">
                                         <thead class="bg-gray">
                                             <tr>
-                                                <th class="w-10"></th>
+
                                                 <th class="w-40">Item</th>
                                                 <th class="w-20">Quantity (KGS)</th>
-                                                <th class="w-10">Cost per kg</th>
+                                                <th class="w-20">Cost per kg</th>
                                                 <th class="w-10">Total</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr id="addItem" class="d-none not-include">
-                                                <td class="text-center border-right-0">
-                                                    <button type="button" id="button-add-item" count="1" data-toggle="tooltip" title="Add" data-original-title="Add" class="btn btn-icon btn-outline-success btn-lg">
-                                                        <i class="fa fa-plus"></i>
-                                                    </button>
+                                            <tr id="addItem">
+                                                <td colspan="3">
+                                                    <h6 class="m-0 text-right">Total:</h6>
                                                 </td>
-                                                <td colspan="4" class="text-right"></td>
-                                            </tr>
+                                                <th class="vendor-full-total text-right">
 
-                                            <tr class="not-include">
-                                                <td class="text-center border-right-0">
-
-                                                </td>
-                                                <td colspan="3" class="text-right">Total</td>
-                                                <td class="text-right"> <input type="number" name="product-total" readonly class="form-control text-right" required></td>
+                                                </th>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -205,14 +204,78 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary product-clear-add">Product Clear</button>
+                            <button type="button" class="btn btn-primary product-in-add">Product OUT</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- end main content-->
+
+        <div class="modal fade damage" tabindex="-1" role="dialog" aria-labelledby="addProductOutLabel" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addProductOutLabel">View Product OUT Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                            </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="product-clear-add">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="formrow-email-input">Bill No</label>
+                                        <input type="text" name="bill_no" class="form-control" readonly>
+                                        <input type="hidden" name="request_code" class="form-control" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="product-clear-table" class="table table-centered table-nowrap table-bordered table-striped">
+                                    <thead class="bg-gray">
+                                        <tr>
+                                            <th class="w-10"></th>
+                                            <th class="w-40">Item</th>
+                                            <th class="w-20">Quantity (KGS)</th>
+                                            <th class="w-10">Cost per kg</th>
+                                            <th class="w-10">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr id="addItem" class="d-none not-include">
+                                            <td class="text-center border-right-0">
+                                                <button type="button" id="button-add-item" count="1" data-toggle="tooltip" title="Add" data-original-title="Add" class="btn btn-icon btn-outline-success btn-lg">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+                                            </td>
+                                            <td colspan="4" class="text-right"></td>
+                                        </tr>
+
+                                        <tr class="not-include">
+                                            <td class="text-center border-right-0">
+
+                                            </td>
+                                            <td colspan="3" class="text-right">Total</td>
+                                            <td class="text-right"> <input type="number" name="product-total" readonly class="form-control text-right" required></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p class="col-md-12 remarks-past"> </p>
+                                <textarea class="form-control col-md-12" name="remarks"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary product-clear-add">Product Clear</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end main content-->
 
     </div>
     <!-- END layout-wrapper -->

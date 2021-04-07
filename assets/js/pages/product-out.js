@@ -137,7 +137,7 @@ function ProductInSetValue(response) {
         })
     }
 
-    $('#product-clear-table .select2').select2({ "disabled": "readonly" });
+    $('#product-clear-table .select2').select2({ "disabled": "readonly" })
 
     $(".past-remarks").html("Last Remarks : " + response.result[0].remarks);
     $("[name='remarks']").val(" ");
@@ -244,3 +244,56 @@ $('.product-clear-add').click(function() {
         $(".product-clear-add").prop('disabled', false);
     }
 });
+
+
+
+/**
+ * To Edit ProductIn
+ */
+
+$(document).on('click', ".edit-row", function() {
+    let data = {
+        "list_key": "getRequest",
+        "condition": { 'request_management.request_code': $(this).attr('data-id') }
+    }
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "ProductInSetValues" });
+});
+
+/***
+ * ProductIn Set Value
+ */
+
+function ProductInSetValues(response) {
+    multipleSetValue(response.result);
+    if (response.result[0].request_product_details) {
+        let requestProductDetails = JSON.parse(response.result[0].request_product_details);
+        $(".remove-row").remove();
+        $.each(requestProductDetails, function(index, value) {
+            var bg = '';
+            if (value.status == '2')
+                bg = 'bg-soft-success'
+            $('#product-in').find('#addItem').before(`<tr class="remove-row ${bg}">
+                       
+                        <td scope="row">
+                            <select name="product_code" class="form-control select2">${productDataList}</select>
+                        </td>
+                        <td> <input type="number" name="quantity" class="form-control text-right" required readonly> </td>
+                        <td> <input type="number" name="cost" class="form-control text-right" required readonly> </td>
+                        <td> <input type="number" name="total" class="form-control text-right" readonly>
+                        <input type="hidden" name="status" value="2" >
+                        </td></tr>
+                    `);
+            $.each(value, function(i, v) {
+                $('#product-in tbody tr:nth-child(' + (index + 1) + ') [name="' + i + '"]').val(v);
+            });
+            $('.select2').select2({ 'disabled': 'readonly' });
+        });
+        $(".remarks-past").html("<b> Remarks: </b> " + response.result[0].remarks);
+        $(".vendor-full-total").html(numberWithCommas(response.result[0].product_total));
+        $('[name="remarks"]').val(" ");
+    }
+}
+
+$(document).on('click', '[name="status"]', function() {
+    ($(this).prop("checked")) ? $(this).val(2): $(this).val(1);
+})
