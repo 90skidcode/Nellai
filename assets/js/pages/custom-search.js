@@ -90,40 +90,20 @@ function displayAllProductsListInit() {
             "stock_master_details.product_code": ($('[name="product_code"]').val()) ? $('[name="product_code"]').val() : ""
         }
     }
-    commonAjax('', 'POST', data, '', '', '', { "functionName": "report" }, { "functionName": "report" });
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "displayAllProductsList" }, { "functionName": "displayAllProductsList" });
 
 }
 
-function report(responce) {
-    if (userSession.department_id == '4') {
-        let data = {
-            "list_key": "getInvoiceReport",
-            "from_date": $("#from_date").val(),
-            "to_date": $("#to_date").val(),
-            "condition": {
-                "outlet_billing.branch_id": (userSession.department_id != 5) ? userSession.branch_id : $("[name='branch_id']").val(),
-                "outlet_billing.department_id": '4',
-                "outlet_billing.orderby": $("[name='orderby']").val()
-            }
-        }
-        commonAjax('', 'POST', data, '', '', '', { "functionName": "displayAllProductsList", "param1": responce }, { "functionName": "displayAllProductsList", "param1": responce });
-    } else
-        displayAllProductsList(responce);
-}
 
-function displayAllProductsList(responce2, responce1) {
+
+function displayAllProductsList(responce) {
     let html = ``;
     let stockIn = 0;
     let stockOut = 0;
     let creditTotal = 0;
     let debitTotal = 0;
-    var sortedData = responce2.result;
-    if (userSession.department_id == '4') {
-        var combineData = responce1.result.concat(responce2.result);
-        var sortedData = combineData.sort(compare);
-        console.log(sortedData)
-    }
-    $.each(sortedData, function(i, v) {
+
+    $.each(responce.result, function(i, v) {
         html += `<tr class='${(!v.damage_images)? "" : "text-danger font-weight-bold"}'>
                     <td>${i+1}</td>
                     <td class="info-row" title="Info" data-toggle="modal" data-id="${v.stock_master_details_id}" data-target=".info">${v.bill_no}</td>
