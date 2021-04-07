@@ -350,5 +350,10 @@
         "menulabel": "Outlet Report",
         "menuicon": "bxs-printer",
         "menulink": "outlet-report.html"
+    }, {
+        "menulabel": "NKT Bill Status",
+        "menuicon": "bxs-report",
+        "menulink": "nkt-list.html",
+        "menu": []
     }]
 }]
