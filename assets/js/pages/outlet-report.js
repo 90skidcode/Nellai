@@ -68,15 +68,16 @@ function displayAllProductsList(response) {
     }
     let html = ``;
     let total = 0;
-    let stockOut = 0;
+    let count = 0;
     $.each(response.result, function(i, v) {
         html += `<tr>
                     <td class="text-primary view-bill-details cursor-pointer" data-json='${JSON.stringify(v)}'>${v.bill_no}</td>
                     <td>${formatDate(v.created_at)}</td> 
-                    <td>${v.orderby}</td>
+                    <td >${v.orderby}</td>
                     <td class="text-right">${numberWithCommas(v.total)}</td>
                 </tr>`;
         total += Number(v.total);
+        count++;
         paymentTypeAmount[v.payment_type] += Number(v.total);
         paymentTypeCount[v.payment_type] += 1;
     });
@@ -92,18 +93,17 @@ function displayAllProductsList(response) {
     $.each(paymentTypeAmount, function(i, v) {
         htmlPayment += `<tr>
                             <td>${i}</td>
-                            <td>${paymentTypeCount[i]}</td> 
+                            <td class="text-right">${paymentTypeCount[i]}</td> 
                             <td class="text-right">${numberWithCommas(v)}</td>                           
                         </tr>`;
 
     });
-    htmlPayment += `<tr>
-    <td colspan="2"><b>Total</b></td>
-    <td class="text-right font-size-24 font-weight-bolder">${numberWithCommas(total)}</td> 
-                        
-</tr>`;
-    $(".payment-type tbody").html(htmlPayment);
 
+
+
+    $(".payment-type tbody").html(htmlPayment);
+    $(".t-amount").text(numberWithCommas(total));
+    $(".t-orders").text(count);
 }
 
 $(document).on('click', '.view-bill-details', function() {
