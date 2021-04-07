@@ -75,7 +75,7 @@ $('.product-damage-add').click(function() {
             "list_key": "createrequestsame",
             "request_code": $("[name='request_code']").val(),
             "damage_images": $("[name='damage_images']").val(),
-            "tracking_status": (userSession.employee_designation_id == '3') ? "8" : "11",
+            "tracking_status": (userSession.employee_designation_id == '3') ? "8" : "12",
             "request_branch_id_from": userSession.branch_id,
             "request_branch_id_to": userSession.branch_id,
             "department_id": userSession.department_id,

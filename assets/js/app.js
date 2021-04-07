@@ -1348,7 +1348,9 @@ function trackingStatus(data) {
     if (data == '10')
         return `<span class="badge badge-pill badge-danger font-size-12">Deleted</span>`;
     if (data == '11')
-        return `<span class="badge badge-pill badge-warning font-size-12">Manager Approval Pending</span>`;
+        return `<span class="badge badge-pill badge-warning font-size-12">Manager Stock Clear Approval Pending</span>`;
+    if (data == '12')
+        return `<span class="badge badge-pill badge-warning font-size-12">Manager Damage Approval Pending</span>`;
     else
         return ``;
 }
