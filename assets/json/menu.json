@@ -91,11 +91,6 @@
     "menuid": "1",
     "menulink": "store-in-list.html",
     "menu": [{
-        "menulabel": "Dashboards",
-        "menuicon": "bx-layout",
-        "menulink": "dashboard.html",
-        "submenu": ""
-    }, {
         "menulabel": "Store",
         "menuicon": "bx-building-house",
         "menulink": "javascript: void(0);",
@@ -342,11 +337,11 @@
             "menulabel": "Vendor List",
             "menulink": "vendor-list.html"
         }, {
-            "menulabel": "Request to Vendor",
-            "menulink": "finance-vendor-request-in.html"
-        }, {
             "menulabel": "Vendor Report",
             "menulink": "vendor-report.html"
+        }, {
+            "menulabel": "Request to Vendor",
+            "menulink": "finance-vendor-request-in.html"
         }, {
             "menulabel": "Request for Units",
             "menulink": "finance-request-in.html"
