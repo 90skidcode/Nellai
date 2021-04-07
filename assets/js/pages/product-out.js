@@ -296,4 +296,28 @@ function ProductInSetValues(response) {
 
 $(document).on('click', '[name="status"]', function() {
     ($(this).prop("checked")) ? $(this).val(2): $(this).val(1);
-})
+});
+
+/**
+ * Add to Product
+ */
+
+$('.product-in-add').click(function() {
+    if (checkRequired('#add-product-in')) {
+        var id = $(this).attr('data-id');
+        if (isEmptyValue(id)) {
+            // Add New
+            var data = {
+                "list_key": "createrequest",
+                "vendor_id": $("[name='vendor_id']").val(),
+                "request_code": $("[name='request_code']").val(),
+                "tracking_status": 7,
+                "employee_id": userSession.login_username,
+                "remarks": $("[name='remarks']").val(),
+                "product_total": $(".vendor-full-total").html(),
+                "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#product-in tbody tr:not(#addItem)'))
+            }
+            commonAjax('', 'POST', data, '.add', 'Product In successfully', '', { "functionName": "locationReload" })
+        }
+    }
+});
