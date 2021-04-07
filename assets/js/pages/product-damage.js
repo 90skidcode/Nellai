@@ -35,7 +35,7 @@ function displayProductInList(response, dataTableId) {
     }, /* EDIT */ /* DELETE */ {
         "data": "created_at",
         mRender: function(data, type, row) {
-            if (userSession.employee_designation_id == '3' && row.tracking_status == '1') {
+            if (userSession.employee_designation_id == '3' && row.tracking_status == '12') {
                 return `<td class="text-right">
                         <a class="mr-3 text-success edit-row" title="Check Approve"  data-toggle="modal" data-target=".damage"  data-id="${row.request_code}"><i class="mdi mdi-check-decagram font-size-18"></i></a>       
                         <a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
