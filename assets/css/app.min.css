@@ -7015,3 +7015,9 @@ input[type=number] {
 .cursor-pointer {
     cursor: pointer;
 }
+
+.table-bordered td,
+.table-bordered th {
+    border: 1px solid #eff2f7;
+    font-size: 12px;
+}

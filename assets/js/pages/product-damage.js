@@ -5,10 +5,11 @@ $(document).ready(function() {
 
 var button = ``;
 
-if (userSession.employee_designation_id == '4')
+if (userSession.employee_designation_id == '4') {
     button = `<div class="text-sm-right">
                 <button type="button" data-toggle="modal" data-target=".damage" class="btn btn-danger btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add Damage </button>
             </div>`;
+}
 
 function displayProductInListInit() {
     let data = {
