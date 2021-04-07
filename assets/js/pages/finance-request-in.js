@@ -232,4 +232,5 @@ $(document).on('click', '.btn-outline-danger', function() {
         $(this).closest('tr').remove();
         $(this).closest('table').find("#button-add-item").attr('count', parseInt($(this).closest('table').find("#button-add-item").attr('count')) - 1);
     }
+    totalFinanceCalculation();
 });
