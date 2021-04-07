@@ -233,7 +233,7 @@ $('.product-clear-add').click(function() {
         var data = {
             "list_key": "createrequestsame",
             "request_code": $("[name='request_code']").val(),
-            "tracking_status": (userSession.employee_designation_id == '3') ? "9" : "1",
+            "tracking_status": (userSession.employee_designation_id == '3') ? "9" : "11",
             "request_branch_id_from": userSession.branch_id,
             "request_branch_id_to": userSession.branch_id,
             "department_id": userSession.department_id,
