@@ -185,7 +185,7 @@ function calculateRow() {
         $(this).find('[name="total"]').val((rowTotal));
         total += rowTotal;
     });
-    $('[name="product-total"]').val(total);
+    // $('[name="product-total"]').val(total);
 }
 
 $(document).on('keyup', 'input', function() {
