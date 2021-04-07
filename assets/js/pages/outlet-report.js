@@ -5,27 +5,7 @@ $(document).ready(function() {
         $('.branch').hide();
 });
 
-var paymentTypeAmount = {
-    "Cash": 0,
-    "Online": 0,
-    "Amazon Pay": 0,
-    "Paytm": 0,
-    "Google Pay": 0,
-    "PhonePe": 0,
-    "Other Wallet": 0,
-    "Card": 0
-}
 
-var paymentTypeCount = {
-    "Cash": 0,
-    "Online": 0,
-    "Amazon Pay": 0,
-    "Paytm": 0,
-    "Google Pay": 0,
-    "PhonePe": 0,
-    "Other Wallet": 0,
-    "Card": 0
-}
 
 /**
  * List Branch in select 2
@@ -65,6 +45,27 @@ function displayAllProductsListInit() {
 
 
 function displayAllProductsList(response) {
+    var paymentTypeAmount = {
+        "Cash": 0,
+        "Online": 0,
+        "Amazon Pay": 0,
+        "Paytm": 0,
+        "Google Pay": 0,
+        "PhonePe": 0,
+        "Other Wallet": 0,
+        "Card": 0
+    }
+
+    var paymentTypeCount = {
+        "Cash": 0,
+        "Online": 0,
+        "Amazon Pay": 0,
+        "Paytm": 0,
+        "Google Pay": 0,
+        "PhonePe": 0,
+        "Other Wallet": 0,
+        "Card": 0
+    }
     let html = ``;
     let total = 0;
     let stockOut = 0;
