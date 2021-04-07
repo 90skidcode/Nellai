@@ -108,8 +108,8 @@ function displayAllProductsList(responce) {
                     <td>${i+1}</td>
                     <td class="info-row" title="Info" data-toggle="modal" data-id="${v.stock_master_details_id}" data-target=".info">${v.bill_no}</td>
                     <td>${formatDate(v.stock_date)}</td>
-                    <td>${(v.from_department == '5')? v.from_branch : v.to_branch}</td>
-                    <td>${(v.from_department == '5')? v.to_branch : v.from_branch}</td>
+                    <td>${v.from_branch}</td>
+                    <td>${v.to_branch}</td>
                     <td>${(Number(v.stock_quantity_in))? " IN ": (v.damage_images)? " Damage " : " OUT "  } - ${v.product_code} - ${v.product_name}</td>
                     <td class="text-success text-right">${(Number(v.stock_quantity_in))?  v.stock_quantity_in : ""}</td>
                     <td class="text-danger text-right">${(Number(v.stock_quantity_in))? numberWithCommas(Number(v.stock_quantity_in) * Number(v.product_price)): ""}</td>
