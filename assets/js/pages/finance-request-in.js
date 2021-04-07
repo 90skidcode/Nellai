@@ -80,7 +80,7 @@ function displayFinanceRequestList(response, dataTableId) {
             if (row.tracking_status == '2')
                 return `<td class="text-right">
                         <a class="mr-3 text-info edit-row" title="Edit" data-toggle="modal" data-target=".add"  data-id="${row.request_code}"><i class="mdi mdi-pencil font-size-18"></i></a>
-                        <a class="text-danger" title="Delete" data-toggle="modal" data-target=".delete"  data-id="${row.request_code}"><i class="mdi mdi-close font-size-18"></i></a>                
+                        <a class="text-danger mr-3" title="Delete" data-toggle="modal" data-target=".delete"  data-id="${row.request_code}"><i class="mdi mdi-close font-size-18"></i></a>                
                         <a class="mr-3 text-success info-row" title="Info" data-toggle="modal" data-id="${row.request_code}" data-target=".info"><i class="mdi mdi-comment-alert-outline font-size-18"></i></a>
             
                         </td>`;
@@ -198,7 +198,7 @@ $('.finance-request-add').click(function() {
                 "product_total": removeCommas($(".finance-full-total").html()),
                 "request_product_details": JSON.stringify(tableRowTOArrayOfObjects('#request-finance-list tbody tr:not(#addItem)'))
             }
-            commonAjax('', 'POST', data, '.add', 'FinanceRequest added successfully', '', { "functionName": "locationReload" })
+            commonAjax('', 'POST', data, '.add', 'Finance Request added successfully', '', { "functionName": "locationReload" })
         }
     }
 });

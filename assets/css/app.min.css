@@ -4717,12 +4717,20 @@ input[switch=dark]:checked+label {
     width: 25% !important
 }
 
+.w-30 {
+    width: 30% !important
+}
+
 .w-40 {
     width: 40% !important
 }
 
 .w-50 {
     width: 50% !important
+}
+
+.w-70 {
+    width: 70% !important
 }
 
 .w-75 {
@@ -6998,4 +7006,8 @@ input[type=number] {
     background: #ccccccc2;
     border-radius: 15px;
     margin-bottom: 5px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }

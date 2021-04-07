@@ -126,10 +126,10 @@ function displayAllProductsList(responce2, responce1) {
     $.each(sortedData, function(i, v) {
         html += `<tr class='${(!v.damage_images)? "" : "text-danger font-weight-bold"}'>
                     <td>${i+1}</td>
-                    <td>${v.bill_no}</td>
+                    <td class="info-row" title="Info" data-toggle="modal" data-id="${v.stock_master_details_id}" data-target=".info">${v.bill_no}</td>
                     <td>${formatDate(v.stock_date)}</td>
-                    <td>${(v.department_id == '5')? "Vendor" : v.to_branch}</td>
-                    <td>${(v.department_id == '5')? v.to_branch : v.from_branch}</td>
+                    <td>${(v.from_department == '5')? "Vendor" : v.to_branch}</td>
+                    <td>${(v.from_department == '5')? v.to_branch : v.from_branch}</td>
                     <td>${(Number(v.stock_quantity_in))? " IN ": (v.damage_images)? " Damage " : " OUT "  } - ${v.product_code} - ${v.product_name}</td>
                     <td class="text-success text-right">${(Number(v.stock_quantity_in))?  v.stock_quantity_in : ""}</td>
                     <td class="text-danger text-right">${(Number(v.stock_quantity_in))? numberWithCommas(Number(v.stock_quantity_in) * Number(v.product_price)): ""}</td>
@@ -154,7 +154,7 @@ function displayAllProductsList(responce2, responce1) {
     </tr>
     <tr>
         <td colspan="6" ></td>
-        <td colspan="3" class="${(CheckValue > 0)? "text-success" : "text-danger"} text-right font-weight-bolder font-size-20">${(CheckValue > 0)? "Profit" : "Loss"}</td>
+        <td colspan="3" class="${(CheckValue > 0)? "text-success" : "text-danger"} text-right font-weight-bolder font-size-20">${(CheckValue > 0)? "" : ""}</td>
         <td class="${(CheckValue > 0)? "text-success" : "text-danger"} text-right font-weight-bolder font-size-20">${numberWithCommas(CheckValue.toString().replace("-",""))}</td>
     </tr>`;
     } else {

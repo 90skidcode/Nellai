@@ -606,7 +606,7 @@ function dataTableDisplay(data, column, filter, dataTableId, button) {
             $(".paging_simple_numbers > .pagination").addClass('pagination-rounded justify-content-end mb-2"');
             $(".dataTables_info").addClass('text-dark');
             $(".dataTables_wrapper .row:first-child .col-sm-12.col-md-6:first-child").html(`<button onclick="tableToExcel('${dataTableId}', 'W3C Example Table')" class='btn btn-sm btn-primary'>Excel</button>`);
-            $("th:first-child").trigger('click');
+            $('#' + dataTableId + " th:first-child").trigger('click');
         },
         "drawCallback": function() {
             $(".paging_simple_numbers > .pagination").addClass('pagination-rounded justify-content-end mb-2"');
@@ -1343,8 +1343,12 @@ function trackingStatus(data) {
         return `<span class="badge badge-pill badge-warning font-size-12">Send to consern Department</span>`;
     if (data == '8')
         return `<span class="badge badge-pill badge-danger font-size-12">Damaged Approved</span>`;
+    if (data == '9')
+        return `<span class="badge badge-pill badge-danger font-size-12">Stock Cleared</span>`;
     if (data == '10')
         return `<span class="badge badge-pill badge-danger font-size-12">Deleted</span>`;
+    if (data == '11')
+        return `<span class="badge badge-pill badge-warning font-size-12">Manager Approval Pending</span>`;
     else
         return ``;
 }

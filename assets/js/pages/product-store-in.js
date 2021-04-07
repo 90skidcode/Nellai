@@ -77,7 +77,8 @@ function displayProductRequestListInit() {
         "list_key": "getRequest",
         "condition": {
             "request_branch_id_from": userSession.branch_id
-        }
+        },
+        "condition_not_in": { 'request_management.tracking_status': "11" }
     }
     commonAjax('', 'POST', data, '', '', '', { "functionName": "displayProductRequestList", "param1": "table-product-list" }, { "functionName": "displayProductRequestList", "param1": "table-product-list" });
 }
@@ -345,6 +346,8 @@ function productApproveSetValue(response) {
     $(".past-remarks").html(response.result[0].remarks);
     $("[name='remarks']").val(" ");
 }
+
+
 
 
 /**
