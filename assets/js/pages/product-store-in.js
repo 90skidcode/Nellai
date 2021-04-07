@@ -78,7 +78,7 @@ function displayProductRequestListInit() {
         "condition": {
             "request_branch_id_from": userSession.branch_id
         },
-        "condition_not_in": { 'request_management.tracking_status': "11" }
+        "condition_not_in": { 'request_management.tracking_status': "11,9,8" }
     }
     commonAjax('', 'POST', data, '', '', '', { "functionName": "displayProductRequestList", "param1": "table-product-list" }, { "functionName": "displayProductRequestList", "param1": "table-product-list" });
 }
