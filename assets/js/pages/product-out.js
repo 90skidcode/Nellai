@@ -39,6 +39,7 @@ function listBranch() {
 function displayProductInListInit() {
     let data = {
         "list_key": "getRequest",
+        "condition": { 'request_management.damage_images': "" },
         "condition_in": { 'request_management.tracking_status': "11,3,4,6,7,9", 'request_management.vendor_id': "0", 'request_management.request_branch_id_to': userSession.branch_id }
     }
     commonAjax('', 'POST', data, '', '', '', { "functionName": "displayProductInList", "param1": "product-in-list" }, { "functionName": "displayProductInList", "param1": "product-in-list" });
