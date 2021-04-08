@@ -185,13 +185,13 @@ $(document).on('click', '.view-bill-details', function() {
                                             <div class="form-group m-0">
                                                 <label for="formrow-password-input">CGST (${data.cgst}%)</label>
                                                 <br>
-                                                <b>${numberWithCommas((data.total*2.5)/100)}</b>   </div>
+                                                <b>${numberWithCommas(((data.total*2.5)/100).toFixed(2))}</b>   </div>
                                         </div>
                                         <div class="col-md-6  border-bottom-1 p-2">
                                             <div class="form-group m-0">
                                                 <label for="formrow-password-input">SGST (${data.sgst}%)</label>
                                                 <br>
-                                                <b>${numberWithCommas((data.total*2.5)/100)}</b>   </div>
+                                                <b>${numberWithCommas(((data.total*2.5)/100).toFixed(2))}</b>   </div>
                                         </div>
                                         <div class="col-md-12  border-right-1 border-bottom-1 p-2">
                                             <div class="form-group m-0">
