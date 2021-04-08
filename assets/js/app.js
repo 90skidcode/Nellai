@@ -1627,7 +1627,7 @@ function printPreview(responce, form) {
                     <tr>
                         <td style="font-size:12px;" class="font-size-12">${findInArrayOfObject(v.product_id, 'product_code', listProductArray).product_name}</td>
                         <td style="text-align:right; font-size:12px;" class="font-size-12 text-right mb-0">${v.quantity}</td>
-                        <td style="text-align:right; font-size:12px;" class="font-size-12 text-right mb-0">${v.costperunit}</td>
+                        <td style="text-align:right; font-size:12px;" class="font-size-12 text-right mb-0">${numberWithCommas(v.costperunit)}</td>
                         <td style="text-align:right; font-size:12px;" class="font-size-12 text-right mb-0">${numberWithCommas(v.cost)}</td>
                     </tr>
         `;
