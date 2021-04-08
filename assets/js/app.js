@@ -1615,8 +1615,8 @@ function printPreview(responce, form) {
         <thead>
             <tr>
                 <th style="font-size:12px;" class="font-size-12">Name</th>
-                <th style="text-align:right;  font-size:12px;" class="font-size-12 text-right">Qua</th>
-                <th style="text-align:right;  font-size:12px;" class="font-size-12 text-right">CostPerUnit</th>
+                <th style="text-align:right;  font-size:12px;" class="font-size-12 text-right">Quantity</th>
+                <th style="text-align:right;  font-size:12px;" class="font-size-12 text-right">Price</th>
                 <th style="text-align:right;  font-size:12px;" class="font-size-12 text-right">Amount</th>
             </tr>
         </thead>
