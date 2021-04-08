@@ -85,6 +85,10 @@
         "menuicon": "bxs-report",
         "menulink": "nkt-list.html",
         "menu": []
+    }, {
+        "menulabel": "Outlet Report",
+        "menuicon": "bxs-printer",
+        "menulink": "outlet-report.html"
     }]
 }, {
     "menutype": "store",

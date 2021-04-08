@@ -1,10 +1,8 @@
 $(document).ready(function() {
     listBranch();
-    if (userSession.department_id != 5)
-        $('.branch').hide();
+    (userSession.department_id == 5 || userSession.department_id == 6) ? $('.branch').show(): $('.branch').hide();
+
 });
-
-
 
 /**
  * List Branch in select 2
