@@ -1614,10 +1614,10 @@ function printPreview(responce, form) {
     <table class="w-100">
         <thead>
             <tr>
-                <th class="font-size-12">Name</th>
-                <th style="text-align:right;" class="font-size-12 text-right">Qua</th>
-                <th style="text-align:right;" class="font-size-12 text-right">CostPerUnit</th>
-                <th style="text-align:right;" class="font-size-12 text-right">Amount</th>
+                <th style="font-size:12px;" class="font-size-12">Name</th>
+                <th style="text-align:right;  font-size:12px;" class="font-size-12 text-right">Qua</th>
+                <th style="text-align:right;  font-size:12px;" class="font-size-12 text-right">CostPerUnit</th>
+                <th style="text-align:right;  font-size:12px;" class="font-size-12 text-right">Amount</th>
             </tr>
         </thead>
         <tbody>`;
@@ -1625,10 +1625,10 @@ function printPreview(responce, form) {
     $.each(JSON.parse(res.bill_details), function(i, v) {
         html += `
                     <tr>
-                        <td class="font-size-12">${findInArrayOfObject(v.product_id, 'product_code', listProductArray).product_name}</td>
-                        <td style="text-align:right;" class="font-size-12 text-right mb-0">${v.quantity}</td>
-                        <td style="text-align:right;" class="font-size-12 text-right mb-0">${v.costperunit}</td>
-                        <td style="text-align:right;" class="font-size-12 text-right mb-0">${numberWithCommas(v.cost)}</td>
+                        <td style="font-size:12px;" class="font-size-12">${findInArrayOfObject(v.product_id, 'product_code', listProductArray).product_name}</td>
+                        <td style="text-align:right; font-size:12px;" class="font-size-12 text-right mb-0">${v.quantity}</td>
+                        <td style="text-align:right; font-size:12px;" class="font-size-12 text-right mb-0">${v.costperunit}</td>
+                        <td style="text-align:right; font-size:12px;" class="font-size-12 text-right mb-0">${numberWithCommas(v.cost)}</td>
                     </tr>
         `;
         total += v.cost;
