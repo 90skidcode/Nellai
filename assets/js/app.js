@@ -1611,7 +1611,7 @@ function printPreview(responce, form) {
 
     <p style="text-align:center;" class="text-center mb-0">Bill No: ${res.bill_no}</p>
     <p style="text-align:center;" class="text-center mb-0">******************************</p>
-    <table class="w-100">
+    <table style="width:100%;" class="w-100">
         <thead>
             <tr>
                 <th style="font-size:12px;" class="font-size-12">Name</th>
