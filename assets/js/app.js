@@ -1636,7 +1636,7 @@ function printPreview(responce, form) {
     html += `</tbody>
                     </table>
                     <p class="text-center mb-0">******************************</p>
-                    <p class="text-right mb-0">CGST (${res.cgst}%) : ${numberWithCommas((total*2.5)/100)}</p>
+                    <p style="text-align:right;" class="text-right mb-0">CGST (${res.cgst}%) : ${numberWithCommas((total*2.5)/100)}</p>
                     <p class="text-right mb-0">SGST (${res.sgst}%) : ${numberWithCommas((total*2.5)/100)}</p>
                     <p class="text-center mb-0">******************************</p>
                     <p class="text-right mb-0">Total GST (5%) : ${numberWithCommas((total*5)/100)}</p>
