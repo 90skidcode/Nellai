@@ -1210,12 +1210,14 @@ $('input').on("wheel mousewheel ", function(e) {
  */
 
 function hasDuplicates(array) {
-    var counts = [];
-    for (var i = 0; i <= array.length; i++) {
-        if (counts[array[i]] === undefined) {
-            counts[array[i]] = 1;
-        } else {
-            return true;
+    if (typeof(array) == 'object') {
+        var counts = [];
+        for (var i = 0; i <= array.length; i++) {
+            if (counts[array[i]] === undefined) {
+                counts[array[i]] = 1;
+            } else {
+                return true;
+            }
         }
     }
     return false;
