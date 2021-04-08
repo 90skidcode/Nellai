@@ -1609,8 +1609,8 @@ function printPreview(responce, form) {
     <p style="text-align:center;" class="text-center mb-0">Ph: +91 94353 56783</p>
     <p style="text-align:center;" class="text-center mb-0">email: foods@nkf.com</p>
 
-    <p style="text-align:center;" class="text-center mb-0">Bill No: ${res.bill_no}</p>
-    <p style="text-align:center;" class="text-center mb-0">******************************</p>
+    <p style="text-align:center;" class="text-center mb-0"><b>Bill No: ${res.bill_no}</b></p>
+    <p style="text-align:center;" class="text-center mb-0">------------------------------------------</p>
     <table style="width:100%;" class="w-100">
         <thead>
             <tr>
@@ -1631,25 +1631,28 @@ function printPreview(responce, form) {
                         <td style="text-align:right; font-size:12px;" class="font-size-12 text-right mb-0">${numberWithCommas(v.cost)}</td>
                     </tr>
         `;
-        total += v.cost;
+        total += Number(v.cost);
     });
     html += `</tbody>
                     </table>
-                    <p style="text-align:center;" class="text-center mb-0">******************************</p>
-                    <p style="text-align:right;" class="text-right mb-0">CGST (${res.cgst}%) : ${numberWithCommas((total*2.5)/100)}</p>
-                    <p style="text-align:right;" class="text-right mb-0">SGST (${res.sgst}%) : ${numberWithCommas((total*2.5)/100)}</p>
-                    <p style="text-align:center;" class="text-center mb-0">******************************</p>
-                    <p style="text-align:right;" class="text-right mb-0">Total GST (5%) : ${numberWithCommas((total*5)/100)}</p>
-                    <p style="text-align:center;" class="text-center mb-0">******************************</p>
+                    <p style="text-align:center;" class="text-center mb-0">------------------------------------------</p>
+                    <p style="text-align:right;" class="text-right mb-0">Before Tax: ${numberWithCommas(Number(res.total) - (((total*5)/100).toFixed(2)))}</p>
+                    <p style="text-align:center;" class="text-center mb-0">------------------------------------------</p>
+                    <p style="text-align:right;" class="text-right mb-0">CGST (${res.cgst}%) : ${numberWithCommas(((total*2.5)/100).toFixed(2))}</p>
+                    <p style="text-align:right;" class="text-right mb-0">SGST (${res.sgst}%) : ${numberWithCommas(((total*2.5)/100).toFixed(2))}</p>
+                    <p style="text-align:center;" class="text-center mb-0">------------------------------------------</p>
+                    <p style="text-align:right;" class="text-right mb-0">Total GST (5%) : ${numberWithCommas(((total*5)/100).toFixed(2))}</p>
+                    <p style="text-align:center;" class="text-center mb-0">------------------------------------------</p>
                     <p style="text-align:right;" class="text-right mb-0"><b>Total: ${numberWithCommas(res.total)}</b></p>
+                    <p style="text-align:center;" class="text-center mb-0">------------------------------------------</p>
                     <p style="text-align:right;" class="text-right mb-0">Customer Given: ${numberWithCommas(res.customer_given)}</p>
                     <p style="text-align:right;" class="text-right mb-0">Need To Return : ${numberWithCommas(res.need_to_return)}</p>
 
-                    <p style="text-align:center;" class="text-center mb-0">******************************</p>
+                    <p style="text-align:center;" class="text-center mb-0">------------------------------------------</p>
 
                     <p style="text-align:center;" class="text-center mb-0">Thank You !!</p>
                     <p style="text-align:center;" class="text-center mb-0">Vist Again !! </p>
-                    <p style="text-align:center;" class="text-center mb-0">******************************</p>
+                    <p style="text-align:center;" class="text-center mb-0">------------------------------------------</p>
   
                     `;
     $('.print-bill').printThis({
