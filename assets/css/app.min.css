@@ -7021,3 +7021,11 @@ input[type=number] {
     border: 1px solid #eff2f7;
     font-size: 12px;
 }
+
+.border-right-1 {
+    border-right: 1px solid #e8e8e8;
+}
+
+.border-bottom-1 {
+    border-bottom: 1px solid #e8e8e8;
+}

@@ -118,97 +118,110 @@ $(document).on('click', '.view-bill-details', function() {
                     <div class="modal-body">
                    
                     <div class="row">                    
-                            <div class="col-md-8">                           
+                            <div class="col-md-8">   
+                            <div class="card">
+                            <div class="card-header">   
+                                Bill Details
+                            </div> 
+                            <div class="card-body">                  
                             <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
-                                <tr>
+                                <tr >
                                     <th>Item Code</th>
-                                    <th>Quantity</th>                                  
+                                    <th class="text-right">Quantity</th>                                  
                                     <th class="text-right">Cost per Unit</th>
                                     <th class="text-right">Cost</th>
                                 </tr>
                             </thead>
                             <tbody>`;
     $.each(JSON.parse(data.bill_details), function(i, v) {
+        let product = findInArrayOfObject(v.product_id, 'product_code', listProductArray);
         html += `<tr>
-                    <td>${v.product_id}</td>
-                    <td>${v.quantity}</td>
-                    <td>${v.costperunit}</td>
-                    <td>${v.cost}</td>
+                    <td>${product.product_code} - ${capitalizeFirstLetter(product.product_name)}</td>
+                    <td class="text-right">${v.quantity}</td>
+                    <td  class="text-right">${numberWithCommas(v.costperunit)}</td>
+                    <td  class="text-right">${numberWithCommas(v.cost)}</td>
                 </tr>`;
     });
 
     html += `</tbody> 
                         </table>
+                       
                         </div>
+                        </div></div>
                             <div class="col-md-4">
                                 <div class="card">
+                                <div class="card-header">   
+                                    Calculation Details
+                                </div>
                                     <div class="row p-3">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
+                                        <div class="col-md-6 border-right-1 border-bottom-1 p-2">
+                                            <div class="form-group m-0">
                                                 <label for="formrow-firstname-input">Bill No</label><br>
                                                 <b>${data.bill_no}</b>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
+                                        <div class="col-md-6 border-bottom-1 p-2">
+                                            <div class="form-group m-0">
                                                 <label for="formrow-email-input">Order By </label>
                                                 <br>
                                                 <b>${data.orderby}</b>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
+                                        <div class="col-md-6  border-right-1 border-bottom-1 p-2">
+                                            <div class="form-group m-0">
                                                 <label for="formrow-password-input">GST No </label>
                                                 <br>
-                                                <b>${data.gst_no}</b>
+                                                <b>${data.gst_no} </b>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
+                                        <div class="col-md-6 border-bottom-1 p-2">
+                                            <div class="form-group m-0">
                                                 <label for="formrow-password-input">Payment Type </label>
                                                 <br>
                                                 <b>${data.payment_type}</b>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="formrow-password-input">CGST</label>
+                                        <div class="col-md-6  border-right-1 border-bottom-1 p-2">
+                                            <div class="form-group m-0">
+                                                <label for="formrow-password-input">CGST (${data.cgst}%)</label>
                                                 <br>
-                                                <b>${data.cgst}</b>   </div>
+                                                <b>${numberWithCommas((data.total*2.5)/100)}</b>   </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="formrow-password-input">SGST</label>
+                                        <div class="col-md-6  border-bottom-1 p-2">
+                                            <div class="form-group m-0">
+                                                <label for="formrow-password-input">SGST (${data.sgst}%)</label>
                                                 <br>
-                                                <b>${data.sgst}</b>   </div>
+                                                <b>${numberWithCommas((data.total*2.5)/100)}</b>   </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
+                                        <div class="col-md-12  border-right-1 border-bottom-1 p-2">
+                                            <div class="form-group m-0">
                                                 <label for="formrow-password-input">Total</label>
                                                 <br>
-                                                <b class="font-size-24 text-success">${data.total}</b>  </div>
+                                                <b class="font-size-24 text-success">${numberWithCommas(data.total)}</b>  </div>
                                         </div>
                                     
-                                        <div class="col-md-6">
-                                            <div class="form-group">
+                                        <div class="col-md-6  border-right-1  p-2">
+                                            <div class="form-group m-0">
                                                 <label for="formrow-password-input">Customer Given </label>
                                                 <br>
-                                                <b>${data.customer_given}</b>   </div>
+                                                <b>${numberWithCommas(data.customer_given)}</b>   </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
+                                        <div class="col-md-6   p-2">
+                                            <div class="form-group m-0">
                                                 <label for="formrow-password-input">Need to return</label>
                                                 <br>
-                                                <b>${data.need_to_return}</b>    </div>
+                                                <b>${numberWithCommas(data.need_to_return)}</b>    </div>
                                         </div>
                                     </div>
                                 </div>
                             <div>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                
                             </div>
+                    </div>                    
                     </div>
-                    </div>
+                    <button type="button" class="btn btn-secondary pull-right ml-1" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary pull-right " onclick='printPreview(${$(this).attr('data-json')},"Outside")'>Print</button>
                 </div>`;
     $(".view-bill .modal-dialog").html(html);
     $(".view-bill").modal('show');

@@ -1584,96 +1584,78 @@ var tableToExcel = (function() {
     }
 })()
 
-
-function PrintElem() {
-    var mywindow = window.open('', 'PRINT');
-    mywindow.document.write('<html><head><title>Payment Slip</title>');
-    mywindow.document.write('</head><body style="text-align:center;font: Georgia, "Times New Roman", Times, serif;background: #fff;font-size: 22pt;margin:20px auto auto 50px;" >');
-    mywindow.document.write('<header style="text-align:center; white-space:nowrap;overflow:hidden;line-height: 1em;">' +
-        '<p  style="font-size:16pt;white-space:nowrap;overflow:hidden;line-height: 12pt;">Payment Slip</p>' +
-        '<p style="font-size:16pt;white-space:nowrap;overflow:hidden;line-height: 1em;">' + $('.mylabelpaymentheader').html() + '</p>' +
-        '</header>');
-    mywindow.document.write('<content style="text-align:center;">' +
-        '<table style="margin-left: auto;margin-right: auto;border-collapse: collapse;font-size:16pt;">' +
-        '<tr  style="border:1px solid black"><td  style="border:1px solid black">Name:</td><td  style="border:1px solid black">' + $('.lblName').html() + '</td></tr>' +
-        '<tr style="border:1px solid black"><td style="border:1px solid black">Address:</td><td style="border:1px solid black">' + $('.lblAddress').html() + '</td></tr>' +
-        '<tr  style="border:1px solid black"><td  style="border:1px solid black">Meter No:</td><td  style="border:1px solid black">' + $('.lblMeterNo').html() + '</td></tr>' +
-        '<tr  style="border:1px solid black"><td  style="border:1px solid black">Token:</td><td  style="border:1px solid black">' + $('.lblToken').html() + '</td></tr>' +
-        '</table>' +
-
-        '</content>' +
-        '<footer>' +
-        '<hr style="margin-top:30pt;margin-bottom:30pt;">' +
-        '<p style="text-align:right;">&copy pdb</p>' +
-        '</footer>' +
-        '');
-    mywindow.document.write('</body></html>');
-    mywindow.document.close(); // necessary for IE >= 10
-    mywindow.focus(); // necessary for IE >= 10*/
-    mywindow.print();
-
-    return true;
+/**
+ * Capitalize First Letter
+ * @param {string} string 
+ * @returns string
+ */
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+/**
+ * To Print Outlet Bill
+ * @param {JSON} responce 
+ */
 
-$html = `<style>
-                body {
-                    font-size: 10px;
-                    font-family:Calibri;
-                }
+function printPreview(responce, form) {
+    var res = responce;
+    (form) ? res = responce: res = responce.result[0];
+    let html = `<h4 class="text-center">Nellai Krishna Food PVT LTD</h4>
+    <p class="text-center mb-0">1st Guindy</p>
+    <p class="text-center mb-0">Chennai - 600001.</p>
+    <p class="text-center mb-0">Ph: +91 94353 56783</p>
+    <p class="text-center mb-0">email: foods@nkf.com</p>
 
-                table {
-                    font-size: 10px;
-                    font-family:Calibri;
-                }
+    <p class="text-center mb-0">Bill No: ${res.bill_no}</p>
+    <p class="text-center mb-0">******************************</p>
+    <table class="w-100">
+        <thead>
+            <tr class="border-bottom-1">
+                <th class="font-size-12">Name</th>
+                <th class="font-size-12 text-right">Qua</th>
+                <th class="font-size-12 text-right">CostPerUnit</th>
+                <th class="font-size-12 text-right">Amount</th>
+            </tr>
+        </thead>
+        <tbody>`;
+    var total = 0;
+    $.each(JSON.parse(res.bill_details), function(i, v) {
+        html += `
+                    <tr class="border-bottom-1">
+                        <td class="font-size-12">${findInArrayOfObject(v.product_id, 'product_code', listProductArray).product_name}</td>
+                        <td class="font-size-12 text-right mb-0">${v.quantity}</td>
+                        <td class="font-size-12 text-right mb-0">${v.costperunit}</td>
+                        <td class="font-size-12 text-right mb-0">${numberWithCommas(v.cost)}</td>
+                    </tr>
+        `;
+        total += v.cost;
+    });
+    html += `</tbody>
+                    </table>
+                    <p class="text-center mb-0">******************************</p>
+                    <p class="text-right mb-0">CGST (${res.cgst}%) : ${numberWithCommas((total*2.5)/100)}</p>
+                    <p class="text-right mb-0">SGST (${res.sgst}%) : ${numberWithCommas((total*2.5)/100)}</p>
+                    <p class="text-center mb-0">******************************</p>
+                    <p class="text-right mb-0">Total GST (5%) : ${numberWithCommas((total*5)/100)}</p>
+                    <p class="text-center mb-0">******************************</p>
+                    <p class="text-right mb-0"><b>Total: ${numberWithCommas(res.total)}</b></p>
+                    <p class="text-right mb-0">Customer Given: ${numberWithCommas(res.customer_given)}</p>
+                    <p class="text-right mb-0">Need To Return : ${numberWithCommas(res.need_to_return)}</p>
 
-            </style>
+                    <p class="text-center mb-0">******************************</p>
 
-            <table style="width:100%">
-
-                <tr>
-                    <td align ="left">SALE ORDER NO</td>
-                    <td align ="right">S01</td>
-                </tr>
-                <tr>
-                    <td align ="left">SALE ORDER D/TIME</td>
-                    <td align ="right">2009/01/01</td>
-                </tr>
-
-                <tr>
-                    <td align ="left">CUSTOMER</td>
-                    <td align ="right">JOHN DOE</td>
-                </tr>
-
-            </table>
-            `;
-
-
-function PrintElem() {
-    Popup($html);
-}
-
-function Popup(data) {
-    var mywindow = window.open('', 'my div', 'height=400,width=600');
-    mywindow.document.write('<html><head><title>PressReleases</title>');
-    mywindow.document.write('<link rel="stylesheet" href="css/main.css" type="text/css" />');
-    mywindow.document.write('</head><body >');
-    mywindow.document.write(data);
-    mywindow.document.write('data');
-    mywindow.document.write('</body></html>');
-    mywindow.document.close(); // necessary for IE >= 10
-
-    myDelay = setInterval(checkReadyState, 100000000);
-
-    function checkReadyState() {
-        if (mywindow.document.readyState == "complete") {
-            clearInterval(myDelay);
-            mywindow.focus(); // necessary for IE >= 10
-
-            mywindow.print();
-            mywindow.close();
+                    <p class="text-center mb-0">Thank You !!</p>
+                    <p class="text-center mb-0">Vist Again !! </p>
+                    <p class="text-center mb-0">******************************</p>
+  
+                    `;
+    $('.print-bill').printThis({
+        importCSS: false,
+        loadCSS: "assets/css/app.min.css",
+        header: html,
+        afterPrint: function() {
+            location.reload();
         }
-    }
-
-    return true;
+    });
 }

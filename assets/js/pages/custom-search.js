@@ -94,8 +94,6 @@ function displayAllProductsListInit() {
 
 }
 
-
-
 function displayAllProductsList(responce) {
     let html = ``;
     let stockIn = 0;
