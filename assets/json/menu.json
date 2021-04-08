@@ -89,6 +89,10 @@
         "menulabel": "Outlet Report",
         "menuicon": "bxs-printer",
         "menulink": "outlet-report.html"
+    }, {
+        "menulabel": "360 Degree Report",
+        "menuicon": "bxs-binoculars",
+        "menulink": "360-report.html"
     }]
 }, {
     "menutype": "store",
