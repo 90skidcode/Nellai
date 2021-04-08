@@ -1,6 +1,5 @@
 $(document).ready(function() {
     listBranch();
-    displayAllProductsListInit();
     if (userSession.department_id != 5)
         $('.branch').hide();
 });
