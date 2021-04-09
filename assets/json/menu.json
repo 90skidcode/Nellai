@@ -8,25 +8,6 @@
         "menulink": "dashboard.html",
         "submenu": ""
     }, {
-        "menulabel": "Employee",
-        "menuicon": "bxs-user",
-        "menulink": "javascript: void(0);",
-        "submenu": [{
-            "menulabel": "Employee List",
-            "menulink": "employee-dashboard.html"
-        }]
-    }, {
-        "menulabel": "Leave",
-        "menuicon": "bx-calendar-plus",
-        "menulink": "javascript: void(0);",
-        "submenu": [{
-            "menulabel": "Leave List",
-            "menulink": "leave-list.html"
-        }, {
-            "menulabel": "Leave Type List",
-            "menulink": "leave-type-list.html"
-        }]
-    }, {
         "menulabel": "Setting",
         "menuicon": "bx-slider-alt",
         "menulink": "javascript: void(0);",
@@ -54,6 +35,25 @@
         }, {
             "menulabel": "Consultancy List",
             "menulink": "consultancy-list.html"
+        }]
+    }, {
+        "menulabel": "Employee",
+        "menuicon": "bxs-user",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+            "menulabel": "Employee List",
+            "menulink": "employee-dashboard.html"
+        }]
+    }, {
+        "menulabel": "Leave",
+        "menuicon": "bx-calendar-plus",
+        "menulink": "javascript: void(0);",
+        "submenu": [{
+            "menulabel": "Leave List",
+            "menulink": "leave-list.html"
+        }, {
+            "menulabel": "Leave Type List",
+            "menulink": "leave-type-list.html"
         }]
     }, {
         "menulabel": "Salary",

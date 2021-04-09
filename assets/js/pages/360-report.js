@@ -164,18 +164,22 @@ $(document).on('click', '.view-bill-details', function() {
 $(document).on('click', '.showBranch', function() {
     let data = JSON.parse($(this).attr('data-json'));
     if (!$(this).closest('tr').hasClass('sub-table')) {
-        $('.sub-table').remove();
-        $('tr').removeClass('selected');
-        let html = ``;
-        $.each(data.details, function(inx, val) {
-            html += `<tr class="sub-table" onclick="displayAllProductsListInit(${data.department_id},${val.branch_master_id})" data-deparment="${data.department_id}" data-branch="${val.branch_master_id}" >
+        if (typeof(data.department_id) != 'undefined') {
+            $('.sub-table').remove();
+            $('tr').removeClass('selected');
+            let html = ``;
+            $.each(data.details, function(inx, val) {
+                html += `<tr class="sub-table" onclick="displayAllProductsListInit(${data.department_id},${val.branch_master_id})" data-deparment="${data.department_id}" data-branch="${val.branch_master_id}" >
                         <td class="showBranch" data-json='${JSON.stringify(val)}'>${inx}</td>
                         <td class="text-right">${numberWithCommas(val.details.income)}</td> 
                         <td class="text-right">${numberWithCommas(val.details.expenses)}</td>                           
                     </tr>`;
-        });
-        $(this).closest('tr').after(html);
-        $(this).closest('tr').addClass('selected');
+            });
+            $(this).closest('tr').after(html);
+            $(this).closest('tr').addClass('selected');
+        } else {
+            listSalaryReport('03', '2021');
+        }
     }
 });
 
@@ -184,6 +188,43 @@ $(document).on('click', '.showBranch', function() {
 
 
 
+function listSalaryReport(m, y) {
+    let data = { "list_key": "salaryList", "salary_month": m, "salary_year": y, "department_id": "", "branch_id": "", }
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "displaySalaryList" }, { "functionName": "displaySalaryList" });
+}
+
+function displaySalaryList(responce) {
+    let html = ` <thead>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Employee Name</th>
+                        <th>Department</th>
+                        <th>Branch</th>
+                        <th>Consultancy Name</th>
+                        <th class="text-right">Salary Amount</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+    let total = 0;
+
+    $.each(responce.result, function(i, v) {
+        html += `<tr>
+                    <td>${v.employee_id}</td>
+                    <td>${v.employee_name}</td>
+                    <td>${v.department_name}</td>
+                    <td>${v.branch_name}</td>
+                    <td>${v.consultancy_name}</td>                    
+                    <td class="text-right">${numberWithCommas(v.salary_total)}</td>
+                </tr>`;
+        total += Number(v.salary_total);
+    });
+    html += `<tr>
+                <td colspan="5" class="text-right font-weight-bolder font-size-20 text-success">Total Salary</td>
+                <td class="text-right font-weight-bolder font-size-20 text-success">${numberWithCommas(total)}</td>
+            </tr></tbody>`;
+
+    $(".table-list").html(html);
+}
 
 
 

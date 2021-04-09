@@ -7042,3 +7042,8 @@ tr.selected {
     background: #e36b70 !important;
     color: #fff;
 }
+
+body[data-sidebar=dark].vertical-collpsed {
+    height: 100vh;
+    overflow: hidden;
+}
