@@ -7029,3 +7029,16 @@ input[type=number] {
 .border-bottom-1 {
     border-bottom: 1px solid #e8e8e8;
 }
+
+.showBranch {
+    cursor: pointer;
+}
+
+tr.selected {
+    background: #f5c9cb !important;
+}
+
+.sub-table {
+    background: #e36b70 !important;
+    color: #fff;
+}

@@ -1,106 +1,43 @@
-$(document).ready(function() {
-    listBranch();
-    (userSession.department_id == 5 || userSession.department_id == 6) ? $('.branch').show(): $('.branch').hide();
-
-});
-
-/**
- * List Branch in select 2
- * 
- */
-
-function listBranch() {
+function display360Init() {
     let data = {
-        "query": 'fetch',
-        "databasename": 'branch_master',
-        "column": {
-            "branch_master_id": "branch_master_id",
-            "branch_name": "branch_name"
-        },
-        "condition": {
-            "status": '1',
-            "department_master_id": 4
-        },
-        "like": ""
-    }
-    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='branch_id']", "param2": "branch_name", "param3": "branch_master_id" }, { "functionName": "listSelect2", "param1": "[name='branch_id']", "param2": "branch_name", "param3": "branch_master_id" });
-}
-
-function displayAllProductsListInit() {
-    let data = {
-        "list_key": "getInvoiceReport",
+        "list_key": "Report360",
         "from_date": $("#from_date").val(),
-        "to_date": $("#to_date").val(),
-        "condition": {
-            "outlet_billing.branch_id": (userSession.department_id != 5) ? userSession.branch_id : $("[name='branch_id']").val(),
-            "outlet_billing.department_id": '4',
-            "outlet_billing.orderby": $("[name='orderby']").val()
-        }
+        "to_date": $("#to_date").val()
     }
-    commonAjax('', 'POST', data, '', '', '', { "functionName": "displayAllProductsList" }, { "functionName": "displayAllProductsList" });
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "displayAllProductsLists" }, { "functionName": "displayAllProductsLists" });
 }
 
 
-function displayAllProductsList(response) {
-    var paymentTypeAmount = {
-        "Cash": 0,
-        "Online": 0,
-        "Amazon Pay": 0,
-        "Paytm": 0,
-        "Google Pay": 0,
-        "PhonePe": 0,
-        "Other Wallet": 0,
-        "Card": 0
-    }
-
-    var paymentTypeCount = {
-        "Cash": 0,
-        "Online": 0,
-        "Amazon Pay": 0,
-        "Paytm": 0,
-        "Google Pay": 0,
-        "PhonePe": 0,
-        "Other Wallet": 0,
-        "Card": 0
-    }
+function displayAllProductsLists(response) {
     let html = ``;
-    let total = 0;
-    let count = 0;
+    let fte = 0;
+    let fti = 0;
     $.each(response.result, function(i, v) {
+        let te = 0;
+        let ti = 0;
+        if (typeof(v.department_id) != 'undefined') {
+            $.each(v.details, function(inx, val) {
+                te += Number(val.details.expenses);
+                ti += Number(val.details.income);
+            });
+        } else {
+            te = Number(v.details.expenses);
+            ti = Number(v.details.income);
+        }
         html += `<tr>
-                    <td class="text-primary view-bill-details cursor-pointer" data-json='${JSON.stringify(v)}'>${v.bill_no}</td>
-                    <td>${formatDate(v.created_at)}</td> 
-                    <td >${v.orderby}</td>
-                    <td class="text-right">${numberWithCommas(v.total)}</td>
+                    <td class="showBranch" data-json='${JSON.stringify(v)}'>${i}</td>
+                    <td class="text-right">${numberWithCommas(ti)}</td> 
+                    <td class="text-right">${numberWithCommas(te)}</td>                           
                 </tr>`;
-        total += Number(v.total);
-        count++;
-        paymentTypeAmount[v.payment_type] += Number(v.total);
-        paymentTypeCount[v.payment_type] += 1;
+        fte += Number(te);
+        fti += Number(ti);
     });
+    $(".list-result-type tbody").html(html);
+    $(".t-income").html(numberWithCommas(fti));
+    $(".t-expences").html(numberWithCommas(fte));
+    let c = ((fti - fte) > 0) ? "text-success" : "text-danger";
+    $(".t-final").html(numberWithCommas((fte - fti))).addClass(c);
 
-    html += `<tr>
-                    <td colspan="3"></td>
-                    <td class="text-success text-right font-weight-bolder font-size-20">${numberWithCommas(total)}</td>
-                </tr>`;
-
-    $(".table-list tbody").html(html);
-
-    let htmlPayment = ``;
-    $.each(paymentTypeAmount, function(i, v) {
-        htmlPayment += `<tr>
-                            <td>${i}</td>
-                            <td class="text-right">${paymentTypeCount[i]}</td> 
-                            <td class="text-right">${numberWithCommas(v)}</td>                           
-                        </tr>`;
-
-    });
-
-
-
-    $(".payment-type tbody").html(htmlPayment);
-    $(".t-amount").text(numberWithCommas(total));
-    $(".t-orders").text(count);
 }
 
 $(document).on('click', '.view-bill-details', function() {
@@ -223,3 +160,150 @@ $(document).on('click', '.view-bill-details', function() {
     $(".view-bill .modal-dialog").html(html);
     $(".view-bill").modal('show');
 })
+
+$(document).on('click', '.showBranch', function() {
+    let data = JSON.parse($(this).attr('data-json'));
+    if (!$(this).closest('tr').hasClass('sub-table')) {
+        $('.sub-table').remove();
+        $('tr').removeClass('selected');
+        let html = ``;
+        $.each(data.details, function(inx, val) {
+            html += `<tr class="sub-table" onclick="displayAllProductsListInit(${data.department_id},${val.branch_master_id})" data-deparment="${data.department_id}" data-branch="${val.branch_master_id}" >
+                        <td class="showBranch" data-json='${JSON.stringify(val)}'>${inx}</td>
+                        <td class="text-right">${numberWithCommas(val.details.income)}</td> 
+                        <td class="text-right">${numberWithCommas(val.details.expenses)}</td>                           
+                    </tr>`;
+        });
+        $(this).closest('tr').after(html);
+        $(this).closest('tr').addClass('selected');
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+$(document).ready(function() {
+    listProduct();
+});
+
+/**
+ * List Product in select 2
+ */
+
+function listProduct() {
+    let data = {
+        "query": 'fetch',
+        "databasename": 'product_master',
+        "column": {
+            "product_code": "product_code",
+            "product_name": "product_name"
+        },
+        "condition": {
+            "status": '1'
+        },
+        "like": ""
+    }
+    let defaultValue = (getParameter('item_code')) ? getParameter('item_code') : "";
+    commonAjax('database.php', 'POST', data, '', '', '', { "functionName": "listSelect2", "param1": "[name='product_code']", "param2": "product_name", "param3": "product_code", "param4": defaultValue })
+
+}
+
+function displayAllProductsListInit(department_id, branch_master_id) {
+    let data = {
+        "list_key": "getProductReport",
+        "from_date": $("#from_date").val(),
+        "to_date": $("#to_date").val(),
+        "condition": {
+            "stock_master_details.branch_master_id": branch_master_id,
+            "stock_master_details.department_id": department_id
+        }
+    }
+    commonAjax('', 'POST', data, '', '', '', { "functionName": "displayAllProductsList" }, { "functionName": "displayAllProductsList" });
+
+}
+
+function displayAllProductsList(responce) {
+    let html = ``;
+    let stockIn = 0;
+    let stockOut = 0;
+    let creditTotal = 0;
+    let debitTotal = 0;
+    html = `<thead>
+        <tr>
+            <th>Sr.No</th>
+            <th>Bill No</th>
+            <th>Date/Time</th>
+            <th>From Branch</th>
+            <th>To Branch</th>
+            <th>Product</th>
+            <th>Credit (Kgs)</th>
+            <th>Credit Total</th>
+            <th>Debit (Kgs)</th>
+            <th>Debit Total</th>
+        </tr>
+    </thead><tbody>`
+    $.each(responce.result, function(i, v) {
+        html += `<tr class='${(!v.damage_images)? (v.tracking_status == '9')? "text-danger font-weight-bold": "" : "text-danger font-weight-bold"}'>
+                    <td>${i+1}</td>
+                    <td class="info-row" title="Info" data-toggle="modal" data-id="${v.stock_master_details_id}" data-target=".info">${v.bill_no}</td>
+                    <td>${formatDate(v.stock_date)}</td>
+                    <td>${(Number(v.stock_quantity_in))? v.from_branch : v.to_branch}</td>
+                    <td>${(Number(v.stock_quantity_in))? v.to_branch : v.from_branch}</td>
+                    <td>${(Number(v.stock_quantity_in))? " IN ": (v.damage_images)? " Damage " : (v.tracking_status == "9")? " Stock Cleared " : " OUT "  } - ${v.product_code} - ${v.product_name}</td>
+                    <td class="text-success text-right">${(Number(v.stock_quantity_in))?  v.stock_quantity_in : ""}</td>
+                    <td class="text-danger text-right">${(Number(v.stock_quantity_in))? numberWithCommas(Number(v.stock_quantity_in) * Number(v.product_price)): ""}</td>
+                    <td class="text-danger text-right">${(Number(v.stock_quantity_out))? v.stock_quantity_out: ""}</td>
+                    <td class="text-success text-right">${(Number(v.stock_quantity_out))? numberWithCommas(Number(v.stock_quantity_out) * Number(v.product_price)): ""}</td>
+                </tr>`;
+        stockIn += Number(v.stock_quantity_in);
+        stockOut += Number(v.stock_quantity_out);
+        creditTotal += Number(v.stock_quantity_in) * Number(v.product_price);
+        debitTotal += Number(v.stock_quantity_out) * Number(v.product_price);
+    });
+
+    let CheckValue = debitTotal - creditTotal;
+    if (!$('[name="product_code"]').val()) {
+        $(".stock-view").hide();
+        html += `<tr>
+        <td colspan="6" ></td>
+        <td class="text-success text-right font-weight-bolder font-size-20"></td>
+        <td class="text-danger text-right font-weight-bolder font-size-20">${numberWithCommas(creditTotal)}</td>
+        <td class="text-danger text-right font-weight-bolder font-size-20"></td>
+        <td class="text-success text-right font-weight-bolder font-size-20">${numberWithCommas(debitTotal)}</td>
+    </tr>
+    <tr>
+        <td colspan="6" ></td>
+        <td colspan="3" class="${(CheckValue > 0)? "text-success" : "text-danger"} text-right font-weight-bolder font-size-20">${(CheckValue > 0)? "" : ""}</td>
+        <td class="${(CheckValue > 0)? "text-success" : "text-danger"} text-right font-weight-bolder font-size-20">${numberWithCommas(CheckValue.toString().replace("-",""))}</td>
+    </tr>`;
+    } else {
+        $(".stock-view").show();
+        $(".stock-details").html(stockIn - stockOut);
+        html += `<tr>
+                    <td colspan="8" ></td>
+                    <td class="text-success text-right font-weight-bolder font-size-20">${stockIn}</td>
+                    <td class="text-danger text-right font-weight-bolder font-size-20">${stockOut}</td>
+                </tr>`;
+    }
+    html += `</tbody>`;
+    $(".table-list").html(html);
+}
+
+function compare(a, b) {
+    if (a.stock_date < b.stock_date) {
+        return -1;
+    }
+    if (a.stock_date > b.stock_date) {
+        return 1;
+    }
+    return 0;
+}

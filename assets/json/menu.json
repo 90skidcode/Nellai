@@ -91,7 +91,7 @@
         "menulink": "outlet-report.html"
     }, {
         "menulabel": "360 Degree Report",
-        "menuicon": "bxs-binoculars",
+        "menuicon": "bx-search-alt",
         "menulink": "360-report.html"
     }]
 }, {
