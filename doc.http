@@ -1,5 +1,5 @@
 # REST Client tests on https://github.com/tronalddump-io/tronald-app
-@baseUrl = https://glowmedia.in/nellai/api/services.php;
+@baseUrl = https://nellaikrishnafoods.in//api/services.php;
 
 ### Get a random clever quote
 POST {{baseUrl}} HTTP/1.1

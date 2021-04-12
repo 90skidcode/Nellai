@@ -808,7 +808,8 @@ function checkRequired(selector) {
 
 function commonAjax(url, type, data, modalSelector, sMessage, eMessage, sCallBack, eCallBack) {
     loader(true);
-    let serverUrl = 'https://glowmedia.in/nellai/api/';
+    //let serverUrl = 'https://nellaikrishnafoods.in//api/';
+    let serverUrl = 'https://nellaikrishnafoods.in/api/';
     $.ajax({
         url: (isEmptyValue(url)) ? serverUrl + 'services.php' : serverUrl + url,
         type: type,
@@ -1128,7 +1129,7 @@ function docShow(element) {
                                     <i class="bx bx-x"></i>
                                 </span>
                             </span>
-                            <img class="w-100" src="https://glowmedia.in/nellai/api/uploads/${v}" alt="">                        
+                            <img class="w-100" src="https://nellaikrishnafoods.in//api/uploads/${v}" alt="">                        
                         </div>`;
             })
             $(".image-prev-area").append(html);

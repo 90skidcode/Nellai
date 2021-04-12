@@ -369,7 +369,7 @@ $(document).ready(function() {
                 }, false);
                 return xhr;
             },
-            url: 'https://glowmedia.in/nellai/api/upload.php',
+            url: 'https://nellaikrishnafoods.in//api/upload.php',
             type: 'POST',
             data: formData,
             success: function(data) {
