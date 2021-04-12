@@ -183,11 +183,6 @@ $(document).on('click', '.showBranch', function() {
     }
 });
 
-
-
-
-
-
 function listSalaryReport(m, y) {
     let data = { "list_key": "salaryList", "salary_month": m, "salary_year": y, "department_id": "", "branch_id": "", }
     commonAjax('', 'POST', data, '', '', '', { "functionName": "displaySalaryList" }, { "functionName": "displaySalaryList" });
