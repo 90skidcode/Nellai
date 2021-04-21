@@ -1,7 +1,6 @@
 $(document).ready(function() {
     listBranch();
     (userSession.department_id == 5 || userSession.department_id == 6) ? $('.branch').show(): $('.branch').hide();
-
 });
 
 /**
@@ -67,22 +66,28 @@ function displayAllProductsList(response) {
     let total = 0;
     let count = 0;
     $.each(response.result, function(i, v) {
-        html += `<tr>
+        let status = '';
+        if (!Number(v.status))
+            status = 'bg-primary-light';
+        html += `<tr class="${status}">
                     <td class="text-primary view-bill-details cursor-pointer" data-json='${JSON.stringify(v)}'>${v.bill_no}</td>
                     <td>${formatDate(v.created_at)}</td> 
                     <td >${v.orderby}</td>
                     <td class="text-right">${numberWithCommas(v.total)}</td>
                 </tr>`;
-        total += Number(v.total);
+
         count++;
-        paymentTypeAmount[v.payment_type] += Number(v.total);
-        paymentTypeCount[v.payment_type] += 1;
+        if (Number(v.status)) {
+            total += Number(v.total);
+            paymentTypeAmount[v.payment_type] += Number(v.total);
+            paymentTypeCount[v.payment_type] += 1;
+        }
     });
 
     html += `<tr>
-                    <td colspan="3"></td>
-                    <td class="text-success text-right font-weight-bolder font-size-20">${numberWithCommas(total)}</td>
-                </tr>`;
+                <td colspan="3"></td>
+                <td class="text-success text-right font-weight-bolder font-size-20">${numberWithCommas(total)}</td>
+            </tr>`;
 
     $(".table-list tbody").html(html);
 
@@ -95,9 +100,6 @@ function displayAllProductsList(response) {
                         </tr>`;
 
     });
-
-
-
     $(".payment-type tbody").html(htmlPayment);
     $(".t-amount").text(numberWithCommas(total));
     $(".t-orders").text(count);
@@ -198,7 +200,7 @@ $(document).on('click', '.view-bill-details', function() {
                                                 <b class="font-size-24 text-success">${numberWithCommas(data.total)}</b>  </div>
                                         </div>
                                     
-                                        <div class="col-md-6  border-right-1  p-2">
+                                        <div class="col-md-6 border-right-1 p-2">
                                             <div class="form-group m-0">
                                                 <label for="formrow-password-input">Customer Given </label>
                                                 <br>
@@ -210,6 +212,12 @@ $(document).on('click', '.view-bill-details', function() {
                                                 <br>
                                                 <b>${numberWithCommas(data.need_to_return)}</b>    </div>
                                         </div>
+                                        <div class="col-md-12 border-top-1 p-2">
+                                        <div class="form-group m-0">
+                                            <label for="formrow-password-input">Remarks</label>
+                                            <br>
+                                            <b>${data.remarks}</b>    </div>
+                                    </div>
                                     </div>
                                 </div>
                             <div>
@@ -217,9 +225,22 @@ $(document).on('click', '.view-bill-details', function() {
                             </div>
                     </div>                    
                     </div>
-                    <button type="button" class="btn btn-secondary pull-right ml-1" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary pull-right " onclick='printPreview(${$(this).attr('data-json')},"Outside")'>Print</button>
-                </div>`;
+                    <button type="button" class="btn btn-secondary pull-right ml-1" data-dismiss="modal">Close</button>`;
+    if (Number(data.status)) {
+        html += `<button type="button" class="btn btn-danger pull-right bill-cancel ml-1" data-bill-id="${data.bill_no}">Cancel Bill</button>
+                <button type="button" class="btn btn-primary pull-right " onclick='printPreview(${$(this).attr('data-json')},"Outside")'>Print</button>`;
+    }
+    html += `</div>`;
     $(".view-bill .modal-dialog").html(html);
     $(".view-bill").modal('show');
+});
+
+
+
+/**
+ * List Product in select 2
+ */
+$(document).on('click', '.bill-cancel', function() {
+    let data = { "list_key": "cancelInvoice", "bill_no": $(this).attr('data-bill-id') };
+    commonAjax('', 'POST', data, '', '', 'Bill Cancelled', { "functionName": "locationReload" })
 })

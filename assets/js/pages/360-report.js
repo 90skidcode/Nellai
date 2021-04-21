@@ -281,9 +281,9 @@ function displayAllProductsList(responce) {
             <th>From Branch</th>
             <th>To Branch</th>
             <th>Product</th>
-            <th>Credit (Kgs)</th>
+            <th>Credit (QTY)</th>
             <th>Credit Total</th>
-            <th>Debit (Kgs)</th>
+            <th>Debit (QTY)</th>
             <th>Debit Total</th>
         </tr>
     </thead><tbody>`

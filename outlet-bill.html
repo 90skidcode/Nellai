@@ -146,6 +146,8 @@
                                                     <option value="Direct">Direct</option>
                                                     <option value="Online">Online</option>                                                            
                                                     <option value="Agent">Agent</option>
+                                                    <option value="Gift">Gift</option>
+                                                    <option value="Employee">Employee</option>
                                                 </select>
                                                 </div>
                                             </div>
@@ -201,12 +203,18 @@
                                                     <input type="text" name="need_to_return" class="form-control need-to-return" readonly tabindex='-1' required>
                                                 </div>
                                             </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="formrow-password-input">Remarks</label>
+                                                    <input type="text" name="remarks" class="form-control">
+                                                </div>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="text-right col-12 p-2">
                                     <button type="button" class="btn btn-success btn-save">Print (F8)</button>
-                                    <button type="button" class="btn btn-secondary">Close (F5)</button>
+                                    <button type="button" class="btn btn-secondary" onclick="location.reload();">Close (F5)</button>
                                 </div>
                             </div>
                         </div>

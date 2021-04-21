@@ -91,8 +91,14 @@ function billCalculation() {
         let cgst = $('.cgst').val();
         let sgst = $('.sgst').val();
         let percentage = Number(cgst) + Number(sgst);
-        let billamount = ((totalCost / 100) * percentage) + totalCost;
-        $('.total').val(billamount);
+        //let billamount = ((totalCost / 100) * percentage) + totalCost;
+        let billamount = totalCost;
+        if ($(".order-by").val() == 'Gift' || $(".order-by").val() == 'Employee') {
+            $('.total').val(0);
+            $('.customer-given').val(0);
+            $('.row-cost').val(0);
+            $('.costperunit').val(0);
+        } else $('.total').val(billamount);
         ($('.customer-given').val() > billamount) ? $('.need-to-return').val($('.customer-given').val() - billamount): $('.need-to-return').val(0);
     });
 }
@@ -188,4 +194,12 @@ $(document).on('click', '.btn-save', function() {
         data["department_id"] = userSession.department_id;
         commonAjax('', 'POST', data, '.add', 'Bill added successfully', '', { "functionName": "printPreview" })
     }
+});
+
+$(document).on('change', '.payment-type', function() {
+    ($(this).val() == 'Cash') ? $('.customer-given').attr('required', 'required'): $('.customer-given').removeAttr('required');
+});
+
+$(document).on('change', '.order-by', function() {
+    billCalculation();
 });

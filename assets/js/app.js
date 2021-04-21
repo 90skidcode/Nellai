@@ -1528,7 +1528,7 @@ function infoStatus(responce) {
                         <thead class="bg-gray">
                             <tr>                   
                                 <th class="w-80">Item</th>
-                                <th class="w-20  text-right">Quantity (KGS)</th>
+                                <th class="w-20  text-right">Quantity (QTY)</th>
                             </tr>
                         </thead>
                         <tbody> 
@@ -1544,7 +1544,7 @@ function infoStatus(responce) {
                         <thead class="bg-gray">
                             <tr>                   
                                 <th class="w-40">Item</th>
-                                <th class="w-20  text-right">Quantity (KGS)</th>
+                                <th class="w-20  text-right">Quantity (QTY)</th>
                                 <th class="w-20  text-right">Cost per kg</th>
                                 <th class="w-10  text-right">Total</th>
                             </tr>
@@ -1605,11 +1605,9 @@ function printPreview(responce, form) {
     var res = responce;
     (form) ? res = responce: res = responce.result[0];
     let html = `<h4 style="text-align:center;" class="text-center">Nellai Krishna Food PVT LTD</h4>
-    <p style="text-align:center;" class="text-center mb-0">1st Guindy</p>
-    <p style="text-align:center;" class="text-center mb-0">Chennai - 600001.</p>
-    <p style="text-align:center;" class="text-center mb-0">Ph: +91 94353 56783</p>
-    <p style="text-align:center;" class="text-center mb-0">email: foods@nkf.com</p>
-
+    <p style="text-align:center;" class="text-center mb-0">${userSession.branch_address}</p>
+    <p style="text-align:center;" class="text-center mb-0">Ph: +91 ${userSession.branch_phone}</p>
+    <p style="text-align:center;" class="text-center mb-0">email: ${userSession.branch_email}</p>
     <p style="text-align:center;" class="text-center mb-0"><b>Bill No: ${res.bill_no}</b></p>
     <p style="text-align:center;" class="text-center mb-0">---------------------------------------</p>
     <table style="width:100%;" class="w-100">

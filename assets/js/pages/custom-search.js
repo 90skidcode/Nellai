@@ -1,13 +1,10 @@
 $(document).ready(function() {
     listProduct();
-    if (userSession.department_id != 5)
-        $(".department,.branch").hide();
-    else {
-        listDepartment();
-        $("[name='department_id']").select2().on('change', function() {
-            listBranch();
-        });
-    }
+    listDepartment();
+    $("[name='department_id']").select2().on('change', function() {
+        listBranch();
+    });
+
 });
 
 /**

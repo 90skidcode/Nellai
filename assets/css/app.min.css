@@ -6867,6 +6867,10 @@ a.text-dark:focus {
     background-color: #e36766 !important
 }
 
+.bg-primary-light {
+    background-color: rgb(244 106 106 / 25%) !important;
+}
+
 .bg-secondary {
     background-color: #886cff !important
 }
@@ -7028,6 +7032,10 @@ input[type=number] {
 
 .border-bottom-1 {
     border-bottom: 1px solid #e8e8e8;
+}
+
+.border-top-1 {
+    border-top: 1px solid #e8e8e8;
 }
 
 .showBranch {
