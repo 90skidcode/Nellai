@@ -1263,7 +1263,8 @@ String.prototype.capitalize = function() {
  * @param {*} x Eg: 12345 : 12,234
  */
 function numberWithCommas(x) {
-    return (typeof(x) != 'object') ? "Rs." + x.toString().replace(/(\d)(?=(\d\d)+\d$)/g, "$1,") : "";
+    let n = Math.round(x);
+    return (typeof(n) != 'object') ? "Rs." + n.toString().replace(/(\d)(?=(\d\d)+\d$)/g, "$1,") : "";
 }
 
 
