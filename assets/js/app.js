@@ -1605,19 +1605,20 @@ function capitalizeFirstLetter(string) {
 function printPreview(responce, form) {
     var res = responce;
     (form) ? res = responce: res = responce.result[0];
-    let html = `<h4 style="text-align:center;" class="text-center">Nellai Krishna Food PVT LTD</h4>
+    let html = `<h4 style="text-align:center;" class="text-center">Nellai Krishna Foods PVT.LTD</h4>
     <p style="text-align:center;" class="text-center mb-0">${userSession.branch_address}</p>
-    <p style="text-align:center;" class="text-center mb-0">Ph: +91 ${userSession.branch_phone}</p>
-    <p style="text-align:center;" class="text-center mb-0">email: ${userSession.branch_email}</p>
-    <p style="text-align:center;" class="text-center mb-0"><b>Bill No: ${res.bill_no}</b></p>
-    <p style="text-align:center;" class="text-center mb-0">---------------------------------------</p>
-    <table style="width:100%;" class="w-100">
+    
+    <p style="text-align:center;" class="text-center mb-0">${userSession.branch_email}</p>
+    <p style="text-align:center;" class="text-center mb-0">+91 ${userSession.branch_phone}</p>
+    <p style="text-align:center;" class="text-center mb-0"><b>Bill No: ${res.bill_no.toLowerCase()}</b></p>
+    <p style="text-align:center;" class="text-center mb-0"></p>
+    <table style="width:100%; " class="w-100">
         <thead>
-            <tr>
-                <th style="font-size:12px;" class="font-size-12">Name</th>
-                <th style="text-align:right;  font-size:12px;" class="font-size-12 text-right">Quantity</th>
-                <th style="text-align:right;  font-size:12px;" class="font-size-12 text-right">Price</th>
-                <th style="text-align:right;  font-size:12px;" class="font-size-12 text-right">Amount</th>
+            <tr style="">
+                <th style="font-size:14px; border-bottom: 1px solid" class="font-size-14">Name</th>
+                <th style="text-align:right; border-bottom: 1px solid; font-size:12px;" class="font-size-14 text-right">Quantity</th>
+                <th style="text-align:right; border-bottom: 1px solid; font-size:12px;" class="font-size-14 text-right">Price</th>
+                <th style="text-align:right; border-bottom: 1px solid; font-size:12px;" class="font-size-14 text-right">Amount</th>
             </tr>
         </thead>
         <tbody>`;
@@ -1625,42 +1626,81 @@ function printPreview(responce, form) {
     $.each(JSON.parse(res.bill_details), function(i, v) {
         html += `
                     <tr>
-                        <td style="font-size:12px;" class="font-size-12">${findInArrayOfObject(v.product_id, 'product_code', listProductArray).product_name}</td>
-                        <td style="text-align:right; font-size:12px;" class="font-size-12 text-right mb-0">${v.quantity}</td>
-                        <td style="text-align:right; font-size:12px;" class="font-size-12 text-right mb-0">${numberWithCommas(v.costperunit)}</td>
-                        <td style="text-align:right; font-size:12px;" class="font-size-12 text-right mb-0">${numberWithCommas(v.cost)}</td>
+                        <td style="font-size:12px;border-bottom: 1px solid" class="font-size-12">${findInArrayOfObject(v.product_id, 'product_code', listProductArray).product_name}</td>
+                        <td style="text-align:right; font-size:12px;border-bottom: 1px solid" class="font-size-12 text-right mb-0">${v.quantity}</td>
+                        <td style="text-align:right; font-size:12px;border-bottom: 1px solid" class="font-size-12 text-right mb-0">${numberWithCommas(v.costperunit)}</td>
+                        <td style="text-align:right; font-size:12px;border-bottom: 1px solid" class="font-size-12 text-right mb-0">${numberWithCommas(v.cost)}</td>
                     </tr>
         `;
         total += Number(v.cost);
+        console.log(JSON.parse(res.bill_details).length , i);
+        if((JSON.parse(res.bill_details).length-1) == i ){
+            html += `
+            <tr>
+            <td colspan="1"></td>
+            <td colspan="2" style="text-align:right;">Before Tax: </td>
+            <td colspan="1" style="text-align:right; font-size:12px;border-bottom: 1px solid"
+                class="font-size-12 text-right mb-0">${numberWithCommas(Number(res.total) - (((total*5)/100).toFixed(2)))}</td>
+        </tr>
+        
+        <tr>
+        <td  style="margin-top: 10px" colspan="1"></td>
+        <td colspan="2" style="text-align:right;">CGST (${res.cgst}%): </td>
+            <td colspan="2" style="text-align:right; font-size:12px;" class="font-size-12 text-right mb-0">
+                ${numberWithCommas(((total*2.5)/100).toFixed(2))}</td>
+        </tr>
+        <tr>
+        <td colspan="1"></td>
+        <td colspan="2" style="text-align:right;">SGST (${res.sgst}%) : </td>
+            <td colspan="2" style="text-align:right; font-size:12px;border-bottom: 1px solid"
+                class="font-size-12 text-right mb-0">${numberWithCommas(((total*2.5)/100).toFixed(2))}</td>
+        </tr>
+        <tr>
+        <td colspan="1"></td>
+        <td colspan="2" style="text-align:right;">Total GST: </td>
+            <td colspan="2" style="text-align:right; font-size:12px;border-bottom: 1px solid"
+                class="font-size-12 text-right mb-0">${numberWithCommas(((total*5)/100).toFixed(2))}</td>
+        </tr>
+        <tr>
+        <td colspan="1"></td>
+        <td colspan="2" style="text-align:right;font-size:16px;" class="font-size-16"><b>Total</b>: </td>
+            <td colspan="2" style="text-align:right; font-size:16px;border-bottom: 1px solid"
+                class="font-size-12 text-right mb-0"><b>${numberWithCommas(res.total)}</b></td>
+        </tr>
+        
+        <tr>
+        <td colspan="1"></td>
+        <td colspan="2" style="text-align:right;">Customer Given : </td>
+            <td colspan="2" style="text-align:right; font-size:12px;border-bottom: 1px solid"
+                class="font-size-12 text-right mb-0">${numberWithCommas(res.customer_given)}</td>
+        </tr>
+        
+        <tr>
+        <td colspan="1"></td>
+        <td colspan="2" style="text-align:right;">Need to Return : </td>
+            <td colspan="2" style="text-align:right; font-size:12px;border-bottom: 1px solid"
+                class="font-size-12 text-right mb-0"><b>${numberWithCommas(res.need_to_return)}</b></td>
+        </tr>
+        
+        <tr>
+            <td colspan="4" style="text-align:center;" class="text-center mb-0">Thank You !!</td>
+        </tr>
+        <tr>
+            <td colspan="4" style="text-align:center;" class="text-center mb-0">Vist Again !! </td>
+        </tr>
+            </tbody>
+            </table>
+            `;
+        }
     });
-    html += `</tbody>
-                    </table>
-                    <p style="text-align:center;" class="text-center mb-0">---------------------------------------</p>
-                    <p style="text-align:right;" class="text-right mb-0">Before Tax: ${numberWithCommas(Number(res.total) - (((total*5)/100).toFixed(2)))}</p>
-                    <p style="text-align:center;" class="text-center mb-0">---------------------------------------</p>
-                    <p style="text-align:right;" class="text-right mb-0">CGST (${res.cgst}%) : ${numberWithCommas(((total*2.5)/100).toFixed(2))}</p>
-                    <p style="text-align:right;" class="text-right mb-0">SGST (${res.sgst}%) : ${numberWithCommas(((total*2.5)/100).toFixed(2))}</p>
-                    <p style="text-align:center;" class="text-center mb-0">---------------------------------------</p>
-                    <p style="text-align:right;" class="text-right mb-0">Total GST (5%) : ${numberWithCommas(((total*5)/100).toFixed(2))}</p>
-                    <p style="text-align:center;" class="text-center mb-0">---------------------------------------</p>
-                    <p style="text-align:right;" class="text-right mb-0"><b>Total: ${numberWithCommas(res.total)}</b></p>
-                    <p style="text-align:center;" class="text-center mb-0">---------------------------------------</p>
-                    <p style="text-align:right;" class="text-right mb-0">Customer Given: ${numberWithCommas(res.customer_given)}</p>
-                    <p style="text-align:right;" class="text-right mb-0">Need To Return : ${numberWithCommas(res.need_to_return)}</p>
-
-                    <p style="text-align:center;" class="text-center mb-0">---------------------------------------</p>
-
-                    <p style="text-align:center;" class="text-center mb-0">Thank You !!</p>
-                    <p style="text-align:center;" class="text-center mb-0">Vist Again !! </p>
-                    <p style="text-align:center;" class="text-center mb-0">---------------------------------------</p>
-  
-                    `;
+   
+   
     $('.print-bill').printThis({
         importCSS: false,
         loadCSS: "assets/css/app.min.css",
         header: html,
         afterPrint: function() {
-            location.reload();
+         location.reload();
         }
     });
 }
